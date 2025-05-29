@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="loginTitle">Login - HopeBridge Academy</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/i18next@21.6.10/dist/umd/i18next.min.js"></script>
+    <script src="i18n.js" defer></script>
+</head>
+<body onload="initializeLoginPage()">
+    <header>
+        <nav aria-label="Main navigation">
+            <ul class="nav-list">
+                <li><img src="./logo.png" height="90" alt="HopeBridge Academy Logo" class="logo"></li>
+                <li><a href="index.html" data-i18n="home">Home</a></li>
+            </ul>
+            <div class="language-switcher">
+                <label for="language-select" data-i18n="languageLabel">Language:</label>
+                <select id="language-select" onchange="changeLanguage(this.value)" aria-label="Select language">
+                    <option value="en" data-i18n="englishOption">English</option>
+                    <option value="fa" data-i18n="persianOption">فارسی</option>
+                </select>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <div class="login-container">
+            <h2 data-i18n="loginHeading">Log In</h2>
+            <form id="login-form" onsubmit="handleLogin(event)" class="modern-form">
+                <label for="username" data-i18n="usernameLabel">Username:</label>
+                <input type="text" id="username" name="username" data-i18n-placeholder="usernamePlaceholder" required>
+                <label for="password" data-i18n="passwordLabel">Password:</label>
+                <input type="password" id="password" name="password" data-i18n-placeholder="passwordPlaceholder" required>
+                <button type="submit" data-i18n="loginButton">Log In</button>
+            </form>
+            <p id="login-error" class="error" aria-live="polite"></p>
+        </div>
+    </main>
+    <footer>
+        <p data-i18n="copyright">© 2025 HopeBridge Academy</p>
+    </footer>
+    <script src="script.js" defer></script>
+</body>
+</html>

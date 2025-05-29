@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="donationTitle">Donation - HopeBridge Academy</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/i18next@21.6.10/dist/umd/i18next.min.js"></script>
+    <script src="i18n.js" defer></script>
+</head>
+<body onload="initializePage()">
+    <header>
+        <nav aria-label="Main navigation">
+            <ul class="nav-list">
+                <li><img src="./logo.png" height="90" alt="HopeBridge Academy Logo" class="logo"></li>
+                <li><a href="index.html" data-i18n="home">Home</a></li>
+                <li><a href="register.html" data-i18n="register">Register</a></li>
+                <li><a href="library.html" data-i18n="library">Library</a></li>
+                <li><a href="contact.html" data-i18n="contact">Contact</a></li>
+                <li><a href="tutor.html" data-i18n="tutor">Request Tutor</a></li>
+                <li><a href="donation.html" data-i18n="donation" aria-current="page">Donation</a></li>
+                <li><a href="certification.html" data-i18n="certification">Certification</a></li>
+                <li class="auth-link"><a href="login.html" id="auth-link" data-i18n="login">Staff Portal</a></li>
+            </ul>
+            <div class="language-switcher">
+                <label for="language-select" data-i18n="languageLabel">Language:</label>
+                <select id="language-select" onchange="changeLanguage(this.value)" aria-label="Select language">
+                    <option value="en" data-i18n="englishOption">English</option>
+                    <option value="fa" data-i18n="persianOption">فارسی</option>
+                </select>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <h1 data-i18n="donationHeading">Support Our Mission</h1>
+        <section class="donation-info" aria-labelledby="donation-info-heading">
+            <h2 id="donation-info-heading" data-i18n="donationInfoHeading">Why Donate?</h2>
+            <p data-i18n="donationInfoText">Your contributions help us provide free education, resources, and opportunities to Afghan youth, fostering a brighter future.</p>
+            <h3 data-i18n="missionLabel">Our Mission</h3>
+            <p data-i18n="missionText">To provide transformative education that empowers Afghan youth to achieve their full potential and contribute to a prosperous society.</p>
+            <h3 data-i18n="needsLabel">Current Needs</h3>
+            <ul>
+                <li data-i18n="need1">Books and educational materials</li>
+                <li data-i18n="need2">Laptops and technology</li>
+                <li data-i18n="need3">Classroom supplies and facilities</li>
+            </ul>
+        </section>
+        <section class="donation-form" aria-labelledby="donation-form-heading">
+            <h2 id="donation-form-heading" data-i18n="donationFormHeading">Make a Donation</h2>
+            <form action="https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec" method="POST" class="modern-form">
+                <input type="hidden" name="sheetName" value="Donations">
+                <label for="donor-name" data-i18n="nameLabel">Name:</label>
+                <input type="text" id="donor-name" name="donor-name" data-i18n-placeholder="namePlaceholder" required>
+                <label for="donor-email" data-i18n="emailLabel">Email:</label>
+                <input type="email" id="donor-email" name="donor-email" data-i18n-placeholder="emailPlaceholder" required>
+                <label for="amount" data-i18n="amountLabel">Donation Amount (USD):</label>
+                <input type="number" id="amount" name="amount" min="1" data-i18n-placeholder="amountPlaceholder" required>
+                <label for="message" data-i18n="messageLabel">Message (Optional):</label>
+                <textarea id="message" name="message" data-i18n-placeholder="messagePlaceholder"></textarea>
+                <button type="submit" data-i18n="donateNow">Donate Now</button>
+            </form>
+        </section>
+        <section class="payment-details" aria-labelledby="payment-details-heading">
+            <h2 id="payment-details-heading" data-i18n="paymentDetailsHeading">Payment Information</h2>
+            <p data-i18n="paymentDetailsText">Bank: Ghazanfar Bank <br> Account: I099520000097</p>
+        </section>
+    </main>
+    <footer>
+        <a href="https://www.facebook.com/profile.php?id=61576355386024"><img src="./facebook.png" alt="Facebook Link" height="30" class="social-icon"></a>
+        <p data-i18n="copyright">© 2025 HopeBridge Academy</p>
+    </footer>
+    <script src="script.js" defer></script>
+</body>
+</html>

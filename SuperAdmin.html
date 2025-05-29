@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="superAdminDashboardTitle">Super Admin Dashboard - HopeBridge Academy</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/i18next@21.6.10/dist/umd/i18next.min.js"></script>
+    <script src="i18n.js" defer></script>
+</head>
+<body onload="initializePage()">
+    <header>
+        <nav aria-label="Main navigation">
+            <ul class="nav-list">
+                <li><img src="./logo.png" height="90" alt="HopeBridge Academy Logo" class="logo"></li>
+                <li><a href="index.html" data-i18n="home">Home</a></li>
+                <li class="auth-link"><a href="login.html" id="auth-link" data-i18n="logout">Log Out</a></li>
+            </ul>
+            <div class="language-switcher">
+                <label for="language-select" data-i18n="languageLabel">Language:</label>
+                <select id="language-select" onchange="changeLanguage(this.value)" aria-label="Select language">
+                    <option value="en" data-i18n="englishOption">English</option>
+                    <option value="fa" data-i18n="persianOption">فارسی</option>
+                </select>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <h1 data-i18n="superAdminDashboard">Super Admin Dashboard</h1>
+        <section class="page-access" aria-labelledby="page-access-heading">
+            <h2 id="page-access-heading" data-i18n="teacherPagesLabel">Teacher Pages</h2>
+            <select id="teacher-page-select" onchange="navigateToTeacherPage(this.value)" class="modern-select">
+                <option value="" data-i18n="selectTeacher">Select a teacher</option>
+                <option value="T01.html" data-i18n="teacher1">Teacher 1</option>
+                <option value="T02.html" data-i18n="teacher2">Teacher 2</option>
+                <option value="T03.html" data-i18n="teacher3">Teacher 3</option>
+                <option value="T04.html" data-i18n="teacher4">Teacher 4</option>
+                <option value="T05.html" data-i18n="teacher5">Teacher 5</option>
+                <option value="T06.html" data-i18n="teacher6">Teacher 6</option>
+                <option value="T07.html" data-i18n="teacher7">Teacher 7</option>
+                <option value="T08.html" data-i18n="teacher8">Teacher 8</option>
+            </select>
+        </section>
+        <section class="admin-access" aria-labelledby="admin-access-heading">
+            <h2 id="admin-access-heading" data-i18n="adminPagesLabel">Admin Pages</h2>
+            <select id="admin-page-select" onchange="navigateToAdminPage(this.value)" class="modern-select">
+                <option value="" data-i18n="selectAdmin">Select an admin</option>
+                <option value="Admin01.html" data-i18n="admin01">Admin 01</option>
+                <option value="Admin02.html" data-i18n="admin02">Admin 02</option>
+            </select>
+        </section>
+    </main>
+    <footer>
+        <p data-i18n="copyright">© 2025 HopeBridge Academy</p>
+    </footer>
+    <script src="script.js" defer></script>
+</body>
+</html>

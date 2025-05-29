@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="homeTitle">Home - HopeBridge Academy</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/i18next@21.6.10/dist/umd/i18next.min.js"></script>
+    <script src="i18n.js" defer></script>
+</head>
+<body onload="initializePage()">
+    <header>
+        <nav aria-label="Main navigation">
+            <ul class="nav-list">
+                <li><img src="./logo.png" height="90" alt="HopeBridge Academy Logo" class="logo"></li>
+                <li><a href="index.html" data-i18n="home" aria-current="page">Home</a></li>
+                <li><a href="register.html" data-i18n="register">Register</a></li>
+                <li><a href="library.html" data-i18n="library">Library</a></li>
+                <li><a href="contact.html" data-i18n="contact">Contact</a></li>
+                <li><a href="tutor.html" data-i18n="tutor">Request Tutor</a></li>
+                <li><a href="donation.html" data-i18n="donation">Donation</a></li>
+                <li><a href="certification.html" data-i18n="certification">Certification</a></li>
+                <li class="auth-link"><a href="login.html" id="auth-link" data-i18n="login">Staff Portal</a></li>
+            </ul>
+            <div class="language-switcher">
+                <label for="language-select" data-i18n="languageLabel">Language:</label>
+                <select id="language-select" onchange="changeLanguage(this.value)" aria-label="Select language">
+                    <option value="en" data-i18n="englishOption">English</option>
+                    <option value="fa" data-i18n="persianOption">فارسی</option>
+                </select>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <section class="welcome">
+            <h1 data-i18n="welcome">Welcome to HopeBridge Academy</h1>
+            <p data-i18n="welcomeText">Empowering Afghan youth through accessible education and skill-building opportunities.</p>
+            <img src="./Welcome.jpg" height="200" width="460" alt="Welcome Image" class="welcome-img">
+        </section>
+        <section class="mission">
+            <h2 data-i18n="missionLabel">Our Mission</h2>
+            <p data-i18n="missionText">To provide transformative education that empowers Afghan youth to achieve their full potential and contribute to a prosperous society.</p>
+            <h3 data-i18n="visionLabel">Our Vision</h3>
+            <p data-i18n="visionText">A future where every Afghan has access to quality education, fostering personal growth and community development.</p>
+            <h3 data-i18n="valuesLabel">Core Values</h3>
+            <ul>
+                <li data-i18n="value1">Integrity: Upholding honesty and ethical standards in all our endeavors.</li>
+                <li data-i18n="value2">Excellence: Striving for the highest quality in education and service.</li>
+                <li data-i18n="value3">Inclusivity: Embracing diversity and ensuring opportunities for all.</li>
+            </ul>
+        </section>
+        <section class="courses">
+            <h2 data-i18n="coursesTitle">Our Courses</h2>
+            <div class="course-list">
+                <article class="course-card">
+                    <h3 data-i18n="languageCourse">Language Skills</h3>
+                    <p data-i18n="languageDesc">Master Persian, English, and Pashto with beginner to advanced courses.</p>
+                    <img src="./Langua.jpg" height="150" alt="Language Skills Course">
+                </article>
+                <article class="course-card">
+                    <h3 data-i18n="computerCourse">Computer Skills</h3>
+                    <p data-i18n="computerDesc">Learn essential software, coding, and digital literacy skills.</p>
+                    <img src="./Com.jpg" height="150" alt="Computer Skills Course">
+                </article>
+                <article class="course-card">
+                    <h3 data-i18n="psychCourse">Psychology Workshops</h3>
+                    <p data-i18n="psychDesc">Explore mental health practices and emotional well-being.</p>
+                    <img src="./image (1).jpg" height="150" alt="Psychology Workshops">
+                </article>
+            </div>
+        </section>
+        <section class="cta">
+            <h2 data-i18n="ctaTitle">Get Started</h2>
+            <div class="cta-buttons">
+                <a href="register.html" class="button" data-i18n="registerNow">Register Now</a>
+                <a href="tutor.html" class="button" data-i18n="requestTutorNow">Request a Tutor</a>
+                <a href="donation.html" class="button" data-i18n="donateNow">Donate Now</a>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <a href="https://www.facebook.com/profile.php?id=61576355386024"><img src="./facebook.png" alt="Facebook Link" height="30" class="social-icon"></a>
+        <p data-i18n="copyright">© 2025 HopeBridge Academy</p>
+    </footer>
+    <script src="script.js" defer></script>
+</body>
+</html>

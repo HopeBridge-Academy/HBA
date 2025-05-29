@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="certificationTitle">Certification - HopeBridge Academy</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/i18next@21.6.10/dist/umd/i18next.min.js"></script>
+    <script src="i18n.js" defer></script>
+</head>
+<body onload="initializePage()">
+    <header>
+        <nav aria-label="Main navigation">
+            <ul class="nav-list">
+                <li><img src="./logo.png" height="90" alt="HopeBridge Academy Logo" class="logo"></li>
+                <li><a href="index.html" data-i18n="home">Home</a></li>
+                <li><a href="register.html" data-i18n="register">Register</a></li>
+                <li><a href="library.html" data-i18n="library">Library</a></li>
+                <li><a href="contact.html" data-i18n="contact">Contact</a></li>
+                <li><a href="tutor.html" data-i18n="tutor">Request Tutor</a></li>
+                <li><a href="donation.html" data-i18n="donation">Donation</a></li>
+                <li><a href="certification.html" data-i18n="certification" aria-current="page">Certification</a></li>
+                <li class="auth-link"><a href="login.html" id="auth-link" data-i18n="login">Staff Portal</a></li>
+            </ul>
+            <div class="language-switcher">
+                <label for="language-select" data-i18n="languageLabel">Language:</label>
+                <select id="language-select" onchange="changeLanguage(this.value)" aria-label="Select language">
+                    <option value="en" data-i18n="englishOption">English</option>
+                    <option value="fa" data-i18n="persianOption">فارسی</option>
+                </select>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <h1 data-i18n="certificationHeading">Verify Student Certification</h1>
+        <section class="certification-search" aria-labelledby="certification-search-heading">
+            <h2 id="certification-search-heading" data-i18n="certificationSearchHeading">Search for Certification</h2>
+            <form id="certification-form" onsubmit="verifyCertification(event)" class="modern-form">
+                <label for="student-id" data-i18n="studentIdLabel">Student ID:</label>
+                <input type="text" id="student-id" name="student-id" data-i18n-placeholder="studentIdPlaceholder" required>
+                <label for="full-name" data-i18n="fullNameLabel">Full Name:</label>
+                <input type="text" id="full-name" name="full-name" data-i18n-placeholder="fullNamePlaceholder" required>
+                <button type="submit" data-i18n="searchButton">Search</button>
+            </form>
+            <div id="certification-result" aria-live="polite" class="result-box"></div>
+        </section>
+    </main>
+    <footer>
+        <a href="https://www.facebook.com/profile.php?id=61576355386024"><img src="./facebook.png" alt="Facebook Link" height="30" class="social-icon"></a>
+        <p data-i18n="copyright">© 2025 HopeBridge Academy</p>
+    </footer>
+    <script src="script.js" defer></script>
+</body>
+</html>

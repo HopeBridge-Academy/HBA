@@ -30,9 +30,7 @@
         <h1 data-i18n="teacherDashboard">Teacher Dashboard</h1>
         <section class="lesson-plan" aria-labelledby="lesson-plan-heading">
             <h2 id="lesson-plan-heading" data-i18n="planningLabel">Lesson Planning</h2>
-            <form id="lesson-plan-form" onsubmit="saveLessonPlan(event, 'T01')" action="https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec" method="POST" class="modern-form">
-                <input type="hidden" name="sheetName" value="LessonPlans">
-                <label for="subject" data-i18n="subjectLabel">Subject:</label>
+            <form id="lesson-plan-form" onsubmit="saveLessonPlan(event, 'T01')" action="https://script.google.com/macros/s/AKfycbxp5N51Px_Qkgyrc4hw2Zkm7VxJizr8GV-Km3E-tc8/dev" method="POST" class="modern-form">                <label for="subject" data-i18n="subjectLabel">Subject:</label>
                 <input type="text" id="subject" name="subject" required>
                 <label for="date" data-i18n="dateLabel">Date:</label>
                 <input type="date" id="date" name="date" required>
@@ -45,9 +43,7 @@
         </section>
         <section class="reporting" aria-labelledby="reporting-heading">
             <h2 id="reporting-heading" data-i18n="reportingLabel">Daily Reporting</h2>
-            <form id="reporting-form" onsubmit="saveReporting(event, 'T01')" action="https://script.google.com/macros/s/AKfycbwjjGIqCfJ-LmXplTYvsiELHEmWP0gXsh4v7dHcL3eCfzYG10aF0AE15AC4cSJxDXtE/exec" method="POST" class="modern-form">
-                <input type="hidden" name="sheetName" value="Reports">
-                <label for="report" data-i18n="reportLabel">Report:</label>
+            <form id="reporting-form" onsubmit="saveReporting(event, 'T01')" action="https://script.google.com/macros/s/AKfycbxp5N51Px_Qkgyrc4hw2Zkm7VxJizr8GV-Km3E-tc8/dev" method="POST" class="modern-form">                <label for="report" data-i18n="reportLabel">Report:</label>
                 <textarea id="report" name="report" required></textarea>
                 <button type="submit" data-i18n="saveButton">Save</button>
             </form>

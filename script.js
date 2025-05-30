@@ -68,14 +68,21 @@ function saveLessonPlan(event, teacherId) {
 
     fetch(form.action, {
         method: 'POST',
-        body: formData
+        body: formData,
+        mode: 'no-cors' // Required for Google Apps Script
     })
-    .then(response => response.json())
-    .then(data => {
-        if (data.status === 'success') alert('Lesson plan saved!');
-        else throw new Error('Failed to save');
+    .then(response => {
+        if (response.type === 'opaque') {
+            alert(i18next.t('lessonPlanSaved') || 'Lesson plan saved successfully!');
+            loadSearchData(); // Refresh search results
+        } else {
+            throw new Error('Failed to save lesson plan');
+        }
     })
-    .catch(error => console.error('Error saving lesson plan:', error));
+    .catch(error => {
+        console.error('Error saving lesson plan:', error);
+        alert(i18next.t('saveError') || 'Error saving lesson plan');
+    });
 }
 
 function saveReporting(event, teacherId) {
@@ -86,16 +93,22 @@ function saveReporting(event, teacherId) {
 
     fetch(form.action, {
         method: 'POST',
-        body: formData
+        body: formData,
+        mode: 'no-cors' // Required for Google Apps Script
     })
-    .then(response => response.json())
-    .then(data => {
-        if (data.status === 'success') alert('Report saved!');
-        else throw new Error('Failed to save');
+    .then(response => {
+        if (response.type === 'opaque') {
+            alert(i18next.t('reportSaved') || 'Report saved successfully!');
+            loadSearchData(); // Refresh search results
+        } else {
+            throw new Error('Failed to save report');
+        }
     })
-    .catch(error => console.error('Error saving report:', error));
+    .catch(error => {
+        console.error('Error saving report:', error);
+        alert(i18next.t('saveError') || 'Error saving report');
+    });
 }
-
 function saveAdminData(event, adminId) {
     event.preventDefault();
     const form = event.target;

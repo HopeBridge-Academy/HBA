@@ -1,7 +1,7 @@
 function initializePage() {
     const authLink = document.getElementById('auth-link');
     if (localStorage.getItem('isLoggedIn') === 'true') {
-        authLink.setAttribute('data-i18n', 'logout');
+        authLink.setAttribute('data-i18n', 'login');
         authLink.textContent = i18next.t('login');
         authLink.onclick = logout; // Attach logout function
         authLink.href = '#'; // Prevent default redirect

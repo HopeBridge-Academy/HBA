@@ -265,3 +265,58 @@ footer {
         grid-template-columns: 1fr;
     }
 }
+/* General styles */
+body {
+    font-family: 'Times New Roman', Times, serif;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 500px;
+  }
+  
+  input, button {
+    padding: 10px;
+    font-size: 16px;
+  }
+  
+  /* Mobile-first responsive design */
+  @media (min-width: 768px) {
+    .container {
+      flex-direction: row;
+      flex-wrap: wrap;
+    }
+  
+    form {
+      max-width: 400px;
+    }
+  }
+  
+  /* Ensure buttons and inputs are touch-friendly on mobile */
+  button {
+    cursor: pointer;
+    min-height: 48px; /* Touch-friendly size */
+  }
+  
+  /* Responsive typography */
+  h1 {
+    font-size: 24px;
+  }
+  @media (min-width: 768px) {
+    h1 {
+      font-size: 32px;
+    }
+  }

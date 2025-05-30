@@ -368,34 +368,3 @@ window.changeLanguage = (lang) => {
         updateContent();
     });
 };
-i18next.init({
-    lng: 'en',
-    resources: {
-        en: {
-            translation: {
-                // Existing keys...
-                lessonPlanSaved: 'Lesson plan saved successfully!',
-                reportSaved: 'Report saved successfully!',
-                saveError: 'Error saving data',
-                fetchError: 'Error loading search data',
-                searchLabel: 'Search Lesson Plans and Reports',
-                searchPlaceholder: 'Search by subject or report...',
-                lessonPlansLabel: 'Lesson Plans',
-                reportsLabel: 'Reports'
-            }
-        },
-        fa: {
-            translation: {
-                // Existing keys...
-                lessonPlanSaved: 'طرح درس با موفقیت ذخیره شد!',
-                reportSaved: 'گزارش با موفقیت ذخیره شد!',
-                saveError: 'خطا در ذخیره داده',
-                fetchError: 'خطا در بارگذاری داده‌های جستجو',
-                searchLabel: 'جستجوی طرح‌های درس و گزارش‌ها',
-                searchPlaceholder: 'جستجو بر اساس موضوع یا گزارش...',
-                lessonPlansLabel: 'طرح‌های درس',
-                reportsLabel: 'گزارش‌ها'
-            }
-        }
-    }
-});

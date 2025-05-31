@@ -29,8 +29,8 @@
     <main>
         <h1 data-i18n="teacherDashboard">Teacher Dashboard</h1>
         <section class="lesson-plan" aria-labelledby="lesson-plan-heading">
-            <h2 id="lesson-plan-heading" data-i18n="planningLabel">Lesson Planning</h2>
-            <form id="lesson-plan-form" onsubmit="saveLessonPlan(event, 'T01')" action="https://script.google.com/macros/s/AKfycbxp5N51Px_Qkgyrc4hw2Zkm7VxJizr8GV-Km3E-tc8/dev" method="POST" class="modern-form">                <label for="subject" data-i18n="subjectLabel">Subject:</label>
+            <h2 id="lesson-plan-heading" data-i18n="planningLabel">Daily Reporting</h2>
+            <form id="lesson-plan-form" onsubmit="saveLessonPlan(event, 'T06')" action="https://usebasin.com/f/abfe37dead25" method="POST" class="modern-form">                <label for="subject" data-i18n="subjectLabel">Subject:</label>
                 <input type="text" id="subject" name="subject" required>
                 <label for="date" data-i18n="dateLabel">Date:</label>
                 <input type="date" id="date" name="date" required>
@@ -38,13 +38,6 @@
                 <input type="text" id="class" name="class" required>
                 <label for="description" data-i18n="descriptionLabel">Description:</label>
                 <textarea id="description" name="description" required></textarea>
-                <button type="submit" data-i18n="saveButton">Save</button>
-            </form>
-        </section>
-        <section class="reporting" aria-labelledby="reporting-heading">
-            <h2 id="reporting-heading" data-i18n="reportingLabel">Daily Reporting</h2>
-            <form id="reporting-form" onsubmit="saveReporting(event, 'T01')" action="https://script.google.com/macros/s/AKfycbxp5N51Px_Qkgyrc4hw2Zkm7VxJizr8GV-Km3E-tc8/dev" method="POST" class="modern-form">                <label for="report" data-i18n="reportLabel">Report:</label>
-                <textarea id="report" name="report" required></textarea>
                 <button type="submit" data-i18n="saveButton">Save</button>
             </form>
         </section>

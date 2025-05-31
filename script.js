@@ -59,7 +59,26 @@ function handleLogin(event) {
         errorElement.textContent = i18next.t('loginError') || 'Invalid username or password';
     }
 }
+// Check authentication on page load
+function checkAuthentication() {
+    const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+    const currentPage = window.location.pathname.split('/').pop();
+    const protectedPages = ['T01.html', 'Admin01.html']; // List all protected pages
 
+    if (protectedPages.includes(currentPage) && !isLoggedIn) {
+        window.location.href = 'login.html';
+    }
+}
+
+// Logout function
+function logout() {
+    localStorage.removeItem('isLoggedIn');
+    localStorage.removeItem('userRole');
+    window.location.href = 'login.html';
+}
+
+// Run authentication check on page load
+window.addEventListener('load', checkAuthentication);
 function saveLessonPlan(event, teacherId) {
     event.preventDefault();
     const form = event.target;
@@ -137,12 +156,33 @@ function navigateToAdminPage(page) {
 
 function verifyCertification(event) {
     event.preventDefault();
-    const studentId = document.getElementById('student-id').value;
     const fullName = document.getElementById('full-name').value;
+    const studentId = document.getElementById('student-id').value;
     const resultElement = document.getElementById('certification-result');
 
-    // Mock verification (replace with actual API call)
-    resultElement.textContent = `Certification for ${fullName} (ID: ${studentId}) is valid.`;
+    // Mock student data (replace with actual database/API)
+    const students = [
+        { id: '123', name: 'John Doe', status: 'enrolled', department: 'Computer Science' },
+        { id: '00001', name: 'Fowzia Stanakzai', status: 'graduated', department: 'English', graduationYear: 2025 }
+    ];
+
+    const student = students.find(s => s.id === studentId && s.name.toLowerCase() === fullName.toLowerCase());
+
+    // Clear previous status classes
+    resultElement.classList.remove('status-enrolled', 'status-graduated', 'status-not-found');
+
+    if (student) {
+        if (student.status === 'enrolled') {
+            resultElement.textContent = `Student ${student.name} is currently enrolled in the ${student.department} department.`;
+            resultElement.classList.add('status-enrolled');
+        } else if (student.status === 'graduated') {
+            resultElement.textContent = `Student ${student.name} has graduated from the ${student.department} department in ${student.graduationYear}.`;
+            resultElement.classList.add('status-graduated');
+        }
+    } else {
+        resultElement.textContent = 'No record found for the provided name and ID.';
+        resultElement.classList.add('status-not-found');
+    }
 }
 
 function updateCities() {

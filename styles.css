@@ -320,4 +320,25 @@ body {
       font-size: 32px;
     }
   }
-  
+  #certification-result {
+    margin-top: 1rem;
+    padding: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+.status-enrolled {
+    background-color: #d4edda; /* Light green background */
+    color: #155724; /* Dark green text for contrast */
+}
+
+.status-graduated {
+    background-color: #cce5ff; /* Light blue background */
+    color: #004085; /* Dark blue text for contrast */
+}
+
+.status-not-found {
+    background-color: #f8d7da; /* Light red background */
+    color: #721c24; /* Dark red text for contrast */
+}

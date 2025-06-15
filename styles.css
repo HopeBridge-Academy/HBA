@@ -238,6 +238,22 @@ footer {
     flex-direction: row-reverse;
 }
 
+/* RTL fix for mobile — stack vertically */
+@media (max-width: 768px) {
+    .rtl nav {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .rtl .nav-list {
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        text-align: right;
+    }
+}
+
+
 .rtl .language-switcher {
     flex-direction: row-reverse;
 }

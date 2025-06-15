@@ -251,20 +251,37 @@ footer {
     .nav-list {
         flex-direction: column;
         gap: 0.5rem;
+        align-items: center;     /* NEW: center-align items on mobile */
+        text-align: center;      /* NEW: center-align text */
+        width: 100%;             /* NEW: ensure full width */
+        overflow-x: auto;        /* NEW: allow horizontal scroll if needed */
+    }
+
+    .rtl .nav-list {
+        align-items: flex-end;   /* NEW: fix alignment for RTL */
+        text-align: right;       /* NEW: RTL text alignment */
     }
 
     nav {
         flex-direction: column;
+        width: 100%;
+    }
+
+    .rtl nav {
+        flex-direction: column;  /* NEW: ensures RTL layout stacks properly */
+        align-items: stretch;    /* NEW: full width in RTL */
     }
 
     .language-switcher {
         margin-top: 1rem;
+        justify-content: center;
     }
 
     .course-list, .discipline-list {
         grid-template-columns: 1fr;
     }
 }
+
 /* General styles */
 body {
     font-family: 'Times New Roman', Times, serif;

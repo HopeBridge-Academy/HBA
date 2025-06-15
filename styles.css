@@ -248,28 +248,17 @@ footer {
 
 /* Responsive Design */
 @media (max-width: 768px) {
+    nav {
+        flex-direction: column;
+        align-items: center;
+    }
+
     .nav-list {
         flex-direction: column;
         gap: 0.5rem;
-        align-items: center;     /* NEW: center-align items on mobile */
-        text-align: center;      /* NEW: center-align text */
-        width: 100%;             /* NEW: ensure full width */
-        overflow-x: auto;        /* NEW: allow horizontal scroll if needed */
-    }
-
-    .rtl .nav-list {
-        align-items: flex-end;   /* NEW: fix alignment for RTL */
-        text-align: right;       /* NEW: RTL text alignment */
-    }
-
-    nav {
-        flex-direction: column;
+        align-items: center;
+        text-align: center;
         width: 100%;
-    }
-
-    .rtl nav {
-        flex-direction: column;  /* NEW: ensures RTL layout stacks properly */
-        align-items: stretch;    /* NEW: full width in RTL */
     }
 
     .language-switcher {
@@ -277,8 +266,21 @@ footer {
         justify-content: center;
     }
 
-    .course-list, .discipline-list {
+    .course-list,
+    .discipline-list {
         grid-template-columns: 1fr;
+    }
+
+    /* RTL support for Persian on mobile */
+    .rtl nav {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .rtl .nav-list {
+        flex-direction: column;
+        align-items: center;
+        text-align: right;
     }
 }
 

@@ -7,7 +7,7 @@
 
 body {
     font-family: 'Times New Roman', Times, serif;
-    background-color: #f8f9fa;
+    background: linear-gradient(135deg, #e0f7fa, #fce4ec); /* Colorful professional gradient */
     color: #333;
     line-height: 1.6;
 }
@@ -98,6 +98,11 @@ h1, h2, h3 {
     border-radius: 8px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s, box-shadow 0.3s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    height: 100%;
 }
 
 .course-card:hover {
@@ -107,6 +112,9 @@ h1, h2, h3 {
 
 .course-card img {
     border-radius: 4px;
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
 }
 
 /* Discipline Cards */
@@ -238,7 +246,6 @@ footer {
     flex-direction: row-reverse;
 }
 
-/* RTL fix for mobile — stack vertically */
 @media (max-width: 768px) {
     .rtl nav {
         flex-direction: column;
@@ -252,7 +259,6 @@ footer {
         text-align: right;
     }
 }
-
 
 .rtl .language-switcher {
     flex-direction: row-reverse;
@@ -262,106 +268,87 @@ footer {
     text-align: right;
 }
 
-/* Responsive Design */
 @media (max-width: 768px) {
-    nav {
-        flex-direction: column;
-        align-items: center;
-    }
-
     .nav-list {
         flex-direction: column;
         gap: 0.5rem;
-        align-items: center;
-        text-align: center;
-        width: 100%;
+    }
+
+    nav {
+        flex-direction: column;
     }
 
     .language-switcher {
         margin-top: 1rem;
-        justify-content: center;
     }
 
-    .course-list,
-    .discipline-list {
+    .course-list, .discipline-list {
         grid-template-columns: 1fr;
         width: 100%;
         display: block;
-        font-style: left;
     }
-
-    /* RTL support for Persian on mobile */
-    .rtl nav {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .rtl .nav-list {
-        flex-direction: column;
-        align-items: center;
-        text-align: right;
+    .psy-img {
+        width: 100%;
+        display: block;
     }
 }
 
-/* General styles */
 body {
     font-family: 'Times New Roman', Times, serif;
     margin: 0;
     padding: 0;
-  }
-  
-  .container {
+}
+
+.container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
     display: flex;
     flex-direction: column;
     gap: 20px;
-  }
-  
-  form {
+}
+
+form {
     display: flex;
     flex-direction: column;
     gap: 10px;
     max-width: 500px;
-  }
-  
-  input, button {
+}
+
+input, button {
     padding: 10px;
     font-size: 16px;
-  }
-  
-  /* Mobile-first responsive design */
-  @media (min-width: 768px) {
+}
+
+@media (max-width: 768px) {
     .container {
-      flex-direction: row;
-      flex-wrap: wrap;
+        flex-direction: row;
+        flex-wrap: wrap;
     }
-  
+
     form {
-      max-width: 400px;
+        max-width: 400px;
     }
-  }
-  
-  /* Ensure buttons and inputs are touch-friendly on mobile */
-  button {
+}
+
+button {
     cursor: pointer;
-    min-height: 48px; /* Touch-friendly size */
-  }
-  
-  /* Responsive typography */
-  h1 {
+    min-height: 48px;
+}
+
+h1 {
     font-size: 24px;
-  }
-  @media (max-width: 768px) {
+}
+
+@media (max-width: 768px) {
     h1 {
-      font-size: 32px;
+        font-size: 32px;
     }
     .welcome {
         width: 100%;
         display: block;
         margin-bottom: 30px;
-        text-align: cover;
+        text-align: center;
     }
     .welcome-img {
         margin-bottom: 10px;
@@ -369,8 +356,9 @@ body {
         display: inline;
         object-fit: cover;
     }
-  }
-  #certification-result {
+}
+
+#certification-result {
     margin-top: 1rem;
     padding: 1rem;
     border: 1px solid #ccc;
@@ -379,16 +367,16 @@ body {
 }
 
 .status-enrolled {
-    background-color: #d4edda; /* Light green background */
-    color: #155724; /* Dark green text for contrast */
+    background-color: #d4edda;
+    color: #155724;
 }
 
 .status-graduated {
-    background-color: #cce5ff; /* Light blue background */
-    color: #004085; /* Dark blue text for contrast */
+    background-color: #cce5ff;
+    color: #004085;
 }
 
 .status-not-found {
-    background-color: #f8d7da; /* Light red background */
-    color: #721c24; /* Dark red text for contrast */
+    background-color: #f8d7da;
+    color: #721c24;
 }

@@ -285,6 +285,9 @@ footer {
     .course-list,
     .discipline-list {
         grid-template-columns: 1fr;
+        width: 100%;
+        display: block;
+        font-style: left;
     }
 
     /* RTL support for Persian on mobile */

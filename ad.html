@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>HopeBridge Academy | Announcements</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* Basic styles to give a professional look */
+    header {
+      background-color: #1483f1;
+      color: white;
+      padding: 1.5rem;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2rem;
+      letter-spacing: 1px;
+    }
+
+    nav ul {
+      list-style: none;
+      padding: 0;
+      margin: 1rem 0 0;
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+    }
+
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    main {
+      padding: 2rem;
+    }
+
+    h2 {
+      color: #003366;
+    }
+    h1 {
+        color: black;
+    }
+
+    .announcement-text {
+      font-size: 1.1rem;
+      margin-bottom: 2rem;
+    }
+
+    .fb-section {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .fb-wrapper,
+    .side-announcement {
+      flex: 1;
+      min-width: 280px;
+    }
+
+    .side-announcement h3 {
+      color: #003366;
+      margin-bottom: 0.5rem;
+    }
+
+    .side-announcement ul {
+      list-style-type: disc;
+      padding-left: 1.5rem;
+    }
+
+    footer {
+      background-color: #081725;
+      color: white;
+      text-align: center;
+      padding: 1rem 0;
+      margin-top: 3rem;
+    }
+
+    .social-icon {
+      margin-bottom: 0.5rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header with Academy Name -->
+  <header>
+    <img src="./logo.png" height="100" width="100" alt="">
+    <h1>HopeBridge Academy</h1>
+    <nav>
+      <ul>
+        <li><a href="index.html" aria-label="Navigate to Home Page">Home</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Main Content -->
+  <main>
+    <h2>Announcements</h2>
+    <div class="announcement-text" role="region" aria-live="polite">
+      Stay informed about graduation ceremonies, course start dates, and upcoming workshops across our <strong>Computer Skills</strong>, <strong>Language Skills</strong>, and <strong>Psychology</strong> programs.
+    </div>
+
+    <section class="fb-section" aria-label="Facebook Feed and Side Announcements">
+      <!-- Left Panel: Upcoming Events -->
+      <aside class="side-announcement" aria-label="Upcoming Events">
+        <h3>Upcoming Events</h3>
+        <ul>
+          <li>Psychology Workshop – Details Coming Soon</li>
+          <li>Graduation Ceremony – Details Coming Soon</li>
+          <li>New Course Registrations – June 21, 2025</li>
+        </ul>
+      </aside>
+
+      <!-- Center Panel: Facebook Feed -->
+      <div class="fb-wrapper" role="region" aria-label="Facebook Timeline Feed">
+        <div class="fb-page"
+             data-href="https://www.facebook.com/profile.php?id=61576355386024"
+             data-tabs="timeline"
+             data-width="600"
+             data-height="600"
+             data-small-header="false"
+             data-adapt-container-width="true"
+             data-hide-cover="false"
+             data-show-facepile="true">
+          <blockquote cite="https://www.facebook.com/profile.php?id=61576355386024" class="fb-xfbml-parse-ignore">
+            <a href="https://www.facebook.com/profile.php?id=61576355386024" target="_blank" rel="noopener noreferrer">HopeBridge Academy</a>
+          </blockquote>
+        </div>
+      </div>
+
+      <!-- Right Panel: Important Notes -->
+      <aside class="side-announcement" aria-label="Important Notes">
+        <h3>Important Notes</h3>
+        <ul>
+          <li>Follow our Facebook page for real-time updates.</li>
+          <li>Student verification services are available.</li>
+          <li>Certificates are now ready for recent graduates.</li>
+        </ul>
+      </aside>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <a href="https://www.facebook.com/profile.php?id=61576355386024" target="_blank" rel="noopener noreferrer" aria-label="Visit our Facebook page">
+      <img src="./facebook.png" alt="Facebook Link" height="30" class="social-icon" />
+    </a>
+    <p>&copy; 2025 HopeBridge Academy. All rights reserved.</p>
+  </footer>
+
+  <!-- Facebook SDK -->
+  <div id="fb-root"></div>
+  <script async defer crossorigin="anonymous"
+    src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v19.0"
+    nonce="AcademyFbFeed">
+  </script>
+
+  <!-- External JS -->
+  <script src="script.js" defer></script>
+</body>
+</html>

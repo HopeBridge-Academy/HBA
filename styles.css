@@ -354,6 +354,18 @@ body {
     h1 {
       font-size: 32px;
     }
+    .welcome {
+        width: 100%;
+        display: block;
+        margin-bottom: 30px;
+        text-align: cover;
+    }
+    .welcome-img {
+        margin-bottom: 10px;
+        width: 100%;
+        display: inline;
+        object-fit: cover;
+    }
   }
   #certification-result {
     margin-top: 1rem;

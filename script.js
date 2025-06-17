@@ -164,6 +164,7 @@ function verifyCertification(event) {
     const students = [
         { id: '123', name: 'John Doe', status: 'enrolled', department: 'Computer Science' },
         { id: '00001', name: 'Fowzia Stanakzai', status: 'graduated', department: 'English', graduationYear: 2025 }
+        { id: '1000021', name: 'Mohadisa Sadat Salahshoor', status: 'graduated', department: 'Computer (ICDL)', graduationYear: 2025 }
     ];
 
     const student = students.find(s => s.id === studentId && s.name.toLowerCase() === fullName.toLowerCase());
@@ -176,7 +177,7 @@ function verifyCertification(event) {
             resultElement.textContent = `Student, ${student.name} is currently enrolled in the ${student.department} department (English Class). ✅`;
             resultElement.classList.add('status-enrolled');
         } else if (student.status === 'graduated') {
-            resultElement.textContent = `Mr./Ms. ${student.name} graduated from the ${student.department} department in level (C1) in ${student.graduationYear}. ✅`;
+            resultElement.textContent = `Mr./Ms. ${student.name} graduated from the ${student.department} department in ${student.graduationYear}. ✅`;
             resultElement.classList.add('status-graduated');
         }
     } else {

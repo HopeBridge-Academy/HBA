@@ -180,7 +180,7 @@ function verifyCertification(event) {
             resultElement.classList.add('status-graduated');
         }
     } else {
-        resultElement.textContent = 'Provided name and ID is NOT valid in HBA. ❌';
+        resultElement.textContent = 'The provided name and ID are not valid in HopeBridge Academy. Please ensure that you have entered the username and ID correctly. ❌ نام و شناسه‌ای که وارد کرده‌اید در آکادمی هوپ‌بریج معتبر نیست. لطفاً مطمئن شوید که نام کاربری و شناسه را به‌درستی وارد کرده‌اید.';
         resultElement.classList.add('status-not-found');
     }
 }

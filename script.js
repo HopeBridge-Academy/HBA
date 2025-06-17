@@ -163,7 +163,7 @@ function verifyCertification(event) {
     // Mock student data (replace with actual database/API)
     const students = [
         { id: '123', name: 'John Doe', status: 'enrolled', department: 'Computer Science' },
-        { id: '00001', name: 'Fowzia Stanakzai', status: 'graduated', department: 'English', graduationYear: 2025 }
+        { id: '00001', name: 'Fowzia Stanakzai', status: 'graduated', department: 'English', graduationYear: 2025 },
         { id: '000021', name: 'Mohadesa Sadat Salahshor', status: 'graduated', department: 'Computer(ICDL)', graduationYear: 2025 }
     ];
 

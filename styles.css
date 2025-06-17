@@ -380,3 +380,58 @@ h1 {
     background-color: #f8d7da;
     color: #721c24;
 }
+/* Container for form and image */
+.certification-container {
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+    justify-content: center; /* Center items on mobile */
+    padding: 20px;
+}
+
+/* Form container */
+.certification-search {
+    flex: 1 1 400px;
+    max-width: 600px;
+}
+
+/* Form itself: make it responsive and centered */
+.modern-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+}
+
+/* Certificate image wrapper */
+.certificate-img-wrapper {
+    flex: 0 1 300px;
+    max-width: 100%;
+    text-align: center;
+}
+
+/* Certificate image */
+.certificate-img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+/* Mobile view */
+@media (max-width: 768px) {
+    .certification-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .certification-search {
+        width: 100%;
+        max-width: 500px;
+    }
+
+    .certificate-img-wrapper {
+        margin-top: 20px;
+        width: 100%;
+    }
+}

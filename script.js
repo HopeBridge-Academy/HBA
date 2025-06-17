@@ -164,7 +164,7 @@ function verifyCertification(event) {
     const students = [
         { id: '123', name: 'John Doe', status: 'enrolled', department: 'Computer Science' },
         { id: '00001', name: 'Fowzia Stanakzai', status: 'graduated', department: 'English', graduationYear: 2025 },
-        { id: '000021', name: 'Mohadesa Sadat Salahshor', status: 'graduated', department: 'Computer (ICDL)', graduationYear: 2025 }
+        { id: 'E00001', name: 'Mohadesa Sadat Salahshor', status: 'graduated', department: 'English', graduationYear: 2025 }
     ];
 
     const student = students.find(s => s.id === studentId && s.name.toLowerCase() === fullName.toLowerCase());

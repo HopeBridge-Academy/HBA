@@ -173,10 +173,10 @@ function verifyCertification(event) {
 
     if (student) {
         if (student.status === 'enrolled') {
-            resultElement.textContent = `Student, ${student.name} is currently enrolled in the ${student.department} department. ✅`;
+            resultElement.textContent = `Student, ${student.name} is currently enrolled in the ${student.department} department (English Class). ✅`;
             resultElement.classList.add('status-enrolled');
         } else if (student.status === 'graduated') {
-            resultElement.textContent = `Mr./Ms. ${student.name} graduated from the ${student.department} department in ${student.graduationYear}. ✅`;
+            resultElement.textContent = `Mr./Ms. ${student.name} graduated from the ${student.department} department in level (C1) in ${student.graduationYear}. ✅`;
             resultElement.classList.add('status-graduated');
         }
     } else {

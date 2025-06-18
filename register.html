@@ -31,55 +31,92 @@
             </div>
         </nav>
     </header>
-    <main>
-        <h1 data-i18n="registerHeading">Student Registration</h1>
-        <form id="registration-form" action="https://www.formbackend.com/f/442e87ff11bd0476" method="POST" enctype="multipart/form-data" class="modern-form">
-            <input type="hidden" name="sheetName" value="Registrations">
-            <label for="first-name" data-i18n="firstNameLabel">First Name:</label>
-            <input type="text" id="first-name" name="first-name" data-i18n-placeholder="firstNamePlaceholder" required>
-            <label for="last-name" data-i18n="lastNameLabel">Last Name:</label>
-            <input type="text" id="last-name" name="last-name" data-i18n-placeholder="lastNamePlaceholder" required>
-            <label for="father-name" data-i18n="fatherNameLabel">Father's Name:</label>
-            <input type="text" id="father-name" name="father-name" data-i18n-placeholder="fatherNamePlaceholder" required>
-            <label for="age" data-i18n="ageLabel">Age:</label>
-            <input type="number" id="age" name="age" min="1" data-i18n-placeholder="agePlaceholder" required>
-            <label for="email" data-i18n="emailLabel">Email:</label>
-            <input type="email" id="email" name="email" data-i18n-placeholder="emailPlaceholder" required>
-            <label for="phone" data-i18n="phoneLabel">Phone Number:</label>
-            <input type="tel" id="phone" name="phone" data-i18n-placeholder="phonePlaceholder" required>
-            <label for="education" data-i18n="educationLabel">Education Level:</label>
-            <input type="text" id="education" name="education" data-i18n-placeholder="educationPlaceholder" required>
-            <label for="gender" data-i18n="genderLabel">Gender:</label>
-            <select id="gender" name="gender" required>
-                <option value="" data-i18n="selectGender">Select Gender</option>
-                <option value="male" data-i18n="male">Male</option>
-                <option value="female" data-i18n="female">Female</option>
-            </select>
-            <label for="national-id" data-i18n="nationalIdLabel">National ID Number:</label>
-            <input type="text" id="national-id" name="national-id" data-i18n-placeholder="nationalIdPlaceholder" required>
-            <label for="course" data-i18n="courseLabel">Course:</label>
-            <select id="course" name="course" required>
-                <option value="" data-i18n="selectCourse">Select a Course</option>
-                <option value="language" data-i18n="languageCourse">Language Skills</option>
-                <option value="computer" data-i18n="computerCourse">Computer Skills</option>
-                <option value="psychology" data-i18n="psychCourse">Psychology Workshops</option>
-                <option value="other" data-i18n="other">Other</option>
-            </select>
-            <div id="other-course" class="hidden">
-                <label for="other-course-input" data-i18n="otherCourseLabel">Specify Other Course:</label>
-                <input type="text" id="other-course-input" name="other-course" data-i18n-placeholder="otherCoursePlaceholder">
+    <main class="main-container">
+        <div class="academy-info-container">
+            <h2 data-i18n="academyIntroductionTitle">About HopeBridge Academy</h2>
+            <div class="academy-info">
+                <p data-i18n="academyIntroduction"></p>
+                <p data-i18n="academyRules"></p>
+                <p data-i18n="academyCourses"></p>
+                <p data-i18n="academySlogan"></p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th data-i18n="courseTableHeader">Course</th>
+                            <th data-i18n="durationTableHeader">Duration</th>
+                            <th data-i18n="feeTableHeader">Monthly Fee (AFN)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td data-i18n="computerCourseTable">Computer Skills (Beginner to Advanced)</td>
+                            <td data-i18n="durationMonths">3-6 Months</td>
+                            <td>350 - 600</td>
+                        </tr>
+                        <tr>
+                            <td data-i18n="englishCourseTable">English Language (Beginner to Advanced)</td>
+                            <td data-i18n="durationMonths">3-6 Months</td>
+                            <td>350 - 500</td>
+                        </tr>
+                        <tr>
+                            <td data-i18n="psychologyCourseTable">Psychology Workshops</td>
+                            <td data-i18n="durationVariable">Variable</td>
+                            <td data-i18n="free">Free</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
-            <label for="skill-level" data-i18n="skillLevelLabel">Skill Level:</label>
-            <select id="skill-level" name="skill-level" required>
-                <option value="" data-i18n="selectLevel">Select Level</option>
-                <option value="beginner" data-i18n="beginner">Beginner</option>
-                <option value="intermediate" data-i18n="intermediate">Intermediate</option>
-                <option value="advanced" data-i18n="advanced">Advanced</option>
-            </select>
-            <label for="details" data-i18n="detailsLabel">Additional Details:</label>
-            <textarea id="details" name="details" data-i18n-placeholder="detailsPlaceholder"></textarea>
-            <button type="submit" data-i18n="submit">Submit</button>
-        </form>
+        </div>
+        <div class="form-container">
+            <h1 data-i18n="registerHeading">Student Registration</h1>
+            <form id="registration-form" action="https://usebasin.com/f/100df2443084" method="POST" enctype="multipart/form-data" class="modern-form">
+                <input type="hidden" name="sheetName" value="Registrations">
+                <label for="first-name" data-i18n="firstNameLabel">First Name:</label>
+                <input type="text" id="first-name" name="first-name" data-i18n-placeholder="firstNamePlaceholder" required>
+                <label for="last-name" data-i18n="lastNameLabel">Last Name:</label>
+                <input type="text" id="last-name" name="last-name" data-i18n-placeholder="lastNamePlaceholder" required>
+                <label for="father-name" data-i18n="fatherNameLabel">Father's Name:</label>
+                <input type="text" id="father-name" name="father-name" data-i18n-placeholder="fatherNamePlaceholder" required>
+                <label for="age" data-i18n="ageLabel">Age:</label>
+                <input type="number" id="age" name="age" min="1" data-i18n-placeholder="agePlaceholder" required>
+                <label for="email" data-i18n="emailLabel">Email:</label>
+                <input type="email" id="email" name="email" data-i18n-placeholder="emailPlaceholder" required>
+                <label for="phone" data-i18n="phoneLabel">Phone Number:</label>
+                <input type="tel" id="phone" name="phone" data-i18n-placeholder="phonePlaceholder" required>
+                <label for="education" data-i18n="educationLabel">Education Level:</label>
+                <input type="text" id="education" name="education" data-i18n-placeholder="educationPlaceholder" required>
+                <label for="gender" data-i18n="genderLabel">Gender:</label>
+                <select id="gender" name="gender" required>
+                    <option value="" data-i18n="selectGender">Select Gender</option>
+                    <option value="male" data-i18n="male">Male</option>
+                    <option value="female" data-i18n="female">Female</option>
+                </select>
+                <label for="national-id" data-i18n="nationalIdLabel">National ID Number:</label>
+                <input type="text" id="national-id" name="national-id" data-i18n-placeholder="nationalIdPlaceholder" required>
+                <label for="course" data-i18n="courseLabel">Course:</label>
+                <select id="course" name="course" required>
+                    <option value="" data-i18n="selectCourse">Select a Course</option>
+                    <option value="language" data-i18n="languageCourse">Language Skills</option>
+                    <option value="computer" data-i18n="computerCourse">Computer Skills</option>
+                    <option value="psychology" data-i18n="psychCourse">Psychology Workshops</option>
+                    <option value="other" data-i18n="other">Other</option>
+                </select>
+                <div id="other-course" class="hidden">
+                    <label for="other-course-input" data-i18n="otherCourseLabel">Specify Other Course:</label>
+                    <input type="text" id="other-course-input" name="other-course" data-i18n-placeholder="otherCoursePlaceholder">
+                </div>
+                <label for="skill-level" data-i18n="skillLevelLabel">Skill Level:</label>
+                <select id="skill-level" name="skill-level" required>
+                    <option value="" data-i18n="selectLevel">Select Level</option>
+                    <option value="beginner" data-i18n="beginner">Beginner</option>
+                    <option value="intermediate" data-i18n="intermediate">Intermediate</option>
+                    <option value="advanced" data-i18n="advanced">Advanced</option>
+                </select>
+                <label for="details" data-i18n="detailsLabel">Additional Details:</label>
+                <textarea id="details" name="details" data-i18n-placeholder="detailsPlaceholder"></textarea>
+                <button type="submit" data-i18n="submit">Submit</button>
+            </form>
+        </div>
     </main>
     <footer>
         <a href="https://www.facebook.com/profile.php?id=61576355386024"><img src="./facebook.png" alt="Facebook Link" height="30" class="social-icon"></a>

@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title data-i18n="adminDashboardTitle">Admin Dashboard - HopeBridge Academy</title>
-    <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic&family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
     <script src="https://unpkg.com/i18next@21.6.10/dist/umd/i18next.min.js"></script>
     <script src="i18n.js" defer></script>
 </head>
@@ -13,7 +13,7 @@
     <header>
         <nav aria-label="Main navigation">
             <ul class="nav-list">
-                <li><img src="./logo.png" height="90" alt="HopeBridge Academy Logo" class="logo"></li>
+                <li><img src="./logo.png" height="90" alt="HopeBridge Academy Logo" class="logo" /></li>
                 <li><a href="index.html" data-i18n="home">Home</a></li>
                 <li class="auth-link"><a href="login.html" id="auth-link" data-i18n="logout">Log Out</a></li>
             </ul>
@@ -42,19 +42,56 @@
                 <option value="T08.html" data-i18n="teacher8">Teacher 8</option>
             </select>
         </section>
-        <section class="admin-panels" aria-labelledby="admin-panels-heading">
-            <h2 id="admin-panels-heading" data-i18n="adminPagesLabel">Admin Pages</h2>
-            <form id="admin-form" onsubmit="saveAdminData(event, 'Admin01')" action="https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec" method="POST" class="modern-form">
-                <input type="hidden" name="sheetName" value="AdminData">
-                <label for="content" data-i18n="contentLabel">Content:</label>
-                <textarea id="content" name="content" required></textarea>
-                <button type="submit" data-i18n="saveButton">Save</button>
-            </form>
+        <!-- New Simple Admin Local Storage Panel -->
+        <section class="local-storage-admin" aria-labelledby="local-storage-admin-heading" style="margin-top: 2em;">
+            <h2 id="local-storage-admin-heading">Local Storage - Save Admin Info</h2>
+            <label for="admin-data">Data:</label><br />
+            <textarea id="admin-data" rows="5" cols="50" placeholder="Enter data here..."></textarea><br /><br />
+            <label for="admin-date">Date:</label>
+            <input id="admin-date" type="date" /><br /><br />
+            <button onclick="saveAdminLocal()">Save Data Locally</button>
+        
+            <h3>Saved Data:</h3>
+            <pre id="admin-storage-output" style="background:#f4f4f4; padding:10px; border:1px solid #ccc; max-height: 200px; overflow:auto;"></pre>
         </section>
+        
     </main>
     <footer>
         <p data-i18n="copyright">© 2025 HopeBridge Academy</p>
     </footer>
+
     <script src="script.js" defer></script>
+    <script>
+        // Local storage for admin info panel functions
+        function saveAdminLocal() {
+            const data = document.getElementById('admin-data').value.trim();
+            const dateInput = document.getElementById('admin-date').value;
+            const date = dateInput || new Date().toISOString().slice(0, 10);
+
+            if (!data) {
+                alert('Please enter the data.');
+                return;
+            }
+
+            let admins = JSON.parse(localStorage.getItem('admins') || '[]');
+            admins.push({ data, date });
+            localStorage.setItem('admins', JSON.stringify(admins));
+
+            showAdminsLocal();
+            // Clear inputs
+            document.getElementById('admin-data').value = '';
+            document.getElementById('admin-date').value = '';
+        }
+
+        function showAdminsLocal() {
+            let admins = JSON.parse(localStorage.getItem('admins') || '[]');
+            document.getElementById('admin-storage-output').textContent = JSON.stringify(admins, null, 2);
+        }
+
+        // Show saved admins on page load
+        window.addEventListener('load', () => {
+            showAdminsLocal();
+        });
+    </script>
 </body>
 </html>

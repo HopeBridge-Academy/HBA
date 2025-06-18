@@ -1,50 +1,376 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fa" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title data-i18n="teacherDashboardTitle">Teacher Dashboard - HopeBridge Academy</title>
-    <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-    <script src="https://unpkg.com/i18next@21.6.10/dist/umd/i18next.min.js"></script>
-    <script src="i18n.js" defer></script>
+    <meta charset="UTF-8" />
+    <title>گزارش تدریس - HopeBridge Academy</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic&display=swap" rel="stylesheet" />
+    <style>
+        body {
+            font-family: 'Noto Naskh Arabic', sans-serif;
+            background: #f4f6f9;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+        header {
+            background-color: #2f7ac0;
+            color: white;
+            text-align: center;
+            padding: 1rem;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        main {
+            max-width: 900px;
+            margin: 2rem auto;
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        label {
+            font-weight: bold;
+            margin-top: 1rem;
+            display: block;
+        }
+        input, textarea, select, button {
+            width: 100%;
+            padding: 0.6rem;
+            margin-top: 0.3rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-family: inherit;
+            font-size: 1rem;
+        }
+        button {
+            background: #004080;
+            color: white;
+            margin-top: 1.5rem;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #0066cc;
+        }
+        iframe {
+            width: 100%;
+            height: 500px;
+            margin: 1rem 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .teacher-id {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 1rem;
+        }
+        .report-entry {
+            background: #f0f4ff;
+            padding: 1rem;
+            margin-top: 1.5rem;
+            border-radius: 10px;
+        }
+        .subtitle {
+            font-weight: bold;
+            color: #004080;
+            margin-bottom: 0.5rem;
+        }
+        .exam-panel {
+            margin-top: 2rem;
+            background: #fff5e6;
+            padding: 1rem;
+            border: 1px solid #ffcc80;
+            border-radius: 10px;
+        }
+        .exam-panel h3 {
+            color: #e65100;
+            margin-top: 0;
+        }
+        .exam-entry {
+            margin-bottom: 0.5rem;
+            padding: 0.5rem;
+            background: #fff9f0;
+            border: 1px solid #ffe0b2;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .exam-entry span {
+            flex-grow: 1;
+        }
+        .exam-entry button {
+            background: #d9534f;
+            border: none;
+            color: white;
+            cursor: pointer;
+            padding: 0.3rem 0.6rem;
+            font-size: 0.9rem;
+            border-radius: 3px;
+            margin-left: 1rem;
+        }
+        .exam-entry button:hover {
+            background: #c9302c;
+        }
+        .add-exam-form {
+            margin-top: 1rem;
+            border-top: 1px solid #ccc;
+            padding-top: 1rem;
+        }
+        .add-exam-form input {
+            width: auto;
+            display: inline-block;
+            margin-left: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+        .add-exam-form label {
+            display: inline-block;
+            width: 90px;
+            margin-left: 0.5rem;
+        }
+        .add-exam-form button {
+            width: auto;
+            margin-top: 0;
+        }
+    </style>
 </head>
-<body onload="initializePage()">
-    <header>
-        <nav aria-label="Main navigation">
-            <ul class="nav-list">
-                <li><img src="./logo.png" height="90" alt="HopeBridge Academy Logo" class="logo"></li>
-                <li><a href="index.html" data-i18n="home">Home</a></li>
-                <li class="auth-link"><a href="login.html" id="auth-link" data-i18n="logout">Log Out</a></li>
-            </ul>
-            <div class="language-switcher">
-                <label for="language-select" data-i18n="languageLabel">Language:</label>
-                <select id="language-select" onchange="changeLanguage(this.value)" aria-label="Select language">
-                    <option value="en" data-i18n="englishOption">English</option>
-                    <option value="fa" data-i18n="persianOption">فارسی</option>
-                </select>
-            </div>
-        </nav>
-    </header>
-    <main>
-        <h1 data-i18n="teacherDashboard">Teacher Dashboard</h1>
-        <section class="lesson-plan" aria-labelledby="lesson-plan-heading">
-            <h2 id="lesson-plan-heading" data-i18n="planningLabel">Daily Reporting</h2>
-            <form id="lesson-plan-form" onsubmit="saveLessonPlan(event, 'T07')" action="https://usebasin.com/f/abfe37dead25" method="POST" class="modern-form">                <label for="subject" data-i18n="subjectLabel">Subject:</label>
-                <input type="text" id="subject" name="subject" required>
-                <label for="date" data-i18n="dateLabel">Date:</label>
-                <input type="date" id="date" name="date" required>
-                <label for="class" data-i18n="classLabel">Class:</label>
-                <input type="text" id="class" name="class" required>
-                <label for="description" data-i18n="descriptionLabel">Description:</label>
-                <textarea id="description" name="description" required></textarea>
-                <button type="submit" data-i18n="saveButton">Save</button>
-            </form>
-        </section>
-    </main>
-    <footer>
-        <p data-i18n="copyright">© 2025 HopeBridge Academy</p>
-    </footer>
-    <script src="script.js" defer></script>
+<body>
+<header>
+    HopeBridge Academy - سامانه ثبت گزارش تدریس
+</header>
+<main>
+    <p class="teacher-id">کد استاد: <span id="teacherId">TCHR-007</span></p>
+
+    <iframe src="plan.pdf" title="Plan PDF"></iframe>
+
+    <form id="reportForm">
+        <input type="hidden" name="teacher_id" id="formTeacherId" value="TCHR-007" />
+
+        <label for="class">انتخاب صنف:</label>
+        <select id="class" name="class" required>
+            <option value="">-- انتخاب صنف --</option>
+            <optgroup label="کمپیوتر">
+                <option value="کمپیوتر A">کمپیوتر A</option>
+                <option value="کمپیوتر B">کمپیوتر B</option>
+                <option value="کمپیوتر C">کمپیوتر C</option>
+            </optgroup>
+            <optgroup label="انگلیسی">
+                <option value="انگلیسی A">انگلیسی A</option>
+                <option value="انگلیسی B">انگلیسی B</option>
+                <option value="انگلیسی C">انگلیسی C</option>
+            </optgroup>
+            <optgroup label="دیگر">
+                <option value="دیگر A">دیگر A</option>
+                <option value="دیگر B">دیگر B</option>
+                <option value="دیگر C">دیگر C</option>
+            </optgroup>
+        </select>
+
+        <label for="date">تاریخ:</label>
+        <input type="date" id="date" name="date" required />
+
+        <label for="subject">موضوع درس:</label>
+        <input type="text" id="subject" name="subject" required />
+
+        <label for="duration">مدت زمان تدریس:</label>
+        <input type="text" id="duration" name="duration" required />
+
+        <label for="content">محتوای تدریس‌شده:</label>
+        <textarea id="content" name="content" required></textarea>
+
+        <label for="assessment">ارزیابی سطح یادگیری:</label>
+        <textarea id="assessment" name="assessment" required></textarea>
+
+        <label for="challenges">مشکلات یا چالش‌ها:</label>
+        <textarea id="challenges" name="challenges"></textarea>
+
+        <label for="suggestions">پیشنهادات استاد:</label>
+        <textarea id="suggestions" name="suggestions"></textarea>
+
+        <label for="presence">وضعیت حضور:</label>
+        <select name="presence_level" id="presence" required>
+            <option value="">انتخاب کنید</option>
+            <option value="full">همه حاضر بودند</option>
+            <option value="partial">برخی غایب بودند</option>
+            <option value="low">حضور بسیار پایین</option>
+        </select>
+
+        <label for="attendance">تعداد حاضر و غایب:</label>
+        <textarea id="attendance" name="attendance" required></textarea>
+
+        <button type="submit">ثبت گزارش</button>
+    </form>
+
+    <div id="reportDisplay"></div>
+
+    <div class="exam-panel">
+        <h3>نتایج امتحان</h3>
+
+        <!-- Local exam results display and management -->
+        <div id="localExamResults"></div>
+
+        <!-- Add new exam result manually -->
+        <form id="addExamResultForm" class="add-exam-form">
+            <label for="studentName">نام شاگرد:</label>
+            <input type="text" id="studentName" required placeholder="مثلا: احمد رحیمی" />
+
+            <label for="studentId">کد شاگرد:</label>
+            <input type="text" id="studentId" required placeholder="مثلا: STD-051" />
+
+            <label for="studentScore">نمره:</label>
+            <input type="number" id="studentScore" required min="0" max="100" placeholder="مثلا: 85" />
+
+            <button type="submit">افزودن نمره</button>
+        </form>
+
+        <form id="examForm" method="POST" action="https://usebasin.com/f/your-basin-form-id" style="margin-top:1rem;">
+            <input type="hidden" name="teacher_id" value="TCHR-001" />
+            <div id="examFormInputs"></div>
+            <button type="submit">ثبت نتایج امتحان  </button>
+        </form>
+    </div>
+</main>
+
+<script>
+    const teacherId = 'TCHR-001';
+    document.getElementById('teacherId').textContent = teacherId;
+    document.getElementById('formTeacherId').value = teacherId;
+
+    // Keys for localStorage
+    const reportKey = `reports-${teacherId}`;
+    const examKey = `exam-results-${teacherId}`;
+
+    const reportForm = document.getElementById('reportForm');
+    const examForm = document.getElementById('examForm');
+    const examFormInputs = document.getElementById('examFormInputs');
+
+    // Reports form handling
+    reportForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+        const report = {
+            class: document.getElementById('class').value,
+            date: document.getElementById('date').value,
+            subject: document.getElementById('subject').value,
+            duration: document.getElementById('duration').value,
+            content: document.getElementById('content').value,
+            assessment: document.getElementById('assessment').value,
+            challenges: document.getElementById('challenges').value,
+            suggestions: document.getElementById('suggestions').value,
+            presence: document.getElementById('presence').value,
+            attendance: document.getElementById('attendance').value
+        };
+        const existingReports = JSON.parse(localStorage.getItem(reportKey)) || [];
+        existingReports.push(report);
+        localStorage.setItem(reportKey, JSON.stringify(existingReports));
+        reportForm.reset();
+        showReports(existingReports);
+    });
+
+    function showReports(reports) {
+        const display = document.getElementById('reportDisplay');
+        display.innerHTML = '<h3>گزارش‌های ثبت‌شده:</h3>';
+        reports.forEach((r) => {
+            const div = document.createElement('div');
+            div.className = 'report-entry';
+            div.innerHTML = `
+                <div class="subtitle">${r.date} - ${r.class} - ${r.subject}</div>
+                <p><strong>مدت تدریس:</strong> ${r.duration}</p>
+                <p><strong>محتوا:</strong> ${r.content}</p>
+                <p><strong>ارزیابی یادگیری:</strong> ${r.assessment}</p>
+                <p><strong>مشکلات:</strong> ${r.challenges || 'ندارد'}</p>
+                <p><strong>پیشنهادات:</strong> ${r.suggestions || 'ندارد'}</p>
+                <p><strong>حضور:</strong> ${r.presence}</p>
+                <p><strong>تعداد حاضر و غایب:</strong> ${r.attendance}</p>
+            `;
+            display.appendChild(div);
+        });
+    }
+
+    // Load saved reports on page load
+    window.addEventListener('load', () => {
+        const savedReports = JSON.parse(localStorage.getItem(reportKey));
+        if (savedReports && savedReports.length > 0) {
+            showReports(savedReports);
+        }
+        loadExamResults();
+    });
+
+    // Exam Results Local Panel Logic
+    const localExamResultsDiv = document.getElementById('localExamResults');
+    const addExamResultForm = document.getElementById('addExamResultForm');
+
+    // Load exam results from localStorage and show
+    function loadExamResults() {
+        const exams = JSON.parse(localStorage.getItem(examKey)) || [];
+        renderExamResults(exams);
+        updateBasinExamForm(exams);
+    }
+
+    // Render exam results list with delete buttons
+    function renderExamResults(exams) {
+        localExamResultsDiv.innerHTML = '';
+        if (exams.length === 0) {
+            localExamResultsDiv.innerHTML = '<p>نتایجی ثبت نشده است.</p>';
+            return;
+        }
+        exams.forEach((exam, index) => {
+            const div = document.createElement('div');
+            div.className = 'exam-entry';
+            div.innerHTML = `
+                <span>${exam.studentName} (${exam.studentId}) - نمره: ${exam.score}</span>
+                <button data-index="${index}">حذف</button>
+            `;
+            localExamResultsDiv.appendChild(div);
+        });
+
+        // Add event listeners to delete buttons
+        localExamResultsDiv.querySelectorAll('button').forEach(button => {
+            button.addEventListener('click', (e) => {
+                const idx = e.target.getAttribute('data-index');
+                deleteExamResult(idx);
+            });
+        });
+    }
+
+    // Delete exam result by index
+    function deleteExamResult(index) {
+        const exams = JSON.parse(localStorage.getItem(examKey)) || [];
+        exams.splice(index, 1);
+        localStorage.setItem(examKey, JSON.stringify(exams));
+        loadExamResults();
+    }
+
+    // Add new exam result from form
+    addExamResultForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const studentName = document.getElementById('studentName').value.trim();
+        const studentId = document.getElementById('studentId').value.trim();
+        const score = document.getElementById('studentScore').value.trim();
+
+        if (!studentName || !studentId || score === '') {
+            alert('لطفاً همه فیلدها را پر کنید.');
+            return;
+        }
+
+        const exams = JSON.parse(localStorage.getItem(examKey)) || [];
+        exams.push({ studentName, studentId, score });
+        localStorage.setItem(examKey, JSON.stringify(exams));
+        addExamResultForm.reset();
+        loadExamResults();
+    });
+
+    // Prepare hidden inputs for Basin form submission
+    function updateBasinExamForm(exams) {
+        examFormInputs.innerHTML = '';
+        exams.forEach((exam, i) => {
+            examFormInputs.innerHTML += `
+                <input type="hidden" name="students[${i}][name]" value="${exam.studentName}" />
+                <input type="hidden" name="students[${i}][id]" value="${exam.studentId}" />
+                <input type="hidden" name="students[${i}][score]" value="${exam.score}" />
+            `;
+        });
+    }
+</script>
 </body>
 </html>

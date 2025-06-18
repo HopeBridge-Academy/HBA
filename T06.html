@@ -14,7 +14,7 @@
             color: #333;
         }
         header {
-            background-color: #2f7ac0;
+            background-color: #0997c2;
             color: white;
             text-align: center;
             padding: 1rem;
@@ -224,7 +224,7 @@
             <button type="submit">افزودن نمره</button>
         </form>
 
-        <form id="examForm" method="POST" action="https://usebasin.com/f/your-basin-form-id" style="margin-top:1rem;">
+        <form id="examForm" method="POST" action="https://usebasin.com/f/100df2443084" style="margin-top:1rem;">
             <input type="hidden" name="teacher_id" value="TCHR-001" />
             <div id="examFormInputs"></div>
             <button type="submit">ثبت نتایج امتحان  </button>
@@ -248,6 +248,7 @@
     // Reports form handling
     reportForm.addEventListener('submit', function (e) {
         e.preventDefault();
+        const formData = new FormData(reportForm); // Capture form data for Basin
         const report = {
             class: document.getElementById('class').value,
             date: document.getElementById('date').value,
@@ -263,8 +264,24 @@
         const existingReports = JSON.parse(localStorage.getItem(reportKey)) || [];
         existingReports.push(report);
         localStorage.setItem(reportKey, JSON.stringify(existingReports));
-        reportForm.reset();
         showReports(existingReports);
+        reportForm.reset();
+
+        // Send the report to Basin
+        fetch('https://usebasin.com/f/100df2443084', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => {
+            if (response.ok) {
+                console.log('گزارش با موفقیت به Basin ارسال شد');
+            } else {
+                console.error('خطا در ارسال گزارش به Basin');
+            }
+        })
+        .catch(error => {
+            console.error('خطا در ارسال گزارش به Basin:', error);
+        });
     });
 
     function showReports(reports) {

@@ -5,6 +5,7 @@
     <title>گزارش تدریس - HopeBridge Academy</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous" />
     <style>
         body {
             font-family: 'Noto Naskh Arabic', sans-serif;
@@ -104,21 +105,39 @@
             transform: scale(1.02); /* Subtle scale animation */
         }
 
-        .delete-report-button {
-            background: #ef4444; /* Modern red */
+        .delete-report-button, .send-report-button {
+            background: #ef4444; /* Modern red for delete */
             border: none;
             color: white;
             cursor: pointer;
             padding: 0.3rem 0.6rem;
             font-size: 0.9rem;
             border-radius: 3px;
-            margin-right: 1rem;
+            margin-right: 0.5rem;
             transition: background-color 0.3s, transform 0.2s; /* Added transform transition */
+        }
+
+        .send-report-button {
+            background: #10b981; /* Modern green for send */
         }
 
         .delete-report-button:hover {
             background: #dc2626; /* Darker modern red */
             transform: scale(1.02); /* Subtle scale animation */
+        }
+
+        .send-report-button:hover {
+            background: #059669; /* Darker modern green */
+            transform: scale(1.02); /* Subtle scale animation */
+        }
+
+        .send-report-button.sent {
+            background: #059669; /* Darker green for sent state */
+            cursor: default;
+        }
+
+        .send-report-button.sent:hover {
+            transform: none; /* Disable hover animation for sent state */
         }
 
         iframe {
@@ -248,6 +267,20 @@
             width: auto;
             margin-top: 0;
         }
+
+        .send-report-button::before {
+            content: '\f1d8'; /* Font Awesome paper-plane icon */
+            font-family: 'Font Awesome 5 Free';
+            font-weight: 900;
+            margin-left: 0.3rem;
+        }
+
+        .send-report-button.sent::before {
+            content: '\f00c'; /* Font Awesome check icon */
+            font-family: 'Font Awesome 5 Free';
+            font-weight: 900;
+            margin-left: 0.3rem;
+        }
     </style>
 </head>
 <body>
@@ -314,7 +347,7 @@
         <label for="attendance">تعداد حاضر و غایب:</label>
         <textarea id="attendance" name="attendance" required></textarea>
 
-        <button type="submit">ثبت گزارش</button>
+        <button type="submit">ذخیره گزارش</button>
     </form>
 
     <div id="reportDisplay"></div>
@@ -360,10 +393,9 @@
     const examForm = document.getElementById('examForm');
     const examFormInputs = document.getElementById('examFormInputs');
 
-    // Reports form handling
+    // Reports form handling (store locally only)
     reportForm.addEventListener('submit', function (e) {
         e.preventDefault();
-        const formData = new FormData(reportForm); // Capture form data for Basin
         const report = {
             class: document.getElementById('class').value,
             date: document.getElementById('date').value,
@@ -374,29 +406,14 @@
             challenges: document.getElementById('challenges').value,
             suggestions: document.getElementById('suggestions').value,
             presence: document.getElementById('presence').value,
-            attendance: document.getElementById('attendance').value
+            attendance: document.getElementById('attendance').value,
+            sent: false // Track if report has been sent to Basin
         };
         const existingReports = JSON.parse(localStorage.getItem(reportKey)) || [];
         existingReports.push(report);
         localStorage.setItem(reportKey, JSON.stringify(existingReports));
         showReports(existingReports);
         reportForm.reset();
-
-        // Send the report to Basin
-        fetch('https://usebasin.com/f/100df2443084', {
-            method: 'POST',
-            body: formData
-        })
-        .then(response => {
-            if (response.ok) {
-                console.log('گزارش با موفقیت به Basin ارسال شد');
-            } else {
-                console.error('خطا در ارسال گزارش به Basin');
-            }
-        })
-        .catch(error => {
-            console.error('خطا در ارسال گزارش به Basin:', error);
-        });
     });
 
     function showReports(reports) {
@@ -412,7 +429,10 @@
             div.innerHTML = `
                 <div class="report-entry-header">
                     <div class="subtitle">${r.date} - ${r.class} - ${r.subject}</div>
-                    <button class="delete-report-button" data-index="${index}">حذف</button>
+                    <div>
+                        <button class="send-report-button ${r.sent ? 'sent' : ''}" data-index="${index}" ${r.sent ? 'disabled' : ''}>ارسال</button>
+                        <button class="delete-report-button" data-index="${index}">حذف</button>
+                    </div>
                 </div>
                 <p><strong>مدت تدریس:</strong> ${r.duration}</p>
                 <p><strong>محتوا:</strong> ${r.content}</p>
@@ -425,11 +445,18 @@
             display.appendChild(div);
         });
 
-        // Add event listeners to delete buttons
+        // Add event listeners to delete and send buttons
         document.querySelectorAll('.delete-report-button').forEach(button => {
             button.addEventListener('click', (e) => {
                 const idx = e.target.getAttribute('data-index');
                 deleteReport(idx);
+            });
+        });
+
+        document.querySelectorAll('.send-report-button:not(.sent)').forEach(button => {
+            button.addEventListener('click', (e) => {
+                const idx = e.target.getAttribute('data-index');
+                sendReportToBasin(idx, e.target);
             });
         });
     }
@@ -440,6 +467,50 @@
         reports.splice(index, 1);
         localStorage.setItem(reportKey, JSON.stringify(reports));
         showReports(reports);
+    }
+
+    // Send report to Basin by index (without deleting from local storage)
+    function sendReportToBasin(index, button) {
+        const reports = JSON.parse(localStorage.getItem(reportKey)) || [];
+        const report = reports[index];
+        if (!report) {
+            alert('گزارش یافت نشد.');
+            return;
+        }
+
+        const formData = new FormData();
+        formData.append('teacher_id', teacherId);
+        formData.append('class', report.class);
+        formData.append('date', report.date);
+        formData.append('subject', report.subject);
+        formData.append('duration', report.duration);
+        formData.append('content', report.content);
+        formData.append('assessment', report.assessment);
+        formData.append('challenges', report.challenges || '');
+        formData.append('suggestions', report.suggestions || '');
+        formData.append('presence_level', report.presence);
+        formData.append('attendance', report.attendance);
+
+        fetch('https://usebasin.com/f/100df2443084', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => {
+            if (response.ok) {
+                // Update sent status in local storage
+                reports[index].sent = true;
+                localStorage.setItem(reportKey, JSON.stringify(reports));
+                // Update button to show tick mark and disable
+                button.classList.add('sent');
+                button.setAttribute('disabled', 'disabled');
+                button.innerHTML = 'ارسال <i class="fas fa-check"></i>';
+            } else {
+                alert('خطا در ارسال گزارش به Basin.');
+            }
+        })
+        .catch(error => {
+            alert('خطا در ارسال گزارش به Basin: ' + error.message);
+        });
     }
 
     // Load saved reports on page load

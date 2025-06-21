@@ -11,16 +11,40 @@
             background: #f4f6f9;
             margin: 0;
             padding: 0;
-            color: #333;
+            color: #2d3748; /* Modern dark gray */
+            animation: fadeInBody 1s ease-in-out; /* Added body fade-in animation */
         }
+
+        @keyframes fadeInBody {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
         header {
-            background-color: #0997c2;
+            background-color: #3b82f6; /* Modern blue */
             color: white;
             text-align: center;
             padding: 1rem;
             font-size: 1.5rem;
             font-weight: bold;
+            animation: slideInHeader 0.5s ease-out; /* Added header slide-in animation */
         }
+
+        @keyframes slideInHeader {
+            from {
+                transform: translateY(-20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
         main {
             max-width: 900px;
             margin: 2rem auto;
@@ -28,65 +52,147 @@
             padding: 2rem;
             border-radius: 10px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            animation: fadeInMain 0.8s ease-in-out; /* Added main content fade-in */
         }
+
+        @keyframes fadeInMain {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
         label {
             font-weight: bold;
             margin-top: 1rem;
             display: block;
+            color: #2d3748; /* Modern dark gray */
         }
+
         input, textarea, select, button {
             width: 100%;
             padding: 0.6rem;
             margin-top: 0.3rem;
-            border: 1px solid #ccc;
+            border: 1px solid #d1d5db; /* Modern gray */
             border-radius: 5px;
             font-family: inherit;
             font-size: 1rem;
+            transition: border-color 0.3s, box-shadow 0.3s; /* Added box-shadow transition */
         }
+
+        input:focus, select:focus, textarea:focus {
+            border-color: #3b82f6; /* Modern blue */
+            box-shadow: 0 0 5px rgba(59, 130, 246, 0.5); /* Added glow effect */
+            outline: none;
+        }
+
         button {
-            background: #004080;
+            background: #3b82f6; /* Modern blue */
             color: white;
             margin-top: 1.5rem;
             border: none;
             cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s; /* Added transform transition */
         }
+
         button:hover {
-            background: #0066cc;
+            background: #2563eb; /* Darker modern blue */
+            transform: scale(1.02); /* Subtle scale animation */
         }
+
+        .delete-report-button {
+            background: #ef4444; /* Modern red */
+            border: none;
+            color: white;
+            cursor: pointer;
+            padding: 0.3rem 0.6rem;
+            font-size: 0.9rem;
+            border-radius: 3px;
+            margin-right: 1rem;
+            transition: background-color 0.3s, transform 0.2s; /* Added transform transition */
+        }
+
+        .delete-report-button:hover {
+            background: #dc2626; /* Darker modern red */
+            transform: scale(1.02); /* Subtle scale animation */
+        }
+
         iframe {
             width: 100%;
             height: 500px;
             margin: 1rem 0;
-            border: 1px solid #ccc;
+            border: 1px solid #d1d5db; /* Modern gray */
             border-radius: 5px;
         }
+
         .teacher-id {
             font-size: 0.9rem;
-            color: #666;
+            color: #6b7280; /* Modern gray */
             margin-bottom: 1rem;
         }
+
         .report-entry {
-            background: #f0f4ff;
+            background: #f0f9ff; /* Modern light blue */
             padding: 1rem;
             margin-top: 1.5rem;
             border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            animation: scaleInImage 0.5s ease-out; /* Added scale-in animation */
         }
+
+        @keyframes scaleInImage {
+            from {
+                transform: scale(0.95);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .report-entry-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
         .subtitle {
             font-weight: bold;
-            color: #004080;
+            color: #3b82f6; /* Modern blue */
             margin-bottom: 0.5rem;
         }
+
         .exam-panel {
             margin-top: 2rem;
             background: #fff5e6;
             padding: 1rem;
             border: 1px solid #ffcc80;
             border-radius: 10px;
+            animation: fadeInForm 0.6s ease-in-out; /* Added form fade-in animation */
         }
+
+        @keyframes fadeInForm {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
         .exam-panel h3 {
             color: #e65100;
             margin-top: 0;
         }
+
         .exam-entry {
             margin-bottom: 0.5rem;
             padding: 0.5rem;
@@ -97,11 +203,13 @@
             justify-content: space-between;
             align-items: center;
         }
+
         .exam-entry span {
             flex-grow: 1;
         }
+
         .exam-entry button {
-            background: #d9534f;
+            background: #ef4444; /* Modern red */
             border: none;
             color: white;
             cursor: pointer;
@@ -109,26 +217,33 @@
             font-size: 0.9rem;
             border-radius: 3px;
             margin-left: 1rem;
+            transition: background-color 0.3s, transform 0.2s; /* Added transform transition */
         }
+
         .exam-entry button:hover {
-            background: #c9302c;
+            background: #dc2626; /* Darker modern red */
+            transform: scale(1.02); /* Subtle scale animation */
         }
+
         .add-exam-form {
             margin-top: 1rem;
-            border-top: 1px solid #ccc;
+            border-top: 1px solid #d1d5db; /* Modern gray */
             padding-top: 1rem;
         }
+
         .add-exam-form input {
             width: auto;
             display: inline-block;
             margin-left: 0.5rem;
             margin-bottom: 0.5rem;
         }
+
         .add-exam-form label {
             display: inline-block;
             width: 90px;
             margin-left: 0.5rem;
         }
+
         .add-exam-form button {
             width: auto;
             margin-top: 0;
@@ -227,7 +342,7 @@
         <form id="examForm" method="POST" action="https://usebasin.com/f/100df2443084" style="margin-top:1rem;">
             <input type="hidden" name="teacher_id" value="TCHR-001" />
             <div id="examFormInputs"></div>
-            <button type="submit">ثبت نتایج امتحان  </button>
+            <button type="submit">ثبت نتایج امتحان</button>
         </form>
     </div>
 </main>
@@ -287,11 +402,18 @@
     function showReports(reports) {
         const display = document.getElementById('reportDisplay');
         display.innerHTML = '<h3>گزارش‌های ثبت‌شده:</h3>';
-        reports.forEach((r) => {
+        if (reports.length === 0) {
+            display.innerHTML += '<p>گزارشی ثبت نشده است.</p>';
+            return;
+        }
+        reports.forEach((r, index) => {
             const div = document.createElement('div');
             div.className = 'report-entry';
             div.innerHTML = `
-                <div class="subtitle">${r.date} - ${r.class} - ${r.subject}</div>
+                <div class="report-entry-header">
+                    <div class="subtitle">${r.date} - ${r.class} - ${r.subject}</div>
+                    <button class="delete-report-button" data-index="${index}">حذف</button>
+                </div>
                 <p><strong>مدت تدریس:</strong> ${r.duration}</p>
                 <p><strong>محتوا:</strong> ${r.content}</p>
                 <p><strong>ارزیابی یادگیری:</strong> ${r.assessment}</p>
@@ -302,6 +424,22 @@
             `;
             display.appendChild(div);
         });
+
+        // Add event listeners to delete buttons
+        document.querySelectorAll('.delete-report-button').forEach(button => {
+            button.addEventListener('click', (e) => {
+                const idx = e.target.getAttribute('data-index');
+                deleteReport(idx);
+            });
+        });
+    }
+
+    // Delete report by index from local storage
+    function deleteReport(index) {
+        const reports = JSON.parse(localStorage.getItem(reportKey)) || [];
+        reports.splice(index, 1);
+        localStorage.setItem(reportKey, JSON.stringify(reports));
+        showReports(reports);
     }
 
     // Load saved reports on page load

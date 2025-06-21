@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <style>
         body {
             font-family: 'Noto Naskh Arabic', sans-serif;
@@ -138,6 +139,28 @@
 
         .send-report-button.sent:hover {
             transform: none; /* Disable hover animation for sent state */
+        }
+
+        .export-button {
+            background: #3b82f6; /* Modern blue */
+            color: white;
+            padding: 0.6rem 1rem;
+            font-size: 1rem;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            margin-top: 1rem;
+            transition: background-color 0.3s, transform 0.2s; /* Added transform transition */
+            display: inline-block;
+        }
+
+        .export-button:hover {
+            background: #2563eb; /* Darker modern blue */
+            transform: scale(1.02); /* Subtle scale animation */
+        }
+
+        .export-button i {
+            margin-left: 0.3rem;
         }
 
         iframe {
@@ -350,7 +373,9 @@
         <button type="submit">ذخیره گزارش</button>
     </form>
 
-    <div id="reportDisplay"></div>
+    <div id="reportDisplay">
+        <button id="exportTeachingReports" class="export-button"><i class="fas fa-file-pdf"></i> صدور گزارش‌های تدریس به PDF</button>
+    </div>
 
     <div class="exam-panel">
         <h3>نتایج امتحان</h3>
@@ -376,11 +401,13 @@
             <input type="hidden" name="teacher_id" value="TCHR-001" />
             <div id="examFormInputs"></div>
             <button type="submit">ثبت نتایج امتحان</button>
+            <button type="button" id="exportExamResults" class="export-button"><i class="fas fa-file-pdf"></i> صدور نتایج امتحان به PDF</button>
         </form>
     </div>
 </main>
 
 <script>
+    const { jsPDF } = window.jspdf;
     const teacherId = 'TCHR-001';
     document.getElementById('teacherId').textContent = teacherId;
     document.getElementById('formTeacherId').value = teacherId;
@@ -418,32 +445,32 @@
 
     function showReports(reports) {
         const display = document.getElementById('reportDisplay');
-        display.innerHTML = '<h3>گزارش‌های ثبت‌شده:</h3>';
+        display.innerHTML = '<h3>گزارش‌های ثبت‌شده:</h3><button id="exportTeachingReports" class="export-button"><i class="fas fa-file-pdf"></i> صدور گزارش‌های تدریس به PDF</button>';
         if (reports.length === 0) {
             display.innerHTML += '<p>گزارشی ثبت نشده است.</p>';
-            return;
-        }
-        reports.forEach((r, index) => {
-            const div = document.createElement('div');
-            div.className = 'report-entry';
-            div.innerHTML = `
-                <div class="report-entry-header">
-                    <div class="subtitle">${r.date} - ${r.class} - ${r.subject}</div>
-                    <div>
-                        <button class="send-report-button ${r.sent ? 'sent' : ''}" data-index="${index}" ${r.sent ? 'disabled' : ''}>ارسال</button>
-                        <button class="delete-report-button" data-index="${index}">حذف</button>
+        } else {
+            reports.forEach((r, index) => {
+                const div = document.createElement('div');
+                div.className = 'report-entry';
+                div.innerHTML = `
+                    <div class="report-entry-header">
+                        <div class="subtitle">${r.date} - ${r.class} - ${r.subject}</div>
+                        <div>
+                            <button class="send-report-button ${r.sent ? 'sent' : ''}" data-index="${index}" ${r.sent ? 'disabled' : ''}>ارسال</button>
+                            <button class="delete-report-button" data-index="${index}">حذف</button>
+                        </div>
                     </div>
-                </div>
-                <p><strong>مدت تدریس:</strong> ${r.duration}</p>
-                <p><strong>محتوا:</strong> ${r.content}</p>
-                <p><strong>ارزیابی یادگیری:</strong> ${r.assessment}</p>
-                <p><strong>مشکلات:</strong> ${r.challenges || 'ندارد'}</p>
-                <p><strong>پیشنهادات:</strong> ${r.suggestions || 'ندارد'}</p>
-                <p><strong>حضور:</strong> ${r.presence}</p>
-                <p><strong>تعداد حاضر و غایب:</strong> ${r.attendance}</p>
-            `;
-            display.appendChild(div);
-        });
+                    <p><strong>مدت تدریس:</strong> ${r.duration}</p>
+                    <p><strong>محتوا:</strong> ${r.content}</p>
+                    <p><strong>ارزیابی یادگیری:</strong> ${r.assessment}</p>
+                    <p><strong>مشکلات:</strong> ${r.challenges || 'ندارد'}</p>
+                    <p><strong>پیشنهادات:</strong> ${r.suggestions || 'ندارد'}</p>
+                    <p><strong>حضور:</strong> ${r.presence}</p>
+                    <p><strong>تعداد حاضر و غایب:</strong> ${r.attendance}</p>
+                `;
+                display.appendChild(div);
+            });
+        }
 
         // Add event listeners to delete and send buttons
         document.querySelectorAll('.delete-report-button').forEach(button => {
@@ -459,6 +486,9 @@
                 sendReportToBasin(idx, e.target);
             });
         });
+
+        // Add event listener to export teaching reports button
+        document.getElementById('exportTeachingReports').addEventListener('click', exportTeachingReportsToPDF);
     }
 
     // Delete report by index from local storage
@@ -513,13 +543,105 @@
         });
     }
 
+    // Export teaching reports to PDF
+    function exportTeachingReportsToPDF() {
+        const reports = JSON.parse(localStorage.getItem(reportKey)) || [];
+        if (reports.length === 0) {
+            alert('هیچ گزارشی برای صدور وجود ندارد.');
+            return;
+        }
+
+        const doc = new jsPDF();
+        doc.setFont('Arial', 'normal');
+        doc.setFontSize(12);
+        doc.text('گزارش‌های تدریس - HopeBridge Academy', 105, 10, { align: 'center' });
+        doc.text(`کد استاد: ${teacherId}`, 105, 20, { align: 'center' });
+
+        let y = 30;
+        reports.forEach((r, index) => {
+            if (y > 270) {
+                doc.addPage();
+                y = 10;
+            }
+            doc.setFontSize(10);
+            doc.text(`گزارش شماره ${index + 1}`, 190, y, { align: 'right' });
+            y += 10;
+            doc.text(`تاریخ: ${r.date}`, 190, y, { align: 'right' });
+            doc.text(`صنف: ${r.class}`, 100, y, { align: 'right' });
+            y += 10;
+            doc.text(`موضوع درس: ${r.subject}`, 190, y, { align: 'right' });
+            doc.text(`مدت تدریس: ${r.duration}`, 100, y, { align: 'right' });
+            y += 10;
+            doc.text(`محتوا: ${r.content.slice(0, 50)}${r.content.length > 50 ? '...' : ''}`, 190, y, { align: 'right' });
+            y += 10;
+            doc.text(`ارزیابی یادگیری: ${r.assessment.slice(0, 50)}${r.assessment.length > 50 ? '...' : ''}`, 190, y, { align: 'right' });
+            y += 10;
+            doc.text(`مشکلات: ${r.challenges || 'ندارد'}`, 190, y, { align: 'right' });
+            y += 10;
+            doc.text(`پیشنهادات: ${r.suggestions || 'ندارد'}`, 190, y, { align: 'right' });
+            y += 10;
+            doc.text(`حضور: ${r.presence}`, 190, y, { align: 'right' });
+            doc.text(`تعداد حاضر و غایب: ${r.attendance}`, 100, y, { align: 'right' });
+            y += 15;
+        });
+
+        doc.save(`Teaching_Reports_${teacherId}.pdf`);
+    }
+
+    // Export exam results to PDF
+    function exportExamResultsToPDF() {
+        const exams = JSON.parse(localStorage.getItem(examKey)) || [];
+        if (exams.length === 0) {
+            alert('هیچ نتیجه امتحانی برای صدور وجود ندارد.');
+            return;
+        }
+
+        const doc = new jsPDF();
+        doc.setFont('Arial', 'normal');
+        doc.setFontSize(12);
+        doc.text('نتایج امتحان - HopeBridge Academy', 105, 10, { align: 'center' });
+        doc.text(`کد استاد: ${teacherId}`, 105, 20, { align: 'center' });
+
+        let y = 30;
+        doc.setFontSize(10);
+        doc.text('شماره', 190, y, { align: 'right' });
+        doc.text('نام شاگرد', 150, y, { align: 'right' });
+        doc.text('کد شاگرد', 100, y, { align: 'right' });
+        doc.text('نمره', 50, y, { align: 'right' });
+        y += 10;
+
+        exams.forEach((exam, index) => {
+            if (y > 270) {
+                doc.addPage();
+                y = 10;
+                doc.text('شماره', 190, y, { align: 'right' });
+                doc.text('نام شاگرد', 150, y, { align: 'right' });
+                doc.text('کد شاگرد', 100, y, { align: 'right' });
+                doc.text('نمره', 50, y, { align: 'right' });
+                y += 10;
+            }
+            doc.text(`${index + 1}`, 190, y, { align: 'right' });
+            doc.text(exam.studentName, 150, y, { align: 'right' });
+            doc.text(exam.studentId, 100, y, { align: 'right' });
+            doc.text(exam.score, 50, y, { align: 'right' });
+            y += 10;
+        });
+
+        doc.save(`Exam_Results_${teacherId}.pdf`);
+    }
+
     // Load saved reports on page load
     window.addEventListener('load', () => {
         const savedReports = JSON.parse(localStorage.getItem(reportKey));
         if (savedReports && savedReports.length > 0) {
             showReports(savedReports);
+        } else {
+            showReports([]);
         }
         loadExamResults();
+
+        // Add event listener to export exam results button
+        document.getElementById('exportExamResults').addEventListener('click', exportExamResultsToPDF);
     });
 
     // Exam Results Local Panel Logic

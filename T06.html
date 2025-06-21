@@ -2,91 +2,226 @@
 <html lang="fa" dir="rtl">
 <head>
     <meta charset="UTF-8" />
-    <title>گزارش تدریس - HopeBridge Academy</title>
+    <title>گزارش تدریس - Teaching Report - HopeBridge Academy</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.23/jspdf.plugin.autotable.min.js"></script>
+    <link rel="stylesheet" href="styles.css">
+
     <style>
         body {
             font-family: 'Noto Naskh Arabic', sans-serif;
-            background: #f4f6f9;
             margin: 0;
             padding: 0;
-            color: #333;
+            color: #2d3748;
+            animation: fadeInBody 1s ease-in-out;
         }
+
+        @keyframes fadeInBody {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
         header {
-            background-color: #0997c2;
+            background-color: #3b82f6;
             color: white;
             text-align: center;
             padding: 1rem;
             font-size: 1.5rem;
             font-weight: bold;
+            animation: slideInHeader 0.5s ease-out;
         }
+
+        @keyframes slideInHeader {
+            from { transform: translateY(-20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
         main {
             max-width: 900px;
             margin: 2rem auto;
-            background: white;
+            background: rgb(219, 245, 241);
             padding: 2rem;
             border-radius: 10px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            animation: fadeInMain 0.8s ease-in-out;
         }
+
+        @keyframes fadeInMain {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
         label {
             font-weight: bold;
             margin-top: 1rem;
             display: block;
+            color: #2d3748;
         }
+
+        .bilingual-label {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .bilingual-label span.en {
+            font-family: Arial, sans-serif;
+            font-size: 0.9rem;
+            color: #6b7280;
+            direction: ltr;
+        }
+
         input, textarea, select, button {
             width: 100%;
             padding: 0.6rem;
             margin-top: 0.3rem;
-            border: 1px solid #ccc;
+            border: 1px solid #43a330;
             border-radius: 5px;
             font-family: inherit;
             font-size: 1rem;
+            transition: border-color 0.3s, box-shadow 0.3s;
         }
+
+        input:focus, select:focus, textarea:focus {
+            border-color: #3b82f6;
+            box-shadow: 0 0 5px rgba(59, 130, 246, 0.5);
+            outline: none;
+        }
+
         button {
-            background: #004080;
+            background: #3b82f6;
             color: white;
             margin-top: 1.5rem;
             border: none;
             cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
         }
+
         button:hover {
-            background: #0066cc;
+            background: #2563eb;
+            transform: scale(1.02);
         }
+
+        .delete-report-button, .send-report-button {
+            background: #ef4444;
+            border: none;
+            color: white;
+            cursor: pointer;
+            padding: 0.3rem 0.6rem;
+            font-size: 0.9rem;
+            border-radius: 3px;
+            margin-right: 0.5rem;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        .send-report-button {
+            background: #10b981;
+        }
+
+        .delete-report-button:hover {
+            background: #dc2626;
+            transform: scale(1.02);
+        }
+
+        .send-report-button:hover {
+            background: #059669;
+            transform: scale(1.02);
+        }
+
+        .send-report-button.sent {
+            background: #059669;
+            cursor: default;
+        }
+
+        .send-report-button.sent:hover {
+            transform: none;
+        }
+
+        .export-button {
+            background: #3b82f6;
+            color: rgb(255, 255, 255);
+            padding: 0.6rem 1rem;
+            font-size: 1rem;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            margin-top: 1rem;
+            transition: background-color 0.3s, transform 0.2s;
+            display: inline-block;
+        }
+
+        .export-button:hover {
+            background: #2563eb;
+            transform: scale(1.02);
+        }
+
+        .export-button i {
+            margin-left: 0.3rem;
+        }
+
         iframe {
             width: 100%;
             height: 500px;
             margin: 1rem 0;
-            border: 1px solid #ccc;
+            border: 1px solid #d1d5db;
             border-radius: 5px;
         }
+
         .teacher-id {
             font-size: 0.9rem;
-            color: #666;
+            color: #6b7280;
             margin-bottom: 1rem;
         }
+
         .report-entry {
-            background: #f0f4ff;
+            background: #c4dbeb;
             padding: 1rem;
             margin-top: 1.5rem;
             border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            animation: scaleInImage 0.5s ease-out;
         }
+
+        @keyframes scaleInImage {
+            from { transform: scale(0.95); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .report-entry-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
         .subtitle {
             font-weight: bold;
-            color: #004080;
+            color: #3b82f6;
             margin-bottom: 0.5rem;
         }
+
         .exam-panel {
             margin-top: 2rem;
-            background: #fff5e6;
+            background: #d5e6ae;
             padding: 1rem;
-            border: 1px solid #ffcc80;
+            border: 1px solid #acd3a8;
             border-radius: 10px;
+            animation: fadeInForm 0.6s ease-in-out;
         }
+
+        @keyframes fadeInForm {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
         .exam-panel h3 {
             color: #e65100;
             margin-top: 0;
         }
+
         .exam-entry {
             margin-bottom: 0.5rem;
             padding: 0.5rem;
@@ -97,11 +232,13 @@
             justify-content: space-between;
             align-items: center;
         }
+
         .exam-entry span {
             flex-grow: 1;
         }
+
         .exam-entry button {
-            background: #d9534f;
+            background: #ef4444;
             border: none;
             color: white;
             cursor: pointer;
@@ -109,285 +246,521 @@
             font-size: 0.9rem;
             border-radius: 3px;
             margin-left: 1rem;
+            transition: background-color 0.3s, transform 0.2s;
         }
+
         .exam-entry button:hover {
-            background: #c9302c;
+            background: #dc2626;
+            transform: scale(1.02);
         }
+
         .add-exam-form {
             margin-top: 1rem;
-            border-top: 1px solid #ccc;
+            border-top: 1px solid #d1d5db;
             padding-top: 1rem;
         }
+
         .add-exam-form input {
             width: auto;
             display: inline-block;
             margin-left: 0.5rem;
             margin-bottom: 0.5rem;
         }
+
         .add-exam-form label {
             display: inline-block;
             width: 90px;
             margin-left: 0.5rem;
         }
+
         .add-exam-form button {
             width: auto;
             margin-top: 0;
+        }
+
+        .send-report-button::before {
+            content: '\f1d8';
+            font-family: 'Font Awesome 5 Free';
+            font-weight: 900;
+            margin-left: 0.3rem;
+        }
+
+        .send-report-button.sent::before {
+            content: '\f00c';
+            font-family: 'Font Awesome 5 Free';
+            font-weight: 900;
+            margin-left: 0.3rem;
+        }
+
+        .bilingual-text {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .bilingual-text .en {
+            font-family: Arial, sans-serif;
+            font-size: 0.9rem;
+            color: #6b7280;
+            direction: ltr;
         }
     </style>
 </head>
 <body>
 <header>
-    HopeBridge Academy - سامانه ثبت گزارش تدریس
+    HopeBridge Academy - سامانه ثبت گزارش تدریس / Teaching Report System
 </header>
 <main>
-    <p class="teacher-id">کد استاد: <span id="teacherId">TCHR-006</span></p>
+    <p class="teacher-id">کد استاد / Teacher ID: <span id="teacherId">TCHR-006</span></p>
 
-    <iframe src="plan.pdf" title="Plan PDF"></iframe>
+    <iframe src="plan.pdf" title="Teaching Plan PDF / برنامه تدریس"></iframe>
 
     <form id="reportForm">
         <input type="hidden" name="teacher_id" id="formTeacherId" value="TCHR-006" />
 
-        <label for="class">انتخاب صنف:</label>
+        <label class="bilingual-label">
+            انتخاب صنف / Select Class:
+        </label>
         <select id="class" name="class" required>
-            <option value="">-- انتخاب صنف --</option>
-            <optgroup label="کمپیوتر">
-                <option value="کمپیوتر A">کمپیوتر A</option>
-                <option value="کمپیوتر B">کمپیوتر B</option>
-                <option value="کمپیوتر C">کمپیوتر C</option>
+            <option value="">-- انتخاب صنف / Select Class --</option>
+            <optgroup label="کمپیوتر / Computer">
+                <option value="کمپیوتر A">کمپیوتر A / Computer A</option>
+                <option value="کمپیوتر B">کمپیوتر B / Computer B</option>
+                <option value="کمپیوتر C">کمپیوتر C / Computer C</option>
             </optgroup>
-            <optgroup label="انگلیسی">
-                <option value="انگلیسی A">انگلیسی A</option>
-                <option value="انگلیسی B">انگلیسی B</option>
-                <option value="انگلیسی C">انگلیسی C</option>
+            <optgroup label="انگلیسی / English">
+                <option value="انگلیسی A">انگلیسی A / English A</option>
+                <option value="انگلیسی B">انگلیسی B / English B</option>
+                <option value="انگلیسی C">انگلیسی C / English C</option>
             </optgroup>
-            <optgroup label="دیگر">
-                <option value="دیگر A">دیگر A</option>
-                <option value="دیگر B">دیگر B</option>
-                <option value="دیگر C">دیگر C</option>
+            <optgroup label="دیگر / Other">
+                <option value="دیگر A">دیگر A / Other A</option>
+                <option value="دیگر B">دیگر B / Other B</option>
+                <option value="دیگر C">دیگر C / Other C</option>
             </optgroup>
         </select>
 
-        <label for="date">تاریخ:</label>
+        <label class="bilingual-label">
+            تاریخ / Date:
+        </label>
         <input type="date" id="date" name="date" required />
 
-        <label for="subject">موضوع درس:</label>
+        <label class="bilingual-label">
+            موضوع درس / Lesson Subject:
+        </label>
         <input type="text" id="subject" name="subject" required />
 
-        <label for="duration">مدت زمان تدریس:</label>
+        <label class="bilingual-label">
+            مدت زمان تدریس / Teaching Duration:
+        </label>
         <input type="text" id="duration" name="duration" required />
 
-        <label for="content">محتوای تدریس‌شده:</label>
+        <label class="bilingual-label">
+            محتوای تدریس‌شده / Taught Content:
+        </label>
         <textarea id="content" name="content" required></textarea>
 
-        <label for="assessment">ارزیابی سطح یادگیری:</label>
+        <label class="bilingual-label">
+            ارزیابی سطح یادگیری / Learning Assessment:
+        </label>
         <textarea id="assessment" name="assessment" required></textarea>
 
-        <label for="challenges">مشکلات یا چالش‌ها:</label>
+        <label class="bilingual-label">
+            مشکلات یا چالش‌ها / Problems or Challenges:
+        </label>
         <textarea id="challenges" name="challenges"></textarea>
 
-        <label for="suggestions">پیشنهادات استاد:</label>
+        <label class="bilingual-label">
+            پیشنهادات استاد / Teacher Suggestions:
+        </label>
         <textarea id="suggestions" name="suggestions"></textarea>
 
-        <label for="presence">وضعیت حضور:</label>
+        <label class="bilingual-label">
+            وضعیت حضور / Attendance Status:
+        </label>
         <select name="presence_level" id="presence" required>
-            <option value="">انتخاب کنید</option>
-            <option value="full">همه حاضر بودند</option>
-            <option value="partial">برخی غایب بودند</option>
-            <option value="low">حضور بسیار پایین</option>
+            <option value="">انتخاب کنید / Select</option>
+            <option value="full">همه حاضر بودند / All Present</option>
+            <option value="partial">برخی غایب بودند / Some Absent</option>
+            <option value="low">حضور بسیار پایین / Very Low Attendance</option>
         </select>
 
-        <label for="attendance">تعداد حاضر و غایب:</label>
+        <label class="bilingual-label">
+            تعداد حاضر و غایب / Number of Present and Absent:
+        </label>
         <textarea id="attendance" name="attendance" required></textarea>
 
-        <button type="submit">ثبت گزارش</button>
+        <button type="submit">ذخیره گزارش / Save Report</button>
     </form>
 
-    <div id="reportDisplay"></div>
+    <div id="reportDisplay">
+        <h3 class="bilingual-text">
+            گزارش‌های ثبت‌شده / Registered Reports
+        </h3>
+        <button id="exportTeachingReports" class="export-button"><i class="fas fa-file-pdf"></i> صدور گزارش‌های تدریس به PDF / Export Teaching Reports to PDF</button>
+    </div>
 
     <div class="exam-panel">
-        <h3>نتایج امتحان</h3>
+        <h3 class="bilingual-text">
+            نتایج امتحان / Exam Results
+        </h3>
 
-        <!-- Local exam results display and management -->
         <div id="localExamResults"></div>
 
-        <!-- Add new exam result manually -->
         <form id="addExamResultForm" class="add-exam-form">
-            <label for="studentName">نام شاگرد:</label>
-            <input type="text" id="studentName" required placeholder="مثلا: احمد رحیمی" />
+            <label class="bilingual-label">
+                نام شاگرد / Student Name:
+            </label>
+            <input type="text" id="studentName" required placeholder="مثلا: احمد رحیمی / e.g., Ahmad Rahimi" />
 
-            <label for="studentId">کد شاگرد:</label>
-            <input type="text" id="studentId" required placeholder="مثلا: STD-051" />
+            <label class="bilingual-label">
+                کد شاگرد / Student ID:
+            </label>
+            <input type="text" id="studentId" required placeholder="مثلا: STD-051 / e.g., STD-051" />
 
-            <label for="studentScore">نمره:</label>
-            <input type="number" id="studentScore" required min="0" max="100" placeholder="مثلا: 85" />
+            <label class="bilingual-label">
+                نمره / Score:
+            </label>
+            <input type="number" id="studentScore" required min="0" max="100" placeholder="مثلا: 85 / e.g., 85" />
 
-            <button type="submit">افزودن نمره</button>
+            <button type="submit">افزودن نمره / Add Score</button>
         </form>
 
         <form id="examForm" method="POST" action="https://usebasin.com/f/100df2443084" style="margin-top:1rem;">
             <input type="hidden" name="teacher_id" value="TCHR-001" />
             <div id="examFormInputs"></div>
-            <button type="submit">ثبت نتایج امتحان  </button>
+            <button type="submit">ثبت نتایج امتحان / Submit Exam Results</button>
+            <button type="button" id="exportExamResults" class="export-button"><i class="fas fa-file-pdf"></i> صدور نتایج امتحان به PDF / Export Exam Results to PDF</button>
         </form>
     </div>
 </main>
 
 <script>
-    const teacherId = 'TCHR-001';
-    document.getElementById('teacherId').textContent = teacherId;
-    document.getElementById('formTeacherId').value = teacherId;
+// Placeholder for Vazir font base64 (replace with actual base64 string or load locally)
+const vazirFontBase64 = ''; // e.g., 'data:font/truetype;base64,AAAB...'
 
-    // Keys for localStorage
-    const reportKey = `reports-${teacherId}`;
-    const examKey = `exam-results-${teacherId}`;
+const { jsPDF } = window.jspdf;
+const teacherId = 'TCHR-001';
+document.getElementById('teacherId').textContent = teacherId;
+document.getElementById('formTeacherId').value = teacherId;
 
-    const reportForm = document.getElementById('reportForm');
-    const examForm = document.getElementById('examForm');
-    const examFormInputs = document.getElementById('examFormInputs');
+const reportKey = `reports-${teacherId}`;
+const examKey = `exam-results-${teacherId}`;
 
-    // Reports form handling
-    reportForm.addEventListener('submit', function (e) {
-        e.preventDefault();
-        const formData = new FormData(reportForm); // Capture form data for Basin
-        const report = {
-            class: document.getElementById('class').value,
-            date: document.getElementById('date').value,
-            subject: document.getElementById('subject').value,
-            duration: document.getElementById('duration').value,
-            content: document.getElementById('content').value,
-            assessment: document.getElementById('assessment').value,
-            challenges: document.getElementById('challenges').value,
-            suggestions: document.getElementById('suggestions').value,
-            presence: document.getElementById('presence').value,
-            attendance: document.getElementById('attendance').value
-        };
-        const existingReports = JSON.parse(localStorage.getItem(reportKey)) || [];
-        existingReports.push(report);
-        localStorage.setItem(reportKey, JSON.stringify(existingReports));
-        showReports(existingReports);
-        reportForm.reset();
+const reportForm = document.getElementById('reportForm');
+const examForm = document.getElementById('examForm');
+const examFormInputs = document.getElementById('examFormInputs');
 
-        // Send the report to Basin
-        fetch('https://usebasin.com/f/100df2443084', {
-            method: 'POST',
-            body: formData
-        })
-        .then(response => {
-            if (response.ok) {
-                console.log('گزارش با موفقیت به Basin ارسال شد');
-            } else {
-                console.error('خطا در ارسال گزارش به Basin');
-            }
-        })
-        .catch(error => {
-            console.error('خطا در ارسال گزارش به Basin:', error);
-        });
-    });
+reportForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+    const report = {
+        class: document.getElementById('class').value,
+        date: document.getElementById('date').value,
+        subject: document.getElementById('subject').value,
+        duration: document.getElementById('duration').value,
+        content: document.getElementById('content').value,
+        assessment: document.getElementById('assessment').value,
+        challenges: document.getElementById('challenges').value,
+        suggestions: document.getElementById('suggestions').value,
+        presence: document.getElementById('presence').value,
+        attendance: document.getElementById('attendance').value,
+        sent: false
+    };
+    const existingReports = JSON.parse(localStorage.getItem(reportKey)) || [];
+    existingReports.push(report);
+    localStorage.setItem(reportKey, JSON.stringify(existingReports));
+    showReports(existingReports);
+    reportForm.reset();
+});
 
-    function showReports(reports) {
-        const display = document.getElementById('reportDisplay');
-        display.innerHTML = '<h3>گزارش‌های ثبت‌شده:</h3>';
-        reports.forEach((r) => {
+function showReports(reports) {
+    const display = document.getElementById('reportDisplay');
+    display.innerHTML = `
+        <h3 class="bilingual-text">
+            گزارش‌های ثبت‌شده / Registered Reports
+        </h3>
+        <button id="exportTeachingReports" class="export-button"><i class="fas fa-file-pdf"></i> صدور گزارش‌های تدریس به PDF / Export Teaching Reports to PDF</button>
+    `;
+    if (reports.length === 0) {
+        display.innerHTML += '<p>گزارشی ثبت نشده است. / No reports registered.</p>';
+    } else {
+        reports.forEach((r, index) => {
             const div = document.createElement('div');
             div.className = 'report-entry';
             div.innerHTML = `
-                <div class="subtitle">${r.date} - ${r.class} - ${r.subject}</div>
-                <p><strong>مدت تدریس:</strong> ${r.duration}</p>
-                <p><strong>محتوا:</strong> ${r.content}</p>
-                <p><strong>ارزیابی یادگیری:</strong> ${r.assessment}</p>
-                <p><strong>مشکلات:</strong> ${r.challenges || 'ندارد'}</p>
-                <p><strong>پیشنهادات:</strong> ${r.suggestions || 'ندارد'}</p>
-                <p><strong>حضور:</strong> ${r.presence}</p>
-                <p><strong>تعداد حاضر و غایب:</strong> ${r.attendance}</p>
+                <div class="report-entry-header">
+                    <div class="subtitle">${r.date} - ${r.class} / ${r.subject}</div>
+                    <div>
+                        <button class="send-report-button ${r.sent ? 'sent' : ''}" data-index="${index}" ${r.sent ? 'disabled' : ''}>ارسال / Send</button>
+                        <button class="delete-report-button" data-index="${index}">حذف / Delete</button>
+                    </div>
+                </div>
+                <p><strong>مدت تدریس / Teaching Duration:</strong> ${r.duration}</p>
+                <p><strong>محتوا / Content:</strong> ${r.content}</p>
+                <p><strong>ارزیابی یادگیری / Learning Assessment:</strong> ${r.assessment}</p>
+                <p><strong>مشکلات / Problems:</strong> ${r.challenges || 'ندارد / None'}</p>
+                <p><strong>پیشنهادات / Suggestions:</strong> ${r.suggestions || 'ندارد / None'}</p>
+                <p><strong>حضور / Attendance:</strong> ${r.presence}</p>
+                <p><strong>تعداد حاضر و غایب / Number of Present and Absent:</strong> ${r.attendance}</p>
             `;
             display.appendChild(div);
         });
     }
 
-    // Load saved reports on page load
-    window.addEventListener('load', () => {
-        const savedReports = JSON.parse(localStorage.getItem(reportKey));
-        if (savedReports && savedReports.length > 0) {
-            showReports(savedReports);
-        }
-        loadExamResults();
+    document.querySelectorAll('.delete-report-button').forEach(button => {
+        button.addEventListener('click', (e) => {
+            const idx = e.target.getAttribute('data-index');
+            deleteReport(idx);
+        });
     });
 
-    // Exam Results Local Panel Logic
-    const localExamResultsDiv = document.getElementById('localExamResults');
-    const addExamResultForm = document.getElementById('addExamResultForm');
+    document.querySelectorAll('.send-report-button:not(.sent)').forEach(button => {
+        button.addEventListener('click', (e) => {
+            const idx = e.target.getAttribute('data-index');
+            sendReportToBasin(idx, e.target);
+        });
+    });
 
-    // Load exam results from localStorage and show
-    function loadExamResults() {
-        const exams = JSON.parse(localStorage.getItem(examKey)) || [];
-        renderExamResults(exams);
-        updateBasinExamForm(exams);
+    document.getElementById('exportTeachingReports').addEventListener('click', exportTeachingReportsToPDF);
+}
+
+function deleteReport(index) {
+    const reports = JSON.parse(localStorage.getItem(reportKey)) || [];
+    reports.splice(index, 1);
+    localStorage.setItem(reportKey, JSON.stringify(reports));
+    showReports(reports);
+}
+
+function sendReportToBasin(index, button) {
+    const reports = JSON.parse(localStorage.getItem(reportKey)) || [];
+    const report = reports[index];
+    if (!report) {
+        alert('گزارش یافت نشد. / Report not found.');
+        return;
     }
 
-    // Render exam results list with delete buttons
-    function renderExamResults(exams) {
-        localExamResultsDiv.innerHTML = '';
+    const formData = new FormData();
+    formData.append('teacher_id', teacherId);
+    formData.append('class', report.class);
+    formData.append('date', report.date);
+    formData.append('subject', report.subject);
+    formData.append('duration', report.duration);
+    formData.append('content', report.content);
+    formData.append('assessment', report.assessment);
+    formData.append('challenges', report.challenges || '');
+    formData.append('suggestions', report.suggestions || '');
+    formData.append('presence_level', report.presence);
+    formData.append('attendance', report.attendance);
+
+    fetch('https://usebasin.com/f/100df2443084', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => {
+        if (response.ok) {
+            reports[index].sent = true;
+            localStorage.setItem(reportKey, JSON.stringify(reports));
+            button.classList.add('sent');
+            button.setAttribute('disabled', 'disabled');
+            button.innerHTML = 'ارسال / Sent <i class="fas fa-check"></i>';
+        } else {
+            alert('خطا در ارسال گزارش به Basin. / Error sending report to Basin.');
+        }
+    })
+    .catch(error => {
+        alert('خطا در ارسال گزارش به Basin: ' + error.message + ' / Error sending report to Basin: ' + error.message);
+    });
+}
+
+async function exportTeachingReportsToPDF() {
+    try {
+        const reports = JSON.parse(localStorage.getItem(reportKey)) || [];
+        if (reports.length === 0) {
+            alert('هیچ گزارشی برای صدور وجود ندارد. / No reports available for export.');
+            return;
+        }
+
+        const doc = new jsPDF();
+        const margin = 15;
+        const pageWidth = doc.internal.pageSize.width;
+
+        // Try to use Vazir font if available, fallback to Arial
+        if (vazirFontBase64) {
+            doc.addFileToVFS('Vazir-Regular.ttf', vazirFontBase64);
+            doc.addFont('Vazir-Regular.ttf', 'Vazir', 'normal');
+            doc.setFont('Vazir');
+        } else {
+            doc.setFont('Arial', 'normal');
+            console.warn('Vazir font not loaded. Using Arial as fallback. Persian text may not render optimally.');
+        }
+
+        doc.setFontSize(12);
+        doc.text('گزارش‌های تدریس / Teaching Reports - HopeBridge Academy', pageWidth / 2, margin + 5, { align: 'center' });
+        doc.text(`کد استاد / Teacher ID: ${teacherId}`, pageWidth / 2, margin + 15, { align: 'center' });
+
+        doc.autoTable({
+            startY: margin + 25,
+            head: [['شماره', 'تاریخ', 'صنف', 'موضوع', 'مدت', 'محتوا', 'ارزیابی', 'مشکلات', 'پیشنهادات', 'حضور', 'حاضر/غایب']],
+            body: reports.map((r, i) => [
+                i + 1,
+                r.date,
+                r.class,
+                r.subject,
+                r.duration,
+                r.content.slice(0, 50) + (r.content.length > 50 ? '...' : ''),
+                r.assessment.slice(0, 50) + (r.assessment.length > 50 ? '...' : ''),
+                r.challenges || 'ندارد',
+                r.suggestions || 'ندارد',
+                r.presence,
+                r.attendance
+            ]),
+            styles: { font: vazirFontBase64 ? 'Vazir' : 'Arial', halign: 'right', fontSize: 8, cellPadding: 2 },
+            headStyles: { fillColor: [59, 130, 246], textColor: [255, 255, 255], halign: 'right' },
+            margin: { top: margin, right: margin, bottom: margin, left: margin },
+            didDrawPage: () => {
+                doc.setFontSize(8);
+                doc.text(`Generated on: ${new Date().toLocaleString('fa-IR')}`, margin, doc.internal.pageSize.height - margin);
+            }
+        });
+
+        doc.save(`Teaching_Reports_${teacherId}.pdf`);
+    } catch (error) {
+        console.error('Error exporting teaching reports to PDF:', error);
+        alert('خطا در صدور PDF گزارش‌های تدریس: ' + error.message + ' / Error exporting teaching reports to PDF: ' + error.message);
+    }
+}
+
+async function exportExamResultsToPDF() {
+    try {
+        const exams = JSON.parse(localStorage.getItem(examKey)) || [];
         if (exams.length === 0) {
-            localExamResultsDiv.innerHTML = '<p>نتایجی ثبت نشده است.</p>';
-            return;
-        }
-        exams.forEach((exam, index) => {
-            const div = document.createElement('div');
-            div.className = 'exam-entry';
-            div.innerHTML = `
-                <span>${exam.studentName} (${exam.studentId}) - نمره: ${exam.score}</span>
-                <button data-index="${index}">حذف</button>
-            `;
-            localExamResultsDiv.appendChild(div);
-        });
-
-        // Add event listeners to delete buttons
-        localExamResultsDiv.querySelectorAll('button').forEach(button => {
-            button.addEventListener('click', (e) => {
-                const idx = e.target.getAttribute('data-index');
-                deleteExamResult(idx);
-            });
-        });
-    }
-
-    // Delete exam result by index
-    function deleteExamResult(index) {
-        const exams = JSON.parse(localStorage.getItem(examKey)) || [];
-        exams.splice(index, 1);
-        localStorage.setItem(examKey, JSON.stringify(exams));
-        loadExamResults();
-    }
-
-    // Add new exam result from form
-    addExamResultForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        const studentName = document.getElementById('studentName').value.trim();
-        const studentId = document.getElementById('studentId').value.trim();
-        const score = document.getElementById('studentScore').value.trim();
-
-        if (!studentName || !studentId || score === '') {
-            alert('لطفاً همه فیلدها را پر کنید.');
+            alert('هیچ نتیجه امتحانی برای صدور وجود ندارد. / No exam results available for export.');
             return;
         }
 
-        const exams = JSON.parse(localStorage.getItem(examKey)) || [];
-        exams.push({ studentName, studentId, score });
-        localStorage.setItem(examKey, JSON.stringify(exams));
-        addExamResultForm.reset();
-        loadExamResults();
+        const doc = new jsPDF();
+        const margin = 15;
+        const pageWidth = doc.internal.pageSize.width;
+
+        // Try to use Vazir font if available, fallback to Arial
+        if (vazirFontBase64) {
+            doc.addFileToVFS('Vazir-Regular.ttf', vazirFontBase64);
+            doc.addFont('Vazir-Regular.ttf', 'Vazir', 'normal');
+            doc.setFont('Vazir');
+        } else {
+            doc.setFont('Arial', 'normal');
+            console.warn('Vazir font not loaded. Using Arial as fallback. Persian text may not render optimally.');
+        }
+
+        doc.setFontSize(12);
+        doc.text('نتایج امتحان / Exam Results - HopeBridge Academy', pageWidth / 2, margin + 5, { align: 'center' });
+        doc.text(`کد استاد / Teacher ID: ${teacherId}`, pageWidth / 2, margin + 15, { align: 'center' });
+
+        doc.autoTable({
+            startY: margin + 25,
+            head: [['شماره', 'نام شاگرد', 'کد شاگرد', 'نمره']],
+            body: exams.map((exam, i) => [
+                i + 1,
+                exam.studentName,
+                exam.studentId,
+                exam.score
+            ]),
+            styles: { font: vazirFontBase64 ? 'Vazir' : 'Arial', halign: 'right', fontSize: 10, cellPadding: 2 },
+            headStyles: { fillColor: [59, 130, 246], textColor: [255, 255, 255], halign: 'right' },
+            margin: { top: margin, right: margin, bottom: margin, left: margin },
+            didDrawPage: () => {
+                doc.setFontSize(8);
+                doc.text(`Generated on: ${new Date().toLocaleString('fa-IR')}`, margin, doc.internal.pageSize.height - margin);
+            }
+        });
+
+        doc.save(`Exam_Results_${teacherId}.pdf`);
+    } catch (error) {
+        console.error('Error exporting exam results to PDF:', error);
+        alert('خطا در صدور PDF نتایج امتحان: ' + error.message + ' / Error exporting exam results to PDF: ' + error.message);
+    }
+}
+
+window.addEventListener('load', () => {
+    const savedReports = JSON.parse(localStorage.getItem(reportKey));
+    if (savedReports && savedReports.length > 0) {
+        showReports(savedReports);
+    } else {
+        showReports([]);
+    }
+    loadExamResults();
+
+    document.getElementById('exportExamResults').addEventListener('click', exportExamResultsToPDF);
+});
+
+const localExamResultsDiv = document.getElementById('localExamResults');
+const addExamResultForm = document.getElementById('addExamResultForm');
+
+function loadExamResults() {
+    const exams = JSON.parse(localStorage.getItem(examKey)) || [];
+    renderExamResults(exams);
+    updateBasinExamForm(exams);
+}
+
+function renderExamResults(exams) {
+    localExamResultsDiv.innerHTML = '';
+    if (exams.length === 0) {
+        localExamResultsDiv.innerHTML = '<p>نتایجی ثبت نشده است. / No results registered.</p>';
+        return;
+    }
+    exams.forEach((exam, index) => {
+        const div = document.createElement('div');
+        div.className = 'exam-entry';
+        div.innerHTML = `
+            <span>${exam.studentName} (${exam.studentId}) - نمره / Score: ${exam.score}</span>
+            <button data-index="${index}">حذف / Delete</button>
+        `;
+        localExamResultsDiv.appendChild(div);
     });
 
-    // Prepare hidden inputs for Basin form submission
-    function updateBasinExamForm(exams) {
-        examFormInputs.innerHTML = '';
-        exams.forEach((exam, i) => {
-            examFormInputs.innerHTML += `
-                <input type="hidden" name="students[${i}][name]" value="${exam.studentName}" />
-                <input type="hidden" name="students[${i}][id]" value="${exam.studentId}" />
-                <input type="hidden" name="students[${i}][score]" value="${exam.score}" />
-            `;
+    localExamResultsDiv.querySelectorAll('button').forEach(button => {
+        button.addEventListener('click', (e) => {
+            const idx = e.target.getAttribute('data-index');
+            deleteExamResult(idx);
         });
+    });
+}
+
+function deleteExamResult(index) {
+    const exams = JSON.parse(localStorage.getItem(examKey)) || [];
+    exams.splice(index, 1);
+    localStorage.setItem(examKey, JSON.stringify(exams));
+    loadExamResults();
+}
+
+addExamResultForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+    const studentName = document.getElementById('studentName').value.trim();
+    const studentId = document.getElementById('studentId').value.trim();
+    const score = document.getElementById('studentScore').value.trim();
+
+    if (!studentName || !studentId || score === '') {
+        alert('لطفاً همه فیلدها را پر کنید. / Please fill all fields.');
+        return;
     }
+
+    const exams = JSON.parse(localStorage.getItem(examKey)) || [];
+    exams.push({ studentName, studentId, score });
+    localStorage.setItem(examKey, JSON.stringify(exams));
+    addExamResultForm.reset();
+    loadExamResults();
+});
+
+function updateBasinExamForm(exams) {
+    examFormInputs.innerHTML = '';
+    exams.forEach((exam, i) => {
+        examFormInputs.innerHTML += `
+            <input type="hidden" name="students[${i}][name]" value="${exam.studentName}" />
+            <input type="hidden" name="students[${i}][id]" value="${exam.studentId}" />
+            <input type="hidden" name="students[${i}][score]" value="${exam.score}" />
+        `;
+    });
+}
 </script>
 </body>
 </html>

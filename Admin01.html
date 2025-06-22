@@ -1,75 +1,280 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fa" dir="rtl">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title data-i18n="adminDashboardTitle">Admin Dashboard - HopeBridge Academy</title>
-    <link rel="stylesheet" href="styles.css" />
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic&family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
-    <script src="https://unpkg.com/i18next@21.6.10/dist/umd/i18next.min.js"></script>
-    <script src="i18n.js" defer></script>
+    <title>داشبورد مدیر - آکادمی هوپ‌بریج</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        :root {
+            --primary-color: #3b82f6;
+            --secondary-color: #059669;
+            --text-color: #1f2937;
+            --card-bg: #7cb3bd;
+            --border-color: #2c70c9;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Naskh Arabic', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            background-color: var(--primary-color);
+            padding: 1rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .nav-list {
+            list-style: none;
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .nav-list li {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-list a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: opacity 0.3s;
+        }
+
+        .nav-list a:hover {
+            opacity: 0.8;
+        }
+
+        .logo {
+            height: 60px;
+        }
+
+        main {
+            flex: 1;
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            color: var(--primary-color);
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-color);
+        }
+
+        .teacher-access, .local-storage-admin {
+            background-color: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+
+        .modern-select, textarea, input[type="date"], button {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        .modern-select:focus, textarea:focus, input[type="date"]:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 5px rgba(59, 130, 246, 0.5);
+            outline: none;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        button:hover {
+            background-color: #2563eb;
+            transform: translateY(-2px);
+        }
+
+        .admin-data-entry {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem;
+            background-color: #f4f4f4;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            margin-bottom: 0.5rem;
+        }
+
+        .admin-data-content {
+            flex: 1;
+            word-break: break-word;
+        }
+
+        .delete-icon {
+            color: #ef4444;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: color 0.3s;
+        }
+
+        .delete-icon:hover {
+            color: #dc2626;
+        }
+
+        #admin-storage-output {
+            background-color: #f4f4f4;
+            padding: 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            max-height: 300px;
+            overflow-y: auto;
+            font-size: 0.9rem;
+        }
+
+        footer {
+            background-color: var(--text-color);
+            color: white;
+            text-align: center;
+            padding: 1rem;
+            margin-top: auto;
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .nav-list {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            h2 {
+                font-size: 1.25rem;
+            }
+
+            .modern-select, textarea, input[type="date"], button {
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo {
+                height: 50px;
+            }
+
+            .nav-list a {
+                font-size: 0.9rem;
+            }
+
+            main {
+                padding: 0 0.5rem;
+            }
+
+            .teacher-access, .local-storage-admin {
+                padding: 1rem;
+            }
+        }
+    </style>
 </head>
 <body onload="initializePage()">
     <header>
-        <nav aria-label="Main navigation">
+        <nav aria-label="ناوبری اصلی">
             <ul class="nav-list">
-                <li><img src="./logo.png" height="90" alt="HopeBridge Academy Logo" class="logo" /></li>
-                <li><a href="index.html" data-i18n="home">Home</a></li>
-                <li class="auth-link"><a href="login.html" id="auth-link" data-i18n="logout">Log Out</a></li>
+                <li><img src="./logo.png" height="90" alt="لوگوی آکادمی هوپ‌بریج" class="logo" /></li>
+                <li><a href="index.html">صفحه اصلی</a></li>
+                <li><a href="login.html" id="auth-link">خروج</a></li>
             </ul>
-            <div class="language-switcher">
-                <label for="language-select" data-i18n="languageLabel">Language:</label>
-                <select id="language-select" onchange="changeLanguage(this.value)" aria-label="Select language">
-                    <option value="en" data-i18n="englishOption">English</option>
-                    <option value="fa" data-i18n="persianOption">فارسی</option>
-                </select>
-            </div>
         </nav>
     </header>
     <main>
-        <h1 data-i18n="adminDashboard">Admin Dashboard</h1>
+        <h1>داشبورد مدیر</h1>
         <section class="teacher-access" aria-labelledby="teacher-access-heading">
-            <h2 id="teacher-access-heading" data-i18n="teacherAccessLabel">Access Teacher Pages</h2>
+            <h2 id="teacher-access-heading">دسترسی به صفحات معلمان</h2>
             <select id="teacher-page-select" onchange="navigateToTeacherPage(this.value)" class="modern-select">
-                <option value="" data-i18n="selectTeacher">Select a teacher</option>
-                <option value="T01.html" data-i18n="teacher1">Teacher 1</option>
-                <option value="T02.html" data-i18n="teacher2">Teacher 2</option>
-                <option value="T03.html" data-i18n="teacher3">Teacher 3</option>
-                <option value="T04.html" data-i18n="teacher4">Teacher 4</option>
-                <option value="T05.html" data-i18n="teacher5">Teacher 5</option>
-                <option value="T06.html" data-i18n="teacher6">Teacher 6</option>
-                <option value="T07.html" data-i18n="teacher7">Teacher 7</option>
-                <option value="T08.html" data-i18n="teacher8">Teacher 8</option>
+                <option value="">انتخاب معلم</option>
+                <option value="T01.html">معلم ۱</option>
+                <option value="T02.html">معلم ۲</option>
+                <option value="T03.html">معلم ۳</option>
+                <option value="T04.html">معلم ۴</option>
+                <option value="T05.html">معلم ۵</option>
+                <option value="T06.html">معلم ۶</option>
+                <option value="T07.html">معلم ۷</option>
+                <option value="T08.html">معلم ۸</option>
             </select>
         </section>
-        <!-- New Simple Admin Local Storage Panel -->
-        <section class="local-storage-admin" aria-labelledby="local-storage-admin-heading" style="margin-top: 2em;">
-            <h2 id="local-storage-admin-heading">Local Storage - Save Admin Info</h2>
-            <label for="admin-data">Data:</label><br />
-            <textarea id="admin-data" rows="5" cols="50" placeholder="Enter data here..."></textarea><br /><br />
-            <label for="admin-date">Date:</label>
-            <input id="admin-date" type="date" /><br /><br />
-            <button onclick="saveAdminLocal()">Save Data Locally</button>
-        
-            <h3>Saved Data:</h3>
-            <pre id="admin-storage-output" style="background:#f4f4f4; padding:10px; border:1px solid #ccc; max-height: 200px; overflow:auto;"></pre>
+        <section class="local-storage-admin" aria-labelledby="local-storage-admin-heading">
+            <h2 id="local-storage-admin-heading">حافظه محلی - ذخیره اطلاعات مدیر</h2>
+            <label for="admin-data">داده:</label>
+            <textarea id="admin-data" rows="5" placeholder="داده را اینجا وارد کنید..."></textarea>
+            <label for="admin-date">تاریخ:</label>
+            <input id="admin-date" type="date" />
+            <button onclick="saveAdminLocal()">ذخیره داده</button>
+            <h3>داده‌های ذخیره‌شده:</h3>
+            <div id="admin-storage-output"></div>
         </section>
-        
     </main>
     <footer>
-        <p data-i18n="copyright">© 2025 HopeBridge Academy</p>
+        <p>© ۱۴۰۴ آکادمی هوپ‌بریج</p>
     </footer>
 
     <script src="script.js" defer></script>
     <script>
-        // Local storage for admin info panel functions
         function saveAdminLocal() {
             const data = document.getElementById('admin-data').value.trim();
             const dateInput = document.getElementById('admin-date').value;
             const date = dateInput || new Date().toISOString().slice(0, 10);
 
             if (!data) {
-                alert('Please enter the data.');
+                alert('لطفاً داده را وارد کنید.');
                 return;
             }
 
@@ -78,17 +283,41 @@
             localStorage.setItem('admins', JSON.stringify(admins));
 
             showAdminsLocal();
-            // Clear inputs
             document.getElementById('admin-data').value = '';
             document.getElementById('admin-date').value = '';
         }
 
-        function showAdminsLocal() {
+        function deleteAdminLocal(index) {
             let admins = JSON.parse(localStorage.getItem('admins') || '[]');
-            document.getElementById('admin-storage-output').textContent = JSON.stringify(admins, null, 2);
+            admins.splice(index, 1);
+            localStorage.setItem('admins', JSON.stringify(admins));
+            showAdminsLocal();
         }
 
-        // Show saved admins on page load
+        function showAdminsLocal() {
+            const output = document.getElementById('admin-storage-output');
+            let admins = JSON.parse(localStorage.getItem('admins') || '[]');
+            output.innerHTML = '';
+
+            if (admins.length === 0) {
+                output.innerHTML = '<p>هیچ داده‌ای ذخیره نشده است.</p>';
+                return;
+            }
+
+            admins.forEach((admin, index) => {
+                const entry = document.createElement('div');
+                entry.className = 'admin-data-entry';
+                entry.innerHTML = `
+                    <div class="admin-data-content">
+                        <strong>داده:</strong> ${admin.data}<br>
+                        <strong>تاریخ:</strong> ${admin.date}
+                    </div>
+                    <i class="fas fa-trash delete-icon" onclick="deleteAdminLocal(${index})" title="حذف این ورودی"></i>
+                `;
+                output.appendChild(entry);
+            });
+        }
+
         window.addEventListener('load', () => {
             showAdminsLocal();
         });

@@ -35,7 +35,7 @@
         <h1 data-i18n="contactHeading">Contact Us</h1>
         <section class="contact-form" aria-labelledby="contact-form-heading">
             <h2 id="contact-form-heading" data-i18n="contactFormHeading">Send Us a Message</h2>
-                        <form id="contact-form" action="https://usebasin.com/f/a26f41c8c3c2" method="POST" class="modern-form">
+            <form id="contact-form" method="POST" class="modern-form">
                 <input type="hidden" name="sheetName" value="ContactMessages">
                 <label for="name" data-i18n="nameLabel">Name:</label>
                 <input type="text" id="name" name="name" data-i18n-placeholder="namePlaceholder" required>
@@ -58,5 +58,43 @@
         <p data-i18n="copyright">© 2025 HopeBridge Academy</p>
     </footer>
     <script src="script.js" defer></script>
+    <script>
+        // Handle form submission to Telegram
+        document.getElementById('contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const token = "YOUR_TELEGRAM_BOT_TOKEN"; // Replace with your Telegram Bot Token
+            const chatId = "YOUR_TELEGRAM_CHAT_ID"; // Replace with your Telegram Chat ID
+
+            const formData = new FormData(this);
+            const data = {
+                name: formData.get('name'),
+                email: formData.get('email'),
+                message: formData.get('message')
+            };
+
+            const telegramMessage = `
+📩 پیام جدید از تماس آکادمی هوپ‌بریج
+نام: ${data.name}
+ایمیل: ${data.email}
+پیام: ${data.message}
+            `;
+
+            const url = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(telegramMessage)}`;
+
+            fetch(url)
+                .then(response => {
+                    if (response.ok) {
+                        alert(i18next.t('submitSuccess', 'Message sent successfully!'));
+                        this.reset();
+                    } else {
+                        alert(i18next.t('submitError', 'Error sending message. Please try again.'));
+                    }
+                })
+                .catch(error => {
+                    alert(i18next.t('submitError', 'Error: ') + error.message);
+                });
+        });
+    </script>
 </body>
 </html>

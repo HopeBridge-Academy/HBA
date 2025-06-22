@@ -66,6 +66,7 @@ function handleLogin(event) {
 function checkAuthentication() {
     const isLoggedIn = sessionStorage.getItem('isLoggedIn') === 'true';
     const userType = sessionStorage.getItem('userType');
+    const userRole = sessionStorage.getItem('userRole');
     const currentPage = window.location.pathname.split('/').pop();
     const protectedPages = [
         'SuperAdmin.html',
@@ -84,9 +85,12 @@ function checkAuthentication() {
     if (protectedPages.includes(currentPage) && !isLoggedIn) {
         window.location.href = 'login.html';
     } else if (isLoggedIn && protectedPages.includes(currentPage)) {
-        const userRole = sessionStorage.getItem('userRole');
+        // اجازه دسترسی کامل به superadmin
+        if (userType === 'superadmin') {
+            return; // superadmin به تمام صفحات دسترسی دارد
+        }
+
         const users = {
-            'superadmin': 'SuperAdmin.html',
             'admin01': 'Admin01.html',
             'admin02': 'Admin02.html',
             'hbat01': 'T01.html',
@@ -100,8 +104,8 @@ function checkAuthentication() {
         };
         const teacherPages = ['T01.html', 'T02.html', 'T03.html', 'T04.html', 'T05.html', 'T06.html', 'T07.html', 'T08.html'];
         
-        // اجازه دسترسی به صفحات معلمان برای admin و superadmin
-        if ((userType === 'admin' || userType === 'superadmin') && teacherPages.includes(currentPage)) {
+        // اجازه دسترسی به صفحات معلمان برای admin
+        if (userType === 'admin' && teacherPages.includes(currentPage)) {
             return; // اجازه دسترسی
         }
         // بررسی نقش برای سایر صفحات

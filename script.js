@@ -84,7 +84,6 @@ function checkAuthentication() {
     if (protectedPages.includes(currentPage) && !isLoggedIn) {
         window.location.href = 'login.html';
     } else if (isLoggedIn && protectedPages.includes(currentPage)) {
-        // بررسی نقش کاربر برای دسترسی به صفحه
         const userRole = sessionStorage.getItem('userRole');
         const users = {
             'superadmin': 'SuperAdmin.html',
@@ -99,6 +98,13 @@ function checkAuthentication() {
             'hbat07': 'T07.html',
             'hbat08': 'T08.html'
         };
+        const teacherPages = ['T01.html', 'T02.html', 'T03.html', 'T04.html', 'T05.html', 'T06.html', 'T07.html', 'T08.html'];
+        
+        // اجازه دسترسی به صفحات معلمان برای admin و superadmin
+        if ((userType === 'admin' || userType === 'superadmin') && teacherPages.includes(currentPage)) {
+            return; // اجازه دسترسی
+        }
+        // بررسی نقش برای سایر صفحات
         if (users[userRole] !== currentPage) {
             window.location.href = 'login.html'; // هدایت به login اگر صفحه با نقش مطابقت ندارد
         }

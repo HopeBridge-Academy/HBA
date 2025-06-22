@@ -63,36 +63,41 @@
         document.getElementById('contact-form').addEventListener('submit', function(e) {
             e.preventDefault();
 
-            const token = "YOUR_TELEGRAM_BOT_TOKEN"; // Replace with your Telegram Bot Token
-            const chatId = "YOUR_TELEGRAM_CHAT_ID"; // Replace with your Telegram Chat ID
+            const token = "7637224975:AAH7Al4buvRmfwW3LUZ-REvloF9rZgoAStU"; // Your Telegram Bot Token
+            const chatId = "-1002886209903"; // Your Telegram Chat ID
 
             const formData = new FormData(this);
             const data = {
-                name: formData.get('name'),
-                email: formData.get('email'),
-                message: formData.get('message')
+                name: formData.get('name') || 'N/A',
+                email: formData.get('email') || 'N/A',
+                message: formData.get('message') || 'N/A'
             };
 
+            // Truncate long inputs to avoid exceeding Telegram's 4096-character limit
+            const truncate = (str, max) => str.length > max ? str.slice(0, max) + '...' : str;
             const telegramMessage = `
 📩 پیام جدید از تماس آکادمی هوپ‌بریج
-نام: ${data.name}
-ایمیل: ${data.email}
-پیام: ${data.message}
+نام: ${truncate(data.name, 100)}
+ایمیل: ${truncate(data.email, 200)}
+پیام: ${truncate(data.message, 3500)}
             `;
 
             const url = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(telegramMessage)}`;
 
             fetch(url)
-                .then(response => {
-                    if (response.ok) {
+                .then(response => response.json())
+                .then(result => {
+                    if (result.ok) {
                         alert(i18next.t('submitSuccess', 'Message sent successfully!'));
                         this.reset();
                     } else {
-                        alert(i18next.t('submitError', 'Error sending message. Please try again.'));
+                        console.error('Telegram API Error:', result);
+                        alert(i18next.t('submitError', 'Error sending message: ') + (result.description || 'Unknown error. Check console for details.'));
                     }
                 })
                 .catch(error => {
-                    alert(i18next.t('submitError', 'Error: ') + error.message);
+                    console.error('Fetch Error:', error);
+                    alert(i18next.t('submitError', 'Error: Network issue or invalid setup. Please check console.'));
                 });
         });
     </script>

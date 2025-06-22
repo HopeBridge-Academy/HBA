@@ -2,12 +2,10 @@
 <html lang="fa" dir="rtl">
 <head>
     <meta charset="UTF-8" />
-    <title>گزارش تدریس - Teaching Report - HopeBridge Academy</title>
+    <title>گزارش تدریس - آکادمی هوپ‌بریج</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.23/jspdf.plugin.autotable.min.js"></script>
     <link rel="stylesheet" href="styles.css">
 
     <style>
@@ -59,19 +57,6 @@
             margin-top: 1rem;
             display: block;
             color: #2d3748;
-        }
-
-        .bilingual-label {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .bilingual-label span.en {
-            font-family: Arial, sans-serif;
-            font-size: 0.9rem;
-            color: #6b7280;
-            direction: ltr;
         }
 
         input, textarea, select, button {
@@ -292,154 +277,110 @@
             margin-left: 0.3rem;
         }
 
-        .bilingual-text {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .bilingual-text .en {
-            font-family: Arial, sans-serif;
-            font-size: 0.9rem;
-            color: #6b7280;
-            direction: ltr;
+        .sent-icon {
+            color: #059669;
+            margin-right: 0.3rem;
         }
     </style>
 </head>
 <body>
 <header>
-    HopeBridge Academy - سامانه ثبت گزارش تدریس / Teaching Report System
+    سامانه ثبت گزارش تدریس - آکادمی هوپ‌بریج
 </header>
 <main>
-    <p class="teacher-id">کد استاد / Teacher ID: <span id="teacherId">TCHR-003</span></p>
+    <p class="teacher-id">کد استاد: <span id="teacherId">TCHR-003</span></p>
 
-    <iframe src="plan.pdf" title="Teaching Plan PDF / برنامه تدریس"></iframe>
+    <iframe src="plan.pdf" title="برنامه تدریس"></iframe>
 
     <form id="reportForm">
         <input type="hidden" name="teacher_id" id="formTeacherId" value="TCHR-003" />
 
-        <label class="bilingual-label">
-            انتخاب صنف / Select Class:
-        </label>
+        <label>انتخاب صنف:</label>
         <select id="class" name="class" required>
-            <option value="">-- انتخاب صنف / Select Class --</option>
-            <optgroup label="کمپیوتر / Computer">
-                <option value="کمپیوتر A">کمپیوتر A / Computer A</option>
-                <option value="کمپیوتر B">کمپیوتر B / Computer B</option>
-                <option value="کمپیوتر C">کمپیوتر C / Computer C</option>
+            <option value="">-- انتخاب صنف --</option>
+            <optgroup label="کمپیوتر">
+                <option value="کمپیوتر A">کمپیوتر A</option>
+                <option value="کمپیوتر B">کمپیوتر B</option>
+                <option value="کمپیوتر C">کمپیوتر C</option>
             </optgroup>
-            <optgroup label="انگلیسی / English">
-                <option value="انگلیسی A">انگلیسی A / English A</option>
-                <option value="انگلیسی B">انگلیسی B / English B</option>
-                <option value="انگلیسی C">انگلیسی C / English C</option>
+            <optgroup label="انگلیسی">
+                <option value="انگلیسی A">انگلیسی A</option>
+                <option value="انگلیسی B">انگلیسی B</option>
+                <option value="انگلیسی C">انگلیسی C</option>
             </optgroup>
-            <optgroup label="دیگر / Other">
-                <option value="دیگر A">دیگر A / Other A</option>
-                <option value="دیگر B">دیگر B / Other B</option>
-                <option value="دیگر C">دیگر C / Other C</option>
+            <optgroup label="دیگر">
+                <option value="دیگر A">دیگر A</option>
+                <option value="دیگر B">دیگر B</option>
+                <option value="دیگر C">دیگر C</option>
             </optgroup>
         </select>
 
-        <label class="bilingual-label">
-            تاریخ / Date:
-        </label>
+        <label>تاریخ:</label>
         <input type="date" id="date" name="date" required />
 
-        <label class="bilingual-label">
-            موضوع درس / Lesson Subject:
-        </label>
+        <label>موضوع درس:</label>
         <input type="text" id="subject" name="subject" required />
 
-        <label class="bilingual-label">
-            مدت زمان تدریس / Teaching Duration:
-        </label>
+        <label>مدت زمان تدریس:</label>
         <input type="text" id="duration" name="duration" required />
 
-        <label class="bilingual-label">
-            محتوای تدریس‌شده / Taught Content:
-        </label>
+        <label>محتوای تدریس‌شده:</label>
         <textarea id="content" name="content" required></textarea>
 
-        <label class="bilingual-label">
-            ارزیابی سطح یادگیری / Learning Assessment:
-        </label>
+        <label>ارزیابی سطح یادگیری:</label>
         <textarea id="assessment" name="assessment" required></textarea>
 
-        <label class="bilingual-label">
-            مشکلات یا چالش‌ها / Problems or Challenges:
-        </label>
+        <label>مشکلات یا چالش‌ها:</label>
         <textarea id="challenges" name="challenges"></textarea>
 
-        <label class="bilingual-label">
-            پیشنهادات استاد / Teacher Suggestions:
-        </label>
+        <label>پیشنهادات استاد:</label>
         <textarea id="suggestions" name="suggestions"></textarea>
 
-        <label class="bilingual-label">
-            وضعیت حضور / Attendance Status:
-        </label>
+        <label>وضعیت حضور:</label>
         <select name="presence_level" id="presence" required>
-            <option value="">انتخاب کنید / Select</option>
-            <option value="full">همه حاضر بودند / All Present</option>
-            <option value="partial">برخی غایب بودند / Some Absent</option>
-            <option value="low">حضور بسیار پایین / Very Low Attendance</option>
+            <option value="">انتخاب کنید</option>
+            <option value="full">همه حاضر بودند</option>
+            <option value="partial">برخی غایب بودند</option>
+            <option value="low">حضور بسیار پایین</option>
         </select>
 
-        <label class="bilingual-label">
-            تعداد حاضر و غایب / Number of Present and Absent:
-        </label>
+        <label>تعداد حاضر و غایب:</label>
         <textarea id="attendance" name="attendance" required></textarea>
 
-        <button type="submit">ذخیره گزارش / Save Report</button>
+        <button type="submit">ذخیره گزارش</button>
     </form>
 
     <div id="reportDisplay">
-        <h3 class="bilingual-text">
-            گزارش‌های ثبت‌شده / Registered Reports
-        </h3>
-        <button id="exportTeachingReports" class="export-button"><i class="fas fa-file-pdf"></i> صدور گزارش‌های تدریس به PDF / Export Teaching Reports to PDF</button>
+        <h3>گزارش‌های ثبت‌شده</h3>
     </div>
 
     <div class="exam-panel">
-        <h3 class="bilingual-text">
-            نتایج امتحان / Exam Results
-        </h3>
+        <h3>نتایج امتحان</h3>
 
         <div id="localExamResults"></div>
 
         <form id="addExamResultForm" class="add-exam-form">
-            <label class="bilingual-label">
-                نام شاگرد / Student Name:
-            </label>
-            <input type="text" id="studentName" required placeholder="مثلا: احمد رحیمی / e.g., Ahmad Rahimi" />
+            <label>نام شاگرد:</label>
+            <input type="text" id="studentName" required placeholder="مثلا: احمد رحیمی" />
 
-            <label class="bilingual-label">
-                کد شاگرد / Student ID:
-            </label>
-            <input type="text" id="studentId" required placeholder="مثلا: STD-051 / e.g., STD-051" />
+            <label>کد شاگرد:</label>
+            <input type="text" id="studentId" required placeholder="مثلا: STD-051" />
 
-            <label class="bilingual-label">
-                نمره / Score:
-            </label>
-            <input type="number" id="studentScore" required min="0" max="100" placeholder="مثلا: 85 / e.g., 85" />
+            <label>نمره:</label>
+            <input type="number" id="studentScore" required min="0" max="100" placeholder="مثلا: 85" />
 
-            <button type="submit">افزودن نمره / Add Score</button>
+            <button type="submit">افزودن نمره</button>
         </form>
 
-        <form id="examForm" method="POST" action="https://usebasin.com/f/100df2443084" style="margin-top:1rem;">
-            <input type="hidden" name="teacher_id" value="TCHR-001" />
+        <form id="examForm" method="POST" style="margin-top:1rem;">
+            <input type="hidden" name="teacher_id" value="TCHR-003" />
             <div id="examFormInputs"></div>
-            <button type="submit">ثبت نتایج امتحان / Submit Exam Results</button>
-            <button type="button" id="exportExamResults" class="export-button"><i class="fas fa-file-pdf"></i> صدور نتایج امتحان به PDF / Export Exam Results to PDF</button>
+            <button type="submit" id="submitExamResults">ثبت نتایج امتحان</button>
         </form>
     </div>
 </main>
 
 <script>
-// Placeholder for Vazir font base64 (replace with actual base64 string or load locally)
-const vazirFontBase64 = ''; // e.g., 'data:font/truetype;base64,AAAB...'
-
-const { jsPDF } = window.jspdf;
 const teacherId = 'TCHR-003';
 document.getElementById('teacherId').textContent = teacherId;
 document.getElementById('formTeacherId').value = teacherId;
@@ -476,13 +417,10 @@ reportForm.addEventListener('submit', function (e) {
 function showReports(reports) {
     const display = document.getElementById('reportDisplay');
     display.innerHTML = `
-        <h3 class="bilingual-text">
-            گزارش‌های ثبت‌شده / Registered Reports
-        </h3>
-        <button id="exportTeachingReports" class="export-button"><i class="fas fa-file-pdf"></i> صدور گزارش‌های تدریس به PDF / Export Teaching Reports to PDF</button>
+        <h3>گزارش‌های ثبت‌شده</h3>
     `;
     if (reports.length === 0) {
-        display.innerHTML += '<p>گزارشی ثبت نشده است. / No reports registered.</p>';
+        display.innerHTML += '<p>گزارشی ثبت نشده است.</p>';
     } else {
         reports.forEach((r, index) => {
             const div = document.createElement('div');
@@ -491,17 +429,17 @@ function showReports(reports) {
                 <div class="report-entry-header">
                     <div class="subtitle">${r.date} - ${r.class} / ${r.subject}</div>
                     <div>
-                        <button class="send-report-button ${r.sent ? 'sent' : ''}" data-index="${index}" ${r.sent ? 'disabled' : ''}>ارسال / Send</button>
-                        <button class="delete-report-button" data-index="${index}">حذف / Delete</button>
+                        <button class="send-report-button ${r.sent ? 'sent' : ''}" data-index="${index}" ${r.sent ? 'disabled' : ''}>ارسال</button>
+                        <button class="delete-report-button" data-index="${index}">حذف</button>
                     </div>
                 </div>
-                <p><strong>مدت تدریس / Teaching Duration:</strong> ${r.duration}</p>
-                <p><strong>محتوا / Content:</strong> ${r.content}</p>
-                <p><strong>ارزیابی یادگیری / Learning Assessment:</strong> ${r.assessment}</p>
-                <p><strong>مشکلات / Problems:</strong> ${r.challenges || 'ندارد / None'}</p>
-                <p><strong>پیشنهادات / Suggestions:</strong> ${r.suggestions || 'ندارد / None'}</p>
-                <p><strong>حضور / Attendance:</strong> ${r.presence}</p>
-                <p><strong>تعداد حاضر و غایب / Number of Present and Absent:</strong> ${r.attendance}</p>
+                <p><strong>مدت تدریس:</strong> ${r.duration}</p>
+                <p><strong>محتوا:</strong> ${r.content}</p>
+                <p><strong>ارزیابی یادگیری:</strong> ${r.assessment}</p>
+                <p><strong>مشکلات:</strong> ${r.challenges || 'ندارد'}</p>
+                <p><strong>پیشنهادات:</strong> ${r.suggestions || 'ندارد'}</p>
+                <p><strong>حضور:</strong> ${r.presence}</p>
+                <p><strong>تعداد حاضر و غایب:</strong> ${r.attendance}</p>
             `;
             display.appendChild(div);
         });
@@ -517,11 +455,9 @@ function showReports(reports) {
     document.querySelectorAll('.send-report-button:not(.sent)').forEach(button => {
         button.addEventListener('click', (e) => {
             const idx = e.target.getAttribute('data-index');
-            sendReportToBasin(idx, e.target);
+            sendTeachingReportToTelegram(idx, e.target);
         });
     });
-
-    document.getElementById('exportTeachingReports').addEventListener('click', exportTeachingReportsToPDF);
 }
 
 function deleteReport(index) {
@@ -531,154 +467,101 @@ function deleteReport(index) {
     showReports(reports);
 }
 
-function sendReportToBasin(index, button) {
+function sendTeachingReportToTelegram(index, button) {
+    const token = "7637224975:AAH7Al4buvRmfwW3LUZ-REvloF9rZgoAStU"; // Your Bot Token
+    const chatId = "-1002886209903"; // Your Telegram Group Chat ID
     const reports = JSON.parse(localStorage.getItem(reportKey)) || [];
     const report = reports[index];
+
     if (!report) {
-        alert('گزارش یافت نشد. / Report not found.');
+        alert('گزارش یافت نشد.');
         return;
     }
 
-    const formData = new FormData();
-    formData.append('teacher_id', teacherId);
-    formData.append('class', report.class);
-    formData.append('date', report.date);
-    formData.append('subject', report.subject);
-    formData.append('duration', report.duration);
-    formData.append('content', report.content);
-    formData.append('assessment', report.assessment);
-    formData.append('challenges', report.challenges || '');
-    formData.append('suggestions', report.suggestions || '');
-    formData.append('presence_level', report.presence);
-    formData.append('attendance', report.attendance);
+    // Construct a detailed message with report data
+    const message = `
+📨 گزارش جدید تدریس از آکادمی هوپ‌بریج
+📋 کد استاد: ${teacherId}
+📚 صنف: ${report.class}
+📅 تاریخ: ${report.date}
+📖 موضوع: ${report.subject}
+⏰ مدت تدریس: ${report.duration}
+📝 محتوا: ${report.content}
+✅ ارزیابی: ${report.assessment}
+⚠️ مشکلات: ${report.challenges || 'ندارد'}
+💡 پیشنهادات: ${report.suggestions || 'ندارد'}
+👥 حضور: ${report.presence}
+🔢 تعداد حاضر و غایب: ${report.attendance}
+    `;
 
-    fetch('https://usebasin.com/f/100df2443084', {
-        method: 'POST',
-        body: formData
-    })
-    .then(response => {
-        if (response.ok) {
-            reports[index].sent = true;
-            localStorage.setItem(reportKey, JSON.stringify(reports));
-            button.classList.add('sent');
-            button.setAttribute('disabled', 'disabled');
-            button.innerHTML = 'ارسال / Sent <i class="fas fa-check"></i>';
-        } else {
-            alert('خطا در ارسال گزارش به Basin. / Error sending report to Basin.');
-        }
-    })
-    .catch(error => {
-        alert('خطا در ارسال گزارش به Basin: ' + error.message + ' / Error sending report to Basin: ' + error.message);
-    });
+    const url = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(message)}`;
+
+    fetch(url)
+        .then(response => {
+            if (response.ok) {
+                reports[index].sent = true;
+                localStorage.setItem(reportKey, JSON.stringify(reports));
+                button.classList.add('sent');
+                button.setAttribute('disabled', 'disabled');
+                button.innerHTML = 'ارسال‌شده <i class="fas fa-check"></i>';
+                alert("✅ گزارش تدریس به تلگرام ارسال شد!");
+            } else {
+                alert("❌ خطا در ارسال گزارش تدریس به تلگرام.");
+            }
+        })
+        .catch(error => {
+            alert("⚠️ خطا: " + error);
+        });
 }
 
-async function exportTeachingReportsToPDF() {
-    try {
-        const reports = JSON.parse(localStorage.getItem(reportKey)) || [];
-        if (reports.length === 0) {
-            alert('هیچ گزارشی برای صدور وجود ندارد. / No reports available for export.');
-            return;
-        }
+function sendExamResultsToTelegram(e) {
+    e.preventDefault();
+    const token = "7637224975:AAH7Al4buvRmfwW3LUZ-REvloF9rZgoAStU"; // Your Bot Token
+    const chatId = "-1002886209903"; // Your Telegram Group Chat ID
+    const exams = JSON.parse(localStorage.getItem(examKey)) || [];
 
-        const doc = new jsPDF();
-        const margin = 15;
-        const pageWidth = doc.internal.pageSize.width;
-
-        // Try to use Vazir font if available, fallback to Arial
-        if (vazirFontBase64) {
-            doc.addFileToVFS('Vazir-Regular.ttf', vazirFontBase64);
-            doc.addFont('Vazir-Regular.ttf', 'Vazir', 'normal');
-            doc.setFont('Vazir');
-        } else {
-            doc.setFont('Arial', 'normal');
-            console.warn('Vazir font not loaded. Using Arial as fallback. Persian text may not render optimally.');
-        }
-
-        doc.setFontSize(12);
-        doc.text('گزارش‌های تدریس / Teaching Reports - HopeBridge Academy', pageWidth / 2, margin + 5, { align: 'center' });
-        doc.text(`کد استاد / Teacher ID: ${teacherId}`, pageWidth / 2, margin + 15, { align: 'center' });
-
-        doc.autoTable({
-            startY: margin + 25,
-            head: [['شماره', 'تاریخ', 'صنف', 'موضوع', 'مدت', 'محتوا', 'ارزیابی', 'مشکلات', 'پیشنهادات', 'حضور', 'حاضر/غایب']],
-            body: reports.map((r, i) => [
-                i + 1,
-                r.date,
-                r.class,
-                r.subject,
-                r.duration,
-                r.content.slice(0, 50) + (r.content.length > 50 ? '...' : ''),
-                r.assessment.slice(0, 50) + (r.assessment.length > 50 ? '...' : ''),
-                r.challenges || 'ندارد',
-                r.suggestions || 'ندارد',
-                r.presence,
-                r.attendance
-            ]),
-            styles: { font: vazirFontBase64 ? 'Vazir' : 'Arial', halign: 'right', fontSize: 8, cellPadding: 2 },
-            headStyles: { fillColor: [59, 130, 246], textColor: [255, 255, 255], halign: 'right' },
-            margin: { top: margin, right: margin, bottom: margin, left: margin },
-            didDrawPage: () => {
-                doc.setFontSize(8);
-                doc.text(`Generated on: ${new Date().toLocaleString('fa-IR')}`, margin, doc.internal.pageSize.height - margin);
-            }
-        });
-
-        doc.save(`Teaching_Reports_${teacherId}.pdf`);
-    } catch (error) {
-        console.error('Error exporting teaching reports to PDF:', error);
-        alert('خطا در صدور PDF گزارش‌های تدریس: ' + error.message + ' / Error exporting teaching reports to PDF: ' + error.message);
+    if (exams.length === 0) {
+        alert('هیچ نتیجه امتحانی برای ارسال وجود ندارد.');
+        return;
     }
-}
 
-async function exportExamResultsToPDF() {
-    try {
-        const exams = JSON.parse(localStorage.getItem(examKey)) || [];
-        if (exams.length === 0) {
-            alert('هیچ نتیجه امتحانی برای صدور وجود ندارد. / No exam results available for export.');
-            return;
-        }
-
-        const doc = new jsPDF();
-        const margin = 15;
-        const pageWidth = doc.internal.pageSize.width;
-
-        // Try to use Vazir font if available, fallback to Arial
-        if (vazirFontBase64) {
-            doc.addFileToVFS('Vazir-Regular.ttf', vazirFontBase64);
-            doc.addFont('Vazir-Regular.ttf', 'Vazir', 'normal');
-            doc.setFont('Vazir');
-        } else {
-            doc.setFont('Arial', 'normal');
-            console.warn('Vazir font not loaded. Using Arial as fallback. Persian text may not render optimally.');
-        }
-
-        doc.setFontSize(12);
-        doc.text('نتایج امتحان / Exam Results - HopeBridge Academy', pageWidth / 2, margin + 5, { align: 'center' });
-        doc.text(`کد استاد / Teacher ID: ${teacherId}`, pageWidth / 2, margin + 15, { align: 'center' });
-
-        doc.autoTable({
-            startY: margin + 25,
-            head: [['شماره', 'نام شاگرد', 'کد شاگرد', 'نمره']],
-            body: exams.map((exam, i) => [
-                i + 1,
-                exam.studentName,
-                exam.studentId,
-                exam.score
-            ]),
-            styles: { font: vazirFontBase64 ? 'Vazir' : 'Arial', halign: 'right', fontSize: 10, cellPadding: 2 },
-            headStyles: { fillColor: [59, 130, 246], textColor: [255, 255, 255], halign: 'right' },
-            margin: { top: margin, right: margin, bottom: margin, left: margin },
-            didDrawPage: () => {
-                doc.setFontSize(8);
-                doc.text(`Generated on: ${new Date().toLocaleString('fa-IR')}`, margin, doc.internal.pageSize.height - margin);
-            }
-        });
-
-        doc.save(`Exam_Results_${teacherId}.pdf`);
-    } catch (error) {
-        console.error('Error exporting exam results to PDF:', error);
-        alert('خطا در صدور PDF نتایج امتحان: ' + error.message + ' / Error exporting exam results to PDF: ' + error.message);
+    if (exams.every(exam => exam.sent)) {
+        alert('نتایج امتحان قبلاً ارسال شده‌اند.');
+        return;
     }
+
+    // Construct a message with all exam results
+    let examDetails = exams.map((exam, i) => `
+${i + 1}. نام شاگرد: ${exam.studentName}
+   کد شاگرد: ${exam.studentId}
+   نمره: ${exam.score}
+    `).join('\n');
+
+    const message = `
+📝 نتایج امتحان از آکادمی هوپ‌بریج
+📋 کد استاد: ${teacherId}
+📅 تاریخ ارسال: ${new Date().toLocaleString('fa-IR')}
+📊 نتایج:
+${examDetails}
+    `;
+
+    const url = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(message)}`;
+
+    fetch(url)
+        .then(response => {
+            if (response.ok) {
+                // Mark all exam results as sent
+                exams.forEach(exam => { exam.sent = true; });
+                localStorage.setItem(examKey, JSON.stringify(exams));
+                loadExamResults();
+                alert("✅ نتایج امتحان به تلگرام ارسال شد!");
+            } else {
+                alert("❌ خطا در ارسال نتایج امتحان به تلگرام.");
+            }
+        })
+        .catch(error => {
+            alert("⚠️ خطا: " + error);
+        });
 }
 
 window.addEventListener('load', () => {
@@ -690,7 +573,7 @@ window.addEventListener('load', () => {
     }
     loadExamResults();
 
-    document.getElementById('exportExamResults').addEventListener('click', exportExamResultsToPDF);
+    examForm.addEventListener('submit', sendExamResultsToTelegram);
 });
 
 const localExamResultsDiv = document.getElementById('localExamResults');
@@ -699,21 +582,32 @@ const addExamResultForm = document.getElementById('addExamResultForm');
 function loadExamResults() {
     const exams = JSON.parse(localStorage.getItem(examKey)) || [];
     renderExamResults(exams);
-    updateBasinExamForm(exams);
+    updateExamFormInputs(exams);
+    // Disable submit button if all results are sent
+    const submitButton = document.getElementById('submitExamResults');
+    if (exams.length > 0 && exams.every(exam => exam.sent)) {
+        submitButton.disabled = true;
+        submitButton.classList.add('sent');
+        submitButton.innerHTML = 'ارسال‌شده <i class="fas fa-check"></i>';
+    } else {
+        submitButton.disabled = false;
+        submitButton.classList.remove('sent');
+        submitButton.innerHTML = 'ثبت نتایج امتحان';
+    }
 }
 
 function renderExamResults(exams) {
     localExamResultsDiv.innerHTML = '';
     if (exams.length === 0) {
-        localExamResultsDiv.innerHTML = '<p>نتایجی ثبت نشده است. / No results registered.</p>';
+        localExamResultsDiv.innerHTML = '<p>نتایجی ثبت نشده است.</p>';
         return;
     }
     exams.forEach((exam, index) => {
         const div = document.createElement('div');
         div.className = 'exam-entry';
         div.innerHTML = `
-            <span>${exam.studentName} (${exam.studentId}) - نمره / Score: ${exam.score}</span>
-            <button data-index="${index}">حذف / Delete</button>
+            <span>${exam.studentName} (${exam.studentId}) - نمره: ${exam.score} ${exam.sent ? '<i class="fas fa-check sent-icon"></i>' : ''}</span>
+            <button data-index="${index}">حذف</button>
         `;
         localExamResultsDiv.appendChild(div);
     });
@@ -740,18 +634,18 @@ addExamResultForm.addEventListener('submit', function(e) {
     const score = document.getElementById('studentScore').value.trim();
 
     if (!studentName || !studentId || score === '') {
-        alert('لطفاً همه فیلدها را پر کنید. / Please fill all fields.');
+        alert('لطفاً همه فیلدها را پر کنید.');
         return;
     }
 
     const exams = JSON.parse(localStorage.getItem(examKey)) || [];
-    exams.push({ studentName, studentId, score });
+    exams.push({ studentName, studentId, score, sent: false });
     localStorage.setItem(examKey, JSON.stringify(exams));
     addExamResultForm.reset();
     loadExamResults();
 });
 
-function updateBasinExamForm(exams) {
+function updateExamFormInputs(exams) {
     examFormInputs.innerHTML = '';
     exams.forEach((exam, i) => {
         examFormInputs.innerHTML += `

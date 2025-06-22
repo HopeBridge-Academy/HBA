@@ -33,7 +33,7 @@
     </header>
     <main>
         <h1 data-i18n="tutorHeading">Request a Private Tutor</h1>
-        <form action="https://usebasin.com/f/e0be36c950e4" method="POST" class="modern-form">
+        <form id="tutor-form" method="POST" class="modern-form">
             <input type="hidden" name="sheetName" value="TutorRequests">
             <label for="name" data-i18n="nameLabel">Your Name:</label>
             <input type="text" id="name" name="name" data-i18n-placeholder="namePlaceholder" required>
@@ -115,5 +115,60 @@
         <p data-i18n="copyright">© 2025 HopeBridge Academy</p>
     </footer>
     <script src="script.js" defer></script>
+    <script>
+        // Handle form submission to Telegram
+        document.getElementById('tutor-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const token = "7637224975:AAH7Al4buvRmfwW3LUZ-REvloF9rZgoAStU"; // Telegram Bot Token
+            const chatId = "-1002886209903"; // Telegram Chat ID
+
+            const formData = new FormData(this);
+            const data = {
+                name: formData.get('name') || 'N/A',
+                gender: formData.get('gender') || 'N/A',
+                province: formData.get('province') || 'N/A',
+                city: formData.get('city') || 'N/A',
+                address: formData.get('address') || 'N/A',
+                tutorGender: formData.get('tutor-gender') || 'N/A',
+                subject: formData.get('subject') || 'N/A',
+                level: formData.get('level') || 'N/A',
+                contact: formData.get('contact') || 'N/A'
+            };
+
+            // Truncate long inputs to avoid exceeding Telegram's 4096-character limit
+            const truncate = (str, max) => str.length > max ? str.slice(0, max) + '...' : str;
+            const telegramMessage = `
+📚 درخواست معلم خصوصی جدید - آکادمی هوپ‌بریج
+نام: ${truncate(data.name, 100)}
+جنسیت: ${truncate(data.gender, 50)}
+استان: ${truncate(data.province, 100)}
+شهر/منطقه: ${truncate(data.city, 100)}
+آدرس دقیق: ${truncate(data.address, 500)}
+جنسیت معلم مورد نظر: ${truncate(data.tutorGender, 50)}
+موضوع: ${truncate(data.subject, 200)}
+سطح: ${truncate(data.level, 50)}
+اطلاعات تماس: ${truncate(data.contact, 200)}
+            `;
+
+            const url = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(telegramMessage)}`;
+
+            fetch(url)
+                .then(response => response.json())
+                .then(result => {
+                    if (result.ok) {
+                        alert(i18next.t('submitSuccess', 'Tutor request submitted successfully!'));
+                        this.reset();
+                    } else {
+                        console.error('Telegram API Error:', result);
+                        alert(i18next.t('submitError', 'Error submitting tutor request: ') + (result.description || 'Unknown error. Check console for details.'));
+                    }
+                })
+                .catch(error => {
+                    console.error('Fetch Error:', error);
+                    alert(i18next.t('submitError', 'Error: Network issue or invalid setup. Please check console.'));
+                });
+        });
+    </script>
 </body>
 </html>

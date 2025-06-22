@@ -1,14 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fa" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title data-i18n="superAdminDashboardTitle">Super Admin Dashboard - HopeBridge Academy</title>
+    <title>داشبورد سوپرادمین - آکادمی هوپ‌بریج</title>
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <script src="https://unpkg.com/i18next@21.6.10/dist/umd/i18next.min.js"></script>
-    <script src="i18n.js" defer></script>
     <style>
         :root {
             --primary-color: #3b82f6;
@@ -75,25 +73,6 @@
 
         .logo {
             height: 60px;
-        }
-
-        .language-switcher {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            color: white;
-        }
-
-        .language-switcher label {
-            font-size: 0.9rem;
-        }
-
-        .language-switcher select {
-            padding: 0.5rem;
-            border-radius: 5px;
-            border: none;
-            font-size: 0.9rem;
-            cursor: pointer;
         }
 
         main {
@@ -235,10 +214,6 @@
                 gap: 1rem;
             }
 
-            .language-switcher {
-                margin-top: 1rem;
-            }
-
             h1 {
                 font-size: 1.5rem;
             }
@@ -273,58 +248,51 @@
 </head>
 <body onload="initializePage()">
     <header>
-        <nav aria-label="Main navigation">
+        <nav aria-label="ناوبری اصلی">
             <ul class="nav-list">
-                <li><img src="./logo.png" height="90" alt="HopeBridge Academy Logo" class="logo"></li>
-                <li><a href="index.html" data-i18n="home">Home</a></li>
-                <li class="auth-link"><a href="login.html" id="auth-link" data-i18n="logout">Log Out</a></li>
+                <li><img src="./logo.png" height="90" alt="لوگوی آکادمی هوپ‌بریج" class="logo"></li>
+                <li><a href="index.html">صفحه اصلی</a></li>
+                <li class="auth-link"><a href="login.html" id="auth-link">خروج</a></li>
             </ul>
-            <div class="language-switcher">
-                <label for="language-select" data-i18n="languageLabel">Language:</label>
-                <select id="language-select" onchange="changeLanguage(this.value)" aria-label="Select language">
-                    <option value="en" data-i18n="englishOption">English</option>
-                    <option value="fa" data-i18n="persianOption">فارسی</option>
-                </select>
-            </div>
         </nav>
     </header>
     <main>
-        <h1 data-i18n="superAdminDashboard">Super Admin Dashboard</h1>
+        <h1>داشبورد سوپرادمین</h1>
         <section class="page-access" aria-labelledby="page-access-heading">
-            <h2 id="page-access-heading" data-i18n="teacherPagesLabel">Teacher Pages</h2>
+            <h2 id="page-access-heading">صفحات معلمان</h2>
             <select id="teacher-page-select" onchange="navigateToTeacherPage(this.value)" class="modern-select">
-                <option value="" data-i18n="selectTeacher">Select a teacher</option>
-                <option value="T01.html" data-i18n="teacher1">Teacher 1</option>
-                <option value="T02.html" data-i18n="teacher2">Teacher 2</option>
-                <option value="T03.html" data-i18n="teacher3">Teacher 3</option>
-                <option value="T04.html" data-i18n="teacher4">Teacher 4</option>
-                <option value="T05.html" data-i18n="teacher5">Teacher 5</option>
-                <option value="T06.html" data-i18n="teacher6">Teacher 6</option>
-                <option value="T07.html" data-i18n="teacher7">Teacher 7</option>
-                <option value="T08.html" data-i18n="teacher8">Teacher 8</option>
+                <option value="">انتخاب معلم</option>
+                <option value="T01.html">معلم ۱ (TCHR-001)</option>
+                <option value="T02.html">معلم ۲ (TCHR-002)</option>
+                <option value="T03.html">معلم ۳ (TCHR-003)</option>
+                <option value="T04.html">معلم ۴ (TCHR-004)</option>
+                <option value="T05.html">معلم ۵ (TCHR-005)</option>
+                <option value="T06.html">معلم ۶ (TCHR-006)</option>
+                <option value="T07.html">معلم ۷ (TCHR-007)</option>
+                <option value="T08.html">معلم ۸ (TCHR-008)</option>
             </select>
         </section>
         <section class="admin-access" aria-labelledby="admin-access-heading">
-            <h2 id="admin-access-heading" data-i18n="adminPagesLabel">Admin Pages</h2>
+            <h2 id="admin-access-heading">صفحات مدیران</h2>
             <select id="admin-page-select" onchange="navigateToAdminPage(this.value)" class="modern-select">
-                <option value="" data-i18n="selectAdmin">Select an admin</option>
-                <option value="Admin01.html" data-i18n="admin01">Admin 01</option>
-                <option value="Admin02.html" data-i18n="admin02">Admin 02</option>
+                <option value="">انتخاب مدیر</option>
+                <option value="Admin01.html">مدیر ۱ (admin01)</option>
+                <option value="Admin02.html">مدیر ۲ (admin02)</option>
             </select>
         </section>
         <section class="local-storage-superadmin" aria-labelledby="local-storage-superadmin-heading">
-            <h2 id="local-storage-superadmin-heading" data-i18n="superadminDataStorage">Super Admin Data Storage</h2>
-            <label for="superadmin-data" data-i18n="dataLabel">Data:</label>
-            <textarea id="superadmin-data" rows="5" placeholder="Enter data here..." data-i18n="dataPlaceholder"></textarea>
-            <label for="superadmin-date" data-i18n="dateLabel">Date:</label>
+            <h2 id="local-storage-superadmin-heading">حافظه داده سوپرادمین</h2>
+            <label for="superadmin-data">داده:</label>
+            <textarea id="superadmin-data" rows="5" placeholder="داده را اینجا وارد کنید..."></textarea>
+            <label for="superadmin-date">تاریخ:</label>
             <input id="superadmin-date" type="date" />
-            <button onclick="saveSuperAdminLocal()" data-i18n="saveData">Save Data</button>
-            <h3 data-i18n="savedData">Saved Data:</h3>
+            <button onclick="saveSuperAdminLocal()">ذخیره داده</button>
+            <h3>داده‌های ذخیره‌شده:</h3>
             <div id="superadmin-storage-output"></div>
         </section>
     </main>
     <footer>
-        <p data-i18n="copyright">© 2025 HopeBridge Academy</p>
+        <p>© ۱۴۰۴ آکادمی هوپ‌بریج</p>
     </footer>
     <script src="script.js" defer></script>
     <script>
@@ -348,7 +316,7 @@
             const date = dateInput || new Date().toISOString().slice(0, 10);
 
             if (!data) {
-                alert(i18next.t('enterData') || 'لطفاً داده را وارد کنید.');
+                alert('لطفاً داده را وارد کنید.');
                 return;
             }
 
@@ -375,14 +343,14 @@
             const entry = superadminData[index];
 
             if (!entry) {
-                alert(i18next.t('dataNotFound') || 'داده یافت نشد.');
+                alert('داده یافت نشد.');
                 return;
             }
 
             const message = `
-📨 ${i18next.t('superadminData') || 'داده جدید سوپرادمین از آکادمی هوپ‌بریج'}
-📅 ${i18next.t('dateLabel') || 'تاریخ'}: ${entry.date}
-📝 ${i18next.t('dataLabel') || 'داده'}: ${entry.data}
+📨 پیام ریاست آکادمی هوپ‌بریج
+📅 تاریخ: ${entry.date}
+📝 داده: ${entry.data}
             `;
 
             const url = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(message)}`;
@@ -394,14 +362,14 @@
                         localStorage.setItem('superadmin-data', JSON.stringify(superadminData));
                         button.classList.add('sent');
                         button.setAttribute('disabled', 'disabled');
-                        button.innerHTML = `${i18next.t('sent') || 'ارسال‌شده'} <i class="fas fa-check"></i>`;
-                        alert(i18next.t('dataSent') || '✅ داده به تلگرام ارسال شد!');
+                        button.innerHTML = `ارسال‌شده <i class="fas fa-check"></i>`;
+                        alert('✅ داده به تلگرام ارسال شد!');
                     } else {
-                        alert(i18next.t('sendError') || '❌ خطا در ارسال داده به تلگرام.');
+                        alert('❌ خطا در ارسال داده به تلگرام.');
                     }
                 })
                 .catch(error => {
-                    alert(i18next.t('error') || '⚠️ خطا: ') + error;
+                    alert('⚠️ خطا: ' + error);
                 });
         }
 
@@ -411,7 +379,7 @@
             output.innerHTML = '';
 
             if (superadminData.length === 0) {
-                output.innerHTML = `<p data-i18n="noData">${i18next.t('noData') || 'هیچ داده‌ای ذخیره نشده است.'}</p>`;
+                output.innerHTML = `<p>هیچ داده‌ای ذخیره نشده است.</p>`;
                 return;
             }
 
@@ -420,12 +388,12 @@
                 entryDiv.className = 'superadmin-data-entry';
                 entryDiv.innerHTML = `
                     <div class="superadmin-data-content">
-                        <strong data-i18n="dataLabel">${i18next.t('dataLabel') || 'داده'}:</strong> ${entry.data}<br>
-                        <strong data-i18n="dateLabel">${i18next.t('dateLabel') || 'تاریخ'}:</strong> ${entry.date}
+                        <strong>داده:</strong> ${entry.data}<br>
+                        <strong>تاریخ:</strong> ${entry.date}
                     </div>
                     <div>
-                        <button class="send-data-button ${entry.sent ? 'sent' : ''}" data-index="${index}" ${entry.sent ? 'disabled' : ''} data-i18n="sendData">${entry.sent ? i18next.t('sent') : i18next.t('sendData') || 'ارسال به تلگرام'}</button>
-                        <i class="fas fa-trash delete-icon" onclick="deleteSuperAdminLocal(${index})" title="Delete this entry" data-i18n="deleteData"></i>
+                        <button class="send-data-button ${entry.sent ? 'sent' : ''}" data-index="${index}" ${entry.sent ? 'disabled' : ''}>${entry.sent ? 'ارسال‌شده' : 'ارسال به تلگرام'}</button>
+                        <i class="fas fa-trash delete-icon" onclick="deleteSuperAdminLocal(${index})" title="حذف این داده"></i>
                     </div>
                 `;
                 output.appendChild(entryDiv);

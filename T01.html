@@ -37,6 +37,25 @@
             to { transform: translateY(0); opacity: 1; }
         }
 
+        .nav-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .nav-list li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: opacity 0.3s;
+        }
+
+        .nav-list li a:hover {
+            opacity: 0.8;
+        }
+
         main {
             max-width: 900px;
             margin: 2rem auto;
@@ -286,6 +305,11 @@
 <body>
 <header>
     سامانه ثبت گزارش تدریس - آکادمی هوپ‌بریج
+    <nav>
+        <ul class="nav-list">
+            <li><a href="#" id="logout-link" data-i18n="logout">خروج</a></li>
+        </ul>
+    </nav>
 </header>
 <main>
     <p class="teacher-id">کد استاد: <span id="teacherId">TCHR-001</span></p>
@@ -381,6 +405,20 @@
 </main>
 
 <script>
+// بررسی وضعیت ورود
+if (sessionStorage.getItem('isLoggedIn') !== 'true' || sessionStorage.getItem('userType') !== 'teacher') {
+    window.location.href = 'login.html';
+}
+
+// مدیریت لینک خروج
+document.getElementById('logout-link').addEventListener('click', function(e) {
+    e.preventDefault();
+    sessionStorage.removeItem('isLoggedIn');
+    sessionStorage.removeItem('userRole');
+    sessionStorage.removeItem('userType');
+    window.location.href = 'login.html';
+});
+
 const teacherId = 'TCHR-001';
 document.getElementById('teacherId').textContent = teacherId;
 document.getElementById('formTeacherId').value = teacherId;

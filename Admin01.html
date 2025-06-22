@@ -270,7 +270,7 @@
     <script src="script.js" defer></script>
     <script>
         // بررسی وضعیت ورود
-        if (sessionStorage.getItem('isLoggedIn') !== 'true' || sessionStorage.getItem('userType') !== 'admin') {
+        if (sessionStorage.getItem('isLoggedIn') !== 'true' || (sessionStorage.getItem('userType') !== 'admin' && sessionStorage.getItem('userType') !== 'superadmin')) {
             window.location.href = 'login.html';
         }
 

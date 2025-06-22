@@ -7,6 +7,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous" />
     <link rel="stylesheet" href="styles.css">
+    <script src="https://unpkg.com/i18next@21.6.10/dist/umd/i18next.min.js"></script>
+    <script src="i18n.js" defer></script>
 
     <style>
         body {
@@ -35,6 +37,25 @@
         @keyframes slideInHeader {
             from { transform: translateY(-20px); opacity: 0; }
             to { transform: translateY(0); opacity: 1; }
+        }
+
+        .nav-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .nav-list li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: opacity 0.3s;
+        }
+
+        .nav-list li a:hover {
+            opacity: 0.8;
         }
 
         main {
@@ -286,14 +307,19 @@
 <body>
 <header>
     سامانه ثبت گزارش تدریس - آکادمی هوپ‌بریج
+    <nav>
+        <ul class="nav-list">
+            <li><a href="#" id="logout-link" data-i18n="logout">خروج</a></li>
+        </ul>
+    </nav>
 </header>
 <main>
-    <p class="teacher-id">کد استاد: <span id="teacherId">TCHR-004</span></p>
+    <p class="teacher-id">کد استاد: <span id="teacherId">TCHR-001</span></p>
 
     <iframe src="plan.pdf" title="برنامه تدریس"></iframe>
 
     <form id="reportForm">
-        <input type="hidden" name="teacher_id" id="formTeacherId" value="TCHR-004" />
+        <input type="hidden" name="teacher_id" id="formTeacherId" value="TCHR-001" />
 
         <label>انتخاب صنف:</label>
         <select id="class" name="class" required>
@@ -373,288 +399,303 @@
         </form>
 
         <form id="examForm" method="POST" style="margin-top:1rem;">
-            <input type="hidden" name="teacher_id" value="TCHR-004" />
+            <input type="hidden" name="teacher_id" value="TCHR-001" />
             <div id="examFormInputs"></div>
             <button type="submit" id="submitExamResults">ثبت نتایج امتحان</button>
         </form>
     </div>
 </main>
 
+<script src="script.js" defer></script>
 <script>
-const teacherId = 'TCHR-004';
-document.getElementById('teacherId').textContent = teacherId;
-document.getElementById('formTeacherId').value = teacherId;
+    // بررسی وضعیت ورود
+    if (sessionStorage.getItem('isLoggedIn') !== 'true' || 
+        (sessionStorage.getItem('userType') !== 'teacher' && 
+         sessionStorage.getItem('userType') !== 'admin' && 
+         sessionStorage.getItem('userType') !== 'superadmin')) {
+        window.location.href = 'login.html';
+    }
 
-const reportKey = `reports-${teacherId}`;
-const examKey = `exam-results-${teacherId}`;
+    // مدیریت لینک خروج
+    document.getElementById('logout-link').addEventListener('click', function(e) {
+        e.preventDefault();
+        sessionStorage.removeItem('isLoggedIn');
+        sessionStorage.removeItem('userRole');
+        sessionStorage.removeItem('userType');
+        window.location.href = 'login.html';
+    });
 
-const reportForm = document.getElementById('reportForm');
-const examForm = document.getElementById('examForm');
-const examFormInputs = document.getElementById('examFormInputs');
+    const teacherId = 'TCHR-004';
+    document.getElementById('teacherId').textContent = teacherId;
+    document.getElementById('formTeacherId').value = teacherId;
+    document.querySelector('#examForm input[name="teacher_id"]').value = teacherId;
 
-reportForm.addEventListener('submit', function (e) {
-    e.preventDefault();
-    const report = {
-        class: document.getElementById('class').value,
-        date: document.getElementById('date').value,
-        subject: document.getElementById('subject').value,
-        duration: document.getElementById('duration').value,
-        content: document.getElementById('content').value,
-        assessment: document.getElementById('assessment').value,
-        challenges: document.getElementById('challenges').value,
-        suggestions: document.getElementById('suggestions').value,
-        presence: document.getElementById('presence').value,
-        attendance: document.getElementById('attendance').value,
-        sent: false
-    };
-    const existingReports = JSON.parse(localStorage.getItem(reportKey)) || [];
-    existingReports.push(report);
-    localStorage.setItem(reportKey, JSON.stringify(existingReports));
-    showReports(existingReports);
-    reportForm.reset();
-});
+    const reportKey = `reports-${teacherId}`;
+    const examKey = `exam-results-${teacherId}`;
 
-function showReports(reports) {
-    const display = document.getElementById('reportDisplay');
-    display.innerHTML = `
-        <h3>گزارش‌های ثبت‌شده</h3>
-    `;
-    if (reports.length === 0) {
-        display.innerHTML += '<p>گزارشی ثبت نشده است.</p>';
-    } else {
-        reports.forEach((r, index) => {
-            const div = document.createElement('div');
-            div.className = 'report-entry';
-            div.innerHTML = `
-                <div class="report-entry-header">
-                    <div class="subtitle">${r.date} - ${r.class} / ${r.subject}</div>
-                    <div>
-                        <button class="send-report-button ${r.sent ? 'sent' : ''}" data-index="${index}" ${r.sent ? 'disabled' : ''}>ارسال</button>
-                        <button class="delete-report-button" data-index="${index}">حذف</button>
+    const reportForm = document.getElementById('reportForm');
+    const examForm = document.getElementById('examForm');
+    const examFormInputs = document.getElementById('examFormInputs');
+
+    reportForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+        const report = {
+            class: document.getElementById('class').value,
+            date: document.getElementById('date').value,
+            subject: document.getElementById('subject').value,
+            duration: document.getElementById('duration').value,
+            content: document.getElementById('content').value,
+            assessment: document.getElementById('assessment').value,
+            challenges: document.getElementById('challenges').value,
+            suggestions: document.getElementById('suggestions').value,
+            presence: document.getElementById('presence').value,
+            attendance: document.getElementById('attendance').value,
+            sent: false
+        };
+        const existingReports = JSON.parse(localStorage.getItem(reportKey)) || [];
+        existingReports.push(report);
+        localStorage.setItem(reportKey, JSON.stringify(existingReports));
+        showReports(existingReports);
+        reportForm.reset();
+    });
+
+    function showReports(reports) {
+        const display = document.getElementById('reportDisplay');
+        display.innerHTML = `
+            <h3 data-i18n="savedReports">گزارش‌های ثبت‌شده</h3>
+        `;
+        if (reports.length === 0) {
+            display.innerHTML += '<p data-i18n="noReports">گزارشی ثبت نشده است.</p>';
+        } else {
+            reports.forEach((r, index) => {
+                const div = document.createElement('div');
+                div.className = 'report-entry';
+                div.innerHTML = `
+                    <div class="report-entry-header">
+                        <div class="subtitle">${r.date} - ${r.class} / ${r.subject}</div>
+                        <div>
+                            <button class="send-report-button ${r.sent ? 'sent' : ''}" data-index="${index}" ${r.sent ? 'disabled' : ''} data-i18n="sendReport">${r.sent ? i18next.t('sent') : i18next.t('sendReport')}</button>
+                            <button class="delete-report-button" data-index="${index}" data-i18n="deleteReport">حذف</button>
+                        </div>
                     </div>
-                </div>
-                <p><strong>مدت تدریس:</strong> ${r.duration}</p>
-                <p><strong>محتوا:</strong> ${r.content}</p>
-                <p><strong>ارزیابی یادگیری:</strong> ${r.assessment}</p>
-                <p><strong>مشکلات:</strong> ${r.challenges || 'ندارد'}</p>
-                <p><strong>پیشنهادات:</strong> ${r.suggestions || 'ندارد'}</p>
-                <p><strong>حضور:</strong> ${r.presence}</p>
-                <p><strong>تعداد حاضر و غایب:</strong> ${r.attendance}</p>
-            `;
-            display.appendChild(div);
+                    <p><strong data-i18n="durationLabel">مدت تدریس:</strong> ${r.duration}</p>
+                    <p><strong data-i18n="contentLabel">محتوا:</strong> ${r.content}</p>
+                    <p><strong data-i18n="assessmentLabel">ارزیابی یادگیری:</strong> ${r.assessment}</p>
+                    <p><strong data-i18n="challengesLabel">مشکلات:</strong> ${r.challenges || i18next.t('none') || 'ندارد'}</p>
+                    <p><strong data-i18n="suggestionsLabel">پیشنهادات:</strong> ${r.suggestions || i18next.t('none') || 'ندارد'}</p>
+                    <p><strong data-i18n="presenceLabel">حضور:</strong> ${r.presence}</p>
+                    <p><strong data-i18n="attendanceLabel">تعداد حاضر و غایب:</strong> ${r.attendance}</p>
+                `;
+                display.appendChild(div);
+            });
+        }
+
+        document.querySelectorAll('.delete-report-button').forEach(button => {
+            button.addEventListener('click', (e) => {
+                const idx = e.target.getAttribute('data-index');
+                deleteReport(idx);
+            });
+        });
+
+        document.querySelectorAll('.send-report-button:not(.sent)').forEach(button => {
+            button.addEventListener('click', (e) => {
+                const idx = e.target.getAttribute('data-index');
+                sendTeachingReportToTelegram(idx, e.target);
+            });
         });
     }
 
-    document.querySelectorAll('.delete-report-button').forEach(button => {
-        button.addEventListener('click', (e) => {
-            const idx = e.target.getAttribute('data-index');
-            deleteReport(idx);
-        });
-    });
-
-    document.querySelectorAll('.send-report-button:not(.sent)').forEach(button => {
-        button.addEventListener('click', (e) => {
-            const idx = e.target.getAttribute('data-index');
-            sendTeachingReportToTelegram(idx, e.target);
-        });
-    });
-}
-
-function deleteReport(index) {
-    const reports = JSON.parse(localStorage.getItem(reportKey)) || [];
-    reports.splice(index, 1);
-    localStorage.setItem(reportKey, JSON.stringify(reports));
-    showReports(reports);
-}
-
-function sendTeachingReportToTelegram(index, button) {
-    const token = "7637224975:AAH7Al4buvRmfwW3LUZ-REvloF9rZgoAStU"; // Your Bot Token
-    const chatId = "-1002886209903"; // Your Telegram Group Chat ID
-    const reports = JSON.parse(localStorage.getItem(reportKey)) || [];
-    const report = reports[index];
-
-    if (!report) {
-        alert('گزارش یافت نشد.');
-        return;
+    function deleteReport(index) {
+        const reports = JSON.parse(localStorage.getItem(reportKey)) || [];
+        reports.splice(index, 1);
+        localStorage.setItem(reportKey, JSON.stringify(reports));
+        showReports(reports);
     }
 
-    // Construct a detailed message with report data
-    const message = `
-📨 گزارش جدید تدریس از آکادمی هوپ‌بریج
-📋 کد استاد: ${teacherId}
-📚 صنف: ${report.class}
-📅 تاریخ: ${report.date}
-📖 موضوع: ${report.subject}
-⏰ مدت تدریس: ${report.duration}
-📝 محتوا: ${report.content}
-✅ ارزیابی: ${report.assessment}
-⚠️ مشکلات: ${report.challenges || 'ندارد'}
-💡 پیشنهادات: ${report.suggestions || 'ندارد'}
-👥 حضور: ${report.presence}
-🔢 تعداد حاضر و غایب: ${report.attendance}
-    `;
+    function sendTeachingReportToTelegram(index, button) {
+        const token = "7637224975:AAH7Al4buvRmfwW3LUZ-REvloF9rZgoAStU"; // Your Bot Token
+        const chatId = "-1002886209903"; // Your Telegram Group Chat ID
+        const reports = JSON.parse(localStorage.getItem(reportKey)) || [];
+        const report = reports[index];
 
-    const url = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(message)}`;
+        if (!report) {
+            alert(i18next.t('reportNotFound') || 'گزارش یافت نشد.');
+            return;
+        }
 
-    fetch(url)
-        .then(response => {
-            if (response.ok) {
-                reports[index].sent = true;
-                localStorage.setItem(reportKey, JSON.stringify(reports));
-                button.classList.add('sent');
-                button.setAttribute('disabled', 'disabled');
-                button.innerHTML = 'ارسال‌شده <i class="fas fa-check"></i>';
-                alert("✅ گزارش تدریس به تلگرام ارسال شد!");
-            } else {
-                alert("❌ خطا در ارسال گزارش تدریس به تلگرام.");
-            }
-        })
-        .catch(error => {
-            alert("⚠️ خطا: " + error);
-        });
-}
+        const message = `
+📨 ${i18next.t('newTeachingReport') || 'گزارش جدید تدریس از آکادمی هوپ‌بریج'}
+📋 ${i18next.t('teacherId') || 'کد استاد'}: ${teacherId}
+📚 ${i18next.t('classLabel') || 'صنف'}: ${report.class}
+📅 ${i18next.t('dateLabel') || 'تاریخ'}: ${report.date}
+📖 ${i18next.t('subjectLabel') || 'موضوع'}: ${report.subject}
+⏰ ${i18next.t('durationLabel') || 'مدت تدریس'}: ${report.duration}
+📝 ${i18next.t('contentLabel') || 'محتوا'}: ${report.content}
+✅ ${i18next.t('assessmentLabel') || 'ارزیابی'}: ${report.assessment}
+⚠️ ${i18next.t('challengesLabel') || 'مشکلات'}: ${report.challenges || i18next.t('none') || 'ندارد'}
+💡 ${i18next.t('suggestionsLabel') || 'پیشنهادات'}: ${report.suggestions || i18next.t('none') || 'ندارد'}
+👥 ${i18next.t('presenceLabel') || 'حضور'}: ${report.presence}
+🔢 ${i18next.t('attendanceLabel') || 'تعداد حاضر و غایب'}: ${report.attendance}
+        `;
 
-function sendExamResultsToTelegram(e) {
-    e.preventDefault();
-    const token = "7637224975:AAH7Al4buvRmfwW3LUZ-REvloF9rZgoAStU"; // Your Bot Token
-    const chatId = "-1002886209903"; // Your Telegram Group Chat ID
-    const exams = JSON.parse(localStorage.getItem(examKey)) || [];
+        const url = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(message)}`;
 
-    if (exams.length === 0) {
-        alert('هیچ نتیجه امتحانی برای ارسال وجود ندارد.');
-        return;
+        fetch(url)
+            .then(response => {
+                if (response.ok) {
+                    reports[index].sent = true;
+                    localStorage.setItem(reportKey, JSON.stringify(reports));
+                    button.classList.add('sent');
+                    button.setAttribute('disabled', 'disabled');
+                    button.innerHTML = `${i18next.t('sent') || 'ارسال‌شده'} <i class="fas fa-check"></i>`;
+                    alert(i18next.t('reportSent') || "✅ گزارش تدریس به تلگرام ارسال شد!");
+                } else {
+                    alert(i18next.t('sendError') || "❌ خطا در ارسال گزارش تدریس به تلگرام.");
+                }
+            })
+            .catch(error => {
+                alert(i18next.t('error') || "⚠️ خطا: ") + error;
+            });
     }
 
-    if (exams.every(exam => exam.sent)) {
-        alert('نتایج امتحان قبلاً ارسال شده‌اند.');
-        return;
-    }
+    function sendExamResultsToTelegram(e) {
+        e.preventDefault();
+        const token = "7637224975:AAH7Al4buvRmfwW3LUZ-REvloF9rZgoAStU"; // Your Bot Token
+        const chatId = "-1002886209903"; // Your Telegram Group Chat ID
+        const exams = JSON.parse(localStorage.getItem(examKey)) || [];
 
-    // Construct a message with all exam results
-    let examDetails = exams.map((exam, i) => `
-${i + 1}. نام شاگرد: ${exam.studentName}
-   کد شاگرد: ${exam.studentId}
-   نمره: ${exam.score}
-    `).join('\n');
+        if (exams.length === 0) {
+            alert(i18next.t('noExamResults') || 'هیچ نتیجه امتحانی برای ارسال وجود ندارد.');
+            return;
+        }
 
-    const message = `
-📝 نتایج امتحان از آکادمی هوپ‌بریج
-📋 کد استاد: ${teacherId}
-📅 تاریخ ارسال: ${new Date().toLocaleString('fa-IR')}
-📊 نتایج:
+        if (exams.every(exam => exam.sent)) {
+            alert(i18next.t('resultsAlreadySent') || 'نتایج امتحان قبلاً ارسال شده‌اند.');
+            return;
+        }
+
+        let examDetails = exams.map((exam, i) => `
+${i + 1}. ${i18next.t('studentName') || 'نام شاگرد'}: ${exam.studentName}
+   ${i18next.t('studentId') || 'کد شاگرد'}: ${exam.studentId}
+   ${i18next.t('score') || 'نمره'}: ${exam.score}
+        `).join('\n');
+
+        const message = `
+📝 ${i18next.t('examResults') || 'نتایج امتحان از آکادمی هوپ‌بریج'}
+📋 ${i18next.t('teacherId') || 'کد استاد'}: ${teacherId}
+📅 ${i18next.t('submissionDate') || 'تاریخ ارسال'}: ${new Date().toLocaleString('fa-IR')}
+📊 ${i18next.t('results') || 'نتایج'}:
 ${examDetails}
-    `;
-
-    const url = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(message)}`;
-
-    fetch(url)
-        .then(response => {
-            if (response.ok) {
-                // Mark all exam results as sent
-                exams.forEach(exam => { exam.sent = true; });
-                localStorage.setItem(examKey, JSON.stringify(exams));
-                loadExamResults();
-                alert("✅ نتایج امتحان به تلگرام ارسال شد!");
-            } else {
-                alert("❌ خطا در ارسال نتایج امتحان به تلگرام.");
-            }
-        })
-        .catch(error => {
-            alert("⚠️ خطا: " + error);
-        });
-}
-
-window.addEventListener('load', () => {
-    const savedReports = JSON.parse(localStorage.getItem(reportKey));
-    if (savedReports && savedReports.length > 0) {
-        showReports(savedReports);
-    } else {
-        showReports([]);
-    }
-    loadExamResults();
-
-    examForm.addEventListener('submit', sendExamResultsToTelegram);
-});
-
-const localExamResultsDiv = document.getElementById('localExamResults');
-const addExamResultForm = document.getElementById('addExamResultForm');
-
-function loadExamResults() {
-    const exams = JSON.parse(localStorage.getItem(examKey)) || [];
-    renderExamResults(exams);
-    updateExamFormInputs(exams);
-    // Disable submit button if all results are sent
-    const submitButton = document.getElementById('submitExamResults');
-    if (exams.length > 0 && exams.every(exam => exam.sent)) {
-        submitButton.disabled = true;
-        submitButton.classList.add('sent');
-        submitButton.innerHTML = 'ارسال‌شده <i class="fas fa-check"></i>';
-    } else {
-        submitButton.disabled = false;
-        submitButton.classList.remove('sent');
-        submitButton.innerHTML = 'ثبت نتایج امتحان';
-    }
-}
-
-function renderExamResults(exams) {
-    localExamResultsDiv.innerHTML = '';
-    if (exams.length === 0) {
-        localExamResultsDiv.innerHTML = '<p>نتایجی ثبت نشده است.</p>';
-        return;
-    }
-    exams.forEach((exam, index) => {
-        const div = document.createElement('div');
-        div.className = 'exam-entry';
-        div.innerHTML = `
-            <span>${exam.studentName} (${exam.studentId}) - نمره: ${exam.score} ${exam.sent ? '<i class="fas fa-check sent-icon"></i>' : ''}</span>
-            <button data-index="${index}">حذف</button>
         `;
-        localExamResultsDiv.appendChild(div);
-    });
 
-    localExamResultsDiv.querySelectorAll('button').forEach(button => {
-        button.addEventListener('click', (e) => {
-            const idx = e.target.getAttribute('data-index');
-            deleteExamResult(idx);
-        });
-    });
-}
+        const url = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(message)}`;
 
-function deleteExamResult(index) {
-    const exams = JSON.parse(localStorage.getItem(examKey)) || [];
-    exams.splice(index, 1);
-    localStorage.setItem(examKey, JSON.stringify(exams));
-    loadExamResults();
-}
-
-addExamResultForm.addEventListener('submit', function(e) {
-    e.preventDefault();
-    const studentName = document.getElementById('studentName').value.trim();
-    const studentId = document.getElementById('studentId').value.trim();
-    const score = document.getElementById('studentScore').value.trim();
-
-    if (!studentName || !studentId || score === '') {
-        alert('لطفاً همه فیلدها را پر کنید.');
-        return;
+        fetch(url)
+            .then(response => {
+                if (response.ok) {
+                    exams.forEach(exam => { exam.sent = true; });
+                    localStorage.setItem(examKey, JSON.stringify(exams));
+                    loadExamResults();
+                    alert(i18next.t('examResultsSent') || "✅ نتایج امتحان به تلگرام ارسال شد!");
+                } else {
+                    alert(i18next.t('sendError') || "❌ خطا در ارسال نتایج امتحان به تلگرام.");
+                }
+            })
+            .catch(error => {
+                alert(i18next.t('error') || "⚠️ خطا: ") + error;
+            });
     }
 
-    const exams = JSON.parse(localStorage.getItem(examKey)) || [];
-    exams.push({ studentName, studentId, score, sent: false });
-    localStorage.setItem(examKey, JSON.stringify(exams));
-    addExamResultForm.reset();
-    loadExamResults();
-});
+    window.addEventListener('load', () => {
+        const savedReports = JSON.parse(localStorage.getItem(reportKey));
+        if (savedReports && savedReports.length > 0) {
+            showReports(savedReports);
+        } else {
+            showReports([]);
+        }
+        loadExamResults();
 
-function updateExamFormInputs(exams) {
-    examFormInputs.innerHTML = '';
-    exams.forEach((exam, i) => {
-        examFormInputs.innerHTML += `
-            <input type="hidden" name="students[${i}][name]" value="${exam.studentName}" />
-            <input type="hidden" name="students[${i}][id]" value="${exam.studentId}" />
-            <input type="hidden" name="students[${i}][score]" value="${exam.score}" />
-        `;
+        examForm.addEventListener('submit', sendExamResultsToTelegram);
     });
-}
+
+    const localExamResultsDiv = document.getElementById('localExamResults');
+    const addExamResultForm = document.getElementById('addExamResultForm');
+
+    function loadExamResults() {
+        const exams = JSON.parse(localStorage.getItem(examKey)) || [];
+        renderExamResults(exams);
+        updateExamFormInputs(exams);
+        const submitButton = document.getElementById('submitExamResults');
+        if (exams.length > 0 && exams.every(exam => exam.sent)) {
+            submitButton.disabled = true;
+            submitButton.classList.add('sent');
+            submitButton.innerHTML = `${i18next.t('sent') || 'ارسال‌شده'} <i class="fas fa-check"></i>`;
+        } else {
+            submitButton.disabled = false;
+            submitButton.classList.remove('sent');
+            submitButton.innerHTML = i18next.t('submitExamResults') || 'ثبت نتایج امتحان';
+        }
+    }
+
+    function renderExamResults(exams) {
+        localExamResultsDiv.innerHTML = '';
+        if (exams.length === 0) {
+            localExamResultsDiv.innerHTML = `<p data-i18n="noResults">${i18next.t('noResults') || 'نتایجی ثبت نشده است.'}</p>`;
+            return;
+        }
+        exams.forEach((exam, index) => {
+            const div = document.createElement('div');
+            div.className = 'exam-entry';
+            div.innerHTML = `
+                <span>${exam.studentName} (${exam.studentId}) - ${i18next.t('score') || 'نمره'}: ${exam.score} ${exam.sent ? '<i class="fas fa-check sent-icon"></i>' : ''}</span>
+                <button data-index="${index}" data-i18n="deleteResult">حذف</button>
+            `;
+            localExamResultsDiv.appendChild(div);
+        });
+
+        localExamResultsDiv.querySelectorAll('button').forEach(button => {
+            button.addEventListener('click', (e) => {
+                const idx = e.target.getAttribute('data-index');
+                deleteExamResult(idx);
+            });
+        });
+    }
+
+    function deleteExamResult(index) {
+        const exams = JSON.parse(localStorage.getItem(examKey)) || [];
+        exams.splice(index, 1);
+        localStorage.setItem(examKey, JSON.stringify(exams));
+        loadExamResults();
+    }
+
+    addExamResultForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const studentName = document.getElementById('studentName').value.trim();
+        const studentId = document.getElementById('studentId').value.trim();
+        const score = document.getElementById('studentScore').value.trim();
+
+        if (!studentName || !studentId || score === '') {
+            alert(i18next.t('fillAllFields') || 'لطفاً همه فیلدها را پر کنید.');
+            return;
+        }
+
+        const exams = JSON.parse(localStorage.getItem(examKey)) || [];
+        exams.push({ studentName, studentId, score, sent: false });
+        localStorage.setItem(examKey, JSON.stringify(exams));
+        addExamResultForm.reset();
+        loadExamResults();
+    });
+
+    function updateExamFormInputs(exams) {
+        examFormInputs.innerHTML = '';
+        exams.forEach((exam, i) => {
+            examFormInputs.innerHTML += `
+                <input type="hidden" name="students[${i}][name]" value="${exam.studentName}" />
+                <input type="hidden" name="students[${i}][id]" value="${exam.studentId}" />
+                <input type="hidden" name="students[${i}][score]" value="${exam.score}" />
+            `;
+        });
+    }
 </script>
 </body>
 </html>

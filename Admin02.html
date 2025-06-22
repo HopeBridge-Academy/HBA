@@ -232,7 +232,7 @@
             <ul class="nav-list">
                 <li><img src="./logo.png" height="90" alt="لوگوی آکادمی هوپ‌بریج" class="logo" /></li>
                 <li><a href="index.html">صفحه اصلی</a></li>
-                <li><a href="login.html" id="auth-link">خروج</a></li>
+                <li><a href="#" id="auth-link" data-i18n="logout">خروج</a></li>
             </ul>
         </nav>
     </header>
@@ -269,6 +269,20 @@
 
     <script src="script.js" defer></script>
     <script>
+        // بررسی وضعیت ورود
+        if (sessionStorage.getItem('isLoggedIn') !== 'true' || sessionStorage.getItem('userType') !== 'admin') {
+            window.location.href = 'login.html';
+        }
+
+        // مدیریت لینک خروج
+        document.getElementById('auth-link').addEventListener('click', function(e) {
+            e.preventDefault();
+            sessionStorage.removeItem('isLoggedIn');
+            sessionStorage.removeItem('userRole');
+            sessionStorage.removeItem('userType');
+            window.location.href = 'login.html';
+        });
+
         function saveAdminLocal() {
             const data = document.getElementById('admin-data').value.trim();
             const dateInput = document.getElementById('admin-date').value;

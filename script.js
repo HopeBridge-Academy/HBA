@@ -1,20 +1,20 @@
 function initializePage() {
     const authLink = document.getElementById('auth-link');
-    if (localStorage.getItem('isLoggedIn') === 'true') {
-        authLink.setAttribute('data-i18n', 'login');
-        authLink.textContent = i18next.t('login');
+    if (sessionStorage.getItem('isLoggedIn') === 'true') {
+        authLink.setAttribute('data-i18n', 'logout');
+        authLink.textContent = i18next.t('logout') || 'خروج';
         authLink.onclick = logout; // Attach logout function
         authLink.href = '#'; // Prevent default redirect
     } else {
         authLink.setAttribute('data-i18n', 'login');
-        authLink.textContent = i18next.t('login');
+        authLink.textContent = i18next.t('login') || 'ورود';
         authLink.href = 'login.html';
     }
 }
 
 function initializeLoginPage() {
-    if (localStorage.getItem('isLoggedIn') === 'true') {
-        const userRole = localStorage.getItem('userRole');
+    if (sessionStorage.getItem('isLoggedIn') === 'true') {
+        const userRole = sessionStorage.getItem('userRole');
         const users = {
             'superadmin': 'SuperAdmin.html',
             'admin01': 'Admin01.html',
@@ -28,57 +28,92 @@ function initializeLoginPage() {
             'hbat07': 'T07.html',
             'hbat08': 'T08.html'
         };
-        window.location.href = users[login] || 'login.html'; // Redirect to user's dashboard
+        window.location.href = users[userRole] || 'login.html'; // Redirect to user's dashboard
     }
 }
 
 function handleLogin(event) {
     event.preventDefault();
-    const username = document.getElementById('username').value;
-    const password = document.getElementById('password').value;
+    const username = document.getElementById('username').value.trim();
+    const password = document.getElementById('password').value.trim();
     const errorElement = document.getElementById('login-error');
 
-    // Simple client-side authentication (replace with server-side in production)
+    // لیست کاربران با نقش‌ها
     const users = {
-        'superadmin': { password: 'super520', redirect: 'SuperAdmin.html' },
-        'admin01': { password: 'admin313', redirect: 'Admin01.html' },
-        'admin02': { password: 'admin421', redirect: 'Admin02.html' },
-        'hbat01': { password: 'teacher123', redirect: 'T01.html' },
-        'hbat02': { password: 'teacher101', redirect: 'T02.html' },
-        'hbat03': { password: 'teacher001', redirect: 'T03.html' },
-        'hbat04': { password: 'teacher414', redirect: 'T04.html' },
-        'hbat05': { password: 'teacher999', redirect: 'T05.html' },
-        'hbat06': { password: 'teacher193', redirect: 'T06.html' },
-    }
+        'superadmin': { password: 'super520', redirect: 'SuperAdmin.html', role: 'superadmin' },
+        'admin01': { password: 'admin313', redirect: 'Admin01.html', role: 'admin' },
+        'admin02': { password: 'admin421', redirect: 'Admin02.html', role: 'admin' },
+        'hbat01': { password: 'teacher123', redirect: 'T01.html', role: 'teacher' },
+        'hbat02': { password: 'teacher101', redirect: 'T02.html', role: 'teacher' },
+        'hbat03': { password: 'teacher001', redirect: 'T03.html', role: 'teacher' },
+        'hbat04': { password: 'teacher414', redirect: 'T04.html', role: 'teacher' },
+        'hbat05': { password: 'teacher999', redirect: 'T05.html', role: 'teacher' },
+        'hbat06': { password: 'teacher193', redirect: 'T06.html', role: 'teacher' },
+        'hbat07': { password: 'teacher211', redirect: 'T07.html', role: 'teacher' },
+        'hbat08': { password: 'teacher491', redirect: 'T08.html', role: 'teacher' }
+    };
 
     if (users[username] && users[username].password === password) {
-        localStorage.setItem('isLoggedIn', 'true');
-        localStorage.setItem('userRole', username);
+        sessionStorage.setItem('isLoggedIn', 'true');
+        sessionStorage.setItem('userRole', username);
+        sessionStorage.setItem('userType', users[username].role);
         window.location.href = users[username].redirect;
     } else {
-        errorElement.textContent = i18next.t('loginError') || 'Invalid username or password';
+        errorElement.textContent = i18next.t('loginError') || 'نام کاربری یا رمز عبور اشتباه است.';
     }
 }
-// Check authentication on page load
+
 function checkAuthentication() {
-    const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+    const isLoggedIn = sessionStorage.getItem('isLoggedIn') === 'true';
+    const userType = sessionStorage.getItem('userType');
     const currentPage = window.location.pathname.split('/').pop();
-    const protectedPages = ['T01.html', 'Admin01.html']; // List all protected pages
+    const protectedPages = [
+        'SuperAdmin.html',
+        'Admin01.html',
+        'Admin02.html',
+        'T01.html',
+        'T02.html',
+        'T03.html',
+        'T04.html',
+        'T05.html',
+        'T06.html',
+        'T07.html',
+        'T08.html'
+    ];
 
     if (protectedPages.includes(currentPage) && !isLoggedIn) {
         window.location.href = 'login.html';
+    } else if (isLoggedIn && protectedPages.includes(currentPage)) {
+        // بررسی نقش کاربر برای دسترسی به صفحه
+        const userRole = sessionStorage.getItem('userRole');
+        const users = {
+            'superadmin': 'SuperAdmin.html',
+            'admin01': 'Admin01.html',
+            'admin02': 'Admin02.html',
+            'hbat01': 'T01.html',
+            'hbat02': 'T02.html',
+            'hbat03': 'T03.html',
+            'hbat04': 'T04.html',
+            'hbat05': 'T05.html',
+            'hbat06': 'T06.html',
+            'hbat07': 'T07.html',
+            'hbat08': 'T08.html'
+        };
+        if (users[userRole] !== currentPage) {
+            window.location.href = 'login.html'; // هدایت به login اگر صفحه با نقش مطابقت ندارد
+        }
     }
 }
 
-// Logout function
 function logout() {
-    localStorage.removeItem('isLoggedIn');
-    localStorage.removeItem('userRole');
+    sessionStorage.removeItem('isLoggedIn');
+    sessionStorage.removeItem('userRole');
+    sessionStorage.removeItem('userType');
     window.location.href = 'login.html';
 }
 
-// Run authentication check on page load
 window.addEventListener('load', checkAuthentication);
+
 function saveLessonPlan(event, teacherId) {
     event.preventDefault();
     const form = event.target;
@@ -128,6 +163,7 @@ function saveReporting(event, teacherId) {
         alert(i18next.t('saveError') || 'Error saving report');
     });
 }
+
 function saveAdminData(event, adminId) {
     event.preventDefault();
     const form = event.target;

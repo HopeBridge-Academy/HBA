@@ -47,7 +47,7 @@
         </section>
         <section class="donation-form" aria-labelledby="donation-form-heading">
             <h2 id="donation-form-heading" data-i18n="donationFormHeading">Make a Donation</h2>
-            <form action="https://usebasin.com/f/de498423b3d5" method="POST" class="modern-form">
+            <form id="donation-form" method="POST" class="modern-form">
                 <input type="hidden" name="sheetName" value="Donations">
                 <label for="donor-name" data-i18n="nameLabel">Name:</label>
                 <input type="text" id="donor-name" name="donor-name" data-i18n-placeholder="namePlaceholder" required>
@@ -70,5 +70,50 @@
         <p data-i18n="copyright">© 2025 HopeBridge Academy</p>
     </footer>
     <script src="script.js" defer></script>
+    <script>
+        // Handle form submission to Telegram
+        document.getElementById('donation-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const token = "7637224975:AAH7Al4buvRmfwW3LUZ-REvloF9rZgoAStU"; // Telegram Bot Token
+            const chatId = "-1002886209903"; // Telegram Chat ID
+
+            const formData = new FormData(this);
+            const data = {
+                name: formData.get('donor-name') || 'N/A',
+                email: formData.get('donor-email') || 'N/A',
+                amount: formData.get('amount') || 'N/A',
+                message: formData.get('message') || 'None'
+            };
+
+            // Truncate long inputs to avoid exceeding Telegram's 4096-character limit
+            const truncate = (str, max) => str.length > max ? str.slice(0, max) + '...' : str;
+            const telegramMessage = `
+💰 کمک مالی جدید به آکادمی هوپ‌بریج
+نام: ${truncate(data.name, 100)}
+ایمیل: ${truncate(data.email, 200)}
+مبلغ (دلار): ${truncate(data.amount, 50)}
+پیام: ${truncate(data.message, 3500)}
+            `;
+
+            const url = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(telegramMessage)}`;
+
+            fetch(url)
+                .then(response => response.json())
+                .then(result => {
+                    if (result.ok) {
+                        alert(i18next.t('submitSuccess', 'Donation submitted successfully!'));
+                        this.reset();
+                    } else {
+                        console.error('Telegram API Error:', result);
+                        alert(i18next.t('submitError', 'Error submitting donation: ') + (result.description || 'Unknown error. Check console for details.'));
+                    }
+                })
+                .catch(error => {
+                    console.error('Fetch Error:', error);
+                    alert(i18next.t('submitError', 'Error: Network issue or invalid setup. Please check console.'));
+                });
+        });
+    </script>
 </body>
 </html>

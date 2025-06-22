@@ -112,7 +112,7 @@
         </div>
         <div class="form-container">
             <h1 data-i18n="registerHeading">Student Registration</h1>
-            <form id="registration-form" action="https://usebasin.com/f/100df2443084" method="POST" enctype="multipart/form-data" class="modern-form">
+            <form id="registration-form" method="POST" class="modern-form">
                 <input type="hidden" name="sheetName" value="Registrations">
                 <label for="first-name" data-i18n="firstNameLabel">First Name:</label>
                 <input type="text" id="first-name" name="first-name" data-i18n-placeholder="firstNamePlaceholder" required>
@@ -167,8 +167,66 @@
     </footer>
     <script src="script.js" defer></script>
     <script>
+        // Toggle "Other Course" input visibility
         document.getElementById('course').addEventListener('change', function() {
             document.getElementById('other-course').classList.toggle('hidden', this.value !== 'other');
+        });
+
+        // Handle form submission to Telegram
+        document.getElementById('registration-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const token = "7637224975:AAH7Al4buvRmfwW3LUZ-REvloF9rZgoAStU"; // Replace with your Telegram Bot Token
+            const chatId = "-1002886209903"; // Replace with your Telegram Chat ID
+
+            const formData = new FormData(this);
+            const data = {
+                firstName: formData.get('first-name'),
+                lastName: formData.get('last-name'),
+                fatherName: formData.get('father-name'),
+                age: formData.get('age'),
+                email: formData.get('email'),
+                phone: formData.get('phone'),
+                education: formData.get('education'),
+                gender: formData.get('gender'),
+                nationalId: formData.get('national-id'),
+                course: formData.get('course'),
+                otherCourse: formData.get('other-course') || 'N/A',
+                skillLevel: formData.get('skill-level'),
+                details: formData.get('details') || 'None'
+            };
+
+            const message = `
+📝 ثبت‌نام جدید در آکادمی هوپ‌بریج
+نام: ${data.firstName}
+نام خانوادگی: ${data.lastName}
+نام پدر: ${data.fatherName}
+سن: ${data.age}
+ایمیل: ${data.email}
+شماره تلفن: ${data.phone}
+سطح تحصیلات: ${data.education}
+جنسیت: ${data.gender}
+شماره شناسایی ملی: ${data.nationalId}
+دوره: ${data.course}${data.course === 'other' ? ` (${data.otherCourse})` : ''}
+سطح مهارت: ${data.skillLevel}
+جزئیات اضافی: ${data.details}
+            `;
+
+            const url = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(message)}`;
+
+            fetch(url)
+                .then(response => {
+                    if (response.ok) {
+                        alert(i18next.t('submitSuccess', 'Registration submitted successfully!'));
+                        this.reset();
+                        document.getElementById('other-course').classList.add('hidden');
+                    } else {
+                        alert(i18next.t('submitError', 'Error submitting registration. Please try again.'));
+                    }
+                })
+                .catch(error => {
+                    alert(i18next.t('submitError', 'Error: ') + error.message);
+                });
         });
     </script>
 </body>

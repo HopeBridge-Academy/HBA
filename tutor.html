@@ -1,123 +1,287 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Request a private tutor for personalized learning at HopeBridge Academy.">
+    <meta name="keywords" content="private tutor, HopeBridge Academy, Afghan education, personalized learning">
+    <meta name="author" content="HopeBridge Academy">
     <title data-i18n="tutorTitle">Request a Tutor - HopeBridge Academy</title>
     <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Noto+Naskh+Arabic:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://unpkg.com/i18next@21.6.10/dist/umd/i18next.min.js"></script>
     <script src="i18n.js" defer></script>
+    <script src="script.js" defer></script>
 </head>
 <body onload="initializePage()">
+    <div class="floating-banner animate__animated animate__fadeIn">
+        <p data-i18n="bannerText">Need personalized learning? Request a tutor today! <a href="tutor.html" data-i18n="tutorBannerLink">Get Started</a></p>
+        <button class="close-banner" aria-label="Close banner" onclick="this.parentElement.classList.add('hidden')">×</button>
+    </div>
+
     <header>
-        <nav aria-label="Main navigation">
-            <ul class="nav-list">
-                <li><img src="./logo.png" height="90" alt="HopeBridge Academy Logo" class="logo"></li>
-                <li><a href="index.html" data-i18n="home">Home</a></li>
-                <li><a href="register.html" data-i18n="register">Register</a></li>
-                <li><a href="contact.html" data-i18n="contact">Contact</a></li>
-                <li><a href="tutor.html" data-i18n="tutor" aria-current="page">Request Tutor</a></li>
-                <li><a href="donation.html" data-i18n="donation">Donation</a></li>
-                <li><a href="certification.html" data-i18n="certification">Certification</a></li>
-                <li class="auth-link"><a href="login.html" id="auth-link" data-i18n="login">Staff Portal</a></li>
-            </ul>
-            <div class="language-switcher">
-                <label for="language-select" data-i18n="languageLabel">Language:</label>
-                <select id="language-select" onchange="changeLanguage(this.value)" aria-label="Select language">
-                    <option value="en" data-i18n="englishOption">English</option>
-                    <option value="fa" data-i18n="persianOption">فارسی</option>
-                </select>
+        <nav>
+            <a href="index.html" class="logo"><img src="logo.png" alt="HopeBridge Academy Logo"></a>
+            <button class="mobile-menu-toggle" aria-label="Toggle menu" onclick="toggleMobileMenu()">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="main-nav">
+                <ul class="nav-list">
+                    <li><a href="index.html" class="nav-link" data-i18n="home">Home</a></li>
+                    <li><a href="register.html" class="nav-link" data-i18n="register">Register</a></li>
+                    <li><a href="contact.html" class="nav-link" data-i18n="contact">Contact</a></li>
+                    <li><a href="tutor.html" class="nav-link active" data-i18n="tutor" aria-current="page">Request Tutor</a></li>
+                    <li><a href="donation.html" class="nav-link" data-i18n="donation">Donate</a></li>
+                    <li><a href="certification.html" class="nav-link" data-i18n="certification">Certification</a></li>
+                    <li><a href="login.html" id="auth-link" class="nav-link" data-i18n="login">Staff Portal</a></li>
+                </ul>
+            </div>
+            <div class="header-actions">
+                <div class="search-bar">
+                    <input type="text" id="searchInput" placeholder="Search courses..." data-i18n-placeholder="searchPlaceholder" aria-label="Search courses">
+                    <button onclick="searchCourses()" aria-label="Search"><i class="fas fa-search"></i></button>
+                </div>
+                <a href="ad.html" class="bell-icon" aria-label="Notifications" data-tooltip="View Notifications">
+                    <img src="bell.gif" alt="Notification Bell">
+                </a>
+                <div class="language-switcher">
+                    <select id="language-select" onchange="changeLanguage(this.value)" aria-label="Select language">
+                        <option value="en" data-i18n="englishOption">English</option>
+                        <option value="fa" data-i18n="persianOption">فارسی</option>
+                    </select>
+                </div>
             </div>
         </nav>
     </header>
+
     <main>
-        <h1 data-i18n="tutorHeading">Request a Private Tutor</h1>
-        <form id="tutor-form" method="POST" class="modern-form">
-            <input type="hidden" name="sheetName" value="TutorRequests">
-            <label for="name" data-i18n="nameLabel">Your Name:</label>
-            <input type="text" id="name" name="name" data-i18n-placeholder="namePlaceholder" required>
-            <label for="gender" data-i18n="genderLabel">Your Gender:</label>
-            <select id="gender" name="gender" required>
-                <option value="" data-i18n="selectGender">Select Gender</option>
-                <option value="male" data-i18n="male">Male</option>
-                <option value="female" data-i18n="female">Female</option>
-            </select>
-            <label for="province" data-i18n="provinceLabel">Province:</label>
-            <select id="province" onchange="updateCities()">
-                <option value="" data-i18n="selectProvince">Select Province</option>
-                <option value="Badakhshan">Badakhshan</option>
-                <option value="Badghis">Badghis</option>
-                <option value="Baghlan">Baghlan</option>
-                <option value="Balkh">Balkh</option>
-                <option value="Bamyan">Bamyan</option>
-                <option value="Daykundi">Daykundi</option>
-                <option value="Farah">Farah</option>
-                <option value="Faryab">Faryab</option>
-                <option value="Ghazni">Ghazni</option>
-                <option value="Ghor">Ghor</option>
-                <option value="Helmand">Helmand</option>
-                <option value="Herat">Herat</option>
-                <option value="Jowzjan">Jowzjan</option>
-                <option value="Kabul">Kabul</option>
-                <option value="Kandahar">Kandahar</option>
-                <option value="Kapisa">Kapisa</option>
-                <option value="Khost">Khost</option>
-                <option value="Kunar">Kunar</option>
-                <option value="Kunduz">Kunduz</option>
-                <option value="Laghman">Laghman</option>
-                <option value="Logar">Logar</option>
-                <option value="Nangarhar">Nangarhar</option>
-                <option value="Nimroz">Nimroz</option>
-                <option value="Nuristan">Nuristan</option>
-                <option value="Paktia">Paktia</option>
-                <option value="Paktika">Paktika</option>
-                <option value="Panjshir">Panjshir</option>
-                <option value="Parwan">Parwan</option>
-                <option value="Samangan">Samangan</option>
-                <option value="Sar-e-Pul">Sar-e-Pul</option>
-                <option value="Takhar">Takhar</option>
-                <option value="Uruzgan">Uruzgan</option>
-                <option value="Wardak">Wardak</option>
-                <option value="Zabul">Zabul</option>
-                <option value="Other">Other</option>
-            </select>
-            <label for="city" data-i18n="cityLabel">City/District:</label>
-            <select id="city" name="city" required>
-                <option value="" data-i18n="selectCity">Select City/District</option>
-            </select>
-            <label for="address" data-i18n="addressLabel">Exact Address:</label>
-            <textarea id="address" name="address" data-i18n-placeholder="addressPlaceholder" required></textarea>
-            <label for="tutor-gender" data-i18n="tutorGenderLabel">Preferred Tutor Gender:</label>
-            <select id="tutor-gender" name="tutor-gender" required>
-                <option value="" data-i18n="selectGender">Select Gender</option>
-                <option value="male" data-i18n="male">Male</option>
-                <option value="female" data-i18n="female">Female</option>
-                <option value="no-preference" data-i18n="noPreference">No Preference</option>
-            </select>
-            <label for="subject" data-i18n="subjectLabel">Subject:</label>
-            <input type="text" id="subject" name="subject" data-i18n-placeholder="subjectPlaceholder" required>
-            <label for="level" data-i18n="levelLabel">Level:</label>
-            <select id="level" name="level" required>
-                <option value="" data-i18n="selectLevel">Select Level</option>
-                <option value="beginner" data-i18n="beginner">Beginner (10-15 USD/hour)</option>
-                <option value="intermediate" data-i18n="intermediate">Intermediate (15-20 USD/hour)</option>
-                <option value="advanced" data-i18n="advanced">Advanced (20-25 USD/hour)</option>
-            </select>
-            <label for="contact" data-i18n="contactInfoLabel">Contact Information:</label>
-            <input type="text" id="contact" name="contact" data-i18n-placeholder="contactInfoPlaceholder" required>
-            <button type="submit" data-i18n="submit">Submit Request</button>
-        </form>
+        <section class="hero compact animate__animated animate__fadeInDown">
+            <div class="hero-content">
+                <h1 data-i18n="tutorHeading">Request a Private Tutor</h1>
+                <p data-i18n="tutorHeroText">Get personalized learning tailored to your needs with our expert tutors.</p>
+                <a href="#tutor-form" class="hero-button primary" data-i18n="requestTutorNow">Request Now</a>
+            </div>
+        </section>
+
+        <section class="tutor-info">
+            <h2 data-i18n="tutorInfoTitle">Why Request a Tutor?</h2>
+            <div class="tutor-info-content animate__animated animate__fadeInUp">
+                <p data-i18n="tutorInfoDesc">Our private tutors provide one-on-one guidance to help you master your chosen subject at your own pace.</p>
+                <div class="tutor-benefits-grid">
+                    <div class="benefit-card">
+                        <i class="fas fa-user-graduate"></i>
+                        <h3 data-i18n="personalizedLearning">Personalized Learning</h3>
+                        <p data-i18n="personalizedLearningDesc">Customized lessons tailored to your goals and learning style.</p>
+                    </div>
+                    <div class="benefit-card">
+                        <i class="fas fa-chalkboard-teacher"></i>
+                        <h3 data-i18n="expertTutors">Expert Tutors</h3>
+                        <p data-i18n="expertTutorsDesc">Learn from highly qualified professionals with years of experience.</p>
+                    </div>
+                    <div class="benefit-card">
+                        <i class="fas fa-clock"></i>
+                        <h3 data-i18n="flexibleScheduling">Flexible Scheduling</h3>
+                        <p data-i18n="flexibleSchedulingDesc">Choose tutoring sessions that fit your busy schedule.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="tutor-form" aria-labelledby="tutor-form-heading">
+            <h2 id="tutor-form-heading" data-i18n="tutorFormHeading">Tutor Request Form</h2>
+            <form id="tutor-form" method="POST" class="modern-form animate__animated animate__fadeInUp">
+                <input type="hidden" name="sheetName" value="TutorRequests">
+                <div class="form-group">
+                    <label for="name" data-i18n="nameLabel">Your Name:</label>
+                    <input type="text" id="name" name="name" data-i18n-placeholder="namePlaceholder" required>
+                </div>
+                <div class="form-group">
+                    <label for="gender" data-i18n="genderLabel">Your Gender:</label>
+                    <select id="gender" name="gender" required>
+                        <option value="" data-i18n="selectGender">Select Gender</option>
+                        <option value="male" data-i18n="male">Male</option>
+                        <option value="female" data-i18n="female">Female</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="province" data-i18n="provinceLabel">Province:</label>
+                    <select id="province" name="province" onchange="updateCities()" required>
+                        <option value="" data-i18n="selectProvince">Select Province</option>
+                        <option value="Badakhshan">Badakhshan</option>
+                        <option value="Badghis">Badghis</option>
+                        <option value="Baghlan">Baghlan</option>
+                        <option value="Balkh">Balkh</option>
+                        <option value="Bamyan">Bamyan</option>
+                        <option value="Daykundi">Daykundi</option>
+                        <option value="Farah">Farah</option>
+                        <option value="Faryab">Faryab</option>
+                        <option value="Ghazni">Ghazni</option>
+                        <option value="Ghor">Ghor</option>
+                        <option value="Helmand">Helmand</option>
+                        <option value="Herat">Herat</option>
+                        <option value="Jowzjan">Jowzjan</option>
+                        <option value="Kabul">Kabul</option>
+                        <option value="Kandahar">Kandahar</option>
+                        <option value="Kapisa">Kapisa</option>
+                        <option value="Khost">Khost</option>
+                        <option value="Kunar">Kunar</option>
+                        <option value="Kunduz">Kunduz</option>
+                        <option value="Laghman">Laghman</option>
+                        <option value="Logar">Logar</option>
+                        <option value="Nangarhar">Nangarhar</option>
+                        <option value="Nimroz">Nimroz</option>
+                        <option value="Nuristan">Nuristan</option>
+                        <option value="Paktia">Paktia</option>
+                        <option value="Paktika">Paktika</option>
+                        <option value="Panjshir">Panjshir</option>
+                        <option value="Parwan">Parwan</option>
+                        <option value="Samangan">Samangan</option>
+                        <option value="Sar-e-Pul">Sar-e-Pul</option>
+                        <option value="Takhar">Takhar</option>
+                        <option value="Uruzgan">Uruzgan</option>
+                        <option value="Wardak">Wardak</option>
+                        <option value="Zabul">Zabul</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="city" data-i18n="cityLabel">City/District:</label>
+                    <select id="city" name="city" required>
+                        <option value="" data-i18n="selectCity">Select City/District</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="address" data-i18n="addressLabel">Exact Address:</label>
+                    <textarea id="address" name="address" data-i18n-placeholder="addressPlaceholder" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="tutor-gender" data-i18n="tutorGenderLabel">Preferred Tutor Gender:</label>
+                    <select id="tutor-gender" name="tutor-gender" required>
+                        <option value="" data-i18n="selectGender">Select Gender</option>
+                        <option value="male" data-i18n="male">Male</option>
+                        <option value="female" data-i18n="female">Female</option>
+                        <option value="no-preference" data-i18n="noPreference">No Preference</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="subject" data-i18n="subjectLabel">Subject:</label>
+                    <input type="text" id="subject" name="subject" data-i18n-placeholder="subjectPlaceholder" required>
+                </div>
+                <div class="form-group">
+                    <label for="level" data-i18n="levelLabel">Level:</label>
+                    <select id="level" name="level" required>
+                        <option value="" data-i18n="selectLevel">Select Level</option>
+                        <option value="beginner" data-i18n="beginner">Beginner (10-15 USD/hour)</option>
+                        <option value="intermediate" data-i18n="intermediate">Intermediate (15-20 USD/hour)</option>
+                        <option value="advanced" data-i18n="advanced">Advanced (20-25 USD/hour)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="contact" data-i18n="contactInfoLabel">Contact Information:</label>
+                    <input type="text" id="contact" name="contact" data-i18n-placeholder="contactInfoPlaceholder" pattern="[0-9]{10,15}" required>
+                </div>
+                <button type="submit" class="primary" data-i18n="submit">Submit Request</button>
+            </form>
+        </section>
     </main>
+
     <footer>
-        <a href="https://www.facebook.com/profile.php?id=61576355386024"><img src="./facebook.png" alt="Facebook Link" height="30" class="social-icon"></a>
+        <div class="footer-content animate__animated animate__fadeInUp">
+            <div class="social-media-links">
+                <a href="https://www.facebook.com/profile.php?id=61576355386024" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Facebook">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="https://twitter.com/hopebridge" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Twitter">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="https://www.instagram.com/hopebridgeacademy/" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Instagram">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://www.youtube.com/youtube" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="YouTube">
+                    <i class="fab fa-youtube"></i>
+                </a>
+            </div>
+            <div class="footer-nav">
+                <h4 data-i18n="footerNavTitle">Explore</h4>
+                <ul class="nav-list">
+                    <li><a href="about.html" data-i18n="about">About Us</a></li>
+                    <li><a href="faq.html" data-i18n="faq">FAQ</a></li>
+                    <li><a href="privacy.html" data-i18n="privacyPolicy">Privacy Policy</a></li>
+                    <li><a href="terms.html" data-i18n="terms">Terms of Service</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h4 data-i18n="contactUsTitle">Contact Us</h4>
+                <p data-i18n="contactInfo">Email: info@hopebridgeacademy.com | Phone: +93 123-456-7890</p>
+            </div>
+        </div>
         <p data-i18n="copyright">© 2025 HopeBridge Academy</p>
     </footer>
-    <script src="script.js" defer></script>
+
+    <button id="backToTopBtn" onclick="scrollToTop()" aria-label="Back to Top" data-tooltip="Back to Top"><i class="fas fa-chevron-up"></i></button>
+
     <script>
-        // Handle form submission to Telegram
+        // City data for provinces (expanded for usability)
+        const cityData = {
+            Badakhshan: ["Fayzabad", "Baharak", "Kishim"],
+            Badghis: ["Qala-e-Naw", "Ab Kamari", "Muqur"],
+            Baghlan: ["Pul-e-Khumri", "Baghlan", "Nahrin"],
+            Balkh: ["Mazar-e-Sharif", "Balkh", "Sholgara"],
+            Bamyan: ["Bamyan City", "Yakawlang", "Panjab"],
+            Daykundi: ["Nili", "Shahristan", "Miramor"],
+            Farah: ["Farah City", "Anar Dara", "Bakwa"],
+            Faryab: ["Maymana", "Almar", "Pashtun Kot"],
+            Ghazni: ["Ghazni City", "Qarabagh", "Andar"],
+            Ghor: ["Firozkoh", "Shahrak", "Dawlat Yar"],
+            Helmand: ["Lashkar Gah", "Nawa-e-Barakzayi", "Greshk"],
+            Herat: ["Herat City", "Guzara", "Injil"],
+            Jowzjan: ["Sheberghan", "Aqcha", "Fayzabad"],
+            Kabul: ["Kabul City", "Paghman", "Char Asiab"],
+            Kandahar: ["Kandahar City", "Daman", "Arghandab"],
+            Kapisa: ["Mahmud Raqi", "Nijrab", "Alasay"],
+            Khost: ["Khost City", "Mandozai", "Tani"],
+            Kunar: ["Asadabad", "Marawara", "Chapa Dara"],
+            Kunduz: ["Kunduz City", "Imam Sahib", "Qala-e-Zal"],
+            Laghman: ["Mihtarlam", "Alingar", "Qarghayi"],
+            Logar: ["Pul-e-Alam", "Baraki Barak", "Mohammad Agha"],
+            Nangarhar: ["Jalalabad", "Behsud", "Surkh Rod"],
+            Nimroz: ["Zaranj", "Chakhansur", "Kang"],
+            Nuristan: ["Parun", "Wama", "Barg-e-Matal"],
+            Paktia: ["Gardez", "Sayed Karam", "Zurmur"],
+            Paktika: ["Sharana", "Yahya Khel", "Omna"],
+            Panjshir: ["Bazarak", "Rokha", "Dara"],
+            Parwan: ["Charikar", "Bagram", "Jabal Saraj"],
+            Samangan: ["Aybak", "Hazrat Sultan", "Khuram Sar Bagh"],
+            "Sar-e-Pul": ["Sar-e-Pul City", "Sayyad", "Kohistanat"],
+            Takhar: ["Taloqan", "Farkhar", "Chal"],
+            Uruzgan: ["Tarin Kowt", "Deh Rawud", "Chora"],
+            Wardak: ["Maidan Shar", "Nirkh", "Saydabad"],
+            Zabul: ["Qalat", "Shinkay", "Tarnak wa Jaldak"],
+            Other: ["Specify in Address"]
+        };
+
+        function updateCities() {
+            const province = document.getElementById('province').value;
+            const citySelect = document.getElementById('city');
+            citySelect.innerHTML = `<option value="" data-i18n="selectCity">Select City/District</option>`;
+            
+            if (cityData[province]) {
+                cityData[province].forEach(city => {
+                    const option = document.createElement('option');
+                    option.value = city;
+                    option.textContent = city;
+                    citySelect.appendChild(option);
+                });
+            }
+            changeLanguage(i18next.language); // Refresh translations
+        }
+
         document.getElementById('tutor-form').addEventListener('submit', function(e) {
             e.preventDefault();
+            if (!validateForm(this)) return;
 
             const token = "7637224975:AAH7Al4buvRmfwW3LUZ-REvloF9rZgoAStU"; // Telegram Bot Token
             const chatId = "-1002886209903"; // Telegram Chat ID
@@ -134,7 +298,6 @@
                 level: formData.get('level') || 'N/A',
                 contact: formData.get('contact') || 'N/A'
             };
-
             // Truncate long inputs to avoid exceeding Telegram's 4096-character limit
             const truncate = (str, max) => str.length > max ? str.slice(0, max) + '...' : str;
             const telegramMessage = `

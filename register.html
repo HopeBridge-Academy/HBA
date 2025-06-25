@@ -1,231 +1,329 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Register for courses at HopeBridge Academy to gain skills in language, computer, psychology, and more.">
+    <meta name="keywords" content="course registration, HopeBridge Academy, Afghan education, online learning">
+    <meta name="author" content="HopeBridge Academy">
     <title data-i18n="registerTitle">Register - HopeBridge Academy</title>
     <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Noto+Naskh+Arabic:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://unpkg.com/i18next@21.6.10/dist/umd/i18next.min.js"></script>
     <script src="i18n.js" defer></script>
+    <script src="script.js" defer></script>
 </head>
 <body onload="initializePage()">
+    <div class="floating-banner animate__animated animate__fadeIn">
+        <p data-i18n="bannerText">Join our new online courses today and get 20% off! <a href="register.html" data-i18n="bannerLink">Register Today</a></p>
+        <button class="close-banner" aria-label="Close banner" onclick="this.parentElement.classList.add('hidden')">×</button>
+    </div>
+
     <header>
-        <nav aria-label="Main navigation">
-            <ul class="nav-list">
-                <li><img src="./logo.png" height="90" alt="HopeBridge Academy Logo" class="logo"></li>
-                <li><a href="index.html" data-i18n="home">Home</a></li>
-                <li><a href="register.html" data-i18n="register" aria-current="page">Register</a></li>
-                <li><a href="contact.html" data-i18n="contact">Contact</a></li>
-                <li><a href="tutor.html" data-i18n="tutor">Request Tutor</a></li>
-                <li><a href="donation.html" data-i18n="donation">Donation</a></li>
-                <li><a href="certification.html" data-i18n="certification">Certification</a></li>
-                <li class="auth-link"><a href="login.html" id="auth-link" data-i18n="login">Staff Portal</a></li>
-            </ul>
-            <div class="language-switcher">
-                <label for="language-select" data-i18n="languageLabel">Language:</label>
-                <select id="language-select" onchange="changeLanguage(this.value)" aria-label="Select language">
-                    <option value="en" data-i18n="englishOption">English</option>
-                    <option value="fa" data-i18n="persianOption">فارسی</option>
-                </select>
+        <nav>
+            <a href="index.html" class="logo"><img src="logo.png" alt="HopeBridge Academy Logo"></a>
+            <button class="mobile-menu-toggle" aria-label="Toggle menu" onclick="toggleMobileMenu()">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="main-nav">
+                <ul class="nav-list">
+                    <li><a href="index.html" class="nav-link" data-i18n="home">Home</a></li>
+                    <li><a href="register.html" class="nav-link active" data-i18n="register" aria-current="page">Register</a></li>
+                    <li><a href="contact.html" class="nav-link" data-i18n="contact">Contact</a></li>
+                    <li><a href="tutor.html" class="nav-link" data-i18n="tutor">Request Tutor</a></li>
+                    <li><a href="donation.html" class="nav-link" data-i18n="donation">Donate</a></li>
+                    <li><a href="certification.html" class="nav-link" data-i18n="certification">Certification</a></li>
+                    <li><a href="login.html" id="auth-link" class="nav-link" data-i18n="login">Staff Portal</a></li>
+                </ul>
+            </div>
+            <div class="header-actions">
+                <div class="search-bar">
+                    <input type="text" id="searchInput" placeholder="Search courses..." data-i18n-placeholder="searchPlaceholder" aria-label="Search courses">
+                    <button onclick="searchCourses()" aria-label="Search"><i class="fas fa-search"></i></button>
+                </div>
+                <a href="ad.html" class="bell-icon" aria-label="Notifications" data-tooltip="View Notifications">
+                    <img src="bell.gif" alt="Notification Bell">
+                </a>
+                <div class="language-switcher">
+                    <select id="language-select" onchange="changeLanguage(this.value)" aria-label="Select language">
+                        <option value="en" data-i18n="englishOption">English</option>
+                        <option value="fa" data-i18n="persianOption">فارسی</option>
+                    </select>
+                </div>
             </div>
         </nav>
     </header>
-    <main class="main-container">
-        <div class="academy-info-container">
-            <h2 data-i18n="academyWelcomeTitle">Welcome to HopeBridge Academy</h2>
-            <div class="academy-info">
-                <p data-i18n="academySlogan"></p>
-                <p data-i18n="academyMission"></p>
-                <h3 data-i18n="coursesTitle">Our Educational Programs</h3>
-                <div class="course-section">
-                    <h4 data-i18n="computerCourseTitle">Computer Courses</h4>
-                    <p data-i18n="computerCourseDesc"></p>
-                    <ul>
-                        <li data-i18n="computerBasic">Computer Basics</li>
-                        <li data-i18n="officeApps">Office Applications (Word, Excel, PowerPoint, etc.)</li>
-                        <li data-i18n="internetTools">Internet and Online Tools</li>
-                        <li data-i18n="graphicDesign">Graphic Design</li>
-                        <li data-i18n="digitalSkills">Web Design and Other Digital Skills</li>
-                    </ul>
-                    <p data-i18n="computerFee"></p>
-                </div>
-                <div class="course-section">
-                    <h4 data-i18n="englishCourseTitle">English Language Courses</h4>
-                    <p data-i18n="englishCourseDesc"></p>
-                    <ul>
-                        <li data-i18n="speaking">Speaking</li>
-                        <li data-i18n="grammar">Grammar and Language Structure</li>
-                        <li data-i18n="writingReading">Writing and Reading</li>
-                        <li data-i18n="examPrep">Preparation for International Exams</li>
-                    </ul>
-                    <p data-i18n="englishFee"></p>
-                </div>
-                <div class="course-section">
-                    <h4 data-i18n="psychologyWorkshopTitle">Psychology Workshops</h4>
-                    <p data-i18n="psychologyWorkshopDesc"></p>
-                    <ul>
-                        <li data-i18n="stressManagement">Stress Management</li>
-                        <li data-i18n="confidenceBuilding">Building Confidence</li>
-                        <li data-i18n="selfAwareness">Self-Awareness and Life Skills</li>
-                    </ul>
-                    <p data-i18n="psychologyFee"></p>
-                </div>
-                <h3 data-i18n="certificateTitle">Internationally Recognized Certificate</h3>
-                <p data-i18n="certificateDesc"></p>
-                <h3 data-i18n="instructorsTitle">Professional Instructors</h3>
-                <p data-i18n="instructorsDesc"></p>
-                <ul>
-                    <li data-i18n="instructorExperience">Years of Teaching Experience</li>
-                    <li data-i18n="instructorExpertise">Expertise in Relevant Fields</li>
-                    <li data-i18n="modernTeaching">Familiarity with Modern Teaching Methods</li>
-                </ul>
-                <h3 data-i18n="courseTableTitle">Course Duration and Fees</h3>
-                <table>
-                    <thead>
-                        <tr>
-                            <th data-i18n="courseTableHeader">Course</th>
-                            <th data-i18n="levelTableHeader">Level</th>
-                            <th data-i18n="feeTableHeader">Monthly Fee (AFN)</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td data-i18n="computerCourseTable">Computer Courses</td>
-                            <td data-i18n="levelRange">Beginner to Advanced</td>
-                            <td>350 - 600</td>
-                        </tr>
-                        <tr>
-                            <td data-i18n="englishCourseTable">English Language Courses</td>
-                            <td data-i18n="levelRange">Beginner to Advanced</td>
-                            <td>350 - 500</td>
-                        </tr>
-                        <tr>
-                            <td data-i18n="psychologyCourseTable">Psychology Workshops</td>
-                            <td data-i18n="levelGeneral">General and Specialized</td>
-                            <td data-i18n="free">Free</td>
-                        </tr>
-                    </tbody>
-                </table>
-                <p data-i18n="registerNow"></p>
+
+    <main>
+        <section class="hero compact animate__animated animate__fadeInDown">
+            <div class="hero-content">
+                <h1 data-i18n="registerHeading">Join HopeBridge Academy</h1>
+                <p data-i18n="registerHeroText">Sign up for our transformative courses and start your journey today.</p>
+                <a href="#registration-form" class="hero-button primary" data-i18n="registerNow">Register Now</a>
             </div>
-        </div>
-        <div class="form-container">
-            <h1 data-i18n="registerHeading">Student Registration</h1>
-            <form id="registration-form" method="POST" class="modern-form">
+        </section>
+
+        <section class="academy-info">
+            <h2 data-i18n="academyWelcomeTitle">Why Choose HopeBridge Academy?</h2>
+            <div class="academy-info-content animate__animated animate__fadeInUp">
+                <p data-i18n="academySlogan">Empowering Afghan youth through education.</p>
+                <p data-i18n="academyMission">Our mission is to provide accessible, high-quality education to empower Afghan youth.</p>
+                <div class="course-grid">
+                    <div class="course-card">
+                        <h3 data-i18n="computerCourseTitle">Computer Courses</h3>
+                        <p data-i18n="computerCourseDesc">Learn essential digital skills to thrive in the modern world.</p>
+                        <ul>
+                            <li data-i18n="computerBasic">Computer Basics</li>
+                            <li data-i18n="officeApps">Office Applications (Word, Excel, PowerPoint, etc.)</li>
+                            <li data-i18n="internetTools">Internet and Online Tools</li>
+                            <li data-i18n="graphicDesign">Graphic Design</li>
+                            <li data-i18n="digitalSkills">Web Design and Other Digital Skills</li>
+                        </ul>
+                        <p data-i18n="computerFee">Fees: 350-600 AFN/month</p>
+                    </div>
+                    <div class="course-card">
+                        <h3 data-i18n="englishCourseTitle">English Language Courses</h3>
+                        <p data-i18n="englishCourseDesc">Improve your English skills for global opportunities.</p>
+                        <ul>
+                            <li data-i18n="speaking">Speaking</li>
+                            <li data-i18n="grammar">Grammar and Language Structure</li>
+                            <li data-i18n="writingReading">Writing and Reading</li>
+                            <li data-i18n="examPrep">Preparation for International Exams</li>
+                        </ul>
+                        <p data-i18n="englishFee">Fees: 350-500 AFN/month</p>
+                    </div>
+                    <div class="course-card">
+                        <h3 data-i18n="psychologyWorkshopTitle">Psychology Workshops</h3>
+                        <p data-i18n="psychologyWorkshopDesc">Develop mental health and life skills for personal growth.</p>
+                        <ul>
+                            <li data-i18n="stressManagement">Stress Management</li>
+                            <li data-i18n="confidenceBuilding">Building Confidence</li>
+                            <li data-i18n="selfAwareness">Self-Awareness and Life Skills</li>
+                        </ul>
+                        <p data-i18n="psychologyFee">Free</p>
+                    </div>
+                </div>
+                <div class="additional-info">
+                    <h3 data-i18n="certificateTitle">Internationally Recognized Certificate</h3>
+                    <p data-i18n="certificateDesc">Earn certificates recognized globally upon course completion.</p>
+                    <h3 data-i18n="instructorsTitle">Professional Instructors</h3>
+                    <p data-i18n="instructorsDesc">Our instructors are highly qualified and dedicated to your success.</p>
+                    <ul>
+                        <li data-i18n="instructorExperience">Years of Teaching Experience</li>
+                        <li data-i18n="instructorExpertise">Expertise in Relevant Fields</li>
+                        <li data-i18n="modernTeaching">Familiarity with Modern Teaching Methods</li>
+                    </ul>
+                </div>
+                <div class="course-table">
+                    <h3 data-i18n="courseTableTitle">Course Duration and Fees</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th data-i18n="courseTableHeader">Course</th>
+                                <th data-i18n="levelTableHeader">Level</th>
+                                <th data-i18n="feeTableHeader">Monthly Fee (AFN)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td data-i18n="computerCourseTable">Computer Courses</td>
+                                <td data-i18n="levelRange">Beginner to Advanced</td>
+                                <td>350 - 600</td>
+                            </tr>
+                            <tr>
+                                <td data-i18n="englishCourseTable">English Language Courses</td>
+                                <td data-i18n="levelRange">Beginner to Advanced</td>
+                                <td>350 - 500</td>
+                            </tr>
+                            <tr>
+                                <td data-i18n="psychologyCourseTable">Psychology Workshops</td>
+                                <td data-i18n="levelGeneral">General and Specialized</td>
+                                <td data-i18n="free">Free</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <section class="registration-form">
+            <h2 data-i18n="registerHeading">Student Registration</h2>
+            <form id="registration-form" method="POST" class="modern-form animate__animated animate__fadeInUp">
                 <input type="hidden" name="sheetName" value="Registrations">
-                <label for="first-name" data-i18n="firstNameLabel">First Name:</label>
-                <input type="text" id="first-name" name="first-name" data-i18n-placeholder="firstNamePlaceholder" required>
-                <label for="last-name" data-i18n="lastNameLabel">Last Name:</label>
-                <input type="text" id="last-name" name="last-name" data-i18n-placeholder="lastNamePlaceholder" required>
-                <label for="father-name" data-i18n="fatherNameLabel">Father's Name:</label>
-                <input type="text" id="father-name" name="father-name" data-i18n-placeholder="fatherNamePlaceholder" required>
-                <label for="age" data-i18n="ageLabel">Age:</label>
-                <input type="number" id="age" name="age" min="1" data-i18n-placeholder="agePlaceholder" required>
-                <label for="email" data-i18n="emailLabel">Email:</label>
-                <input type="email" id="email" name="email" data-i18n-placeholder="emailPlaceholder" required>
-                <label for="phone" data-i18n="phoneLabel">Phone Number:</label>
-                <input type="tel" id="phone" name="phone" data-i18n-placeholder="phonePlaceholder" required>
-                <label for="education" data-i18n="educationLabel">Education Level:</label>
-                <input type="text" id="education" name="education" data-i18n-placeholder="educationPlaceholder" required>
-                <label for="gender" data-i18n="genderLabel">Gender:</label>
-                <select id="gender" name="gender" required>
-                    <option value="" data-i18n="selectGender">Select Gender</option>
-                    <option value="male" data-i18n="male">Male</option>
-                    <option value="female" data-i18n="female">Female</option>
-                </select>
-                <label for="national-id" data-i18n="nationalIdLabel">National ID Number:</label>
-                <input type="text" id="national-id" name="national-id" data-i18n-placeholder="nationalIdPlaceholder" required>
-                <label for="course" data-i18n="courseLabel">Course:</label>
-                <select id="course" name="course" required>
-                    <option value="" data-i18n="selectCourse">Select a Course</option>
-                    <option value="language" data-i18n="languageCourse">Language Skills</option>
-                    <option value="computer" data-i18n="computerCourse">Computer Skills</option>
-                    <option value="psychology" data-i18n="psychCourse">Psychology Workshops</option>
-                    <option value="other" data-i18n="other">Other</option>
-                </select>
-                <div id="other-course" class="hidden">
+                <div class="form-group">
+                    <label for="first-name" data-i18n="firstNameLabel">First Name:</label>
+                    <input type="text" id="first-name" name="first-name" data-i18n-placeholder="firstNamePlaceholder" required>
+                </div>
+                <div class="form-group">
+                    <label for="last-name" data-i18n="lastNameLabel">Last Name:</label>
+                    <input type="text" id="last-name" name="last-name" data-i18n-placeholder="lastNamePlaceholder" required>
+                </div>
+                <div class="form-group">
+                    <label for="father-name" data-i18n="fatherNameLabel">Father's Name:</label>
+                    <input type="text" id="father-name" name="father-name" data-i18n-placeholder="fatherNamePlaceholder" required>
+                </div>
+                <div class="form-group">
+                    <label for="age" data-i18n="ageLabel">Age:</label>
+                    <input type="number" id="age" name="age" min="1" max="120" data-i18n-placeholder="agePlaceholder" required>
+                </div>
+                <div class="form-group">
+                    <label for="email" data-i18n="emailLabel">Email:</label>
+                    <input type="email" id="email" name="email" data-i18n-placeholder="emailPlaceholder" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone" data-i18n="phoneLabel">Phone Number:</label>
+                    <input type="tel" id="phone" name="phone" data-i18n-placeholder="phonePlaceholder" pattern="[0-9]{10,15}" required>
+                </div>
+                <div class="form-group">
+                    <label for="education" data-i18n="educationLabel">Education Level:</label>
+                    <input type="text" id="education" name="education" data-i18n-placeholder="educationPlaceholder" required>
+                </div>
+                <div class="form-group">
+                    <label for="gender" data-i18n="genderLabel">Gender:</label>
+                    <select id="gender" name="gender" required>
+                        <option value="" data-i18n="selectGender">Select Gender</option>
+                        <option value="male" data-i18n="male">Male</option>
+                        <option value="female" data-i18n="female">Female</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="national-id" data-i18n="nationalIdLabel">National ID Number:</label>
+                    <input type="text" id="national-id" name="national-id" data-i18n-placeholder="nationalIdPlaceholder" required>
+                </div>
+                <div class="form-group">
+                    <label for="course" data-i18n="courseLabel">Course:</label>
+                    <select id="course" name="course" required>
+                        <option value="" data-i18n="selectCourse">Select a Course</option>
+                        <option value="language" data-i18n="languageCourse">Language Skills</option>
+                        <option value="computer" data-i18n="computerCourse">Computer Skills</option>
+                        <option value="psychology" data-i18n="psychCourse">Psychology Workshops</option>
+                        <option value="business" data-i18n="businessCourse">Business Skills</option>
+                        <option value="other" data-i18n="other">Other</option>
+                    </select>
+                </div>
+                <div id="other-course" class="hidden form-group">
                     <label for="other-course-input" data-i18n="otherCourseLabel">Specify Other Course:</label>
                     <input type="text" id="other-course-input" name="other-course" data-i18n-placeholder="otherCoursePlaceholder">
                 </div>
-                <label for="skill-level" data-i18n="skillLevelLabel">Skill Level:</label>
-                <select id="skill-level" name="skill-level" required>
-                    <option value="" data-i18n="selectLevel">Select Level</option>
-                    <option value="beginner" data-i18n="beginner">Beginner</option>
-                    <option value="intermediate" data-i18n="intermediate">Intermediate</option>
-                    <option value="advanced" data-i18n="advanced">Advanced</option>
-                </select>
-                <label for="details" data-i18n="detailsLabel">Additional Details:</label>
-                <textarea id="details" name="details" data-i18n-placeholder="detailsPlaceholder"></textarea>
-                <button type="submit" data-i18n="submit">Submit</button>
+                <div class="form-group">
+                    <label for="skill-level" data-i18n="skillLevelLabel">Skill Level:</label>
+                    <select id="skill-level" name="skill-level" required>
+                        <option value="" data-i18n="selectLevel">Select Level</option>
+                        <option value="beginner" data-i18n="beginner">Beginner</option>
+                        <option value="intermediate" data-i18n="intermediate">Intermediate</option>
+                        <option value="advanced" data-i18n="advanced">Advanced</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="details" data-i18n="detailsLabel">Additional Details:</label>
+                    <textarea id="details" name="details" data-i18n-placeholder="detailsPlaceholder"></textarea>
+                </div>
+                <button type="submit" class="primary" data-i18n="submit">Submit</button>
             </form>
-        </div>
+        </section>
     </main>
+
     <footer>
-        <a href="https://www.facebook.com/profile.php?id=61576355386024"><img src="./facebook.png" alt="Facebook Link" height="30" class="social-icon"></a>
+        <div class="footer-content animate__animated animate__fadeInUp">
+            <div class="social-media-links">
+                <a href="https://www.facebook.com/profile.php?id=61576355386024" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Facebook">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="https://twitter.com/hopebridge" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Twitter">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="https://www.instagram.com/hopebridgeacademy/" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Instagram">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://www.youtube.com/youtube" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="YouTube">
+                    <i class="fab fa-youtube"></i>
+                </a>
+            </div>
+            <div class="footer-nav">
+                <h4 data-i18n="footerNavTitle">Explore</h4>
+                <ul class="nav-list">
+                    <li><a href="about.html" data-i18n="about">About Us</a></li>
+                    <li><a href="faq.html" data-i18n="faq">FAQ</a></li>
+                    <li><a href="privacy.html" data-i18n="privacyPolicy">Privacy Policy</a></li>
+                    <li><a href="terms.html" data-i18n="terms">Terms of Service</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h4 data-i18n="contactUsTitle">Contact Us</h4>
+                <p data-i18n="contactInfo">Email: info@hopebridgeacademy.com | Phone: +93 123-456-7890</p>
+            </div>
+        </div>
         <p data-i18n="copyright">© 2025 HopeBridge Academy</p>
     </footer>
-    <script src="script.js" defer></script>
+
+    <button id="backToTopBtn" onclick="scrollToTop()" aria-label="Back to Top" data-tooltip="Back to Top"><i class="fas fa-chevron-up"></i></button>
+
     <script>
-        // Toggle "Other Course" input visibility
         document.getElementById('course').addEventListener('change', function() {
             document.getElementById('other-course').classList.toggle('hidden', this.value !== 'other');
         });
 
-        // Handle form submission to Telegram
         document.getElementById('registration-form').addEventListener('submit', function(e) {
             e.preventDefault();
+            if (!validateForm(this)) return;
 
-            const token = "7637224975:AAH7Al4buvRmfwW3LUZ-REvloF9rZgoAStU"; // Replace with your Telegram Bot Token
-            const chatId = "-1002886209903"; // Replace with your Telegram Chat ID
+            const token = "7637224975:AAH7Al4buvRmfwW3LUZ-REvloF9rZgoAStU";
+            const chatId = "-1002886209903";
 
             const formData = new FormData(this);
             const data = {
-                firstName: formData.get('first-name'),
-                lastName: formData.get('last-name'),
-                fatherName: formData.get('father-name'),
-                age: formData.get('age'),
-                email: formData.get('email'),
-                phone: formData.get('phone'),
-                education: formData.get('education'),
-                gender: formData.get('gender'),
-                nationalId: formData.get('national-id'),
-                course: formData.get('course'),
+                firstName: formData.get('first-name') || 'N/A',
+                lastName: formData.get('last-name') || 'N/A',
+                fatherName: formData.get('father-name') || 'N/A',
+                age: formData.get('age') || 'N/A',
+                email: formData.get('email') || 'N/A',
+                phone: formData.get('phone') || 'N/A',
+                education: formData.get('education') || 'N/A',
+                gender: formData.get('gender') || 'N/A',
+                nationalId: formData.get('national-id') || 'N/A',
+                course: formData.get('course') || 'N/A',
                 otherCourse: formData.get('other-course') || 'N/A',
-                skillLevel: formData.get('skill-level'),
+                skillLevel: formData.get('skill-level') || 'N/A',
                 details: formData.get('details') || 'None'
             };
 
-            const message = `
+            const truncate = (str, max) => str.length > max ? str.slice(0, max) + '...' : str;
+            const telegramMessage = `
 📝 ثبت‌نام جدید در آکادمی هوپ‌بریج
-نام: ${data.firstName}
-نام خانوادگی: ${data.lastName}
-نام پدر: ${data.fatherName}
-سن: ${data.age}
-ایمیل: ${data.email}
-شماره تلفن: ${data.phone}
-سطح تحصیلات: ${data.education}
-جنسیت: ${data.gender}
-شماره شناسایی ملی: ${data.nationalId}
-دوره: ${data.course}${data.course === 'other' ? ` (${data.otherCourse})` : ''}
-سطح مهارت: ${data.skillLevel}
-جزئیات اضافی: ${data.details}
+نام: ${truncate(data.firstName, 100)}
+نام خانوادگی: ${truncate(data.lastName, 100)}
+نام پدر: ${truncate(data.fatherName, 100)}
+سن: ${truncate(data.age, 50)}
+ایمیل: ${truncate(data.email, 200)}
+شماره تلفن: ${truncate(data.phone, 50)}
+سطح تحصیلات: ${truncate(data.education, 200)}
+جنسیت: ${truncate(data.gender, 50)}
+شماره شناسایی ملی: ${truncate(data.nationalId, 50)}
+دوره: ${truncate(data.course, 100)}${data.course === 'other' ? ` (${truncate(data.otherCourse, 100)})` : ''}
+سطح مهارت: ${truncate(data.skillLevel, 50)}
+جزئیات اضافی: ${truncate(data.details, 3500)}
             `;
 
-            const url = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(message)}`;
+            const url = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(telegramMessage)}`;
 
             fetch(url)
-                .then(response => {
-                    if (response.ok) {
+                .then(response => response.json())
+                .then(result => {
+                    if (result.ok) {
                         alert(i18next.t('submitSuccess', 'Registration submitted successfully!'));
                         this.reset();
                         document.getElementById('other-course').classList.add('hidden');
                     } else {
-                        alert(i18next.t('submitError', 'Error submitting registration. Please try again.'));
+                        console.error('Telegram API Error:', result);
+                        alert(i18next.t('submitError', 'Error submitting registration: ') + (result.description || 'Unknown error.'));
                     }
                 })
                 .catch(error => {
-                    alert(i18next.t('submitError', 'Error: ') + error.message);
+                    console.error('Fetch Error:', error);
+                    alert(i18next.t('submitError', 'Error: Network issue or invalid setup.'));
                 });
         });
     </script>

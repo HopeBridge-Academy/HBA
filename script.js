@@ -394,3 +394,165 @@ function updateCities() {
     });
     updateContent(); // Preserve existing translation logic
 }
+
+// Initialize Page
+function initializePage() {
+    // Initialize i18next
+    i18next.init({
+        lng: localStorage.getItem('language') || 'en',
+        fallbackLng: 'en',
+        resources: {
+            en: { translation: translations.en },
+            fa: { translation: translations.fa }
+        },
+        debug: true // Enable debug for missing keys
+    }, function(err, t) {
+        if (err) {
+            console.error('i18next initialization error:', err);
+            return;
+        }
+        updateContent();
+    });
+
+    // Show back to top button on scroll
+    window.addEventListener('scroll', function() {
+        const backToTopBtn = document.getElementById('backToTopBtn');
+        if (backToTopBtn) {
+            backToTopBtn.classList.toggle('visible', window.scrollY > 300);
+        }
+    });
+
+    // Initialize FAQ accordion (for faq.html)
+    const faqQuestions = document.querySelectorAll('.faq-question');
+    faqQuestions.forEach(button => {
+        button.addEventListener('click', () => {
+            const answer = button.nextElementSibling;
+            const isExpanded = button.getAttribute('aria-expanded') === 'true';
+            button.setAttribute('aria-expanded', !isExpanded);
+            answer.hidden = isExpanded;
+        });
+    });
+
+    // Initialize Facebook SDK (for ad.html)
+    if (window.FB) {
+        FB.XFBML.parse();
+    }
+}
+
+// Update Content for i18n
+function updateContent() {
+    // Update text content
+    document.querySelectorAll('[data-i18n]').forEach(element => {
+        const key = element.dataset.i18n;
+        if (i18next.exists(key)) {
+            element.textContent = i18next.t(key);
+        } else {
+            console.warn(`Translation key "${key}" not found for language "${i18next.language}" on ${window.location.pathname}`);
+        }
+    });
+
+    // Update placeholder attributes
+    document.querySelectorAll('[data-i18n-placeholder]').forEach(element => {
+        const key = element.dataset.i18nPlaceholder;
+        if (i18next.exists(key)) {
+            element.placeholder = i18next.t(key);
+        } else {
+            console.warn(`Placeholder translation key "${key}" not found for language "${i18next.language}" on ${window.location.pathname}`);
+        }
+    });
+
+    // Update select options
+    document.querySelectorAll('select option[data-i18n]').forEach(option => {
+        const key = option.dataset.i18n;
+        if (i18next.exists(key)) {
+            option.textContent = i18next.t(key);
+        } else {
+            console.warn(`Option translation key "${key}" not found for language "${i18next.language}" on ${window.location.pathname}`);
+        }
+    });
+
+    // Set document direction for RTL
+    document.documentElement.dir = i18next.language === 'fa' ? 'rtl' : 'ltr';
+}
+
+// Toggle Mobile Menu
+function toggleMobileMenu() {
+    const mainNav = document.querySelector('.main-nav');
+    mainNav.classList.toggle('active');
+}
+
+// Change Language
+function changeLanguage(lang) {
+    localStorage.setItem('language', lang);
+    i18next.changeLanguage(lang, (err, t) => {
+        if (err) {
+            console.error('Language change error:', err);
+            return;
+        }
+        updateContent();
+        // Re-parse Facebook SDK for ad.html
+        if (window.FB && document.querySelector('.fb-page')) {
+            FB.XFBML.parse();
+        }
+    });
+}
+
+// Scroll to Top
+function scrollToTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// Search Courses
+function searchCourses() {
+    const query = document.getElementById('searchInput').value.toLowerCase();
+    alert(i18next.t('searchMessage', { query: query }));
+}
+
+// Form Validation
+function validateForm(form) {
+    const inputs = form.querySelectorAll('input[required], select[required], textarea[required]');
+    let isValid = true;
+    inputs.forEach(input => {
+        if (!input.value.trim()) {
+            isValid = false;
+            input.style.borderColor = '#FF6666';
+        } else {
+            input.style.borderColor = '#00E7FF';
+        }
+    });
+    if (!isValid) {
+        alert(i18next.t('formError', 'Please fill out all required fields.'));
+    }
+    return isValid;
+}
+
+// Form Handlers
+function submitRegistration(event) {
+    event.preventDefault();
+    const form = event.target;
+    if (!validateForm(form)) return;
+    alert(i18next.t('submitSuccess', 'Registration submitted successfully!'));
+}
+
+function requestTutor(event) {
+    event.preventDefault();
+    const form = event.target;
+    if (!validateForm(form)) return;
+    alert(i18next.t('submitSuccess', 'Tutor request submitted successfully!'));
+}
+
+function submitContact(event) {
+    event.preventDefault();
+    const form = event.target;
+    if (!validateForm(form)) return;
+    alert(i18next.t('submitSuccess', 'Contact form submitted successfully!'));
+}
+
+function submitDonation(event) {
+    event.preventDefault();
+    const form = event.target;
+    if (!validateForm(form)) return;
+    alert(i18next.t('submitSuccess', 'Donation submitted successfully!'));
+}
+
+

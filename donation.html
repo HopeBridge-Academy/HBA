@@ -1,82 +1,169 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Support HopeBridge Academy's mission by donating to provide education and resources for Afghan youth.">
+    <meta name="keywords" content="donation, HopeBridge Academy, Afghan education, charity">
+    <meta name="author" content="HopeBridge Academy">
     <title data-i18n="donationTitle">Donation - HopeBridge Academy</title>
     <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Noto+Naskh+Arabic:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://unpkg.com/i18next@21.6.10/dist/umd/i18next.min.js"></script>
     <script src="i18n.js" defer></script>
+    <script src="script.js" defer></script>
 </head>
 <body onload="initializePage()">
+    <div class="floating-banner animate__animated animate__fadeIn">
+        <p data-i18n="bannerText">Support Afghan youth with your donation! <a href="donation.html" data-i18n="donationBannerLink">Donate Now</a></p>
+        <button class="close-banner" aria-label="Close banner" onclick="this.parentElement.classList.add('hidden')">×</button>
+    </div>
+
     <header>
-        <nav aria-label="Main navigation">
-            <ul class="nav-list">
-                <li><img src="./logo.png" height="90" alt="HopeBridge Academy Logo" class="logo"></li>
-                <li><a href="index.html" data-i18n="home">Home</a></li>
-                <li><a href="register.html" data-i18n="register">Register</a></li>
-                <li><a href="contact.html" data-i18n="contact">Contact</a></li>
-                <li><a href="tutor.html" data-i18n="tutor">Request Tutor</a></li>
-                <li><a href="donation.html" data-i18n="donation" aria-current="page">Donation</a></li>
-                <li><a href="certification.html" data-i18n="certification">Certification</a></li>
-                <li class="auth-link"><a href="login.html" id="auth-link" data-i18n="login">Staff Portal</a></li>
-            </ul>
-            <div class="language-switcher">
-                <label for="language-select" data-i18n="languageLabel">Language:</label>
-                <select id="language-select" onchange="changeLanguage(this.value)" aria-label="Select language">
-                    <option value="en" data-i18n="englishOption">English</option>
-                    <option value="fa" data-i18n="persianOption">فارسی</option>
-                </select>
+        <nav>
+            <a href="index.html" class="logo"><img src="logo.png" alt="HopeBridge Academy Logo"></a>
+            <button class="mobile-menu-toggle" aria-label="Toggle menu" onclick="toggleMobileMenu()">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="main-nav">
+                <ul class="nav-list">
+                    <li><a href="index.html" class="nav-link" data-i18n="home">Home</a></li>
+                    <li><a href="register.html" class="nav-link" data-i18n="register">Register</a></li>
+                    <li><a href="contact.html" class="nav-link" data-i18n="contact">Contact</a></li>
+                    <li><a href="tutor.html" class="nav-link" data-i18n="tutor">Request Tutor</a></li>
+                    <li><a href="donation.html" class="nav-link active" data-i18n="donation" aria-current="page">Donate</a></li>
+                    <li><a href="certification.html" class="nav-link" data-i18n="certification">Certification</a></li>
+                    <li><a href="login.html" id="auth-link" class="nav-link" data-i18n="login">Staff Portal</a></li>
+                </ul>
+            </div>
+            <div class="header-actions">
+                <div class="search-bar">
+                    <input type="text" id="searchInput" placeholder="Search courses..." data-i18n-placeholder="searchPlaceholder" aria-label="Search courses">
+                    <button onclick="searchCourses()" aria-label="Search"><i class="fas fa-search"></i></button>
+                </div>
+                <a href="ad.html" class="bell-icon" aria-label="Notifications" data-tooltip="View Notifications">
+                    <img src="bell.gif" alt="Notification Bell">
+                </a>
+                <div class="language-switcher">
+                    <select id="language-select" onchange="changeLanguage(this.value)" aria-label="Select language">
+                        <option value="en" data-i18n="englishOption">English</option>
+                        <option value="fa" data-i18n="persianOption">فارسی</option>
+                    </select>
+                </div>
             </div>
         </nav>
     </header>
+
     <main>
-        <h1 data-i18n="donationHeading">Support Our Mission</h1>
+        <section class="hero compact animate__animated animate__fadeInDown">
+            <div class="hero-content">
+                <h1 data-i18n="donationHeading">Support Our Mission</h1>
+                <p data-i18n="donationHeroText">Your donations empower Afghan youth with education and opportunities.</p>
+                <a href="#donation-form" class="hero-button primary" data-i18n="donateNow">Donate Now</a>
+            </div>
+        </section>
+
         <section class="donation-info" aria-labelledby="donation-info-heading">
             <h2 id="donation-info-heading" data-i18n="donationInfoHeading">Why Donate?</h2>
-            <p data-i18n="donationInfoText">Your contributions help us provide free education, resources, and opportunities to Afghan youth, fostering a brighter future.</p>
-            <h3 data-i18n="missionLabel">Our Mission</h3>
-            <p data-i18n="missionText">To provide transformative education that empowers Afghan youth to achieve their full potential and contribute to a prosperous society.</p>
-            <h3 data-i18n="needsLabel">Current Needs</h3>
-            <ul>
-                <li data-i18n="need1">Books and educational materials</li>
-                <li data-i18n="need2">Laptops and technology</li>
-                <li data-i18n="need3">Classroom supplies and facilities</li>
-            </ul>
+            <div class="donation-info-content animate__animated animate__fadeInUp">
+                <p data-i18n="donationInfoText">Your contributions help us provide free education, resources, and opportunities to Afghan youth, fostering a brighter future.</p>
+                <div class="donation-details-grid">
+                    <div class="donation-card">
+                        <i class="fas fa-book"></i>
+                        <h3 data-i18n="missionLabel">Our Mission</h3>
+                        <p data-i18n="missionText">To provide transformative education that empowers Afghan youth to achieve their full potential and contribute to a prosperous society.</p>
+                    </div>
+                    <div class="donation-card">
+                        <i class="fas fa-laptop"></i>
+                        <h3 data-i18n="needsLabel">Current Needs</h3>
+                        <ul>
+                            <li data-i18n="need1">Books and educational materials</li>
+                            <li data-i18n="need2">Laptops and technology</li>
+                            <li data-i18n="need3">Classroom supplies and facilities</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </section>
+
         <section class="donation-form" aria-labelledby="donation-form-heading">
             <h2 id="donation-form-heading" data-i18n="donationFormHeading">Make a Donation</h2>
-            <form id="donation-form" method="POST" class="modern-form">
+            <form id="donation-form" method="POST" class="modern-form animate__animated animate__fadeInUp">
                 <input type="hidden" name="sheetName" value="Donations">
-                <label for="donor-name" data-i18n="nameLabel">Name:</label>
-                <input type="text" id="donor-name" name="donor-name" data-i18n-placeholder="namePlaceholder" required>
-                <label for="donor-email" data-i18n="emailLabel">Email:</label>
-                <input type="email" id="donor-email" name="donor-email" data-i18n-placeholder="emailPlaceholder" required>
-                <label for="amount" data-i18n="amountLabel">Donation Amount (USD):</label>
-                <input type="number" id="amount" name="amount" min="1" data-i18n-placeholder="amountPlaceholder" required>
-                <label for="message" data-i18n="messageLabel">Message (Optional):</label>
-                <textarea id="message" name="message" data-i18n-placeholder="messagePlaceholder"></textarea>
-                <button type="submit" data-i18n="donateNow">Donate Now</button>
+                <div class="form-group">
+                    <label for="donor-name" data-i18n="nameLabel">Name:</label>
+                    <input type="text" id="donor-name" name="donor-name" data-i18n-placeholder="namePlaceholder" required>
+                </div>
+                <div class="form-group">
+                    <label for="donor-email" data-i18n="emailLabel">Email:</label>
+                    <input type="email" id="donor-email" name="donor-email" data-i18n-placeholder="emailPlaceholder" required>
+                </div>
+                <div class="form-group">
+                    <label for="amount" data-i18n="amountLabel">Donation Amount (USD):</label>
+                    <input type="number" id="amount" name="amount" min="1" data-i18n-placeholder="amountPlaceholder" required>
+                </div>
+                <div class="form-group">
+                    <label for="message" data-i18n="messageLabel">Message (Optional):</label>
+                    <textarea id="message" name="message" data-i18n-placeholder="messagePlaceholder"></textarea>
+                </div>
+                <button type="submit" class="primary" data-i18n="donateNow">Donate Now</button>
             </form>
         </section>
+
         <section class="payment-details" aria-labelledby="payment-details-heading">
             <h2 id="payment-details-heading" data-i18n="paymentDetailsHeading">Payment Information</h2>
-            <p data-i18n="paymentDetailsText">Bank: Ghazanfar Bank <br> Account: I099520000097</p>
+            <div class="payment-details-content animate__animated animate__fadeInUp">
+                <p data-i18n="paymentDetailsText">Bank: Ghazanfar Bank <br> Account: I099520000097</p>
+                <p data-i18n="paymentNote">Please include your name in the transaction reference for tracking purposes.</p>
+            </div>
         </section>
     </main>
+
     <footer>
-        <a href="https://www.facebook.com/profile.php?id=61576355386024"><img src="./facebook.png" alt="Facebook Link" height="30" class="social-icon"></a>
+        <div class="footer-content animate__animated animate__fadeInUp">
+            <div class="social-media-links">
+                <a href="https://www.facebook.com/profile.php?id=61576355386024" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Facebook">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="https://twitter.com/hopebridge" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Twitter">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="https://www.instagram.com/hopebridgeacademy/" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Instagram">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://www.youtube.com/youtube" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="YouTube">
+                    <i class="fab fa-youtube"></i>
+                </a>
+            </div>
+            <div class="footer-nav">
+                <h4 data-i18n="footerNavTitle">Explore</h4>
+                <ul class="nav-list">
+                    <li><a href="about.html" data-i18n="about">About Us</a></li>
+                    <li><a href="faq.html" data-i18n="faq">FAQ</a></li>
+                    <li><a href="privacy.html" data-i18n="privacyPolicy">Privacy Policy</a></li>
+                    <li><a href="terms.html" data-i18n="terms">Terms of Service</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h4 data-i18n="contactUsTitle">Contact Us</h4>
+                <p data-i18n="contactInfo">Email: info@hopebridgeacademy.com | Phone: +93 123-456-7890</p>
+            </div>
+        </div>
         <p data-i18n="copyright">© 2025 HopeBridge Academy</p>
     </footer>
-    <script src="script.js" defer></script>
+
+    <button id="backToTopBtn" onclick="scrollToTop()" aria-label="Back to Top" data-tooltip="Back to Top"><i class="fas fa-chevron-up"></i></button>
+
     <script>
-        // Handle form submission to Telegram
         document.getElementById('donation-form').addEventListener('submit', function(e) {
             e.preventDefault();
+            if (!validateForm(this)) return;
 
-            const token = "7637224975:AAH7Al4buvRmfwW3LUZ-REvloF9rZgoAStU"; // Telegram Bot Token
-            const chatId = "-1002886209903"; // Telegram Chat ID
+            const token = "7637224975:AAH7Al4buvRmfwW3LUZ-REvloF9rZgoAStU";
+            const chatId = "-1002886209903";
 
             const formData = new FormData(this);
             const data = {
@@ -86,7 +173,6 @@
                 message: formData.get('message') || 'None'
             };
 
-            // Truncate long inputs to avoid exceeding Telegram's 4096-character limit
             const truncate = (str, max) => str.length > max ? str.slice(0, max) + '...' : str;
             const telegramMessage = `
 💰 کمک مالی جدید به آکادمی هوپ‌بریج
@@ -106,12 +192,12 @@
                         this.reset();
                     } else {
                         console.error('Telegram API Error:', result);
-                        alert(i18next.t('submitError', 'Error submitting donation: ') + (result.description || 'Unknown error. Check console for details.'));
+                        alert(i18next.t('submitError', 'Error submitting donation: ') + (result.description || 'Unknown error.'));
                     }
                 })
                 .catch(error => {
                     console.error('Fetch Error:', error);
-                    alert(i18next.t('submitError', 'Error: Network issue or invalid setup. Please check console.'));
+                    alert(i18next.t('submitError', 'Error: Network issue or invalid setup.'));
                 });
         });
     </script>

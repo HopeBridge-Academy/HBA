@@ -1,46 +1,123 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Log in to the HopeBridge Academy Staff Portal to manage educational resources and services.">
+    <meta name="keywords" content="login, HopeBridge Academy, staff portal, Afghan education">
+    <meta name="author" content="HopeBridge Academy">
     <title data-i18n="loginTitle">Login - HopeBridge Academy</title>
     <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Noto+Naskh+Arabic:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://unpkg.com/i18next@21.6.10/dist/umd/i18next.min.js"></script>
     <script src="i18n.js" defer></script>
+    <script src="script.js" defer></script>
 </head>
-<body onload="initializeLoginPage()">
+<body onload="initializePage()">
+    <div class="floating-banner animate__animated animate__fadeIn">
+        <p data-i18n="bannerText">Access the Staff Portal now! <a href="login.html" data-i18n="loginBannerLink">Log In</a></p>
+        <button class="close-banner" aria-label="Close banner" onclick="this.parentElement.classList.add('hidden')">×</button>
+    </div>
+
     <header>
-        <nav aria-label="Main navigation">
-            <ul class="nav-list">
-                <li><img src="./logo.png" height="90" alt="HopeBridge Academy Logo" class="logo"></li>
-                <li><a href="index.html" data-i18n="home">Home</a></li>
-            </ul>
-            <div class="language-switcher">
-                <label for="language-select" data-i18n="languageLabel">Language:</label>
-                <select id="language-select" onchange="changeLanguage(this.value)" aria-label="Select language">
-                    <option value="en" data-i18n="englishOption">English</option>
-                    <option value="fa" data-i18n="persianOption">فارسی</option>
-                </select>
+        <nav>
+            <a href="index.html" class="logo"><img src="logo.png" alt="HopeBridge Academy Logo"></a>
+            <button class="mobile-menu-toggle" aria-label="Toggle menu" onclick="toggleMobileMenu()">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="main-nav">
+                <ul class="nav-list">
+                    <li><a href="index.html" class="nav-link" data-i18n="home">Home</a></li>
+                    <li><a href="register.html" class="nav-link" data-i18n="register">Register</a></li>
+                    <li><a href="contact.html" class="nav-link" data-i18n="contact">Contact</a></li>
+                    <li><a href="tutor.html" class="nav-link" data-i18n="tutor">Request Tutor</a></li>
+                    <li><a href="donation.html" class="nav-link" data-i18n="donation">Donate</a></li>
+                    <li><a href="certification.html" class="nav-link" data-i18n="certification">Certification</a></li>
+                    <li><a href="login.html" id="auth-link" class="nav-link active" data-i18n="login" aria-current="page">Staff Portal</a></li>
+                </ul>
+            </div>
+            <div class="header-actions">
+                <div class="search-bar">
+                    <input type="text" id="searchInput" data-i18n-placeholder="searchPlaceholder" aria-label="Search courses">
+                    <button onclick="searchCourses()" aria-label="Search"><i class="fas fa-search"></i></button>
+                </div>
+                <a href="ad.html" class="bell-icon" aria-label="Notifications" data-tooltip="View Notifications">
+                    <img src="bell.gif" alt="Notification Bell">
+                </a>
+                <div class="language-switcher">
+                    <select id="language-select" onchange="changeLanguage(this.value)" aria-label="Select language">
+                        <option value="en" data-i18n="englishOption">English</option>
+                        <option value="fa" data-i18n="persianOption">فارسی</option>
+                    </select>
+                </div>
             </div>
         </nav>
     </header>
+
     <main>
-        <div class="login-container">
-            <h2 data-i18n="loginHeading">Log In</h2>
-            <form id="login-form" onsubmit="handleLogin(event)" class="modern-form">
-                <label for="username" data-i18n="usernameLabel">Username:</label>
-                <input type="text" id="username" name="username" data-i18n-placeholder="usernamePlaceholder" required>
-                <label for="password" data-i18n="passwordLabel">Password:</label>
-                <input type="password" id="password" name="password" data-i18n-placeholder="passwordPlaceholder" required>
-                <button type="submit" data-i18n="loginButton">Log In</button>
-            </form>
-            <p id="login-error" class="error" aria-live="polite"></p>
-        </div>
+        <section class="hero compact animate__animated animate__fadeInDown">
+            <div class="hero-content">
+                <h1 data-i18n="loginHeading">Staff Portal Login</h1>
+                <p data-i18n="loginHeroText">Access the HopeBridge Academy Staff Portal to manage educational resources and services.</p>
+                <a href="#login-form" class="hero-button primary" data-i18n="loginButton">Log In</a>
+            </div>
+        </section>
+
+        <section class="login-content" aria-labelledby="login-heading">
+            <div class="login-container animate__animated animate__fadeInUp">
+                <h2 id="login-heading" data-i18n="loginHeading">Log In</h2>
+                <form id="login-form" onsubmit="handleLogin(event)" class="modern-form">
+                    <div class="form-group">
+                        <label for="username" data-i18n="usernameLabel">Username:</label>
+                        <input type="text" id="username" name="username" data-i18n-placeholder="usernamePlaceholder" required aria-describedby="username-error">
+                    </div>
+                    <div class="form-group">
+                        <label for="password" data-i18n="passwordLabel">Password:</label>
+                        <input type="password" id="password" name="password" data-i18n-placeholder="passwordPlaceholder" required aria-describedby="password-error">
+                    </div>
+                    <button type="submit" class="primary" data-i18n="loginButton">Log In</button>
+                </form>
+                <p id="login-error" class="error" aria-live="polite"></p>
+            </div>
+        </section>
     </main>
+
     <footer>
+        <div class="footer-content animate__animated animate__fadeInUp">
+            <div class="social-media-links">
+                <a href="https://www.facebook.com/profile.php?id=61576355386024" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Facebook">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="https://twitter.com/hopebridge" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Twitter">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="https://www.instagram.com/hopebridgeacademy/" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Instagram">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://www.youtube.com/youtube" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="YouTube">
+                    <i class="fab fa-youtube"></i>
+                </a>
+            </div>
+            <div class="footer-nav">
+                <h4 data-i18n="footerNavTitle">Explore</h4>
+                <ul class="nav-list">
+                    <li><a href="about.html" data-i18n="about">About Us</a></li>
+                    <li><a href="faq.html" data-i18n="faq">FAQ</a></li>
+                    <li><a href="privacy.html" data-i18n="privacyPolicy">Privacy Policy</a></li>
+                    <li><a href="terms.html" data-i18n="terms">Terms of Service</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h4 data-i18n="contactUsTitle">Contact Us</h4>
+                <p data-i18n="contactInfo">Email: info@hopebridgeacademy.com | Phone: +93 123-456-7890</p>
+            </div>
+        </div>
         <p data-i18n="copyright">© 2025 HopeBridge Academy</p>
     </footer>
-    <script src="script.js" defer></script>
+
+    <button id="backToTopBtn" onclick="scrollToTop()" aria-label="Back to Top" data-tooltip="Back to Top"><i class="fas fa-chevron-up"></i></button>
 </body>
 </html>

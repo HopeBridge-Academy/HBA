@@ -1,167 +1,154 @@
 <!DOCTYPE html>
-<html lang="fa" dir="rtl">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>آکادمی هوپ‌بریج | اطلاعیه‌ها</title>
-  <link rel="stylesheet" href="styles.css" />
-  <style>
-    /* Basic styles to give a professional look */
-    header {
-      background-color: #1483f1;
-      color: white;
-      padding: 1.5rem;
-      text-align: center;
-    }
-
-    header h1 {
-      margin: 0;
-      font-size: 2rem;
-      letter-spacing: 1px;
-    }
-
-    nav ul {
-      list-style: none;
-      padding: 0;
-      margin: 1rem 0 0;
-      display: flex;
-      justify-content: center;
-      gap: 1.5rem;
-    }
-
-    nav ul li a {
-      color: white;
-      text-decoration: none;
-      font-weight: bold;
-    }
-
-    main {
-      padding: 2rem;
-    }
-
-    h2 {
-      color: #003366;
-    }
-    h1 {
-        color: black;
-    }
-
-    .announcement-text {
-      font-size: 1.1rem;
-      margin-bottom: 2rem;
-    }
-
-    .fb-section {
-      display: flex;
-      gap: 2rem;
-      flex-wrap: wrap;
-    }
-
-    .fb-wrapper,
-    .side-announcement {
-      flex: 1;
-      min-width: 280px;
-    }
-
-    .side-announcement h3 {
-      color: #003366;
-      margin-bottom: 0.5rem;
-    }
-
-    .side-announcement ul {
-      list-style-type: disc;
-      padding-right: 1.5rem; /* Adjusted for RTL */
-    }
-
-    footer {
-      background-color: #081725;
-      color: white;
-      text-align: center;
-      padding: 1rem 0;
-      margin-top: 3rem;
-    }
-
-    .social-icon {
-      margin-bottom: 0.5rem;
-    }
-  </style>
+<html lang="en" dir="ltr">
+<head lang="fa" dir="rtl">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Stay updated with announcements and events from HopeBridge Academy.">
+    <meta name="keywords" content="announcements, HopeBridge Academy, Afghan education, events,">
+    <meta name="author" content="HopeBridge">
+    <title Academydata-i18n="adTitle">About HopeBridge Academy - Announcements - HopeBridge</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Noto+Naskh+Arabic:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://unpkg.com/i18next@21.6.10/dist/umd/i18next.min.js"></script>
+    <script src="i18n.js" defer></script>
+    <script src="script.js" defer></script>
 </head>
-<body>
-
-  <!-- Header with Academy Name -->
-  <header>
-    <img src="./logo.png" height="100" width="100" alt="لوگوی آکادمی هوپ‌بریج">
-    <h1>آکادمی هوپ‌بریج</h1>
-    <nav>
-      <ul>
-        <li><a href="index.html" aria-label="رفتن به صفحه اصلی">صفحه اصلی</a></li>
-      </ul>
-    </nav>
-  </header>
-
-  <!-- Main Content -->
-  <main>
-    <h2>اطلاعیه‌ها</h2>
-    <div class="announcement-text" role="region" aria-live="polite">
-      از مراسم فارغ‌التحصیلی، تاریخ شروع دوره‌ها و کارگاه‌های آینده در برنامه‌های <strong>مهارت‌های کامپیوتری</strong>، <strong>مهارت‌های زبانی</strong> و <strong>روان‌شناسی</strong> مطلع شوید.
+<body onload="initializePage()">
+    <div class="floating-banner animate__animated animate__fadeIn">
+        <p data-i18n="bannerText">Stay updated with our latest announcements! <a href="ad.html" data-i18n="adBannerLink">View Now</a></p>
+        <button class="close-banner" aria-label="Close banner" onclick="this.parentElement.classList.add('hidden')">×</button>
     </div>
 
-    <section class="fb-section" aria-label="فید فیسبوک و اطلاعیه‌های جانبی">
-      <!-- Right Panel: Upcoming Events (Adjusted for RTL) -->
-      <aside class="side-announcement" aria-label="رویدادهای آینده">
-        <h3>رویدادهای آینده</h3>
-        <ul>
-          <li>کارگاه روان‌شناسی – جزئیات به زودی</li>
-          <li>مراسم فارغ‌التحصیلی – جزئیات به زودی</li>
-          <li>ثبت‌نام دوره‌های جدید – ۱ تیر ۱۴۰۴</li>
-        </ul>
-      </aside>
+    <header>
+        <nav>
+            <a href="index.html" class="logo"><img src="logo.png" alt="HopeBridge Academy Logo"></a>
+            <button class="mobile-menu-toggle" aria-label="Toggle menu" onclick="toggleMobileMenu()">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="main-nav">
+                <ul class="nav-list">
+                    <li><a href="index.html" class="nav-link" data-i18n="home">Home</a></li>
+                    <li><a href="register.html" class="nav-link" data-i18n="register">Register</a></li>
+                    <li><a href="contact.html" class="nav-link" data-i18n="contact">Contact</a></li>
+                    <li><a href="tutor.html" class="nav-link" data-i18n="tutor">Request Tutor</a></li>
+                    <li><a href="donation.html" class="nav-link" data-i18n="donation">Donate</a></li>
+                    <li><a href="certification.html" class="nav-link" data-i18n="certification">Certification</a></li>
+                    <li><a href="login.html" id="auth-link" class="nav-link" data-i18n="login">Staff Portal</a></li>
+                </ul>
+            </div>
+            <div class="header-actions">
+                <div class="search-bar">
+                    <input type="text" id="searchInput" placeholder="Search courses..." data-i18n-placeholder="searchPlaceholder" aria-label="Search courses">
+                    <button onclick="searchCourses()" aria-label="Search"><i class="fas fa-search"></i></button>
+                </div>
+                <a href="ad.html" class="bell-icon active" aria-label="Notifications" data-tooltip="View Notifications">
+                    <img src="bell.gif" alt="Notification Bell">
+                </a>
+                <div class="language-switcher">
+                    <select id="language-select" onchange="changeLanguage(this.value)" aria-label="Select language">
+                        <option value="en" data-i18n="englishOption">English</option>
+                        <option value="fa" data-i18n="persianOption">فارسی</option>
+                    </select>
+                </div>
+            </div>
+        </nav>
+    </header>
 
-      <!-- Center Panel: Facebook Feed -->
-      <div class="fb-wrapper" role="region" aria-label="فید تایم‌لاین فیسبوک">
-        <div class="fb-page"
-             data-href="https://www.facebook.com/profile.php?id=61576355386024"
-             data-tabs="timeline"
-             data-width="600"
-             data-height="600"
-             data-small-header="false"
-             data-adapt-container-width="true"
-             data-hide-cover="false"
-             data-show-facepile="true">
-          <blockquote cite="https://www.facebook.com/profile.php?id=61576355386024" class="fb-xfbml-parse-ignore">
-            <a href="https://www.facebook.com/profile.php?id=61576355386024" target="_blank" rel="noopener noreferrer">آکادمی هوپ‌بریج</a>
-          </blockquote>
+    <main>
+        <section class="hero compact animate__animated animate__fadeInDown">
+            <div class="hero-content">
+                <h1 data-i18n="adHeading">Announcements</h1>
+                <p data-i18n="adHeroText">Stay informed about our latest events, courses, and updates.</p>
+                <a href="#announcement-text" class="hero-button primary" data-i18n="viewAnnouncements">View Announcements</a>
+            </div>
+        </section>
+
+        <section class="announcement-content" aria-labelledby="announcement-text-heading">
+            <div class="announcement-container animate__animated animate__fadeInUp">
+                <h2 id="announcement-text-heading" data-i18n="adGeneralLabel">Latest Updates</h2>
+                <p data-i18n="adText">Stay informed about our graduation ceremonies, upcoming course start dates, and future workshops in <strong>Computer Skills</strong>, <strong>Language Skills</strong>, and <strong>Psychology</strong>.</p>
+            </div>
+        </section>
+
+        <section class="fb-section" aria-label="Facebook feed and side announcements">
+            <div class="fb-container animate__animated animate__fadeInUp">
+                <aside class="side-announcement" aria-label="Upcoming events">
+                    <h3 data-i18n="upcomingEvents">Upcoming Events</h3>
+                    <ul>
+                        <li data-i18n="event1">Psychology Workshop – Details Coming Soon</li>
+                        <li data-i18n="event2">Graduation Ceremony – Details Coming Soon</li>
+                        <li data-i18n="event3">New Course Registration – July 1, 2025</li>
+                    </ul>
+                </aside>
+                <div class="fb-wrapper" role="region" aria-label="Facebook timeline feed">
+                    <div class="fb-page"
+                         data-href="https://www.facebook.com/profile.php?id=61576355386024"
+                         data-tabs="timeline"
+                         data-width="600"
+                         data-height="600"
+                         data-small-header="false"
+                         data-adapt-container-width="true"
+                         data-hide-cover="false"
+                         data-show-facepile="true">
+                        <blockquote cite="https://www.facebook.com/profile.php?id=61576355386024" class="fb-xfbml-parse-ignore">
+                            <a href="https://www.facebook.com/profile.php?id=61576355386024" target="_blank" rel="noopener noreferrer">HopeBridge Academy</a>
+                        </blockquote>
+                    </div>
+                </div>
+                <aside class="side-announcement" aria-label="Important notes">
+                    <h3 data-i18n="importantNotes">Important Notes</h3>
+                    <ul>
+                        <li data-i18n="note1">Follow our Facebook page for real-time updates.</li>
+                        <li data-i18n="note2">Student verification services are available.</li>
+                        <li data-i18n="note3">Certificates for recent graduates are ready.</li>
+                    </ul>
+                </aside>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content animate__animated animate__fadeInUp">
+            <div class="social-media-links">
+                <a href="https://www.facebook.com/profile.php?id=61576355386024" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Facebook">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="https://twitter.com/hopebridge" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Twitter">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="https://www.instagram.com/hopebridgeacademy/" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Instagram">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://www.youtube.com/youtube" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="YouTube">
+                    <i class="fab fa-youtube"></i>
+                </a>
+            </div>
+            <div class="footer-nav">
+                <h4 data-i18n="footerNavTitle">Explore</h4>
+                <ul class="nav-list">
+                    <li><a href="about.html" data-i18n="about">About Us</a></li>
+                    <li><a href="faq.html" data-i18n="faq">FAQ</a></li>
+                    <li><a href="privacy.html" data-i18n="privacyPolicy">Privacy Policy</a></li>
+                    <li><a href="terms.html" data-i18n="terms">Terms of Service</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h4 data-i18n="contactUsTitle">Contact Us</h4>
+                <p data-i18n="contactInfo">Email: info@hopebridgeacademy.com | Phone: +93 123-456-7890</p>
+            </div>
         </div>
-      </div>
+        <p data-i18n="copyright">© 2025 HopeBridge Academy</p>
+    </footer>
 
-      <!-- Left Panel: Important Notes (Adjusted for RTL) -->
-      <aside class="side-announcement" aria-label="یادداشت‌های مهم">
-        <h3>یادداشت‌های مهم</h3>
-        <ul>
-          <li>صفحه فیسبوک ما را برای به‌روزرسانی‌های لحظه‌ای دنبال کنید.</li>
-          <li>خدمات تأیید دانشجویی در دسترس است.</li>
-          <li>گواهینامه‌ها برای فارغ‌التحصیلان اخیر آماده است.</li>
-        </ul>
-      </aside>
-    </section>
-  </main>
+    <button id="backToTopBtn" onclick="scrollToTop()" aria-label="Back to Top" data-tooltip="Back to Top"><i class="fas fa-chevron-up"></i></button>
 
-  <!-- Footer -->
-  <footer>
-    <a href="https://www.facebook.com/profile.php?id=61576355386024" target="_blank" rel="noopener noreferrer" aria-label="بازدید از صفحه فیسبوک ما">
-      <img src="./facebook.png" alt="لینک فیسبوک" height="30" class "social-icon" />
-    </a>
-    <p>© ۱۴۰۴ آکادمی هوپ‌بریج. تمامی حقوق محفوظ است.</p>
-  </footer>
-
-  <!-- Facebook SDK -->
-  <div id="fb-root"></div>
-  <script async defer crossorigin="anonymous"
-    src="https://connect.facebook.net/fa_IR/sdk.js#xfbml=1&version=v19.0"
-    nonce="AcademyFbFeed">
-  </script>
-
-  <!-- External JS -->
-  <script src="script.js" defer></script>
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous"
+            src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v19.0"
+            nonce="AcademyFbFeed">
+    </script>
 </body>
 </html>

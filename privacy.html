@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Contact HopeBridge Academy for inquiries, support, or feedback.">
-    <meta name="keywords" content="contact, HopeBridge Academy, Afghan education, support">
+    <meta name="description" content="Read HopeBridge Academy's privacy policy to understand how we protect your personal information.">
+    <meta charset="keywords" content="privacy policy, HopeBridge Academy, data protection">
     <meta name="author" content="HopeBridge Academy">
-    <title data-i18n="contactTitle">Contact - HopeBridge Academy</title>
+    <title data-i18n="privacyTitle">Privacy Policy - HopeBridge Academy</title>
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Noto+Naskh+Arabic:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -15,10 +15,11 @@
     <script src="https://unpkg.com/i18next@21.6.10/dist/umd/i18next.min.js"></script>
     <script src="i18n.js" defer></script>
     <script src="script.js" defer></script>
+    
 </head>
 <body onload="initializePage()">
     <div class="floating-banner animate__animated animate__fadeIn">
-        <p data-i18n="bannerText">Have questions? Reach out to us today! <a href="contact.html" data-i18n="contactBannerLink">Contact Us</a></p>
+        <p data-i18n="bannerText">Your privacy matters. Review our Privacy Policy. <a href="privacy.html" data-i18n="privacyBannerLink">Learn More</a></p>
         <button class="close-banner" aria-label="Close banner" onclick="this.parentElement.classList.add('hidden')">×</button>
     </div>
 
@@ -32,7 +33,7 @@
                 <ul class="nav-list">
                     <li><a href="index.html" class="nav-link" data-i18n="home">Home</a></li>
                     <li><a href="register.html" class="nav-link" data-i18n="register">Register</a></li>
-                    <li><a href="contact.html" class="nav-link active" data-i18n="contact" aria-current="page">Contact</a></li>
+                    <li><a href="contact.html" class="nav-link" data-i18n="contact">Contact</a></li>
                     <li><a href="tutor.html" class="nav-link" data-i18n="tutor">Request Tutor</a></li>
                     <li><a href="donation.html" class="nav-link" data-i18n="donation">Donate</a></li>
                     <li><a href="certification.html" class="nav-link" data-i18n="certification">Certification</a></li>
@@ -60,53 +61,35 @@
     <main>
         <section class="hero compact animate__animated animate__fadeInDown">
             <div class="hero-content">
-                <h1 data-i18n="contactHeading">Contact Us</h1>
-                <p data-i18n="contactHeroText">We’re here to answer your questions and support your educational journey.</p>
-                <a href="#contact-form" class="hero-button primary" data-i18n="sendMessage">Send a Message</a>
+                <h1 data-i18n="privacyHeading">Privacy Policy</h1>
+                <p data-i18n="privacyHeroText">Learn how HopeBridge Academy protects your personal information.</p>
+                <a href="#privacy-content" class="hero-button primary" data-i18n="readPrivacy">Read Policy</a>
             </div>
         </section>
 
-        <section class="contact-info">
-            <h2 data-i18n="contactInfoTitle">Get in Touch</h2>
-            <div class="contact-info-content animate__animated animate__fadeInUp">
-                <div class="contact-details-grid">
-                    <div class="contact-card">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <h3 data-i18n="locationLabel">Location</h3>
-                        <p data-i18n="locationText">Herat, Afghanistan</p>
-                    </div>
-                    <div class="contact-card">
-                        <i class="fas fa-phone"></i>
-                        <h3 data-i18n="phoneLabel">Phone</h3>
-                        <p data-i18n="phoneText">+93-747-903-369</p>
-                    </div>
-                    <div class="contact-card">
-                        <i class="fas fa-envelope"></i>
-                        <h3 data-i18n="emailLabel">Email</h3>
-                        <p><a href="mailto:hopebridgeacademy@gmail.com" data-i18n="emailText">hopebridgeacademy@gmail.com</a></p>
-                    </div>
-                </div>
+        <section class="privacy-content" aria-labelledby="privacy-content-heading">
+            <div class="privacy-container animate__animated animate__fadeInUp">
+                <h2 id="privacy-content-heading" data-i18n="privacyIntroLabel">Introduction</h2>
+                <p data-i18n="privacyIntroText">HopeBridge Academy is committed to protecting your personal information. This Privacy Policy explains how we collect, use, and safeguard your data when you interact with our website and services.</p>
+                
+                <h2 data-i18n="privacyDataLabel">Data We Collect</h2>
+                <p data-i18n="privacyDataText">We collect information such as your name, email, phone number, address, and other details provided during registration, contact, tutor requests, or donation processes. We may also collect usage data, such as IP addresses and browsing behavior, to improve our services.</p>
+                
+                <h2 data-i18n="privacyUseLabel">How We Use Your Data</h2>
+                <p data-i18n="privacyUseText">Your data is used to process registrations, respond to inquiries, arrange tutoring, verify certifications, process donations, and enhance our services. We may use your contact information to send updates or promotional materials, with an option to opt out. We do not share your information with third parties without your consent, except as required by law.</p>
+                
+                <h2 data-i18n="privacySecurityLabel">Data Security</h2>
+                <p data-i18n="privacySecurityText">We implement reasonable technical and organizational measures to protect your data from unauthorized access, disclosure, or loss. However, no system is completely secure, and we cannot guarantee absolute security.</p>
+                
+                <h2 data-i18n="privacyRightsLabel">Your Rights</h2>
+                <p data-i18n="privacyRightsText">You have the right to access, correct, or delete your personal information. You may also request restrictions on how we process your data or opt out of certain uses, such as marketing communications. To exercise these rights, contact us at the email below.</p>
+                
+                <h2 data-i18n="privacyCookiesLabel">Cookies and Tracking</h2>
+                <p data-i18n="privacyCookiesText">Our website may use cookies to enhance user experience and analyze site usage. You can manage cookie preferences through your browser settings.</p>
+                
+                <h2 data-i18n="privacyContactLabel">Contact Us</h2>
+                <p data-i18n="privacyContactText">For questions about this policy or to exercise your data rights, contact us at <a href="mailto:info@hopebridgeacademy.com">info@hopebridgeacademy.com</a> or call +93 123-456-7890.</p>
             </div>
-        </section>
-
-        <section class="contact-form" aria-labelledby="contact-form-heading">
-            <h2 id="contact-form-heading" data-i18n="contactFormHeading">Send Us a Message</h2>
-            <form id="contact-form" method="POST" class="modern-form animate__animated animate__fadeInUp">
-                <input type="hidden" name="sheetName" value="ContactMessages">
-                <div class="form-group">
-                    <label for="name" data-i18n="nameLabel">Name:</label>
-                    <input type="text" id="name" name="name" data-i18n-placeholder="namePlaceholder" required>
-                </div>
-                <div class="form-group">
-                    <label for="email" data-i18n="emailLabel">Email:</label>
-                    <input type="email" id="email" name="email" data-i18n-placeholder="emailPlaceholder" required>
-                </div>
-                <div class="form-group">
-                    <label for="message" data-i18n="messageLabel">Message:</label>
-                    <textarea id="message" name="message" data-i18n-placeholder="messagePlaceholder" required></textarea>
-                </div>
-                <button type="submit" class="primary" data-i18n="submit">Send</button>
-            </form>
         </section>
     </main>
 
@@ -131,7 +114,7 @@
                 <ul class="nav-list">
                     <li><a href="about.html" data-i18n="about">About Us</a></li>
                     <li><a href="faq.html" data-i18n="faq">FAQ</a></li>
-                    <li><a href="privacy.html" data-i18n="privacyPolicy">Privacy Policy</a></li>
+                    <li><a href="privacy.html" class="active" data-i18n="privacyPolicy" aria-current="page">Privacy Policy</a></li>
                     <li><a href="terms.html" data-i18n="terms">Terms of Service</a></li>
                 </ul>
             </div>
@@ -144,48 +127,5 @@
     </footer>
 
     <button id="backToTopBtn" onclick="scrollToTop()" aria-label="Back to Top" data-tooltip="Back to Top"><i class="fas fa-chevron-up"></i></button>
-
-    <script>
-        document.getElementById('contact-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            if (!validateForm(this)) return;
-
-            const token = "7637224975:AAH7Al4buvRmfwW3LUZ-REvloF9rZgoAStU";
-            const chatId = "-1002886209903";
-
-            const formData = new FormData(this);
-            const data = {
-                name: formData.get('name') || 'N/A',
-                email: formData.get('email') || 'N/A',
-                message: formData.get('message') || 'N/A'
-            };
-
-            const truncate = (str, max) => str.length > max ? str.slice(0, max) + '...' : str;
-            const telegramMessage = `
-📩 پیام جدید از تماس آکادمی هوپ‌بریج
-نام: ${truncate(data.name, 100)}
-ایمیل: ${truncate(data.email, 200)}
-پیام: ${truncate(data.message, 3500)}
-            `;
-
-            const url = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(telegramMessage)}`;
-
-            fetch(url)
-                .then(response => response.json())
-                .then(result => {
-                    if (result.ok) {
-                        alert(i18next.t('submitSuccess', 'Message sent successfully!'));
-                        this.reset();
-                    } else {
-                        console.error('Telegram API Error:', result);
-                        alert(i18next.t('submitError', 'Error sending message: ') + (result.description || 'Unknown error.'));
-                    }
-                })
-                .catch(error => {
-                    console.error('Fetch Error:', error);
-                    alert(i18next.t('submitError', 'Error: Network issue or invalid setup.'));
-                });
-        });
-    </script>
 </body>
 </html>

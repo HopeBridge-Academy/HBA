@@ -319,6 +319,7 @@ i18next.init({
                 paymentDetailsText: "Bank: Ghazanfar Bank <br> Account: I099520000097",
                 paymentNote: "Please include your name in the transaction reference.",
                 donationBannerLink: "Donate Now",
+                paymentcart: 'Af Pay (HesabPay)',
 
                 // Certification Page
                 certificationHeading: "Verify Student Certification",
@@ -681,7 +682,7 @@ i18next.init({
                 locationLabel: "موقعیت:",
                 locationText: "هرات، افغانستان",
                 phoneLabel: "تلفن:",
-                phoneText: "+93-747-903-369",
+                phoneText: "۹۳-۷۴۷-۹۰۳-۳۶۹+",
                 emailText: "hopebridgeacademy@gmail.com",
                 addressContact: "آدرس: کابل، افغانستان",
                 contactBannerLink: "با ما تماس بگیرید",
@@ -749,9 +750,10 @@ i18next.init({
                 amountLabel: "مبلغ کمک مالی (دلار):",
                 amountPlaceholder: "مبلغ کمک مالی را وارد کنید",
                 paymentDetailsHeading: "اطلاعات پرداخت",
-                paymentDetailsText: "بانک: بانک غزنفر <br> شماره حساب: I099520000097",
+                paymentDetailsText: "بانک:  غضنفر بانک <br> شماره حساب: I099520000097",
                 paymentNote: "لطفاً نام خود را در مرجع تراکنش ذکر کنید.",
                 donationBannerLink: "اکنون کمک کنید",
+                paymentcart: 'Af Pay (حساب پی)',
 
                 // Certification Page
                 certificationHeading: "تأیید گواهینامه دانشجو",

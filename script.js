@@ -556,3 +556,16 @@ function submitDonation(event) {
 }
 
 
+document.addEventListener('DOMContentLoaded', function () {
+    const faqQuestions = document.querySelectorAll('.faq-question');
+
+    faqQuestions.forEach(question => {
+        question.addEventListener('click', function () {
+            const isExpanded = this.getAttribute('aria-expanded') === 'true';
+            faqQuestions.forEach(q => q.setAttribute('aria-expanded', 'false')); // بستن همه سوالات
+            if (!isExpanded) {
+                this.setAttribute('aria-expanded', 'true'); // باز کردن سوال کلیک‌شده
+            }
+        });
+    });
+});

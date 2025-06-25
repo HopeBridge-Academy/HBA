@@ -59,6 +59,20 @@ body {
     backdrop-filter: blur(5px);
 }
 
+.floating-banner.hidden {
+    display: none;
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+html[dir="rtl"] .floating-banner {
+    right: auto;
+    left: 2rem;
+}
+
+html[dir="rtl"] .close-banner {
+    margin-left: 1rem;
+}
 .floating-banner a {
     color: #F4A261; /* Warm gold */
     font-weight: 700;
@@ -1590,5 +1604,61 @@ html[dir="rtl"] .course-grid, html[dir="rtl"] .mission-grid, html[dir="rtl"] .ev
     }
     html[dir="rtl"] .nav-link {
         text-align: right; /* راست‌چین متن */
+    }
+}
+.faq-answer {
+    display: none;
+    padding: 0 1.5rem 1.5rem;
+    color: #333333;
+    font-size: 1.1rem;
+}
+
+.faq-question[aria-expanded="true"] + .faq-answer {
+    display: block;
+}
+
+html[dir="rtl"] .faq-question {
+    text-align: right;
+    flex-direction: row-reverse;
+}
+
+html[dir="rtl"] .faq-answer {
+    text-align: right;
+}
+/* اطمینان از نمایش دکمه منو در حالت موبایل */
+@media (max-width: 768px) {
+    .mobile-menu-toggle {
+        display: block !important;
+        position: relative;
+        z-index: 1001; /* بالاتر از سایر عناصر */
+        font-size: 1.8rem;
+        color: #FFFFFF;
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 0.6rem;
+        border-radius: 6px;
+        transition: background 0.3s;
+        margin-right: 1rem; /* فاصله از لبه */
+    }
+
+    html[dir="rtl"] .mobile-menu-toggle {
+        margin-right: 0;
+        margin-left: 1rem; /* فاصله مناسب در RTL */
+    }
+
+    .main-nav {
+        display: none;
+    }
+
+    .main-nav.active {
+        display: block;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: linear-gradient(145deg, #4A90E2, #26A69A);
+        padding: 1.5rem;
+        box-shadow: 0 6px 12px rgba(74, 144, 226, 0.4);
     }
 }

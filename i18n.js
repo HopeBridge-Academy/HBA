@@ -40,6 +40,10 @@ i18next.init({
                 searchMessage: 'Searching for "{{query}}"',
                 submitSuccess: "Submission successful!",
                 submitError: "Error occurred. Please try again.",
+                submitSuccess: 'Registration submitted successfully!',
+                submitError: 'Error: Network issue or invalid setup.',
+                firstNameLabel: 'First Name',
+                submiting: 'Click Here to Register',
 
                 // Index Page
                 searchPlaceholder: "Search courses...",
@@ -472,6 +476,10 @@ i18next.init({
                 searchMessage: 'جستجو برای "{{query}}"',
                 submitSuccess: "ارسال با موفقیت انجام شد!",
                 submitError: "خطایی رخ داد. لطفاً دوباره تلاش کنید.",
+                submitSuccess: 'ثبت‌نام با موفقیت ارسال شد!',
+                submitError: 'خطا: مشکل شبکه یا تنظیمات نامعتبر.',
+                firstNameLabel: 'نام',
+                submiting: 'برای ثبت نام کلیک کنید',
 
                 // Index Page
                 searchPlaceholder: "جستجوی دوره‌ها...",

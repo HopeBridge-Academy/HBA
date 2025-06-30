@@ -228,6 +228,7 @@ i18next.init({
                 detailsLabel: "Additional Details:",
                 detailsPlaceholder: "Enter any additional details",
                 submit: "Submit",
+                instructorModernTeaching: 'Familiarity with Modern Teaching Methods',
 
                 // Contact Page
                 contactHeading: "Contact Us",
@@ -380,7 +381,7 @@ i18next.init({
                 faqQ3: "What courses do you offer?",
                 faqA3: "We offer courses in Language Skills, Computer Skills, Psychology Workshops, and Business Skills. Check our Register page for details.",
                 faqQ4: "Are certificates provided?",
-                faqA4: "Yes, upon completion of our courses, students receive internationally recognized certificates.",
+                faqA4: "Yes, Upon successful completion of the courses, students will receive certificates that can be verified and validated online from anywhere in the world via the official website using a unique identification code (ID).",
                 faqSupportLabel: "Support and Contact",
                 faqQ5: "How can I contact you?",
                 faqA5: "You can reach us via email at hopebridgeacademy@gmail.com or phone at +93-747-903-369. Visit our Contact page for more options.",
@@ -667,6 +668,8 @@ i18next.init({
                 detailsLabel: "جزئیات اضافی:",
                 detailsPlaceholder: "جزئیات اضافی را وارد کنید",
                 submit: "ارسال",
+                instructorModernTeaching: 'آشنایی با روش‌های نوین تدریس',
+
 
                 // Contact Page
                 contactHeading: "تماس با ما",
@@ -818,7 +821,7 @@ i18next.init({
                 faqQ3: "چه دوره‌هایی ارائه می‌دهید؟",
                 faqA3: "ما دوره‌هایی در مهارت‌های زبانی، مهارت‌های کامپیوتری، کارگاه‌های روان‌شناسی و مهارت‌های کسب‌وکار ارائه می‌دهیم. برای جزئیات به صفحه ثبت‌نام مراجعه کنید.",
                 faqQ4: "آیا گواهینامه ارائه می‌شود؟",
-                faqA4: "بله، پس از اتمام دوره‌ها، دانشجویان گواهینامه‌های معتبر بین‌المللی دریافت می‌کنند.",
+                faqA4: "با پایان موفقانهٔ دوره‌ها، دانشجویان گواهی‌نامه‌هایی دریافت خواهند کرد که در هر نقطه از جهان، از طریق وب‌سایت رسمی و شناسهٔ منحصر به‌فرد (ID)، به‌صورت آنلاین قابل بررسی و تأیید هستند.",
                 faqSupportLabel: "پشتیبانی و تماس",
                 faqQ5: "چگونه می‌توانم با شما تماس بگیرم؟",
                 faqA5: "می‌توانید از طریق ایمیل به hopebridgeacademy@gmail.com یا تلفن +93-747-903-369 با ما تماس بگیرید. برای گزینه‌های بیشتر به صفحه تماس مراجعه کنید.",

@@ -828,7 +828,7 @@ nav {
 
 .newsletter h2 {
     font-size: 2.5rem;
-    color: #4A90E2; /* Soft blue */
+    color: #4a90e2; /* Soft blue */
     margin-bottom: 1.5rem;
 }
 
@@ -1461,8 +1461,8 @@ footer p {
     bottom: 3rem;
     right: 3rem;
     background: linear-gradient(145deg, #4A90E2, #26A69A); /* Blue to teal */
-    color: #FFFFFF;
-    border: none;
+    color: #3c15a8;
+    border: #333333;
     border-radius: 50%;
     width: 60px;
     height: 60px;
@@ -1632,7 +1632,7 @@ html[dir="rtl"] .faq-answer {
         position: relative;
         z-index: 1001; /* بالاتر از سایر عناصر */
         font-size: 1.8rem;
-        color: #FFFFFF;
+        color: #ffffff;
         background: none;
         border: none;
         cursor: pointer;
@@ -1657,8 +1657,8 @@ html[dir="rtl"] .faq-answer {
         top: 100%;
         left: 0;
         width: 100%;
-        background: linear-gradient(145deg, #4A90E2, #26A69A);
+        background: linear-gradient(145deg, #4a91e2c4, #26a699bb);
         padding: 1.5rem;
-        box-shadow: 0 6px 12px rgba(74, 144, 226, 0.4);
+        box-shadow: 0 6px 12px rgba(74, 145, 226, 0.589);
     }
 }

@@ -1,274 +1,265 @@
-<!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="HopeBridge Academy empowers Afghan youth with accessible education and skill-building opportunities.">
-    <!-- Removed keywords meta tag as it's outdated -->
-    <meta name="author" content="HopeBridge Academy">
-    <!-- Added Open Graph and Twitter Card meta tags -->
-    <meta property="og:title" content="HopeBridge Academy - Empowering Afghan Youth">
-    <meta property="og:description" content="Join thousands of Afghan youth in building a brighter tomorrow through education.">
-    <meta property="og:image" content="https://hopebridgeacademy.com/logo.png">
-    <meta property="og:url" content="https://hopebridgeacademy.com">
-    <meta property="og:type" content="website">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="HopeBridge Academy - Empowering Afghan Youth">
-    <meta name="twitter:description" content="Join thousands of Afghan youth in building a brighter tomorrow through education.">
-    <meta name="twitter:image" content="https://hopebridgeacademy.com/logo.png">
-    <title data-i18n="homeTitle">Home - HopeBridge Academy</title>
-    <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Noto+Naskh+Arabic:wght@400;700&display=swap" rel="stylesheet">
-    <!-- Updated Font Awesome to 6.6.0 -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
-    <!-- Updated jQuery to 3.7.1 -->
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <!-- Updated i18next to 23.15.2 -->
-    <script src="https://unpkg.com/i18next@23.15.2/dist/umd/i18next.min.js"></script>
-    <script src="i18n.js" defer></script>
-    <script src="script.js" defer></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Hope Bridge Academy (اکادمی هوپ بریج - HBA) empowers Afghan youth with accessible education and skill-building opportunities in English and Persian.">
+<!-- Removed keywords meta tag as it's outdated -->
+<meta name="author" content="HopeBridge Academy">
+<!-- Added Open Graph and Twitter Card meta tags -->
+<meta property="og:title" content="Hope Bridge Academy - اکادمی هوپ بریج - HBA">
+<meta property="og:description" content="Join thousands of Afghan youth in building a brighter tomorrow through education at Hope Bridge Academy (اکادمی هوپ بریج - HBA).">
+<meta property="og:image" content="https://hopebridgeacademy.com/logo.png">
+<meta property="og:url" content="https://hopebridgeacademy.com">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Hope Bridge Academy - اکادمی هوپ بریج - HBA">
+<meta name="twitter:description" content="Join thousands of Afghan youth in building a brighter tomorrow through education at Hope Bridge Academy (اکادمی هوپ بریج - HBA).">
+<meta name="twitter:image" content="https://hopebridgeacademy.com/logo.png">
+<!-- Added hreflang for multilingual support (assuming separate language versions; adjust URLs if needed) -->
+<link rel="alternate" hreflang="en" href="https://hopebridgeacademy.com/en/index.html" />
+<link rel="alternate" hreflang="fa" href="https://hopebridgeacademy.com/fa/index.html" />
+<link rel="alternate" hreflang="x-default" href="https://hopebridgeacademy.com/index.html" />
+<title data-i18n="homeTitle">Hope Bridge Academy - اکادمی هوپ بریج - HBA</title>
+<link rel="stylesheet" href="styles.css">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Noto+Naskh+Arabic:wght@400;700&display=swap" rel="stylesheet">
+<!-- Updated Font Awesome to 6.6.0 -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+<!-- Updated jQuery to 3.7.1 -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<!-- Updated i18next to 23.15.2 -->
+<script src="https://unpkg.com/i18next@23.15.2/dist/umd/i18next.min.js"></script>
+<script src="i18n.js" defer></script>
+<script src="script.js" defer></script>
 </head>
 <body onload="initializePage()">
-    <div class="floating-banner animate__animated animate__bounceInRight">
-        <p data-i18n="bannerText">Join our new online courses today and get 20% off! <a href="register.html" data-i18n="bannerLink">Sign Up Now</a></p>
-        <button class="close-banner" aria-label="Close banner" onclick="this.parentElement.classList.add('hidden')">×</button>
-    </div>
-
-    <header>
-        <nav>
-            <a href="index.html" class="logo"><img src="logo.png" alt="HopeBridge Academy Logo"></a>
-            <button class="mobile-menu-toggle" aria-label="Toggle menu" onclick="toggleMobileMenu()">
-                <i class="fas fa-bars"></i>
-            </button>
-            <div class="main-nav">
-                <ul class="nav-list">
-                    <li><a href="index.html" class="nav-link active" data-i18n="home" aria-current="page">Home</a></li>
-                    <li><a href="register.html" class="nav-link" data-i18n="register">Register</a></li>
-                    <li><a href="contact.html" class="nav-link" data-i18n="contact">Contact</a></li>
-                    <li><a href="tutor.html" class="nav-link" data-i18n="tutor">Request Tutor</a></li>
-                    <li><a href="donation.html" class="nav-link" data-i18n="donation">Donate</a></li>
-                    <li><a href="certification.html" class="nav-link" data-i18n="certification">Certification</a></li>
-                    <li><a href="login.html" id="auth-link" class="nav-link" data-i18n="login">Staff Portal</a></li>
-                </ul>
-            </div>
-            <div class="header-actions">
-                <div class="search-bar">
-                    <!-- Fixed placeholder internationalization -->
-                    <input type="text" id="searchInput" data-i18n="[placeholder]searchPlaceholder" aria-label="Search courses">
-                    <button onclick="searchCourses()" aria-label="Search"><i class="fas fa-search"></i></button>
-                </div>
-                <a href="ad.html" class="bell-icon" aria-label="Notifications" data-tooltip="View Notifications">
-                    <img src="bell.gif" alt="Notification Bell">
-                </a>
-                <div class="language-switcher">
-                    <select id="language-select" onchange="changeLanguage(this.value)" aria-label="Select language">
-                        <option value="en" data-i18n="englishOption">English</option>
-                        <option value="fa" data-i18n="persianOption">فارسی</option>
-                    </select>
-                </div>
-            </div>
-        </nav>
-    </header>
-
-    <main>
-        <section class="hero" style="position: relative; width: 100%; height: 100vh; overflow: hidden;">
-            <!-- Added controls, captions, and fallback for video -->
-            <video controls autoplay muted loop class="hero-video" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;" poster="fallback-image.jpg">
-                <source src="academy-video.mp4" type="video/mp4">
-                <track src="captions.vtt" kind="captions" srclang="en" label="English">
-                Your browser does not support the video tag. <a href="fallback-image.jpg">View image instead</a>.
-            </video>
-            <!-- Adjusted animation to prevent jumping -->
-            <div class="hero-content animate__animated animate__fadeInDown" style="position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; text-align: center; color: white; padding: 20px; animation-duration: 1s; animation-timing-function: ease-in-out;">
-                <h1 data-i18n="heroTitle">Transform Your Future with HopeBridge Academy</h1>
-                <p data-i18n="heroText">Join thousands of Afghan youth in building a brighter tomorrow through education.</p>
-                <div class="hero-actions">
-                    <a href="register.html" class="hero-button primary" data-i18n="heroButton">Enroll Today</a>
-                </div>
-            </div>
-        </section>
-
-        <section class="welcome">
-            <div class="welcome-content animate__animated animate__fadeInUp">
-                <h1 data-i18n="welcome">Welcome to HopeBridge Academy</h1>
-                <p data-i18n="welcomeText">Empowering Afghan youth through accessible education and skill-building opportunities.</p>
-                <a href="about.html" class="welcome-button" data-i18n="learnMore">Learn More</a>
-            </div>
-            <img src="Welcome.jpg" alt="Welcome to HopeBridge Academy" class="welcome-img animate__animated animate__zoomIn">
-        </section>
-
-        <section class="statistics">
-            <h2 data-i18n="statsTitle">Our Impact</h2>
-            <div class="stats-container animate__animated animate__fadeInUp">
-                <div class="stat-card">
-                    <i class="fas fa-users"></i>
-                    <h3 data-i18n="studentsCount">5,000+</h3>
-                    <p data-i18n="studentsLabel">Students Enrolled</p>
-                </div>
-                <div class="stat-card">
-                    <i class="fas fa-book-open"></i>
-                    <h3 data-i18n="coursesCount">20+</h3>
-                    <p data-i18n="coursesLabel">Courses Offered</p>
-                </div>
-                <div class="stat-card">
-                    <i class="fas fa-chalkboard-teacher"></i>
-                    <h3 data-i18n="tutorsCount">100+</h3>
-                    <p data-i18n="tutorsLabel">Expert Tutors</p>
-                </div>
-            </div>
-        </section>
-
-        <section class="testimonials">
-            <h2 data-i18n="testimonialsTitle">What Our Students Say</h2>
-            <div class="testimonial-slider animate__animated animate__fadeInUp">
-                <div class="testimonial-card active">
-                    <img src="student1.jpg" alt="Student Sara A." class="testimonial-img">
-                    <p data-i18n="testimonial1">"HopeBridge changed my life with its amazing courses!"</p>
-                    <h4 data-i18n="student1Name">Sara A.</h4>
-                </div>
-                <div class="testimonial-card">
-                    <img src="student2.jpg" alt="Student Ahmad K." class="testimonial-img">
-                    <p data-i18n="testimonial2">"The tutors are supportive and the content is top-notch."</p>
-                    <h4 data-i18n="student2Name">Ahmad K.</h4>
-                </div>
-                <div class="testimonial-card">
-                    <img src="student3.jpg" alt="Student Zahra M." class="testimonial-img">
-                    <p data-i18n="testimonial3">"I gained skills that helped me start my own business."</p>
-                    <h4 data-i18n="student3Name">Zahra M.</h4>
-                </div>
-            </div>
-            <div class="slider-controls">
-                <button onclick="prevSlide()" aria-label="Previous Slide"><i class="fas fa-chevron-left"></i></button>
-                <button onclick="nextSlide()" aria-label="Next Slide"><i class="fas fa-chevron-right"></i></button>
-            </div>
-        </section>
-
-        <section class="mission">
-            <h2 data-i18n="missionLabel">Our Mission</h2>
-            <div class="mission-content animate__animated animate__fadeInUp">
-                <p data-i18n="missionText">To provide transformative education that empowers Afghan youth to achieve their full potential and contribute to a prosperous society.</p>
-                <div class="mission-grid">
-                    <div class="mission-card">
-                        <h3 data-i18n="visionLabel">Our Vision</h3>
-                        <p data-i18n="visionText">A future where every Afghan has access to quality education, fostering personal growth and community development.</p>
-                    </div>
-                    <div class="mission-card">
-                        <h3 data-i18n="valuesLabel">Core Values</h3>
-                        <ul>
-                            <li data-i18n="value1">Integrity: Upholding honesty and ethical standards.</li>
-                            <li data-i18n="value2">Excellence: Striving for the highest quality in education.</li>
-                            <li data-i18n="value3">Inclusivity: Embracing diversity and opportunities for all.</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="events">
-            <h2 data-i18n="eventsTitle">Upcoming Events</h2>
-            <div class="event-list animate__animated animate__zoomIn">
-                <article class="event-card">
-                    <h3 data-i18n="event1Title">Career Workshop</h3>
-                    <p data-i18n="event1Desc">Join us to learn about career opportunities and resume building.</p>
-                    <p data-i18n="event1Date">Date: July 10, 2025</p>
-                    <a href="register.html" class="event-button" data-i18n="eventRegister">Register</a>
-                </article>
-                <article class="event-card">
-                    <h3 data-i18n="event2Title">Coding Bootcamp</h3>
-                    <p data-i18n="event2Desc">A 3-day intensive course to kickstart your coding journey.</p>
-                    <p data-i18n="event2Date">Date: August 5, 2025</p>
-                    <a href="register.html" class="event-button" data-i18n="eventRegister">Register</a>
-                </article>
-            </div>
-        </section>
-
-        <section class="courses">
-            <h2 data-i18n="coursesTitle">Our Courses</h2>
-            <div class="course-list animate__animated animate__fadeInUp">
-                <article class="course-card">
-                    <img src="Langua.jpg" alt="Language Skills Course Illustration">
-                    <h3 data-i18n="languageCourse">Language Skills</h3>
-                    <p data-i18n="languageDesc">Master Persian, English, and Pashto with beginner to advanced courses.</p>
-                    <a href="register.html" class="course-button" data-i18n="enrollNow">Enroll Now</a>
-                </article>
-                <article class="course-card">
-                    <img src="Com.jpg" alt="Computer Skills Course Illustration">
-                    <h3 data-i18n="computerCourse">Computer Skills</h3>
-                    <p data-i18n="computerDesc">Learn essential software, coding, and digital literacy skills.</p>
-                    <a href="register.html" class="course-button" data-i18n="enrollNow">Enroll Now</a>
-                </article>
-                <article class="course-card">
-                    <!-- Renamed image file -->
-                    <img src="image (1).jpg" alt="Psychology Workshops Illustration">
-                    <h3 data-i18n="psychCourse">Psychology Workshops</h3>
-                    <p data-i18n="psychDesc">Explore mental health practices and emotional well-being.</p>
-                    <a href="register.html" class="course-button" data-i18n="enrollNow">Enroll Now</a>
-                </article>
-                <article class="course-card">
-                    <img src="biss.jpg" alt="Business Skills Course Illustration">
-                    <h3 data-i18n="businessCourse">Business Skills</h3>
-                    <p data-i18n="businessDesc">Learn entrepreneurship, marketing, and financial management.</p>
-                    <a href="register.html" class="course-button" data-i18n="enrollNow">Enroll Now</a>
-                </article>
-            </div>
-        </section>
-
-        <section class="cta">
-            <h2 data-i18n="ctaTitle">Get Started</h2>
-            <div class="cta-buttons animate__animated animate__fadeInUp">
-                <a href="register.html" class="button primary" data-i18n="registerNow">Register Now</a>
-                <a href="tutor.html" class="button secondary" data-i18n="requestTutorNow">Request a Tutor</a>
-                <a href="donation.html" class="button tertiary" data-i18n="donateNow">Donate Now</a>
-            </div>
-        </section>
-
-        <section class="newsletter">
-            <h2 data-i18n="newsletterTitle">Subscribe to Our Newsletter</h2>
-            <p data-i18n="newsletterDesc">Stay updated with our latest courses and events!</p>
-            <!-- Added label and form attributes -->
-            <form id="newsletter-form" action="https://www.youtube.com/channel/UCtqHtyvuTbwOCM7NZy-DpJQ" method="POST" class="newsletter-form animate__animated animate__fadeIn">
-                <label for="newsletter-email" data-i18n="emailLabel">Email Address</label>
-                <input type="email" id="newsletter-email" name="email" data-i18n="[placeholder]emailPlaceholder" required aria-label="Email for newsletter">
-                <button type="submit" data-i18n="subscribe">Subscribe</button>
-            </form>
-        </section>
-    </main>
-
-    <footer>
-        <div class="footer-content animate__animated animate__fadeInUp">
-            <div class="social-media-links">
-                <a href="https://www.facebook.com/profile.php?id=61576355386024" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Facebook">
-                    <i class="fab fa-facebook-f"></i>
-                </a>
-                <!-- Updated Twitter to X -->
-                <a href="https://x.com/Hopebridge96846" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="X">
-                    <i class="fab fa-x-twitter"></i>
-                </a>
-                <a href="https://www.instagram.com/hopebridgeacademy1" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Instagram">
-                    <i class="fab fa-instagram"></i>
-                </a>
-                <a href="https://www.youtube.com/channel/UCtqHtyvuTbwOCM7NZy-DpJQ" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="YouTube">
-                    <i class="fab fa-youtube"></i>
-                </a>
-            </div>
-            <div class="footer-nav">
-                <h4 data-i18n="footerNavTitle">Explore</h4>
-                <ul class="nav-list">
-                    <li><a href="about.html" data-i18n="about">About Us</a></li>
-                    <li><a href="faq.html" data-i18n="faq">FAQ</a></li>
-                    <li><a href="privacy.html" data-i18n="privacyPolicy">Privacy Policy</a></li>
-                    <li><a href="terms.html" data-i18n="terms">Terms of Service</a></li>
-                </ul>
-            </div>
-            <div class="footer-contact">
-                <h4 data-i18n="contactUsTitle">Contact Us</h4>
-                <p data-i18n="contactInfo">Email: info@hopebridgeacademy.com | Phone: +93 123-456-7890</p>
-            </div>
-        </div>
-        <p data-i18n="copyright">© 2025 HopeBridge Academy</p>
-    </footer>
-
-    <button id="backToTopBtn" onclick="scrollToTop()" aria-label="Back to Top" title="Back to Top"><i class="fas fa-chevron-up"></i></button>
+<div class="floating-banner animate__animated animate__bounceInRight">
+<p data-i18n="bannerText">Join our new online courses today and get 20% off! <a href="register.html" data-i18n="bannerLink">Sign Up Now</a></p>
+<button class="close-banner" aria-label="Close banner" onclick="this.parentElement.classList.add('hidden')">×</button>
+</div>
+<header>
+<nav>
+<a href="index.html" class="logo"><img src="logo.png" alt="Hope Bridge Academy Logo - لوگوی اکادمی هوپ بریج (HBA)"></a>
+<button class="mobile-menu-toggle" aria-label="Toggle menu" onclick="toggleMobileMenu()">
+<i class="fas fa-bars"></i>
+</button>
+<div class="main-nav">
+<ul class="nav-list">
+<li><a href="index.html" class="nav-link active" data-i18n="home" aria-current="page">Home</a></li>
+<li><a href="register.html" class="nav-link" data-i18n="register">Register</a></li>
+<li><a href="contact.html" class="nav-link" data-i18n="contact">Contact</a></li>
+<li><a href="tutor.html" class="nav-link" data-i18n="tutor">Request Tutor</a></li>
+<li><a href="donation.html" class="nav-link" data-i18n="donation">Donate</a></li>
+<li><a href="certification.html" class="nav-link" data-i18n="certification">Certification</a></li>
+<li><a href="login.html" id="auth-link" class="nav-link" data-i18n="login">Staff Portal</a></li>
+</ul>
+</div>
+<div class="header-actions">
+<div class="search-bar">
+<!-- Fixed placeholder internationalization -->
+<input type="text" id="searchInput" data-i18n="[placeholder]searchPlaceholder" aria-label="Search courses">
+<button onclick="searchCourses()" aria-label="Search"><i class="fas fa-search"></i></button>
+</div>
+<a href="ad.html" class="bell-icon" aria-label="Notifications" data-tooltip="View Notifications">
+<img src="bell.gif" alt="Notification Bell">
+</a>
+<div class="language-switcher">
+<select id="language-select" onchange="changeLanguage(this.value)" aria-label="Select language">
+<option value="en" data-i18n="englishOption">English</option>
+<option value="fa" data-i18n="persianOption">فارسی</option>
+</select>
+</div>
+</div>
+</nav>
+</header>
+<main>
+<section class="hero" style="position: relative; width: 100%; height: 100vh; overflow: hidden;">
+<!-- Added controls, captions, and fallback for video -->
+<video controls autoplay muted loop class="hero-video" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;" poster="fallback-image.jpg">
+<source src="academy-video.mp4" type="video/mp4">
+<track src="captions.vtt" kind="captions" srclang="en" label="English">
+Your browser does not support the video tag. <a href="fallback-image.jpg">View image instead</a>.
+</video>
+<!-- Adjusted animation to prevent jumping -->
+<div class="hero-content animate__animated animate__fadeInDown" style="position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; text-align: center; color: white; padding: 20px; animation-duration: 1s; animation-timing-function: ease-in-out;">
+<h1 data-i18n="heroTitle">Transform Your Future with Hope Bridge Academy - اکادمی هوپ بریج (HBA)</h1>
+<p data-i18n="heroText">Join thousands of Afghan youth in building a brighter tomorrow through education at Hope Bridge Academy (اکادمی هوپ بریج - HBA).</p>
+<div class="hero-actions">
+<a href="register.html" class="hero-button primary" data-i18n="heroButton">Enroll Today</a>
+</div>
+</div>
+</section>
+<section class="welcome">
+<div class="welcome-content animate__animated animate__fadeInUp">
+<h1 data-i18n="welcome">Welcome to Hope Bridge Academy - اکادمی هوپ بریج (HBA)</h1>
+<p data-i18n="welcomeText">Empowering Afghan youth through accessible education and skill-building opportunities at Hope Bridge Academy (اکادمی هوپ بریج - HBA).</p>
+<a href="about.html" class="welcome-button" data-i18n="learnMore">Learn More</a>
+</div>
+<img src="Welcome.jpg" alt="Welcome to Hope Bridge Academy - خوش آمدید به اکادمی هوپ بریج (HBA)" class="welcome-img animate__animated animate__zoomIn">
+</section>
+<section class="statistics">
+<h2 data-i18n="statsTitle">Our Impact at Hope Bridge Academy - اکادمی هوپ بریج (HBA)</h2>
+<div class="stats-container animate__animated animate__fadeInUp">
+<div class="stat-card">
+<i class="fas fa-users"></i>
+<h3 data-i18n="studentsCount">5,000+</h3>
+<p data-i18n="studentsLabel">Students Enrolled</p>
+</div>
+<div class="stat-card">
+<i class="fas fa-book-open"></i>
+<h3 data-i18n="coursesCount">20+</h3>
+<p data-i18n="coursesLabel">Courses Offered</p>
+</div>
+<div class="stat-card">
+<i class="fas fa-chalkboard-teacher"></i>
+<h3 data-i18n="tutorsCount">100+</h3>
+<p data-i18n="tutorsLabel">Expert Tutors</p>
+</div>
+</div>
+</section>
+<section class="testimonials">
+<h2 data-i18n="testimonialsTitle">What Our Students Say about Hope Bridge Academy - اکادمی هوپ بریج (HBA)</h2>
+<div class="testimonial-slider animate__animated animate__fadeInUp">
+<div class="testimonial-card active">
+<img src="student1.jpg" alt="Student Sara A. at Hope Bridge Academy">
+<p data-i18n="testimonial1">"HopeBridge changed my life with its amazing courses!"</p>
+<h4 data-i18n="student1Name">Sara A.</h4>
+</div>
+<div class="testimonial-card">
+<img src="student2.jpg" alt="Student Ahmad K. at Hope Bridge Academy">
+<p data-i18n="testimonial2">"The tutors are supportive and the content is top-notch."</p>
+<h4 data-i18n="student2Name">Ahmad K.</h4>
+</div>
+<div class="testimonial-card">
+<img src="student3.jpg" alt="Student Zahra M. at Hope Bridge Academy">
+<p data-i18n="testimonial3">"I gained skills that helped me start my own business."</p>
+<h4 data-i18n="student3Name">Zahra M.</h4>
+</div>
+</div>
+<div class="slider-controls">
+<button onclick="prevSlide()" aria-label="Previous Slide"><i class="fas fa-chevron-left"></i></button>
+<button onclick="nextSlide()" aria-label="Next Slide"><i class="fas fa-chevron-right"></i></button>
+</div>
+</section>
+<section class="mission">
+<h2 data-i18n="missionLabel">Our Mission at Hope Bridge Academy - اکادمی هوپ بریج (HBA)</h2>
+<div class="mission-content animate__animated animate__fadeInUp">
+<p data-i18n="missionText">To provide transformative education that empowers Afghan youth to achieve their full potential and contribute to a prosperous society through Hope Bridge Academy (اکادمی هوپ بریج - HBA).</p>
+<div class="mission-grid">
+<div class="mission-card">
+<h3 data-i18n="visionLabel">Our Vision</h3>
+<p data-i18n="visionText">A future where every Afghan has access to quality education, fostering personal growth and community development at Hope Bridge Academy (اکادمی هوپ بریج - HBA).</p>
+</div>
+<div class="mission-card">
+<h3 data-i18n="valuesLabel">Core Values</h3>
+<ul>
+<li data-i18n="value1">Integrity: Upholding honesty and ethical standards.</li>
+<li data-i18n="value2">Excellence: Striving for the highest quality in education.</li>
+<li data-i18n="value3">Inclusivity: Embracing diversity and opportunities for all.</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section class="events">
+<h2 data-i18n="eventsTitle">Upcoming Events at Hope Bridge Academy - اکادمی هوپ بریج (HBA)</h2>
+<div class="event-list animate__animated animate__zoomIn">
+<article class="event-card">
+<h3 data-i18n="event1Title">Career Workshop</h3>
+<p data-i18n="event1Desc">Join us to learn about career opportunities and resume building.</p>
+<p data-i18n="event1Date">Date: July 10, 2025</p>
+<a href="register.html" class="event-button" data-i18n="eventRegister">Register</a>
+</article>
+<article class="event-card">
+<h3 data-i18n="event2Title">Coding Bootcamp</h3>
+<p data-i18n="event2Desc">A 3-day intensive course to kickstart your coding journey.</p>
+<p data-i18n="event2Date">Date: August 5, 2025</p>
+<a href="register.html" class="event-button" data-i18n="eventRegister">Register</a>
+</article>
+</div>
+</section>
+<section class="courses">
+<h2 data-i18n="coursesTitle">Our Courses at Hope Bridge Academy - اکادمی هوپ بریج (HBA)</h2>
+<div class="course-list animate__animated animate__fadeInUp">
+<article class="course-card">
+<img src="Langua.jpg" alt="Language Skills Course at Hope Bridge Academy - دوره مهارت های زبانی در اکادمی هوپ بریج (HBA)">
+<h3 data-i18n="languageCourse">Language Skills</h3>
+<p data-i18n="languageDesc">Master Persian, English, and Pashto with beginner to advanced courses.</p>
+<a href="register.html" class="course-button" data-i18n="enrollNow">Enroll Now</a>
+</article>
+<article class="course-card">
+<img src="Com.jpg" alt="Computer Skills Course at Hope Bridge Academy - دوره مهارت های کامپیوتری در اکادمی هوپ بریج (HBA)">
+<h3 data-i18n="computerCourse">Computer Skills</h3>
+<p data-i18n="computerDesc">Learn essential software, coding, and digital literacy skills.</p>
+<a href="register.html" class="course-button" data-i18n="enrollNow">Enroll Now</a>
+</article>
+<article class="course-card">
+<!-- Renamed image file -->
+<img src="image (1).jpg" alt="Psychology Workshops at Hope Bridge Academy - کارگاه های روانشناسی در اکادمی هوپ بریج (HBA)">
+<h3 data-i18n="psychCourse">Psychology Workshops</h3>
+<p data-i18n="psychDesc">Explore mental health practices and emotional well-being.</p>
+<a href="register.html" class="course-button" data-i18n="enrollNow">Enroll Now</a>
+</article>
+<article class="course-card">
+<img src="biss.jpg" alt="Business Skills Course at Hope Bridge Academy - دوره مهارت های تجاری در اکادمی هوپ بریج (HBA)">
+<h3 data-i18n="businessCourse">Business Skills</h3>
+<p data-i18n="businessDesc">Learn entrepreneurship, marketing, and financial management.</p>
+<a href="register.html" class="course-button" data-i18n="enrollNow">Enroll Now</a>
+</article>
+</div>
+</section>
+<section class="cta">
+<h2 data-i18n="ctaTitle">Get Started with Hope Bridge Academy - اکادمی هوپ بریج (HBA)</h2>
+<div class="cta-buttons animate__animated animate__fadeInUp">
+<a href="register.html" class="button primary" data-i18n="registerNow">Register Now</a>
+<a href="tutor.html" class="button secondary" data-i18n="requestTutorNow">Request a Tutor</a>
+<a href="donation.html" class="button tertiary" data-i18n="donateNow">Donate Now</a>
+</div>
+</section>
+<section class="newsletter">
+<h2 data-i18n="newsletterTitle">Subscribe to Our Newsletter at Hope Bridge Academy - اکادمی هوپ بریج (HBA)</h2>
+<p data-i18n="newsletterDesc">Stay updated with our latest courses and events!</p>
+<!-- Added label and form attributes -->
+<form id="newsletter-form" action="https://www.youtube.com/channel/UCtqHtyvuTbwOCM7NZy-DpJQ" method="POST" class="newsletter-form animate__animated animate__fadeIn">
+<label for="newsletter-email" data-i18n="emailLabel">Email Address</label>
+<input type="email" id="newsletter-email" name="email" data-i18n="[placeholder]emailPlaceholder" required aria-label="Email for newsletter">
+<button type="submit" data-i18n="subscribe">Subscribe</button>
+</form>
+</section>
+</main>
+<footer>
+<div class="footer-content animate__animated animate__fadeInUp">
+<div class="social-media-links">
+<a href="https://www.facebook.com/profile.php?id=61576355386024" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Facebook">
+<i class="fab fa-facebook-f"></i>
+</a>
+<!-- Updated Twitter to X -->
+<a href="https://x.com/Hopebridge96846" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="X">
+<i class="fab fa-x-twitter"></i>
+</a>
+<a href="https://www.instagram.com/hopebridgeacademy1" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Instagram">
+<i class="fab fa-instagram"></i>
+</a>
+<a href="https://www.youtube.com/channel/UCtqHtyvuTbwOCM7NZy-DpJQ" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="YouTube">
+<i class="fab fa-youtube"></i>
+</a>
+</div>
+<div class="footer-nav">
+<h4 data-i18n="footerNavTitle">Explore Hope Bridge Academy - اکادمی هوپ بریج (HBA)</h4>
+<ul class="nav-list">
+<li><a href="about.html" data-i18n="about">About Us</a></li>
+<li><a href="faq.html" data-i18n="faq">FAQ</a></li>
+<li><a href="privacy.html" data-i18n="privacyPolicy">Privacy Policy</a></li>
+<li><a href="terms.html" data-i18n="terms">Terms of Service</a></li>
+</ul>
+</div>
+<div class="footer-contact">
+<h4 data-i18n="contactUsTitle">Contact Us at Hope Bridge Academy - اکادمی هوپ بریج (HBA)</h4>
+<p data-i18n="contactInfo">Email: info@hopebridgeacademy.com | Phone: +93 123-456-7890</p>
+</div>
+</div>
+<p data-i18n="copyright">© 2025 HopeBridge Academy</p>
+</footer>
+<button id="backToTopBtn" onclick="scrollToTop()" aria-label="Back to Top" title="Back to Top"><i class="fas fa-chevron-up"></i></button>
 </body>
 </html>

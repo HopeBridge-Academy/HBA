@@ -6,7 +6,7 @@
     <meta name="description" content="Stay updated with announcements and events from HopeBridge Academy.">
     <meta name="keywords" content="announcements, HopeBridge Academy, Afghan education, events,">
     <meta name="author" content="HopeBridge">
-    <title Academydata-i18n="adTitle">About HopeBridge Academy - Announcements - HopeBridge</title>
+    <title data-i18n="adTitle">About HopeBridge Academy - Announcements - HopeBridge</title>
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Noto+Naskh+Arabic:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -21,7 +21,6 @@
         <p data-i18n="bannerText">Stay updated with our latest announcements! <a href="ad.html" data-i18n="adBannerLink">View Now</a></p>
         <button class="close-banner" aria-label="Close banner" onclick="this.parentElement.classList.add('hidden')">×</button>
     </div>
-
     <header>
         <nav>
             <a href="index.html" class="logo"><img src="logo.png" alt="HopeBridge Academy Logo"></a>
@@ -56,7 +55,6 @@
             </div>
         </nav>
     </header>
-
     <main>
         <section class="hero compact animate__animated animate__fadeInDown">
             <div class="hero-content">
@@ -66,48 +64,60 @@
             </div>
         </section>
 
-        <section class="announcement-content" aria-labelledby="announcement-text-heading">
-            <div class="announcement-container animate__animated animate__fadeInUp">
-                <h2 id="announcement-text-heading" data-i18n="adGeneralLabel">Latest Updates</h2>
-                <p data-i18n="adText">Stay informed about our graduation ceremonies, upcoming course start dates, and future workshops in <strong>Computer Skills</strong>, <strong>Language Skills</strong>, and <strong>Psychology</strong>.</p>
-            </div>
-        </section>
-
-        <section class="fb-section" aria-label="Facebook feed and side announcements">
-            <div class="fb-container animate__animated animate__fadeInUp">
-                <aside class="side-announcement" aria-label="Upcoming events">
-                    <h3 data-i18n="upcomingEvents">Upcoming Events</h3>
-                    <ul>
-                        <li data-i18n="event1">Psychology Workshop – Details Coming Soon</li>
-                        <li data-i18n="event2">Graduation Ceremony – Details Coming Soon</li>
-                        <li data-i18n="event3">New Course Registration – July 1, 2025</li>
-                    </ul>
-                </aside>
-                <div class="fb-wrapper" role="region" aria-label="Facebook timeline feed">
-                    <div class="fb-page"
-                         data-href="https://www.facebook.com/profile.php?id=61576355386024"
-                         data-tabs="timeline"
-                         data-width="600"
-                         data-height="600"
-                         data-small-header="false"
-                         data-adapt-container-width="true"
-                         data-hide-cover="false"
-                         data-show-facepile="true">
-                        <blockquote cite="https://www.facebook.com/profile.php?id=61576355386024" class="fb-xfbml-parse-ignore">
-                            <a href="https://www.facebook.com/profile.php?id=61576355386024" target="_blank" rel="noopener noreferrer">HopeBridge Academy</a>
-                        </blockquote>
+        <!-- تصویر به کنار سیکشن‌ها منتقل شد -->
+        <div style="display: flex; gap: 30px; max-width: 1300px; margin: 30px auto; padding: 0 20px; flex-wrap: wrap;">
+            
+            <div style="flex: 1; min-width: 300px;">
+                <section class="announcement-content" aria-labelledby="announcement-text-heading">
+                    <div class="announcement-container animate__animated animate__fadeInUp">
+                        <h2 id="announcement-text-heading" data-i18n="adGeneralLabel">Latest Updates</h2>
+                        <p data-i18n="adText">Stay informed about our graduation ceremonies, upcoming course start dates, and future workshops in <strong>Computer Skills</strong>, <strong>Language Skills</strong>, and <strong>Psychology</strong>.</p>
                     </div>
-                </div>
-                <aside class="side-announcement" aria-label="Important notes">
-                    <h3 data-i18n="importantNotes">Important Notes</h3>
-                    <ul>
-                        <li data-i18n="note1">Follow our Facebook page for real-time updates.</li>
-                        <li data-i18n="note2">Student verification services are available.</li>
-                        <li data-i18n="note3">Certificates for recent graduates are ready.</li>
-                    </ul>
-                </aside>
+                </section>
+
+                <section class="fb-section" aria-label="Facebook feed and side announcements">
+                    <div class="fb-container animate__animated animate__fadeInUp">
+                        <aside class="side-announcement" aria-label="Upcoming events">
+                            <h3 data-i18n="upcomingEvents">Upcoming Events</h3>
+                            <ul>
+                                <li data-i18n="event1">Psychology Workshop – Details Coming Soon</li>
+                                <li data-i18n="event2">Graduation Ceremony – Details Coming Soon</li>
+                                <li data-i18n="event3">New Course Registration – July 1, 2025</li>
+                            </ul>
+                        </aside>
+                        <div class="fb-wrapper" role="region" aria-label="Facebook timeline feed">
+                            <div class="fb-page"
+                                 data-href="https://www.facebook.com/profile.php?id=61576355386024"
+                                 data-tabs="timeline"
+                                 data-width="600"
+                                 data-height="600"
+                                 data-small-header="false"
+                                 data-adapt-container-width="true"
+                                 data-hide-cover="false"
+                                 data-show-facepile="true">
+                                <blockquote cite="https://www.facebook.com/profile.php?id=61576355386024" class="fb-xfbml-parse-ignore">
+                                    <a href="https://www.facebook.com/profile.php?id=61576355386024" target="_blank" rel="noopener noreferrer">HopeBridge Academy</a>
+                                </blockquote>
+                            </div>
+                        </div>
+                        <aside class="side-announcement" aria-label="Important notes">
+                            <h3 data-i18n="importantNotes">Important Notes</h3>
+                            <ul>
+                                <li data-i18n="note1">Follow our Facebook page for real-time updates.</li>
+                                <li data-i18n="note2">Student verification services are available.</li>
+                                <li data-i18n="note3">Certificates for recent graduates are ready.</li>
+                            </ul>
+                        </aside>
+                    </div>
+                </section>
             </div>
-        </section>
+
+            <!-- تصویر در کنار سیکشن‌ها (روی کامپیوتر) -->
+            <img src="English.jpg" alt="" class="welcome-img animate__animated animate__zoomIn" 
+                 style="width: 340px; height: fit-content; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.15); align-self: start; position: sticky; top: 20px;">
+            <img src="Persian.jpg" alt="" class="welcome-img animate__animated animate__zoomIn" 
+                 style="width: 340px; height: fit-content; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.15); align-self: start; position: sticky; top: 20px;">
+        </div>
     </main>
 
     <footer>
@@ -144,7 +154,6 @@
     </footer>
 
     <button id="backToTopBtn" onclick="scrollToTop()" aria-label="Back to Top" data-tooltip="Back to Top"><i class="fas fa-chevron-up"></i></button>
-
     <div id="fb-root"></div>
     <script async defer crossorigin="anonymous"
             src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v19.0"

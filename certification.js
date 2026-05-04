@@ -1,4 +1,43 @@
 // certification.js
+
+// ====================== Toast Notification ======================
+function showToast(isSuccess) {
+    let toast = document.getElementById('custom-toast');
+    if (!toast) {
+        toast = document.createElement('div');
+        toast.id = 'custom-toast';
+        document.body.appendChild(toast);
+    }
+
+    if (isSuccess) {
+        toast.className = 'toast success';
+        toast.innerHTML = `
+            <strong>✅ تأیید موفق!</strong><br>
+            اطلاعات دانشجو معتبر است.<br>
+            <span>Student verified successfully</span>
+        `;
+    } else {
+        toast.className = 'toast error';
+        toast.innerHTML = `
+            <strong>❌ تأیید ناموفق!</strong><br>
+            نام و شناسه وارد شده معتبر نیست.<br>
+            <span>The name and ID are not valid</span>
+        `;
+    }
+
+    toast.style.display = 'block';
+
+    // محو شدن خودکار بعد از ۴ ثانیه
+    setTimeout(() => {
+        toast.style.opacity = '0';
+        setTimeout(() => {
+            toast.style.display = 'none';
+            toast.style.opacity = '1';
+        }, 600);
+    }, 4000);
+}
+
+// ====================== Main Verification Function ======================
 function verifyCertification(event) {
     event.preventDefault();
     
@@ -17,6 +56,7 @@ function verifyCertification(event) {
             <span>نام کامل و شناسه دانشجو را وارد نمایید.</span>
         `;
         resultElement.classList.add('error');
+        showToast(false);   // Toast خطا
         return;
     }
 
@@ -33,7 +73,7 @@ function verifyCertification(event) {
     );
 
     if (student) {
-        // === پیام موفقیت (سبز) ===
+        // موفقیت
         let message = '';
 
         if (student.status === 'enrolled') {
@@ -54,9 +94,10 @@ function verifyCertification(event) {
 
         resultElement.innerHTML = message;
         resultElement.classList.add('success');
+        showToast(true);        // Toast موفقیت
 
     } else {
-        // === پیام خطا (قرمز) ===
+        // خطا
         resultElement.innerHTML = `
             <strong>❌ Verification Failed</strong><br>
             The name and ID you entered are not valid in HopeBridge Academy.<br>
@@ -66,6 +107,7 @@ function verifyCertification(event) {
             لطفاً اطلاعات را به‌درستی وارد کنید.
         `;
         resultElement.classList.add('error');
+        showToast(false);       // Toast خطا
     }
 }
 
@@ -76,7 +118,7 @@ document.addEventListener('DOMContentLoaded', function() {
         certForm.addEventListener('submit', verifyCertification);
     }
 
-    // پاک کردن نتیجه هنگام تغییر ورودی
+    // پاک کردن نتیجه هنگام تایپ
     const inputs = document.querySelectorAll('#full-name, #student-id');
     inputs.forEach(input => {
         input.addEventListener('input', () => {

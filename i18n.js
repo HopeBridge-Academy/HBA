@@ -619,8 +619,8 @@ window.translations = {
       teamLabel: 'تیم ما',
       teamText:  'تیم مجرب ما متشکل از مربیان، مدیران و داوطلبان متعهد است که تجربیات یادگیری استثنایی متناسب با نیازهای دانش‌آموزان را فراهم می‌کند.',
 
-      teamMember1Name: 'آقای اسمت‌الله اکبری',
-      teamMember1Role: 'فارغ‌التحصیل ارشد TEFL | بنیان‌گذار و رئیس',
+      teamMember1Name: ' عصمت‌الله اکبری',
+      teamMember1Role: 'ماستر TEFL | بنیان‌گذار و رئیس',
       teamMember2Name: 'مدرس ارشد',
       teamMember2Role: 'مدرس ارشد',
 

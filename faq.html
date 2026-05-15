@@ -1,158 +1,190 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Find answers to frequently asked questions about HopeBridge Academy’s courses, registration, and services.">
-<meta    <meta name="keywords" content="FAQ, HopeBridge Academy, Afghan education, course questions">
-    <meta name="author" content="HopeBridge Academy">
-    <title data-i18n="faqTitle">FAQ - HopeBridge Academy</title>
-    <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Noto+Naskh+Arabic:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://unpkg.com/i18next@21.6.10/dist/umd/i18next.min.js"></script>
-    <script src="i18n.js" defer></script>
-    <script src="script.js" defer></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Find answers to frequently asked questions about HopeBridge Academy's courses, registration, and services.">
+<meta name="author" content="HopeBridge Academy">
+<title data-i18n="faqTitle">FAQ - HopeBridge Academy</title>
+<link rel="stylesheet" href="styles.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=DM+Sans:wght@300;400;500;600&family=Noto+Naskh+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+<script src="https://unpkg.com/i18next@23.15.2/dist/umd/i18next.min.js" defer></script>
+<script src="i18n.js" defer></script>
+<script src="script.js" defer></script>
 </head>
-<body onload="initializePage()">
-    <div class="floating-banner animate__animated animate__fadeIn">
-        <p data-i18n="bannerText">Have questions? Explore our FAQ for answers! <a href="faq.html" data-i18n="faqBannerLink">Learn More</a></p>
-        <button class="close-banner" aria-label="Close banner" onclick="this.parentElement.classList.add('hidden')">×</button>
+<body>
+
+<div class="floating-banner" id="floatingBanner">
+  <p>Have questions? Explore our FAQ! <a href="faq.html" data-i18n="faqBannerLink">Learn More</a></p>
+  <button class="close-banner" aria-label="Close" onclick="document.getElementById('floatingBanner').classList.add('hidden')">×</button>
+</div>
+
+<header>
+  <nav>
+    <a href="index.html" class="logo"><img src="logo.png" alt="HopeBridge Academy Logo"></a>
+    <button class="mobile-menu-toggle" aria-label="Toggle navigation" aria-expanded="false" onclick="toggleMobileMenu(this)"><i class="fas fa-bars"></i></button>
+    <div class="main-nav" id="mainNav">
+      <ul class="nav-list">
+        <li><a href="index.html"         class="nav-link"        data-i18n="home">Home</a></li>
+        <li><a href="register.html"      class="nav-link"        data-i18n="register">Register</a></li>
+        <li><a href="contact.html"       class="nav-link"        data-i18n="contact">Contact</a></li>
+        <li><a href="tutor.html"         class="nav-link"        data-i18n="tutor">Request Tutor</a></li>
+        <li><a href="donation.html"      class="nav-link"        data-i18n="donation">Donate</a></li>
+        <li><a href="certification.html" class="nav-link"        data-i18n="certification">Certification</a></li>
+        <li><a href="login.html"         class="nav-link"        data-i18n="login" id="auth-link">Staff Portal</a></li>
+      </ul>
     </div>
+    <div class="header-actions">
+      <div class="search-bar">
+        <input type="text" id="searchInput" placeholder="Search courses…" aria-label="Search courses">
+        <button onclick="searchCourses()" aria-label="Search"><i class="fas fa-search"></i></button>
+      </div>
+      <a href="ad.html" class="bell-icon" aria-label="Announcements"><img src="bell.gif" alt="Announcements"></a>
+      <div class="language-switcher">
+        <select id="language-select" onchange="changeLanguage(this.value)" aria-label="Select language">
+          <option value="en" data-i18n="englishOption">English</option>
+          <option value="fa" data-i18n="persianOption">فارسی</option>
+        </select>
+      </div>
+    </div>
+  </nav>
+</header>
 
-    <header>
-        <nav>
-            <a href="index.html" class="logo"><img src="logo.png" alt="HopeBridge Academy Logo"></a>
-            <button class="mobile-menu-toggle" aria-label="Toggle menu" onclick="toggleMobileMenu()">
-                <i class="fas fa-bars"></i>
-            </button>
-            <div class="main-nav">
-                <ul class="nav-list">
-                    <li><a href="index.html" class="nav-link" data-i18n="home">Home</a></li>
-                    <li><a href="register.html" class="nav-link" data-i18n="register">Register</a></li>
-                    <li><a href="contact.html" class="nav-link" data-i18n="contact">Contact</a></li>
-                    <li><a href="tutor.html" class="nav-link" data-i18n="tutor">Request Tutor</a></li>
-                    <li><a href="donation.html" class="nav-link" data-i18n="donation">Donate</a></li>
-                    <li><a href="certification.html" class="nav-link" data-i18n="certification">Certification</a></li>
-                    <li><a href="login.html" id="auth-link" class="nav-link" data-i18n="login">Staff Portal</a></li>
-                </ul>
-            </div>
-            <div class="header-actions">
-                <div class="search-bar">
-                    <input type="text" id="searchInput" placeholder="Search courses..." data-i18n-placeholder="searchPlaceholder" aria-label="Search courses">
-                    <button onclick="searchCourses()" aria-label="Search"><i class="fas fa-search"></i></button>
-                </div>
-                <a href="ad.html" class="bell-icon" aria-label="Notifications" data-tooltip="View Notifications">
-                    <img src="bell.gif" alt="Notification Bell">
-                </a>
-                <div class="language-switcher">
-                    <select id="language-select" onchange="changeLanguage(this.value)" aria-label="Select language">
-                        <option value="en" data-i18n="englishOption">English</option>
-                        <option value="fa" data-i18n="persianOption">فارسی</option>
-                    </select>
-                </div>
-            </div>
-        </nav>
-    </header>
+<main>
+  <section class="hero compact">
+    <div class="hero-content">
+      <p class="section-label" style="color:var(--gold-light);">We Have Answers</p>
+      <h1 data-i18n="faqHeading">Frequently Asked Questions</h1>
+      <p data-i18n="faqHeroText">Find answers to common questions about our courses, services, and support.</p>
+      <div class="hero-actions">
+        <a href="#faq-content" class="hero-button primary" data-i18n="exploreFaq">Explore FAQs</a>
+      </div>
+    </div>
+  </section>
 
-    <main>
-        <section class="hero compact animate__animated animate__fadeInDown">
-            <div class="hero-content">
-                <h1 data-i18n="faqHeading">Frequently Asked Questions</h1>
-                <p data-i18n="faqHeroText">Find answers to common questions about our courses, services, and support.</p>
-                <a href="#faq-content" class="hero-button primary" data-i18n="exploreFaq">Explore FAQs</a>
-            </div>
-        </section>
+  <section class="faq-content" id="faq-content" aria-labelledby="faq-heading">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label">Common Questions</p>
+        <h2 class="section-title" id="faq-heading" data-i18n="faqHeading">Frequently Asked Questions</h2>
+        <div class="gold-line"></div>
+      </div>
 
-        <section class="faq-content" aria-labelledby="faq-content-heading">
-            <div class="faq-container animate__animated animate__fadeInUp">
-                <h2 id="faq-content-heading" data-i18n="faqGeneralLabel">General Questions</h2>
-                <div class="faq-item" role="region" aria-labelledby="faqQ1">
-                    <button class="faq-question" aria-expanded="false" aria-controls="faqA1">
-                        <h3 id="faqQ1" data-i18n="faqQ1">What is HopeBridge Academy?</h3>
-                        <i class="fas fa-chevron-down"></i>
-                    </button>
-                    <div id="faqA1" class="faq-answer" >
-                        <p data-i18n="faqA1">HopeBridge Academy is an educational institution dedicated to empowering Afghan youth through accessible, high-quality education in various fields.</p>
-                    </div>
-                </div>
-                <div class="faq-item" role="region" aria-labelledby="faqQ2">
-                    <button class="faq-question" aria-expanded="false" aria-controls="faqA2">
-                        <h3 id="faqQ2" data-i18n="faqQ2">Who can enroll in your courses?</h3>
-                        <i class="fas fa-chevron-down"></i>
-                    </button>
-                    <div id="faqA2" class="faq-answer" >
-                        <p data-i18n="faqA2">Anyone interested in learning, particularly Afghan youth, can enroll. We offer courses for beginners to advanced learners.</p>
-                    </div>
-                </div>
-                <h2 data-i18n="faqCoursesLabel">Course-Related Questions</h2>
-                <div class="faq-item" role="region" aria-labelledby="faqQ3">
-                    <button class="faq-question" aria-expanded="false" aria-controls="faqA3">
-                        <h3 id="faqQ3" data-i18n="faqQ3">What courses do you offer?</h3>
-                        <i class="fas fa-chevron-down"></i>
-                    </button>
-                    <div id="faqA3" class="faq-answer" >
-                        <p data-i18n="faqA3">We offer courses in Language Skills, Computer Skills, Psychology Workshops, and Business Skills. Check our <a href="register.html">Register page</a> for details.</p>
-                    </div>
-                </div>
-                <div class="faq-item" role="region" aria-labelledby="faqQ4">
-                    <button class="faq-question" aria-expanded="false" aria-controls="faqA4">
-                        <h3 id="faqQ4" data-i18n="faqQ4">Are certificates provided?</h3>
-                        <i class="fas fa-chevron-down"></i>
-                    </button>
-                    <div id="faqA4" class="faq-answer" >
-                        <p data-i18n="faqA4">Yes, upon completion of our courses, students receive internationally recognized certificates.</p>
-                    </div>
-                </div>
-                <h2 data-i18n="faqSupportLabel">Support and Contact</h2>
-                <div class="faq-item" role="region" aria-labelledby="faqQ5">
-                    <button class="faq-question" aria-expanded="false" aria-controls="faqA5">
-                        <h3 id="faqQ5" data-i18n="faqQ5">How can I contact you?</h3>
-                        <i class="fas fa-chevron-down"></i>
-                    </button>
-                    <div id="faqA5" class="faq-answer" >
-                        <p data-i18n="faqA5">You can reach us via email at <a href="mailto:info@hopebridgeacademy.com">info@hopebridgeacademy.com</a> or phone at +93 123-456-7890. Visit our <a href="contact.html">Contact page</a> for more options.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
+      <div class="faq-container animate-up">
 
-    <footer>
-        <div class="footer-content animate__animated animate__fadeInUp">
-            <div class="social-media-links">
-                <a href="https://www.facebook.com/profile.php?id=61576355386024" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Facebook">
-                    <i class="fab fa-facebook-f"></i>
-                </a>
-                <a href="https://x.com/Hopebridge96846" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Twitter">
-                    <i class="fab fa-x-twitter"></i>
-                </a>
-                <a href="https://www.instagram.com/hopebridgeacademy1/" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Instagram">
-                    <i class="fab fa-instagram"></i>
-                </a>
-                <a href="https://www.youtube.com/channel/UCtqHtyvuTbwOCM7NZy-DpJQ" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="YouTube">
-                    <i class="fab fa-youtube"></i>
-                </a>
-            </div>
-            <div class="footer-nav">
-                <h4 data-i18n="footerNavTitle">Explore</h4>
-                <ul class="nav-list">
-                    <li><a href="about.html" data-i18n="about">About Us</a></li>
-                    <li><a href="faq.html" class="active" data-i18n="faq" aria-current="page">FAQ</a></li>
-                    <li><a href="privacy.html" data-i18n="privacyPolicy">Privacy Policy</a></li>
-                    <li><a href="terms.html" data-i18n="terms">Terms of Service</a></li>
-                </ul>
-            </div>
-            <div class="footer-contact">
-                <h4 data-i18n="contactUsTitle">Contact Us</h4>
-                <p data-i18n="contactInfo">Email: info@hopebridgeacademy.com | Phone: +93 123-456-7890</p>
-            </div>
+        <!-- General -->
+        <h2 data-i18n="faqGeneralLabel">General Questions</h2>
+
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false" aria-controls="faqA1">
+            <h3 id="faqQ1" data-i18n="faqQ1">What is HopeBridge Academy?</h3>
+            <i class="fas fa-chevron-down"></i>
+          </button>
+          <div id="faqA1" class="faq-answer">
+            <p data-i18n="faqA1">HopeBridge Academy is an educational institution dedicated to empowering Afghan youth through accessible, high-quality education in various fields.</p>
+          </div>
         </div>
-        <p data-i18n="copyright">© 2025 HopeBridge Academy</p>
-    </footer>
 
-    <button id="backToTopBtn" onclick="scrollToTop()" aria-label="Back to Top" data-tooltip="Back to Top"><i class="fas fa-chevron-up"></i></button>
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false" aria-controls="faqA2">
+            <h3 id="faqQ2" data-i18n="faqQ2">Who can enroll in your courses?</h3>
+            <i class="fas fa-chevron-down"></i>
+          </button>
+          <div id="faqA2" class="faq-answer">
+            <p data-i18n="faqA2">Anyone interested in learning, particularly Afghan youth, can enroll. We offer courses for beginners to advanced learners.</p>
+          </div>
+        </div>
+
+        <!-- Courses -->
+        <h2 data-i18n="faqCoursesLabel">Course-Related Questions</h2>
+
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false" aria-controls="faqA3">
+            <h3 id="faqQ3" data-i18n="faqQ3">What courses do you offer?</h3>
+            <i class="fas fa-chevron-down"></i>
+          </button>
+          <div id="faqA3" class="faq-answer">
+            <p data-i18n="faqA3">We offer courses in Language Skills, Computer Skills, Psychology Workshops, and Business Skills. Check our <a href="register.html">Register page</a> for full details.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false" aria-controls="faqA4">
+            <h3 id="faqQ4" data-i18n="faqQ4">Are certificates provided?</h3>
+            <i class="fas fa-chevron-down"></i>
+          </button>
+          <div id="faqA4" class="faq-answer">
+            <p data-i18n="faqA4">Yes. Upon successful completion of our courses, students receive certificates that can be verified and validated online from anywhere in the world via the official website using a unique Student ID.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false" aria-controls="faqA6">
+            <h3 id="faqQ6" data-i18n="faqQ6">How much do the courses cost?</h3>
+            <i class="fas fa-chevron-down"></i>
+          </button>
+          <div id="faqA6" class="faq-answer">
+            <p data-i18n="faqA6">Computer and English courses range from 350–700 AFN per month depending on level. Psychology Workshops are completely <strong>free</strong>. See the full fee table on our <a href="register.html">Register page</a>.</p>
+          </div>
+        </div>
+
+        <!-- Support -->
+        <h2 data-i18n="faqSupportLabel">Support and Contact</h2>
+
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false" aria-controls="faqA5">
+            <h3 id="faqQ5" data-i18n="faqQ5">How can I contact you?</h3>
+            <i class="fas fa-chevron-down"></i>
+          </button>
+          <div id="faqA5" class="faq-answer">
+            <p data-i18n="faqA5">You can reach us via email at <a href="mailto:hopebridgeacademy@gmail.com">hopebridgeacademy@gmail.com</a> or phone at <a href="tel:+93747903369">+93-747-903-369</a>. Visit our <a href="contact.html">Contact page</a> for more options.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false" aria-controls="faqA7">
+            <h3 id="faqQ7" data-i18n="faqQ7">How do I request a private tutor?</h3>
+            <i class="fas fa-chevron-down"></i>
+          </button>
+          <div id="faqA7" class="faq-answer">
+            <p data-i18n="faqA7">Visit our <a href="tutor.html">Request a Tutor</a> page, fill out the form with your details, subject, and preferred schedule, and we will match you with a qualified tutor.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="footer-content">
+    <div>
+      <img src="logo.png" alt="HopeBridge Academy" style="height:48px;margin-bottom:1rem;filter:brightness(1.2);">
+      <div class="social-media-links" style="margin-top:1rem;">
+        <a href="https://www.facebook.com/profile.php?id=61576355386024" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://x.com/Hopebridge96846" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="X"><i class="fab fa-x-twitter"></i></a>
+        <a href="https://www.instagram.com/hopebridgeacademy1" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.youtube.com/channel/UCtqHtyvuTbwOCM7NZy-DpJQ" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+      </div>
+    </div>
+    <nav class="footer-nav">
+      <h4 data-i18n="footerNavTitle">Explore</h4>
+      <ul>
+        <li><a href="about.html"   data-i18n="about">About Us</a></li>
+        <li><a href="faq.html"     class="active" data-i18n="faq" aria-current="page">FAQ</a></li>
+        <li><a href="privacy.html" data-i18n="privacyPolicy">Privacy Policy</a></li>
+        <li><a href="terms.html"   data-i18n="terms">Terms of Service</a></li>
+      </ul>
+    </nav>
+    <div class="footer-contact">
+      <h4 data-i18n="contactUsTitle">Contact Us</h4>
+      <p data-i18n="contactInfo">Email: hopebridgeacademy@gmail.com | Phone: +93-747-903-369</p>
+    </div>
+  </div>
+  <div class="footer-bottom"><p data-i18n="copyright">© 2025–2026 HopeBridge Academy. All rights reserved.</p></div>
+</footer>
+<button id="backToTopBtn" onclick="scrollToTop()" aria-label="Back to Top"><i class="fas fa-chevron-up"></i></button>
 </body>
 </html>

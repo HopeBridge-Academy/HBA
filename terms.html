@@ -1,130 +1,146 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Review the terms of service for using HopeBridge Academy's website and services.">
-    <meta name="keywords" content="terms of service, HopeBridge Academy, user agreement">
-    <meta name="author" content="HopeBridge Academy">
-    <title data-i18n="termsTitle">Terms of Service - HopeBridge Academy</title>
-    <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Noto+Naskh+Arabic:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://unpkg.com/i18next@21.6.10/dist/umd/i18next.min.js"></script>
-    <script src="i18n.js" defer></script>
-    <script src="script.js" defer></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Terms of Service for HopeBridge Academy - Review our user agreements and policies.">
+<meta name="author" content="HopeBridge Academy">
+<title data-i18n="termsTitle">Terms of Service - HopeBridge Academy</title>
+<link rel="stylesheet" href="styles.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=DM+Sans:wght@300;400;500;600&family=Noto+Naskh+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+<script src="https://unpkg.com/i18next@23.15.2/dist/umd/i18next.min.js" defer></script>
+<script src="i18n.js" defer></script>
+<script src="script.js" defer></script>
 </head>
-<body onload="initializePage()">
-    <div class="floating-banner animate__animated animate__fadeIn">
-        <p data-i18n="bannerText">Explore our services with confidence. Review our Terms of Service. <a href="terms.html" data-i18n="termsBannerLink">Learn More</a></p>
-        <button class="close-banner" aria-label="Close banner" onclick="this.parentElement.classList.add('hidden')">×</button>
+<body>
+
+<header>
+  <nav>
+    <a href="index.html" class="logo"><img src="logo.png" alt="HopeBridge Academy Logo"></a>
+    <button class="mobile-menu-toggle" aria-label="Toggle navigation" aria-expanded="false" onclick="toggleMobileMenu(this)"><i class="fas fa-bars"></i></button>
+    <div class="main-nav" id="mainNav">
+      <ul class="nav-list">
+        <li><a href="index.html"         class="nav-link"        data-i18n="home">Home</a></li>
+        <li><a href="register.html"      class="nav-link"        data-i18n="register">Register</a></li>
+        <li><a href="contact.html"       class="nav-link"        data-i18n="contact">Contact</a></li>
+        <li><a href="tutor.html"         class="nav-link"        data-i18n="tutor">Request Tutor</a></li>
+        <li><a href="donation.html"      class="nav-link"        data-i18n="donation">Donate</a></li>
+        <li><a href="certification.html" class="nav-link"        data-i18n="certification">Certification</a></li>
+        <li><a href="login.html"         class="nav-link"        data-i18n="login" id="auth-link">Staff Portal</a></li>
+      </ul>
     </div>
+    <div class="header-actions">
+      <div class="language-switcher">
+        <select id="language-select" onchange="changeLanguage(this.value)" aria-label="Select language">
+          <option value="en" data-i18n="englishOption">English</option>
+          <option value="fa" data-i18n="persianOption">فارسی</option>
+        </select>
+      </div>
+    </div>
+  </nav>
+</header>
 
-    <header>
-        <nav>
-            <a href="index.html" class="logo"><img src="logo.png" alt="HopeBridge Academy Logo"></a>
-            <button class="mobile-menu-toggle" aria-label="Toggle menu" onclick="toggleMobileMenu()">
-                <i class="fas fa-bars"></i>
-            </button>
-            <div class="main-nav">
-                <ul class="nav-list">
-                    <li><a href="index.html" class="nav-link" data-i18n="home">Home</a></li>
-                    <li><a href="register.html" class="nav-link" data-i18n="register">Register</a></li>
-                    <li><a href="contact.html" class="nav-link" data-i18n="contact">Contact</a></li>
-                    <li><a href="tutor.html" class="nav-link" data-i18n="tutor">Request Tutor</a></li>
-                    <li><a href="donation.html" class="nav-link" data-i18n="donation">Donate</a></li>
-                    <li><a href="certification.html" class="nav-link" data-i18n="certification">Certification</a></li>
-                    <li><a href="login.html" id="auth-link" class="nav-link" data-i18n="login">Staff Portal</a></li>
-                </ul>
-            </div>
-            <div class="header-actions">
-                <div class="search-bar">
-                    <input type="text" id="searchInput" placeholder="Search courses..." data-i18n-placeholder="searchPlaceholder" aria-label="Search courses">
-                    <button onclick="searchCourses()" aria-label="Search"><i class="fas fa-search"></i></button>
-                </div>
-                <a href="ad.html" class="bell-icon" aria-label="Notifications" data-tooltip="View Notifications">
-                    <img src="bell.gif" alt="Notification Bell">
-                </a>
-                <div class="language-switcher">
-                    <select id="language-select" onchange="changeLanguage(this.value)" aria-label="Select language">
-                        <option value="en" data-i18n="englishOption">English</option>
-                        <option value="fa" data-i18n="persianOption">فارسی</option>
-                    </select>
-                </div>
-            </div>
-        </nav>
-    </header>
+<main>
+  <section class="hero compact">
+    <div class="hero-content">
+      <p class="section-label" style="color:var(--gold-light);">Legal Agreement</p>
+      <h1 data-i18n="termsHeading">Terms of Service</h1>
+      <p data-i18n="termsHeroText">Please read our terms and conditions carefully before using our platform.</p>
+    </div>
+  </section>
 
-    <main>
-        <section class="hero compact animate__animated animate__fadeInDown">
-            <div class="hero-content">
-                <h1 data-i18n="termsHeading">Terms of Service</h1>
-                <p data-i18n="termsHeroText">Understand the guidelines for using HopeBridge Academy’s website and services.</p>
-                <a href="#terms-content" class="hero-button primary" data-i18n="readTerms">Read Terms</a>
-            </div>
-        </section>
+  <section class="legal-content">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label">Legal Information</p>
+        <h2 class="section-title" data-i18n="termsHeading">Terms of Service</h2>
+        <div class="gold-line"></div>
+      </div>
 
-        <section class="terms-content" aria-labelledby="terms-content-heading">
-            <div class="terms-container animate__animated animate__fadeInUp">
-                <h2 id="terms-content-heading" data-i18n="termsIntroLabel">Introduction</h2>
-                <p data-i18n="termsIntroText">By using HopeBridge Academy’s website and services, you agree to these Terms of Service. These terms govern your access to and use of our platform, including courses, tutoring, and other services provided by HopeBridge Academy.</p>
-                
-                <h2 data-i18n="termsUseLabel">Use of Services</h2>
-                <p data-i18n="termsUseText">You agree to use our services for lawful purposes and in accordance with our policies. You may not use our services to engage in any illegal activities, harass others, or distribute harmful content. Violation of these terms may result in suspension or termination of your account.</p>
-                
-                <h2 data-i18n="termsAccountLabel">Account Responsibilities</h2>
-                <p data-i18n="termsAccountText">You are responsible for maintaining the confidentiality of your account credentials and for all activities under your account. You must notify us immediately of any unauthorized use of your account. HopeBridge Academy is not liable for any losses caused by unauthorized access to your account.</p>
-                
-                <h2 data-i18n="termsPaymentLabel">Payment Terms</h2>
-                <p data-i18n="termsPaymentText">All payments for courses, tutoring, or other services must be made in accordance with the fees outlined on our website. Fees are non-refundable unless otherwise stated. We reserve the right to modify pricing at any time, with notice provided to users.</p>
-                
-                <h2 data-i18n="termsChangesLabel">Changes to Terms</h2>
-                <p data-i18n="termsChangesText">We may update these terms periodically to reflect changes in our services or legal requirements. Continued use of our services after such changes constitutes acceptance of the updated terms. We encourage you to review these terms regularly.</p>
-                
-                <h2 data-i18n="termsTerminationLabel">Termination</h2>
-                <p data-i18n="termsTerminationText">We may terminate or suspend your access to our services at our discretion, with or without notice, for violations of these terms or other policies. Upon termination, your right to access our services will cease immediately.</p>
-                
-                <h2 data-i18n="termsContactLabel">Contact Us</h2>
-                <p data-i18n="termsContactText">For questions about these terms, please contact us at <a href="mailto:info@hopebridgeacademy.com">info@hopebridgeacademy.com</a> or call +93 123-456-7890.</p>
-            </div>
-        </section>
-    </main>
+      <div class="legal-text animate-up">
+        <h3>1. Acceptance of Terms</h3>
+        <p>By accessing and using HopeBridge Academy's website and services, you agree to be bound by these Terms of Service. If you do not agree to these terms, please do not use our services.</p>
 
-    <footer>
-        <div class="footer-content animate__animated animate__fadeInUp">
-            <div class="social-media-links">
-                <a href="https://www.facebook.com/profile.php?id=61576355386024" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Facebook">
-                    <i class="fab fa-facebook-f"></i>
-                </a>
-                <a href="https://twitter.com/hopebridge" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Twitter">
-                    <i class="fab fa-twitter"></i>
-                </a>
-                <a href="https://www.instagram.com/hopebridgeacademy/" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Instagram">
-                    <i class="fab fa-instagram"></i>
-                </a>
-                <a href="https://www.youtube.com/youtube" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="YouTube">
-                    <i class="fab fa-youtube"></i>
-                </a>
-            </div>
-            <div class="footer-nav">
-                <h4 data-i18n="footerNavTitle">Explore</h4>
-                <ul class="nav-list">
-                    <li><a href="about.html" data-i18n="about">About Us</a></li>
-                    <li><a href="faq.html" data-i18n="faq">FAQ</a></li>
-                    <li><a href="privacy.html" data-i18n="privacyPolicy">Privacy Policy</a></li>
-                    <li><a href="terms.html" class="active" data-i18n="terms" aria-current="page">Terms of Service</a></li>
-                </ul>
-            </div>
-            <div class="footer-contact">
-                <h4 data-i18n="contactUsTitle">Contact Us</h4>
-                <p data-i18n="contactInfo">Email: info@hopebridgeacademy.com | Phone: +93 123-456-7890</p>
-            </div>
-        </div>
-        <p data-i18n="copyright">© 2025 HopeBridge Academy</p>
-    </footer>
+        <h3>2. Use License</h3>
+        <p>Permission is granted to temporarily download and print materials (including course content) from HopeBridge Academy's website for personal, non-commercial use only. This is the grant of a license, not a transfer of title, and under this license you may not:</p>
+        <ul>
+          <li>Modify or copy the materials</li>
+          <li>Use the materials for any commercial purpose or for any public display</li>
+          <li>Attempt to decompile or reverse engineer any software contained on the website</li>
+          <li>Remove any copyright or other proprietary notations from the materials</li>
+          <li>Transfer the materials to another person or "mirror" the materials on any other server</li>
+        </ul>
 
-    <button id="backToTopBtn" onclick="scrollToTop()" aria-label="Back to Top" data-tooltip="Back to Top"><i class="fas fa-chevron-up"></i></button>
+        <h3>3. Disclaimer</h3>
+        <p>The materials on HopeBridge Academy's website are provided on an 'as is' basis. HopeBridge Academy makes no warranties, expressed or implied, and hereby disclaims and negates all other warranties including, without limitation, implied warranties or conditions of merchantability, fitness for a particular purpose, or non-infringement of intellectual property or other violation of rights.</p>
+
+        <h3>4. Limitations</h3>
+        <p>In no event shall HopeBridge Academy or its suppliers be liable for any damages (including, without limitation, damages for loss of data or profit, or due to business interruption) arising out of the use or inability to use the materials on HopeBridge Academy's website, even if authorized representatives have been notified orally or in writing of the possibility of such damage.</p>
+
+        <h3>5. Accuracy of Materials</h3>
+        <p>The materials appearing on HopeBridge Academy's website could include technical, typographical, or photographic errors. HopeBridge Academy does not warrant that any of the materials on its website are accurate, complete, or current. HopeBridge Academy may make changes to the materials contained on its website at any time without notice.</p>
+
+        <h3>6. Links</h3>
+        <p>HopeBridge Academy has not reviewed all of the sites linked to its website and is not responsible for the contents of any such linked site. The inclusion of any link does not imply endorsement by HopeBridge Academy of the site. Use of any such linked website is at the user's own risk.</p>
+
+        <h3>7. Modifications</h3>
+        <p>HopeBridge Academy may revise these Terms of Service for its website at any time without notice. By using this website, you are agreeing to be bound by the then current version of these Terms of Service.</p>
+
+        <h3>8. Governing Law</h3>
+        <p>These Terms of Service and any separate agreements we provide will be governed by and construed in accordance with the laws of Afghanistan, without regard to its conflict of law provisions.</p>
+
+        <h3>9. Course Policies</h3>
+        <ul>
+          <li><strong>Registration:</strong> Course registration is subject to availability and completion of the registration form. Students must be at least 13 years old.</li>
+          <li><strong>Attendance:</strong> Regular attendance is expected. Students with excessive absences may be removed from the course.</li>
+          <li><strong>Cancellation:</strong> Students may request refunds within 7 days of course start date if no classes have been attended.</li>
+          <li><strong>Certificates:</strong> Certificates are issued upon successful completion of course requirements and passing assessments.</li>
+        </ul>
+
+        <h3>10. User Conduct</h3>
+        <p>Users agree to:</p>
+        <ul>
+          <li>Provide accurate and complete information during registration</li>
+          <li>Maintain the confidentiality of their login credentials</li>
+          <li>Not engage in any illegal, abusive, or disruptive behavior</li>
+          <li>Respect the intellectual property rights of HopeBridge Academy and other users</li>
+          <li>Not upload or share any harmful, offensive, or inappropriate content</li>
+        </ul>
+
+        <h3>11. Contact Information</h3>
+        <p>If you have any questions about these Terms of Service, please contact us at <a href="mailto:hopebridgeacademy@gmail.com">hopebridgeacademy@gmail.com</a> or <a href="tel:+93747903369">+93-747-903-369</a>.</p>
+
+        <p style="margin-top:2rem;padding:1.2rem;background:var(--gold-pale);border-radius:var(--radius-sm);border-left:4px solid var(--gold);">
+          <strong>Last Updated:</strong> January 2025
+        </p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="footer-content">
+    <div>
+      <img src="logo.png" alt="HopeBridge Academy" style="height:48px;margin-bottom:1rem;filter:brightness(1.2);">
+    </div>
+    <nav class="footer-nav">
+      <h4 data-i18n="footerNavTitle">Explore</h4>
+      <ul>
+        <li><a href="about.html"   data-i18n="about">About Us</a></li>
+        <li><a href="faq.html"     data-i18n="faq">FAQ</a></li>
+        <li><a href="privacy.html" data-i18n="privacyPolicy">Privacy Policy</a></li>
+        <li><a href="terms.html"   class="active" data-i18n="terms" aria-current="page">Terms of Service</a></li>
+      </ul>
+    </nav>
+    <div class="footer-contact">
+      <h4 data-i18n="contactUsTitle">Contact Us</h4>
+      <p data-i18n="contactInfo">Email: hopebridgeacademy@gmail.com | Phone: +93-747-903-369</p>
+    </div>
+  </div>
+  <div class="footer-bottom"><p data-i18n="copyright">© 2025–2026 HopeBridge Academy. All rights reserved.</p></div>
+</footer>
+<button id="backToTopBtn" onclick="scrollToTop()" aria-label="Back to Top"><i class="fas fa-chevron-up"></i></button>
 </body>
 </html>

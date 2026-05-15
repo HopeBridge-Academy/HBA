@@ -1,701 +1,1277 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-    <meta charset="UTF-8" />
-    <title>گزارش تدریس - آکادمی هوپ‌بریج</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous" />
-    <link rel="stylesheet" href="styles.css">
-    <script src="https://unpkg.com/i18next@21.6.10/dist/umd/i18next.min.js"></script>
-    <script src="i18n.js" defer></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>صفحه معلم - اکادمی هوپ بریج</title>
+<link rel="stylesheet" href="styles.css">
+<script src="i18n.js" defer></script>
+<script src="script.js" defer></script>
+<script src="hba-core.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=DM+Sans:wght@300;400;500;600&family=Noto+Naskh Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" crossorigin="anonymous">
 
-    <style>
-        body {
-            font-family: 'Noto Naskh Arabic', sans-serif;
-            margin: 0;
-            padding: 0;
-            color: #2d3748;
-            animation: fadeInBody 1s ease-in-out;
-        }
+<style>
+:root{
+  --navy:#0B1C3D;--gold:#C9A84C;--off-white:#f8f7f4;
+  --white:#fff;--gray-600:#4b5563;--gray-400:#9ca3af;
+  --success:#10b981;--danger:#ef4444;--warn:#f59e0b;
+  --info:#6366f1;--font-head:'Playfair Display',serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Noto Naskh Arabic','DM Sans',sans-serif;background:var(--off-white);color:#1f2937;direction:rtl}
 
-        @keyframes fadeInBody {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
+/* ── HEADER ── */
+header{background:var(--navy);padding:1rem 2rem;display:flex;align-items:center;justify-content:space-between;box-shadow:0 2px 12px rgba(0,0,0,.3);position:sticky;top:0;z-index:100}
+.logo{display:flex;align-items:center;gap:.6rem;color:#fff;text-decoration:none;font-family:var(--font-head);font-size:1.2rem;font-weight:700}
+.logo span{color:var(--gold)}
+.nav-out{background:transparent;border:1px solid rgba(255,255,255,.3);color:#fff;padding:.5rem 1.2rem;border-radius:6px;cursor:pointer;font-size:.9rem;transition:.2s}
+.nav-out:hover{background:rgba(255,255,255,.1)}
+.teacher-badge{background:rgba(201,168,76,.2);border:1px solid var(--gold);color:var(--gold);padding:.35rem .9rem;border-radius:20px;font-size:.85rem;font-weight:600}
 
-        header {
-            background-color: #3b82f6;
-            color: white;
-            text-align: center;
-            padding: 1rem;
-            font-size: 1.5rem;
-            font-weight: bold;
-            animation: slideInHeader 0.5s ease-out;
-        }
+/* ── LAYOUT ── */
+.container{max-width:1200px;margin:0 auto;padding:0 1.5rem}
+main{padding:2rem 0 4rem}
 
-        @keyframes slideInHeader {
-            from { transform: translateY(-20px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
+/* ── STAT CARDS ── */
+.stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:1.25rem;margin:2rem 0}
+.stat-card{background:#fff;border-radius:12px;padding:1.4rem;text-align:center;border-top:4px solid var(--gold);box-shadow:0 2px 8px rgba(0,0,0,.06);transition:.2s}
+.stat-card:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,.1)}
+.stat-card i{font-size:1.9rem;color:var(--gold);margin-bottom:.5rem;display:block}
+.stat-card h3{color:var(--navy);font-size:.88rem;margin-bottom:.3rem;line-height:1.3}
+.stat-card .num{font-size:1.9rem;color:var(--gold);font-weight:700}
 
-        .nav-list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            display: flex;
-            justify-content: flex-end;
-        }
+/* ── CARDS ── */
+.card{background:#fff;border-radius:12px;padding:2rem;margin-bottom:2rem;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.card-title{color:var(--navy);font-family:var(--font-head);font-size:1.25rem;margin-bottom:1.5rem;display:flex;align-items:center;gap:.5rem;border-bottom:2px solid var(--off-white);padding-bottom:.75rem}
+.card-title i{color:var(--gold)}
 
-        .nav-list li a {
-            color: white;
-            text-decoration: none;
-            font-weight: 500;
-            transition: opacity 0.3s;
-        }
+/* ── FORMS ── */
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-bottom:1.25rem}
+.form-grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1.25rem;margin-bottom:1.25rem}
+.form-group{display:flex;flex-direction:column;gap:.4rem}
+.form-group label{font-weight:600;color:var(--navy);font-size:.88rem}
+.form-group input,.form-group select,.form-group textarea{
+  padding:.7rem .9rem;border:1.5px solid #e5e7eb;border-radius:8px;
+  font-family:inherit;font-size:.93rem;transition:.2s;background:#fff;width:100%}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{
+  outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(201,168,76,.15)}
+.form-group textarea{resize:vertical}
+.full-span{grid-column:1/-1}
 
-        .nav-list li a:hover {
-            opacity: 0.8;
-        }
+/* ── BUTTONS ── */
+.btn{padding:.7rem 1.5rem;border:none;border-radius:8px;font-weight:600;cursor:pointer;
+  font-family:inherit;font-size:.9rem;transition:.2s;display:inline-flex;align-items:center;gap:.45rem}
+.btn:hover{opacity:.87;transform:translateY(-1px)}
+.btn:active{transform:translateY(0)}
+.btn-primary{background:var(--navy);color:#fff}
+.btn-success{background:var(--success);color:#fff}
+.btn-danger{background:var(--danger);color:#fff}
+.btn-warn{background:var(--warn);color:#fff}
+.btn-gold{background:var(--gold);color:var(--navy)}
+.btn-tg{background:#229ED9;color:#fff}
+.btn-info{background:var(--info);color:#fff}
+.btn-sm{padding:.42rem .9rem;font-size:.82rem}
+.btn-xs{padding:.3rem .7rem;font-size:.78rem}
+.btn-group{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:1rem}
 
-        main {
-            max-width: 900px;
-            margin: 2rem auto;
-            background: rgb(219, 245, 241);
-            padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            animation: fadeInMain 0.8s ease-in-out;
-        }
+/* ── OVERDUE BANNER ── */
+.overdue-banner{background:#fef3c7;border:2px solid var(--warn);border-radius:12px;
+  padding:1.5rem 2rem;margin-bottom:2rem;display:flex;gap:1.2rem;align-items:center}
+.overdue-banner.hidden{display:none}
+.overdue-banner .icon{font-size:2.2rem;color:var(--warn);flex-shrink:0}
+.overdue-banner h3{color:#92400e;margin:0 0 .3rem}
+.overdue-banner p{color:#b45309;font-size:.9rem;margin:0 0 .6rem}
 
-        @keyframes fadeInMain {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+/* ── LIST ITEMS ── */
+.list-item{background:var(--off-white);padding:1rem 1.2rem;margin-bottom:.7rem;
+  border-radius:8px;border-right:4px solid var(--gold);display:flex;
+  justify-content:space-between;align-items:flex-start;gap:1rem}
+.list-item.sent{border-color:var(--success)}
+.list-item.pending{border-color:var(--warn)}
+.list-item-info h4{color:var(--navy);margin:0 0 .25rem;font-size:.97rem}
+.list-item-info p{color:var(--gray-600);font-size:.83rem;margin:.15rem 0;line-height:1.5}
+.list-item-actions{display:flex;gap:.4rem;flex-shrink:0;flex-wrap:wrap}
 
-        label {
-            font-weight: bold;
-            margin-top: 1rem;
-            display: block;
-            color: #2d3748;
-        }
+/* ── BADGES ── */
+.badge{display:inline-block;padding:.22rem .65rem;border-radius:20px;font-size:.76rem;font-weight:700}
+.badge-green{background:#d1fae5;color:#065f46}
+.badge-red{background:#fee2e2;color:#991b1b}
+.badge-blue{background:#dbeafe;color:#1e40af}
+.badge-yellow{background:#fef3c7;color:#92400e}
+.badge-purple{background:#ede9fe;color:#5b21b6}
+.badge-sent{background:#d1fae5;color:#065f46}
+.badge-pending{background:#fef3c7;color:#92400e}
+.badge-gray{background:#f3f4f6;color:#374151}
 
-        input, textarea, select, button {
-            width: 100%;
-            padding: 0.6rem;
-            margin-top: 0.3rem;
-            border: 1px solid #43a330;
-            border-radius: 5px;
-            font-family: inherit;
-            font-size: 1rem;
-            transition: border-color 0.3s, box-shadow 0.3s;
-        }
+/* ── WEEKLY REPORT CARD ── */
+.weekly-wrap{background:linear-gradient(135deg,#f0fdf4,#dcfce7);border:2px solid #86efac;border-radius:12px;padding:2rem;margin-bottom:2rem}
+.weekly-wrap .card-title{border-color:#86efac}
+.info-box{border-right:4px solid var(--warn);background:#fef9e7;padding:1rem 1.2rem;border-radius:6px;margin-bottom:1.5rem}
+.info-box p{margin:.2rem 0;color:#92400e;font-size:.9rem}
+.info-box strong{color:#b45309}
 
-        input:focus, select:focus, textarea:focus {
-            border-color: #3b82f6;
-            box-shadow: 0 0 5px rgba(59, 130, 246, 0.5);
-            outline: none;
-        }
+/* ── TABS ── */
+.tabs{display:flex;gap:.4rem;margin-bottom:1.5rem;flex-wrap:wrap;border-bottom:2px solid #e5e7eb;padding-bottom:.75rem}
+.tab-btn{padding:.5rem 1.1rem;border:1.5px solid #e5e7eb;border-radius:8px;background:#fff;
+  cursor:pointer;font-family:inherit;font-size:.86rem;font-weight:600;color:var(--gray-600);transition:.2s}
+.tab-btn.active,.tab-btn:hover{background:var(--navy);color:#fff;border-color:var(--navy)}
 
-        button {
-            background: #3b82f6;
-            color: white;
-            margin-top: 1.5rem;
-            border: none;
-            cursor: pointer;
-            transition: background-color 0.3s, transform 0.2s;
-        }
+/* ── TABLE ── */
+.data-table{width:100%;border-collapse:collapse;font-size:.88rem}
+.data-table th{background:var(--navy);color:#fff;padding:.65rem .9rem;text-align:right;white-space:nowrap}
+.data-table td{padding:.6rem .9rem;border-bottom:1px solid #f0f0f0;vertical-align:middle}
+.data-table tr:nth-child(even) td{background:#f9fafb}
+.data-table tr:hover td{background:#f0f9ff}
 
-        button:hover {
-            background: #2563eb;
-            transform: scale(1.02);
-        }
+/* ── PROGRESS ── */
+.progress-bar{background:#e5e7eb;border-radius:8px;height:8px;overflow:hidden;margin-top:.4rem}
+.progress-fill{height:100%;border-radius:8px;background:linear-gradient(90deg,var(--gold),#e8b84b);transition:width .5s}
 
-        .delete-report-button, .send-report-button {
-            background: #ef4444;
-            border: none;
-            color: white;
-            cursor: pointer;
-            padding: 0.3rem 0.6rem;
-            font-size: 0.9rem;
-            border-radius: 3px;
-            margin-right: 0.5rem;
-            transition: background-color 0.3s, transform 0.2s;
-        }
+/* ── SECTION DIVIDER ── */
+.section-note{background:#f0f9ff;border:1px solid #bae6fd;border-radius:8px;padding:1rem 1.2rem;margin-bottom:1.5rem}
+.section-note p{margin:0;color:#0369a1;font-size:.88rem}
 
-        .send-report-button {
-            background: #10b981;
-        }
+/* ── EMPTY STATE ── */
+.empty{color:var(--gray-400);text-align:center;padding:2rem;font-size:.95rem}
 
-        .delete-report-button:hover {
-            background: #dc2626;
-            transform: scale(1.02);
-        }
+/* ── TOAST ── */
+.hba-toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);
+  padding:12px 24px;border-radius:8px;font-weight:600;z-index:9999;
+  box-shadow:0 4px 20px rgba(0,0,0,.25);transition:opacity .3s;
+  max-width:420px;text-align:center;pointer-events:none}
 
-        .send-report-button:hover {
-            background: #059669;
-            transform: scale(1.02);
-        }
+/* ── MODAL ── */
+.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:200;
+  display:flex;align-items:center;justify-content:center;padding:1rem}
+.modal-bg.hidden{display:none}
+.modal-box{background:#fff;border-radius:12px;padding:2rem;max-width:560px;
+  width:100%;max-height:90vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,.3)}
+.modal-box h3{color:var(--navy);margin-bottom:1.5rem;font-family:var(--font-head)}
+.modal-close{float:left;background:none;border:none;font-size:1.4rem;cursor:pointer;color:var(--gray-600)}
 
-        .send-report-button.sent {
-            background: #059669;
-            cursor: default;
-        }
-
-        .send-report-button.sent:hover {
-            transform: none;
-        }
-
-        .export-button {
-            background: #3b82f6;
-            color: rgb(255, 255, 255);
-            padding: 0.6rem 1rem;
-            font-size: 1rem;
-            border-radius: 5px;
-            border: none;
-            cursor: pointer;
-            margin-top: 1rem;
-            transition: background-color 0.3s, transform 0.2s;
-            display: inline-block;
-        }
-
-        .export-button:hover {
-            background: #2563eb;
-            transform: scale(1.02);
-        }
-
-        .export-button i {
-            margin-left: 0.3rem;
-        }
-
-        iframe {
-            width: 100%;
-            height: 500px;
-            margin: 1rem 0;
-            border: 1px solid #d1d5db;
-            border-radius: 5px;
-        }
-
-        .teacher-id {
-            font-size: 0.9rem;
-            color: #6b7280;
-            margin-bottom: 1rem;
-        }
-
-        .report-entry {
-            background: #c4dbeb;
-            padding: 1rem;
-            margin-top: 1.5rem;
-            border-radius: 10px;
-            display: flex;
-            flex-direction: column;
-            animation: scaleInImage 0.5s ease-out;
-        }
-
-        @keyframes scaleInImage {
-            from { transform: scale(0.95); opacity: 0; }
-            to { transform: scale(1); opacity: 1; }
-        }
-
-        .report-entry-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .subtitle {
-            font-weight: bold;
-            color: #3b82f6;
-            margin-bottom: 0.5rem;
-        }
-
-        .exam-panel {
-            margin-top: 2rem;
-            background: #d5e6ae;
-            padding: 1rem;
-            border: 1px solid #acd3a8;
-            border-radius: 10px;
-            animation: fadeInForm 0.6s ease-in-out;
-        }
-
-        @keyframes fadeInForm {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .exam-panel h3 {
-            color: #e65100;
-            margin-top: 0;
-        }
-
-        .exam-entry {
-            margin-bottom: 0.5rem;
-            padding: 0.5rem;
-            background: #fff9f0;
-            border: 1px solid #ffe0b2;
-            border-radius: 5px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .exam-entry span {
-            flex-grow: 1;
-        }
-
-        .exam-entry button {
-            background: #ef4444;
-            border: none;
-            color: white;
-            cursor: pointer;
-            padding: 0.3rem 0.6rem;
-            font-size: 0.9rem;
-            border-radius: 3px;
-            margin-left: 1rem;
-            transition: background-color 0.3s, transform 0.2s;
-        }
-
-        .exam-entry button:hover {
-            background: #dc2626;
-            transform: scale(1.02);
-        }
-
-        .add-exam-form {
-            margin-top: 1rem;
-            border-top: 1px solid #d1d5db;
-            padding-top: 1rem;
-        }
-
-        .add-exam-form input {
-            width: auto;
-            display: inline-block;
-            margin-left: 0.5rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .add-exam-form label {
-            display: inline-block;
-            width: 90px;
-            margin-left: 0.5rem;
-        }
-
-        .add-exam-form button {
-            width: auto;
-            margin-top: 0;
-        }
-
-        .send-report-button::before {
-            content: '\f1d8';
-            font-family: 'Font Awesome 5 Free';
-            font-weight: 900;
-            margin-left: 0.3rem;
-        }
-
-        .send-report-button.sent::before {
-            content: '\f00c';
-            font-family: 'Font Awesome 5 Free';
-            font-weight: 900;
-            margin-left: 0.3rem;
-        }
-
-        .sent-icon {
-            color: #059669;
-            margin-right: 0.3rem;
-        }
-    </style>
+.hidden{display:none}
+@media(max-width:700px){
+  .form-grid,.form-grid-3{grid-template-columns:1fr}
+  .stat-grid{grid-template-columns:repeat(2,1fr)}
+  .list-item{flex-direction:column}
+  header{padding:.75rem 1rem}
+}
+</style>
 </head>
 <body>
+
+<!-- ══ HEADER ══ -->
 <header>
-    سامانه ثبت گزارش تدریس - آکادمی هوپ‌بریج
-    <nav>
-        <ul class="nav-list">
-            <li><a href="#" id="logout-link" data-i18n="logout">خروج</a></li>
-        </ul>
-    </nav>
+  <a href="index.html" class="logo">🎓 <span>هوپ</span>بریج</a>
+  <div style="display:flex;align-items:center;gap:.75rem">
+    <span class="teacher-badge"><i class="fas fa-chalkboard-teacher"></i> معلم</span>
+    <button class="nav-out" onclick="sessionStorage.clear();location.href='login.html'">
+      <i class="fas fa-sign-out-alt"></i> خروج
+    </button>
+  </div>
 </header>
+
 <main>
-    <p class="teacher-id">کد استاد: <span id="teacherId">TCHR-001</span></p>
+<div class="container">
 
-    <iframe src="plan.pdf" title="برنامه تدریس"></iframe>
+  <!-- PAGE TITLE -->
+  <div style="text-align:center;margin:2rem 0 1.5rem">
+    <h1 style="color:var(--navy);font-family:var(--font-head);font-size:2rem" id="welcome-title">خوش آمدید، معلم گرامی</h1>
+    <p style="color:var(--gray-600)">پنل مدیریت تدریس، امتحانات و گزارشات هفتگی</p>
+  </div>
 
-    <form id="reportForm">
-        <input type="hidden" name="teacher_id" id="formTeacherId" value="TCHR-001" />
+  <!-- ══ OVERDUE BANNER ══ -->
+  <div class="overdue-banner hidden" id="overdue-banner">
+    <div class="icon"><i class="fas fa-exclamation-triangle"></i></div>
+    <div>
+      <h3>⚠️ گزارش هفتگی شما معوق است!</h3>
+      <p id="overdue-msg">برای ثبت تقریر یا نتایج جدید، ابتدا باید گزارش هفته گذشته را ارسال کنید.</p>
+      <button class="btn btn-warn btn-sm" onclick="scrollToSection('weekly-section')">
+        <i class="fas fa-paper-plane"></i> ارسال گزارش همین حالا
+      </button>
+    </div>
+  </div>
 
-        <label>انتخاب صنف:</label>
-        <select id="class" name="class" required>
-            <option value="">-- انتخاب صنف --</option>
-            <optgroup label="کمپیوتر">
-                <option value="کمپیوتر A">کمپیوتر A</option>
-                <option value="کمپیوتر B">کمپیوتر B</option>
-                <option value="کمپیوتر C">کمپیوتر C</option>
-            </optgroup>
-            <optgroup label="انگلیسی">
-                <option value="انگلیسی A">انگلیسی A</option>
-                <option value="انگلیسی B">انگلیسی B</option>
-                <option value="انگلیسی C">انگلیسی C</option>
-            </optgroup>
-            <optgroup label="دیگر">
-                <option value="دیگر A">دیگر A</option>
-                <option value="دیگر B">دیگر B</option>
-                <option value="دیگر C">دیگر C</option>
-            </optgroup>
-        </select>
+  <!-- ══ STATS ══ -->
+  <div class="stat-grid">
+    <div class="stat-card">
+      <i class="fas fa-users"></i>
+      <h3>کل دانشجویان</h3>
+      <div class="num" id="s-students">0</div>
+    </div>
+    <div class="stat-card">
+      <i class="fas fa-book-open"></i>
+      <h3>دوره‌های فعال</h3>
+      <div class="num" id="s-courses">0</div>
+    </div>
+    <div class="stat-card">
+      <i class="fas fa-file-alt"></i>
+      <h3>تقریرهای ثبت‌شده</h3>
+      <div class="num" id="s-logs">0</div>
+    </div>
+    <div class="stat-card">
+      <i class="fas fa-pencil-alt"></i>
+      <h3>نتایج امتحانات</h3>
+      <div class="num" id="s-exams">0</div>
+    </div>
+    <div class="stat-card">
+      <i class="fas fa-check-circle"></i>
+      <h3>نرخ قبولی</h3>
+      <div class="num" id="s-pass">0%</div>
+    </div>
+    <div class="stat-card">
+      <i class="fas fa-calendar-check"></i>
+      <h3>گزارش‌های ارسال‌شده</h3>
+      <div class="num" id="s-reports">0</div>
+    </div>
+  </div>
 
-        <label>تاریخ:</label>
-        <input type="date" id="date" name="date" required />
+  <!-- ══ WEEKLY REPORT (MANDATORY) ══ -->
+  <div class="weekly-wrap" id="weekly-section">
+    <h2 class="card-title"><i class="fas fa-calendar-week"></i> گزارش هفتگی معلم (الزامی)</h2>
 
-        <label>موضوع درس:</label>
-        <input type="text" id="subject" name="subject" required />
+    <div class="info-box">
+      <p><strong>⏰ قانون:</strong> هر هفته (حداکثر تا جمعه) یک گزارش جامع باید ارسال شود.</p>
+      <p>بعد از ۷ روز، ثبت تقریر یا نتایج جدید تا ارسال گزارش امکان‌پذیر نخواهد بود.</p>
+      <p style="margin-top:.5rem">وضعیت: <strong id="report-status-text">در حال بررسی...</strong></p>
+    </div>
 
-        <label>مدت زمان تدریس:</label>
-        <input type="text" id="duration" name="duration" required />
+    <form id="weekly-form" onsubmit="submitWeeklyReport(event)" novalidate>
+      <div class="form-grid">
+        <div class="form-group">
+          <label>تاریخ شروع هفته *</label>
+          <input type="date" id="w-start" required>
+        </div>
+        <div class="form-group">
+          <label>تاریخ پایان هفته *</label>
+          <input type="date" id="w-end" required>
+        </div>
+        <div class="form-group">
+          <label>دوره(های) تدریس‌شده *</label>
+          <input type="text" id="w-courses" placeholder="مثال: English Advanced, IELTS" required>
+        </div>
+        <div class="form-group">
+          <label>تعداد جلسات برگزار شده *</label>
+          <input type="number" id="w-sessions" min="0" required>
+        </div>
+        <div class="form-group">
+          <label>میانگین حضور دانشجویان *</label>
+          <input type="number" id="w-present" min="0" required>
+        </div>
+        <div class="form-group">
+          <label>درصد حضور (%) *</label>
+          <input type="number" id="w-attendance" min="0" max="100" required>
+        </div>
+      </div>
+      <div class="form-group" style="margin-bottom:1rem">
+        <label>خلاصه تدریس این هفته *</label>
+        <textarea id="w-summary" rows="4" placeholder="موضوعات تدریس‌شده، روش‌های آموزشی، پیشرفت دانشجویان..." required></textarea>
+      </div>
+      <div class="form-grid">
+        <div class="form-group">
+          <label>چالش‌ها و مشکلات</label>
+          <textarea id="w-challenges" rows="3" placeholder="مشکلاتی که در تدریس یا با دانشجویان داشتید..."></textarea>
+        </div>
+        <div class="form-group">
+          <label>پیشنهادات بهبود</label>
+          <textarea id="w-suggestions" rows="3" placeholder="پیشنهادات برای بهبود کیفیت تدریس..."></textarea>
+        </div>
+      </div>
+      <div class="form-group" style="margin-bottom:1.5rem">
+        <label>برنامه هفته آینده</label>
+        <textarea id="w-nextplan" rows="2" placeholder="موضوعاتی که هفته آینده تدریس خواهید کرد..."></textarea>
+      </div>
 
-        <label>محتوای تدریس‌شده:</label>
-        <textarea id="content" name="content" required></textarea>
-
-        <label>ارزیابی سطح یادگیری:</label>
-        <textarea id="assessment" name="assessment" required></textarea>
-
-        <label>مشکلات یا چالش‌ها:</label>
-        <textarea id="challenges" name="challenges"></textarea>
-
-        <label>پیشنهادات استاد:</label>
-        <textarea id="suggestions" name="suggestions"></textarea>
-
-        <label>وضعیت حضور:</label>
-        <select name="presence_level" id="presence" required>
-            <option value="">انتخاب کنید</option>
-            <option value="full">همه حاضر بودند</option>
-            <option value="partial">برخی غایب بودند</option>
-            <option value="low">حضور بسیار پایین</option>
-        </select>
-
-        <label>تعداد حاضر و غایب:</label>
-        <textarea id="attendance" name="attendance" required></textarea>
-
-        <button type="submit">ذخیره گزارش</button>
+      <div class="btn-group">
+        <button type="button" class="btn btn-primary" onclick="saveWeeklyDraft()">
+          <i class="fas fa-save"></i> ذخیره پیش‌نویس
+        </button>
+        <button type="submit" class="btn btn-success">
+          <i class="fas fa-paper-plane"></i> ذخیره + ارسال به تلگرام (PDF)
+        </button>
+      </div>
     </form>
 
-    <div id="reportDisplay">
-        <h3>گزارش‌های ثبت‌شده</h3>
+    <!-- Submitted Reports -->
+    <div style="margin-top:2rem;padding-top:2rem;border-top:2px solid #86efac">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;flex-wrap:wrap;gap:.5rem">
+        <h3 style="color:var(--navy);margin:0">📋 گزارشات ذخیره‌شده</h3>
+        <button class="btn btn-tg btn-sm" onclick="sendAllUnsentWeekly()">
+          <i class="fab fa-telegram"></i> ارسال همه پیش‌نویس‌ها
+        </button>
+      </div>
+      <div id="weekly-list"></div>
+    </div>
+  </div>
+
+  <!-- ══ TEACHING LOG ══ -->
+  <div class="card" id="teaching-section">
+    <h2 class="card-title"><i class="fas fa-chalkboard"></i> ثبت تقریر تدریس</h2>
+
+    <div class="section-note">
+      <p><i class="fas fa-info-circle" style="color:#0369a1;margin-left:.4rem"></i>
+        تقریرها به‌صورت محلی ذخیره می‌شوند. می‌توانید هر زمان آن‌ها را به تلگرام ارسال کنید.
+        بعد از ۷ روز بدون ارسال، سیستم گزارش هفتگی را الزامی می‌کند.
+      </p>
     </div>
 
-    <div class="exam-panel">
-        <h3>نتایج امتحان</h3>
+    <form id="teaching-form" onsubmit="addTeachingLog(event)" novalidate>
+      <div class="form-grid">
+        <div class="form-group">
+          <label>تاریخ جلسه *</label>
+          <input type="date" id="tl-date" required>
+        </div>
+        <div class="form-group">
+          <label>نام دوره *</label>
+          <select id="tl-course" required><option value="">انتخاب کنید</option></select>
+        </div>
+        <div class="form-group">
+          <label>موضوع درس *</label>
+          <input type="text" id="tl-topic" placeholder="موضوع جلسه امروز" required>
+        </div>
+        <div class="form-group">
+          <label>تعداد دانشجویان حاضر *</label>
+          <input type="number" id="tl-present" min="0" required>
+        </div>
+        <div class="form-group">
+          <label>مدت جلسه (دقیقه)</label>
+          <input type="number" id="tl-duration" min="0" placeholder="90">
+        </div>
+        <div class="form-group">
+          <label>نوع جلسه</label>
+          <select id="tl-type">
+            <option>عادی</option><option>مرور</option><option>آزمون</option><option>کارگاه</option><option>آنلاین</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group" style="margin-bottom:1rem">
+        <label>شرح درس و نقاط مهم *</label>
+        <textarea id="tl-content" rows="4" placeholder="توضیح مختصری از مطالب تدریس‌شده، روش‌های استفاده‌شده، نقاط کلیدی..." required></textarea>
+      </div>
+      <div class="form-grid">
+        <div class="form-group">
+          <label>تکالیف داده‌شده</label>
+          <input type="text" id="tl-homework" placeholder="شرح تکلیف...">
+        </div>
+        <div class="form-group">
+          <label>یادداشت معلم</label>
+          <input type="text" id="tl-note" placeholder="یادداشت اضافی...">
+        </div>
+      </div>
+      <div class="btn-group">
+        <button type="submit" class="btn btn-primary">
+          <i class="fas fa-save"></i> ذخیره تقریر
+        </button>
+        <button type="button" class="btn btn-tg" onclick="saveAndSendLog()">
+          <i class="fab fa-telegram"></i> ذخیره + ارسال به تلگرام
+        </button>
+      </div>
+    </form>
 
-        <div id="localExamResults"></div>
-
-        <form id="addExamResultForm" class="add-exam-form">
-            <label>نام شاگرد:</label>
-            <input type="text" id="studentName" required placeholder="مثلا: احمد رحیمی" />
-
-            <label>کد شاگرد:</label>
-            <input type="text" id="studentId" required placeholder="مثلا: STD-051" />
-
-            <label>نمره:</label>
-            <input type="number" id="studentScore" required min="0" max="100" placeholder="مثلا: 85" />
-
-            <button type="submit">افزودن نمره</button>
-        </form>
-
-        <form id="examForm" method="POST" style="margin-top:1rem;">
-            <input type="hidden" name="teacher_id" value="TCHR-001" />
-            <div id="examFormInputs"></div>
-            <button type="submit" id="submitExamResults">ثبت نتایج امتحان</button>
-        </form>
+    <!-- Teaching Logs List -->
+    <div style="margin-top:2rem;padding-top:2rem;border-top:2px solid var(--off-white)">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;flex-wrap:wrap;gap:.5rem">
+        <h3 style="color:var(--navy);margin:0">📑 تقریرهای ذخیره‌شده</h3>
+        <div style="display:flex;gap:.5rem;flex-wrap:wrap">
+          <button class="btn btn-tg btn-sm" onclick="sendAllUnsentLogs()">
+            <i class="fab fa-telegram"></i> ارسال همه ارسال‌نشده‌ها
+          </button>
+          <button class="btn btn-gold btn-sm" onclick="exportLogsPDF()">
+            <i class="fas fa-file-pdf"></i> خروجی PDF
+          </button>
+        </div>
+      </div>
+      <div id="teaching-list"></div>
     </div>
+  </div>
+
+  <!-- ══ EXAM RESULTS ══ -->
+  <div class="card" id="exam-section">
+    <h2 class="card-title"><i class="fas fa-pencil-alt"></i> ثبت نتایج امتحانات</h2>
+
+    <div class="section-note">
+      <p><i class="fas fa-info-circle" style="color:#0369a1;margin-left:.4rem"></i>
+        نتایج امتحانات در سیستم ذخیره می‌شوند و برای مدیر قابل مشاهده است.
+      </p>
+    </div>
+
+    <!-- Bulk entry toggle -->
+    <div style="margin-bottom:1.5rem">
+      <div class="tabs">
+        <button class="tab-btn active" onclick="switchExamTab('single',this)">ثبت یک دانشجو</button>
+        <button class="tab-btn" onclick="switchExamTab('bulk',this)">ثبت گروهی</button>
+      </div>
+    </div>
+
+    <!-- Single Entry -->
+    <div id="exam-single">
+      <form id="exam-form" onsubmit="addExamResult(event)" novalidate>
+        <div class="form-grid">
+          <div class="form-group">
+            <label>تاریخ امتحان *</label>
+            <input type="date" id="ex-date" required>
+          </div>
+          <div class="form-group">
+            <label>دوره *</label>
+            <select id="ex-course" required><option value="">انتخاب کنید</option></select>
+          </div>
+          <div class="form-group">
+            <label>نام دانشجو *</label>
+            <select id="ex-student" required><option value="">انتخاب کنید</option></select>
+          </div>
+          <div class="form-group">
+            <label>نمره (از 100) *</label>
+            <input type="number" id="ex-score" min="0" max="100" required>
+          </div>
+          <div class="form-group">
+            <label>نوع امتحان *</label>
+            <select id="ex-type" required>
+              <option value="">انتخاب کنید</option>
+              <option value="quiz">کوئیز</option>
+              <option value="midterm">میان‌ترم</option>
+              <option value="final">نهایی</option>
+              <option value="oral">شفاهی</option>
+              <option value="project">پروژه</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>وضعیت</label>
+            <select id="ex-status">
+              <option value="passed">قبول</option>
+              <option value="failed">رد</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group" style="margin-bottom:1.5rem">
+          <label>یادداشت معلم</label>
+          <textarea id="ex-note" rows="2" placeholder="نظرات، نقاط قوت و ضعف دانشجو..."></textarea>
+        </div>
+        <div class="btn-group">
+          <button type="submit" class="btn btn-primary">
+            <i class="fas fa-save"></i> ذخیره نتیجه
+          </button>
+          <button type="button" class="btn btn-tg" onclick="saveAndSendExam()">
+            <i class="fab fa-telegram"></i> ذخیره + ارسال به تلگرام
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Bulk Entry -->
+    <div id="exam-bulk" class="hidden">
+      <div class="form-grid">
+        <div class="form-group">
+          <label>دوره *</label>
+          <select id="bulk-course"><option value="">انتخاب کنید</option></select>
+        </div>
+        <div class="form-group">
+          <label>تاریخ امتحان *</label>
+          <input type="date" id="bulk-date">
+        </div>
+        <div class="form-group">
+          <label>نوع امتحان *</label>
+          <select id="bulk-type">
+            <option value="quiz">کوئیز</option><option value="midterm">میان‌ترم</option>
+            <option value="final">نهایی</option><option value="oral">شفاهی</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>نمره قبولی (از 100)</label>
+          <input type="number" id="bulk-pass-score" value="50" min="0" max="100">
+        </div>
+      </div>
+      <div id="bulk-students-table" style="margin-bottom:1rem"></div>
+      <div class="btn-group">
+        <button type="button" class="btn btn-primary" onclick="submitBulkExams()">
+          <i class="fas fa-save"></i> ذخیره همه نتایج
+        </button>
+        <button type="button" class="btn btn-tg" onclick="submitBulkExams(true)">
+          <i class="fab fa-telegram"></i> ذخیره + ارسال
+        </button>
+      </div>
+    </div>
+
+    <!-- Results Table -->
+    <div style="margin-top:2rem;padding-top:2rem;border-top:2px solid var(--off-white)">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;flex-wrap:wrap;gap:.5rem">
+        <h3 style="color:var(--navy);margin:0">📊 نتایج ذخیره‌شده</h3>
+        <div style="display:flex;gap:.5rem;flex-wrap:wrap">
+          <select id="filter-course" class="btn btn-sm" style="background:#fff;color:var(--navy);border:1.5px solid #e5e7eb" onchange="renderExamResults()">
+            <option value="">همه دوره‌ها</option>
+          </select>
+          <button class="btn btn-gold btn-sm" onclick="exportExamsPDF()">
+            <i class="fas fa-file-pdf"></i> خروجی PDF
+          </button>
+          <button class="btn btn-tg btn-sm" onclick="sendAllUnsentExams()">
+            <i class="fab fa-telegram"></i> ارسال ارسال‌نشده‌ها
+          </button>
+        </div>
+      </div>
+      <!-- Summary row -->
+      <div id="exam-summary" style="display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:1rem"></div>
+      <div id="exam-list"></div>
+    </div>
+  </div>
+
+  <!-- ══ MY STUDENTS (READ-ONLY FROM SHARED STORAGE) ══ -->
+  <div class="card" id="students-section">
+    <h2 class="card-title"><i class="fas fa-users"></i> دانشجویان من</h2>
+    <div class="section-note">
+      <p><i class="fas fa-sync" style="color:#0369a1;margin-left:.4rem"></i>
+        این لیست از سیستم مرکزی (سوپرادمین/مدیر) به‌صورت خودکار همگام می‌شود.
+      </p>
+    </div>
+    <div style="margin-bottom:1rem">
+      <input type="text" id="student-search" placeholder="🔍 جستجو بر اساس نام..." 
+        style="width:100%;padding:.7rem .9rem;border:1.5px solid #e5e7eb;border-radius:8px;font-family:inherit"
+        oninput="renderMyStudents()">
+    </div>
+    <div id="my-students-list"></div>
+  </div>
+
+  <!-- ══ MY COURSES (READ-ONLY) ══ -->
+  <div class="card">
+    <h2 class="card-title"><i class="fas fa-book"></i> دوره‌های من</h2>
+    <div id="my-courses-list"></div>
+  </div>
+
+  <!-- ══ QUICK STATS PANEL ══ -->
+  <div class="card">
+    <h2 class="card-title"><i class="fas fa-chart-pie"></i> آمار عملکرد</h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem" id="performance-stats"></div>
+  </div>
+
+</div><!-- /container -->
 </main>
 
-<script src="script.js" defer></script>
+<footer style="background:var(--navy);color:#fff;padding:1.5rem;text-align:center">
+  <p style="opacity:.7;font-size:.88rem">© 2025–2026 اکادمی هوپ‌بریج | hopebridgeacademy@gmail.com | +93-747-903-369</p>
+</footer>
+
+<!-- ══ DETAIL MODAL ══ -->
+<div class="modal-bg hidden" id="detail-modal">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <h3 id="modal-title">جزئیات</h3>
+    <div id="modal-body"></div>
+  </div>
+</div>
+
+<script src="hba-core.js"></script>
 <script>
-    // بررسی وضعیت ورود
-    if (sessionStorage.getItem('isLoggedIn') !== 'true' || 
-        (sessionStorage.getItem('userType') !== 'teacher' && 
-         sessionStorage.getItem('userType') !== 'admin' && 
-         sessionStorage.getItem('userType') !== 'superadmin')) {
-        window.location.href = 'login.html';
+// ══════════════════════════════════════════════════
+//  T01 — Teacher Dashboard Logic
+// ══════════════════════════════════════════════════
+const K = HBA.KEYS;
+
+// ── HELPERS ──
+function $(id){ return document.getElementById(id) }
+function val(id){ return $(id)?.value?.trim()||'' }
+function setVal(id,v){ const e=$(id); if(e) e.value=v }
+function setTxt(id,v){ const e=$(id); if(e) e.textContent=v }
+function scrollToSection(id){ $(id)?.scrollIntoView({behavior:'smooth'}) }
+
+function showToastMsg(msg, type='success'){
+  const el=document.createElement('div');
+  el.className='hba-toast';
+  const bg={success:'#10b981',error:'#ef4444',warn:'#f59e0b'}[type]||'#10b981';
+  el.style.cssText=`background:${bg};color:#fff`;
+  el.textContent=msg;
+  document.body.appendChild(el);
+  setTimeout(()=>{el.style.opacity='0';setTimeout(()=>el.remove(),300)},3800);
+}
+
+function closeModal(){ $('detail-modal').classList.add('hidden') }
+function openModal(title, bodyHTML){
+  $('modal-title').textContent=title;
+  $('modal-body').innerHTML=bodyHTML;
+  $('detail-modal').classList.remove('hidden');
+}
+
+// ── STATS ──
+function updateStats(){
+  const logs     = HBA.getArr(K.teachingLogs);
+  const exams    = HBA.getArr(K.examResults);
+  const students = HBA.getArr(K.students);
+  const courses  = HBA.getArr(K.courses);
+  const reports  = HBA.getArr(K.weeklyReports).filter(r=>r.submittedBy==='T01'||r.submittedBy==='teacher');
+  const passRate = exams.length
+    ? Math.round(exams.filter(e=>e.status==='passed').length/exams.length*100) : 0;
+  setTxt('s-students', students.length);
+  setTxt('s-courses',  courses.length);
+  setTxt('s-logs',     logs.length);
+  setTxt('s-exams',    exams.length);
+  setTxt('s-pass',     passRate+'%');
+  setTxt('s-reports',  HBA.getArr(K.weeklyReports).filter(r=>r.sentToTelegram).length);
+  renderPerformanceStats();
+}
+
+function renderPerformanceStats(){
+  const logs    = HBA.getArr(K.teachingLogs);
+  const exams   = HBA.getArr(K.examResults);
+  const reports = HBA.getArr(K.weeklyReports);
+  const avgPresent = logs.length
+    ? Math.round(logs.reduce((s,l)=>s+(Number(l.studentsPresent)||0),0)/logs.length) : 0;
+  const passRate   = exams.length
+    ? Math.round(exams.filter(e=>e.status==='passed').length/exams.length*100) : 0;
+  const avgScore   = exams.length
+    ? Math.round(exams.reduce((s,e)=>s+(Number(e.score)||0),0)/exams.length) : 0;
+
+  const el=$('performance-stats'); if(!el) return;
+  el.innerHTML=[
+    ['میانگین دانشجویان حاضر', avgPresent+' نفر', avgPresent/40*100, '#6366f1'],
+    ['نرخ قبولی کلی',          passRate+'%',       passRate,           '#10b981'],
+    ['میانگین نمرات',          avgScore+'/100',     avgScore,           '#f59e0b'],
+    ['گزارش‌های ارسال‌شده',    reports.filter(r=>r.sentToTelegram).length+' گزارش',
+     Math.min(reports.filter(r=>r.sentToTelegram).length/Math.max(reports.length,1)*100,100), '#0B1C3D'],
+  ].map(([label, value, pct, color])=>`
+    <div style="background:var(--off-white);padding:1.2rem;border-radius:8px">
+      <p style="color:var(--gray-600);font-size:.85rem;margin-bottom:.3rem">${label}</p>
+      <p style="color:${color};font-size:1.6rem;font-weight:700;margin-bottom:.3rem">${value}</p>
+      <div class="progress-bar"><div class="progress-fill" style="width:${Math.round(pct)}%;background:${color}"></div></div>
+    </div>`).join('');
+}
+
+// ── SELECTS ──
+function populateSelects(){
+  const courses  = HBA.getArr(K.courses);
+  const students = HBA.getArr(K.students);
+
+  fillSelect('tl-course',  courses,  'name','name');
+  fillSelect('ex-course',  courses,  'name','name');
+  fillSelect('ex-student', students, 'id', 'name');
+  fillSelect('bulk-course',courses,  'name','name');
+  // filter select
+  const fs=$('filter-course');
+  if(fs){
+    const cur=fs.value;
+    fs.innerHTML='<option value="">همه دوره‌ها</option>';
+    courses.forEach(c=>fs.insertAdjacentHTML('beforeend',`<option value="${c.name}"${c.name===cur?' selected':''}>${c.name}</option>`));
+  }
+}
+function fillSelect(id, arr, vField, lField){
+  const el=$(id); if(!el) return;
+  const cur=el.value;
+  el.innerHTML='<option value="">انتخاب کنید</option>';
+  arr.forEach(item=>el.insertAdjacentHTML('beforeend',
+    `<option value="${item[vField]}"${item[vField]==cur?' selected':''}>${item[lField]}</option>`));
+}
+
+// ══ WEEKLY REPORT ENFORCEMENT ══
+function checkOverdue(){
+  const status  = HBA.teacherReportStatus();
+  const banner  = $('overdue-banner');
+  const statusEl= $('report-status-text');
+  if(!banner) return;
+  if(status.overdue){
+    banner.classList.remove('hidden');
+    if(statusEl) statusEl.innerHTML=`<span style="color:#b45309">⚠️ ${status.daysAgo} روز بدون گزارش (معوق)</span>`;
+    $('overdue-msg').textContent=`${status.daysAgo} روز است که گزارش هفتگی ارسال نشده. برای ثبت موارد جدید ابتدا گزارش ارسال کنید.`;
+  } else {
+    banner.classList.add('hidden');
+    if(statusEl) statusEl.innerHTML=`<span style="color:#065f46">✓ گزارش هفتگی به‌روز است</span>`;
+  }
+}
+
+function enforceWeeklyReport(){
+  const status = HBA.teacherReportStatus();
+  if(status.overdue){
+    showToastMsg('⚠️ ابتدا گزارش هفتگی را ارسال کنید!','error');
+    scrollToSection('weekly-section');
+    return false;
+  }
+  return true;
+}
+
+// ══ SAVE DRAFT WEEKLY ══
+function saveWeeklyDraft(){
+  if(!val('w-start')||!val('w-end')||!val('w-courses')||!val('w-summary'))
+    return showToastMsg('لطفاً فیلدهای ستاره‌دار را پر کنید','error');
+
+  const report = buildWeeklyObj();
+  report.sentToTelegram = false;
+  HBA.pushTo(K.weeklyReports, report);
+  $('weekly-form').reset();
+  setWeekDefaults();
+  renderWeeklyList(); updateStats(); checkOverdue();
+  showToastMsg('✓ پیش‌نویس ذخیره شد — برای ارسال روی دکمه ارسال کلیک کنید','warn');
+}
+
+// ══ SUBMIT + SEND WEEKLY ══
+async function submitWeeklyReport(e){
+  e.preventDefault();
+  if(!val('w-start')||!val('w-end')||!val('w-courses')||!val('w-summary'))
+    return showToastMsg('لطفاً همه فیلدهای الزامی را پر کنید','error');
+
+  showToastMsg('در حال ذخیره و ارسال...','warn');
+  const report = buildWeeklyObj();
+  const ok = await sendWeeklyToTelegram(report);
+  report.sentToTelegram = ok;
+  report.sentAt = ok ? new Date().toISOString() : null;
+
+  HBA.pushTo(K.weeklyReports, report);
+  $('weekly-form').reset();
+  setWeekDefaults();
+  renderWeeklyList(); updateStats(); checkOverdue();
+  showToastMsg(ok ? '✓ گزارش ذخیره و به تلگرام ارسال شد' : '✓ گزارش ذخیره شد (ارسال ناموفق بود — بعداً دوباره امتحان کنید)', ok?'success':'warn');
+}
+
+function buildWeeklyObj(){
+  return {
+    weekStart: val('w-start'), weekEnd: val('w-end'),
+    coursesTaught: val('w-courses'), sessionsHeld: val('w-sessions'),
+    avgStudentsPresent: val('w-present'), attendancePercent: val('w-attendance'),
+    summary: val('w-summary'), challenges: val('w-challenges'),
+    suggestions: val('w-suggestions'), nextPlan: val('w-nextplan'),
+    submittedAt: new Date().toISOString(), submittedBy: 'T01',
+  };
+}
+
+async function sendWeeklyToTelegram(r){
+  const rows = [
+    ['هفته',                `${r.weekStart} تا ${r.weekEnd}`],
+    ['دوره‌های تدریس',      r.coursesTaught||'—'],
+    ['جلسات برگزار شده',   r.sessionsHeld||'—'],
+    ['میانگین دانشجویان',   r.avgStudentsPresent||'—'],
+    ['درصد حضور',           (r.attendancePercent||'—')+'%'],
+    ['خلاصه تدریس',         r.summary],
+    ['چالش‌ها',             r.challenges||'—'],
+    ['پیشنهادات',           r.suggestions||'—'],
+    ['برنامه هفته آینده',   r.nextPlan||'—'],
+    ['ارسال‌کننده',         'معلم (T01)'],
+    ['تاریخ ارسال',         new Date(r.submittedAt).toLocaleString('fa-IR')],
+  ];
+  try {
+    return await HBA.sendReportToTelegram(
+      'گزارش هفتگی معلم — اکادمی هوپ‌بریج', rows,
+      `📚 گزارش هفتگی معلم\nهفته: ${r.weekStart} تا ${r.weekEnd}\nدوره‌ها: ${r.coursesTaught}\nحضور: ${r.attendancePercent}%`,
+      `teacher-report-${r.weekStart}`
+    );
+  } catch { return false; }
+}
+
+async function sendSingleWeekly(id){
+  const reports = HBA.getArr(K.weeklyReports);
+  const report  = reports.find(r=>r.id==id);
+  if(!report) return;
+  showToastMsg('در حال ارسال...','warn');
+  const ok = await sendWeeklyToTelegram(report);
+  if(ok){
+    report.sentToTelegram=true; report.sentAt=new Date().toISOString();
+    HBA.setArr(K.weeklyReports,reports);
+    renderWeeklyList(); checkOverdue();
+    showToastMsg('✓ گزارش به تلگرام ارسال شد');
+  } else showToastMsg('خطا در ارسال. اینترنت را بررسی کنید','error');
+}
+
+async function sendAllUnsentWeekly(){
+  const reports = HBA.getArr(K.weeklyReports);
+  const unsent  = reports.filter(r=>!r.sentToTelegram);
+  if(!unsent.length) return showToastMsg('همه گزارش‌ها قبلاً ارسال شده‌اند');
+  showToastMsg(`در حال ارسال ${unsent.length} گزارش...`,'warn');
+  for(const r of unsent){
+    const ok=await sendWeeklyToTelegram(r);
+    if(ok){ r.sentToTelegram=true; r.sentAt=new Date().toISOString(); }
+    await new Promise(res=>setTimeout(res,1200));
+  }
+  HBA.setArr(K.weeklyReports,reports);
+  renderWeeklyList(); checkOverdue(); updateStats();
+  showToastMsg('✓ ارسال انجام شد');
+}
+
+function deleteWeekly(id){
+  if(!confirm('آیا از حذف این گزارش مطمئن هستید؟')) return;
+  HBA.setArr(K.weeklyReports, HBA.getArr(K.weeklyReports).filter(r=>r.id!=id));
+  renderWeeklyList(); updateStats(); checkOverdue();
+  showToastMsg('✓ گزارش حذف شد');
+}
+
+function renderWeeklyList(){
+  const list = HBA.getArr(K.weeklyReports).filter(r=>r.submittedBy==='T01'||r.submittedBy==='teacher');
+  const el   = $('weekly-list'); if(!el) return;
+  if(!list.length){ el.innerHTML='<p class="empty">هنوز گزارشی ثبت نشده</p>'; return; }
+  el.innerHTML = list.slice().reverse().map(r=>`
+    <div class="list-item ${r.sentToTelegram?'sent':'pending'}">
+      <div class="list-item-info">
+        <h4>📅 ${r.weekStart} تا ${r.weekEnd}
+          <span class="badge ${r.sentToTelegram?'badge-sent':'badge-pending'}" style="margin-right:.5rem">
+            ${r.sentToTelegram?'✓ ارسال شده':'⏳ پیش‌نویس'}
+          </span>
+        </h4>
+        <p>📚 ${r.coursesTaught||'—'} | 🏫 ${r.sessionsHeld||'—'} جلسه | 📊 حضور: ${r.attendancePercent||'—'}%</p>
+        ${r.sentAt?`<p>ارسال در: ${new Date(r.sentAt).toLocaleString('fa-IR')}</p>`:''}
+      </div>
+      <div class="list-item-actions">
+        <button class="btn btn-info btn-xs" onclick="showWeeklyDetail(${r.id})">جزئیات</button>
+        ${!r.sentToTelegram?`<button class="btn btn-tg btn-xs" onclick="sendSingleWeekly(${r.id})"><i class="fab fa-telegram"></i></button>`:''}
+        <button class="btn btn-danger btn-xs" onclick="deleteWeekly(${r.id})">حذف</button>
+      </div>
+    </div>`).join('');
+}
+
+function showWeeklyDetail(id){
+  const r=HBA.getArr(K.weeklyReports).find(r=>r.id==id); if(!r) return;
+  openModal(`گزارش هفتگی: ${r.weekStart} تا ${r.weekEnd}`,`
+    <table style="width:100%;border-collapse:collapse;font-size:.9rem">
+      ${[['دوره‌ها',r.coursesTaught],['جلسات',r.sessionsHeld],['حضور',r.attendancePercent+'%'],
+         ['خلاصه',r.summary],['چالش‌ها',r.challenges||'—'],['پیشنهادات',r.suggestions||'—'],
+         ['هفته آینده',r.nextPlan||'—']].map(([l,v])=>`
+      <tr><td style="padding:.6rem;font-weight:600;color:var(--navy);width:35%;border-bottom:1px solid #f0f0f0">${l}</td>
+          <td style="padding:.6rem;border-bottom:1px solid #f0f0f0">${v||'—'}</td></tr>`).join('')}
+    </table>`);
+}
+
+// ══ TEACHING LOGS ══
+async function addTeachingLog(e, sendNow=false){
+  if(e) e.preventDefault();
+  if(sendNow && !enforceWeeklyReport()) return;
+  if(!val('tl-date')||!val('tl-course')||!val('tl-topic')||!val('tl-present')||!val('tl-content'))
+    return showToastMsg('لطفاً همه فیلدهای الزامی را پر کنید','error');
+
+  const log = {
+    date:val('tl-date'), courseName:val('tl-course'), topic:val('tl-topic'),
+    studentsPresent:Number(val('tl-present')), duration:val('tl-duration'),
+    sessionType:val('tl-type'), content:val('tl-content'),
+    homework:val('tl-homework'), note:val('tl-note'),
+    teacherName:'معلم (T01)', sentToTelegram:false,
+  };
+
+  if(sendNow){
+    showToastMsg('در حال ارسال...','warn');
+    const ok = await sendLogToTelegram(log);
+    log.sentToTelegram=ok; log.sentAt=ok?new Date().toISOString():null;
+  }
+
+  HBA.pushTo(K.teachingLogs, log);
+  $('teaching-form').reset();
+  setVal('tl-date', new Date().toISOString().split('T')[0]);
+  renderTeachingLogs(); updateStats();
+  showToastMsg(sendNow?(log.sentToTelegram?'✓ تقریر ذخیره و ارسال شد':'✓ ذخیره شد (ارسال ناموفق)'):'✓ تقریر ذخیره شد',
+    log.sentToTelegram?'success':'warn');
+}
+
+async function saveAndSendLog(){
+  if(!enforceWeeklyReport()) return;
+  if(!val('tl-date')||!val('tl-course')||!val('tl-topic')||!val('tl-present')||!val('tl-content'))
+    return showToastMsg('لطفاً همه فیلدهای الزامی را پر کنید','error');
+  await addTeachingLog(null, true);
+}
+
+async function sendLogToTelegram(log){
+  const rows=[
+    ['تاریخ',     log.date],
+    ['دوره',      log.courseName],
+    ['موضوع',     log.topic],
+    ['حاضر',      log.studentsPresent+' نفر'],
+    ['مدت',       (log.duration||'—')+' دقیقه'],
+    ['نوع جلسه',  log.sessionType||'—'],
+    ['شرح درس',   log.content],
+    ['تکلیف',     log.homework||'—'],
+    ['یادداشت',   log.note||'—'],
+  ];
+  try {
+    return await HBA.sendReportToTelegram(
+      'تقریر تدریس — اکادمی هوپ‌بریج', rows,
+      `📚 تقریر تدریس جدید\nدوره: ${log.courseName}\nموضوع: ${log.topic}\nتاریخ: ${log.date}`,
+      `teaching-log-${log.date}-${log.courseName}`
+    );
+  } catch { return false; }
+}
+
+async function sendSingleLog(id){
+  const logs = HBA.getArr(K.teachingLogs);
+  const log  = logs.find(l=>l.id==id); if(!log) return;
+  showToastMsg('در حال ارسال...','warn');
+  const ok=await sendLogToTelegram(log);
+  if(ok){
+    log.sentToTelegram=true; log.sentAt=new Date().toISOString();
+    HBA.setArr(K.teachingLogs,logs);
+    renderTeachingLogs();
+    showToastMsg('✓ تقریر به تلگرام ارسال شد');
+  } else showToastMsg('خطا در ارسال','error');
+}
+
+async function sendAllUnsentLogs(){
+  const logs   = HBA.getArr(K.teachingLogs);
+  const unsent = logs.filter(l=>!l.sentToTelegram);
+  if(!unsent.length) return showToastMsg('همه تقریرها ارسال شده‌اند');
+  if(!enforceWeeklyReport()) return;
+  showToastMsg(`در حال ارسال ${unsent.length} تقریر...`,'warn');
+  for(const l of unsent){
+    const ok=await sendLogToTelegram(l);
+    if(ok){ l.sentToTelegram=true; l.sentAt=new Date().toISOString(); }
+    await new Promise(res=>setTimeout(res,1200));
+  }
+  HBA.setArr(K.teachingLogs,logs);
+  renderTeachingLogs(); updateStats();
+  showToastMsg('✓ ارسال انجام شد');
+}
+
+function deleteLog(id){
+  if(!confirm('حذف شود؟')) return;
+  HBA.removeFrom(K.teachingLogs,id);
+  renderTeachingLogs(); updateStats();
+  showToastMsg('✓ تقریر حذف شد');
+}
+
+function renderTeachingLogs(){
+  const list = HBA.getArr(K.teachingLogs);
+  const el   = $('teaching-list'); if(!el) return;
+  if(!list.length){ el.innerHTML='<p class="empty">هنوز تقریری ثبت نشده</p>'; return; }
+  el.innerHTML = list.slice().reverse().map(l=>`
+    <div class="list-item ${l.sentToTelegram?'sent':'pending'}">
+      <div class="list-item-info">
+        <h4>${l.courseName} — ${l.topic}
+          <span class="badge ${l.sentToTelegram?'badge-sent':'badge-pending'}" style="margin-right:.5rem">
+            ${l.sentToTelegram?'✓ ارسال شده':'⏳ ارسال نشده'}
+          </span>
+        </h4>
+        <p>📅 ${l.date} | 👥 ${l.studentsPresent} نفر حاضر ${l.duration?'| ⏱ '+l.duration+' دق.':''}
+           | نوع: ${l.sessionType||'—'}</p>
+        <p style="color:#374151;margin-top:.3rem">${l.content.slice(0,100)}${l.content.length>100?'...':''}</p>
+      </div>
+      <div class="list-item-actions">
+        <button class="btn btn-info btn-xs" onclick="showLogDetail(${l.id})">جزئیات</button>
+        ${!l.sentToTelegram?`<button class="btn btn-tg btn-xs" onclick="sendSingleLog(${l.id})"><i class="fab fa-telegram"></i></button>`:''}
+        <button class="btn btn-danger btn-xs" onclick="deleteLog('${l.id}')">حذف</button>
+      </div>
+    </div>`).join('');
+}
+
+function showLogDetail(id){
+  const l=HBA.getArr(K.teachingLogs).find(l=>l.id==id); if(!l) return;
+  openModal(`تقریر: ${l.courseName} — ${l.date}`,`
+    <table style="width:100%;border-collapse:collapse;font-size:.9rem">
+      ${[['دوره',l.courseName],['تاریخ',l.date],['موضوع',l.topic],
+         ['دانشجویان حاضر',l.studentsPresent+' نفر'],['مدت',l.duration?' '+l.duration+' دقیقه':'—'],
+         ['نوع جلسه',l.sessionType],['شرح درس',l.content],
+         ['تکلیف',l.homework||'—'],['یادداشت',l.note||'—']].map(([lbl,v])=>`
+      <tr><td style="padding:.6rem;font-weight:600;color:var(--navy);width:35%;border-bottom:1px solid #f0f0f0">${lbl}</td>
+          <td style="padding:.6rem;border-bottom:1px solid #f0f0f0">${v}</td></tr>`).join('')}
+    </table>`);
+}
+
+async function exportLogsPDF(){
+  const logs = HBA.getArr(K.teachingLogs);
+  if(!logs.length) return showToastMsg('هیچ تقریری برای خروجی وجود ندارد','error');
+  const rows=logs.map(l=>[l.date+' | '+l.courseName, l.topic+' ('+l.studentsPresent+' نفر)']);
+  const html=HBA.buildReportHTML('تقریرهای تدریس',rows,
+    `<p style="font-size:.85rem;color:#6b7280">مجموع: ${logs.length} تقریر</p>`);
+  const blob=await HBA.htmlToPDFBlob(html);
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download=`teaching-logs-${Date.now()}.txt`;
+  a.click();
+  showToastMsg('✓ فایل دانلود شد');
+}
+
+// ══ EXAM RESULTS ══
+function switchExamTab(tab, btn){
+  $('exam-single').classList.toggle('hidden', tab!=='single');
+  $('exam-bulk').classList.toggle('hidden', tab!=='bulk');
+  document.querySelectorAll('#exam-section .tab-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  if(tab==='bulk') renderBulkTable();
+}
+
+function renderBulkTable(){
+  const course   = val('bulk-course');
+  const students = HBA.getArr(K.students).filter(s=>!course||s.course===course);
+  const el       = $('bulk-students-table'); if(!el) return;
+  if(!students.length){ el.innerHTML='<p class="empty">دانشجویی برای این دوره یافت نشد</p>'; return; }
+  el.innerHTML=`<table class="data-table">
+    <thead><tr><th>نام دانشجو</th><th>دوره</th><th>نمره</th><th>وضعیت</th></tr></thead>
+    <tbody>${students.map((s,i)=>`<tr>
+      <td>${s.name}</td><td>${s.course}</td>
+      <td><input type="number" id="bulk-score-${i}" class="bulk-score" 
+          data-id="${s.id}" data-name="${s.name}" data-course="${s.course}"
+          min="0" max="100" style="width:80px;padding:.3rem;border:1px solid #e5e7eb;border-radius:4px"
+          oninput="autoBulkStatus(${i})"></td>
+      <td id="bulk-st-${i}"><span class="badge badge-gray">—</span></td>
+    </tr>`).join('')}</tbody></table>`;
+}
+
+function autoBulkStatus(i){
+  const score  = Number($(`bulk-score-${i}`)?.value||0);
+  const pass   = Number(val('bulk-pass-score')||50);
+  const el     = $(`bulk-st-${i}`); if(!el) return;
+  el.innerHTML = score>=pass
+    ? '<span class="badge badge-green">قبول</span>'
+    : '<span class="badge badge-red">رد</span>';
+}
+
+async function submitBulkExams(sendNow=false){
+  const date   = val('bulk-date');
+  const type   = val('bulk-type');
+  const pass   = Number(val('bulk-pass-score')||50);
+  if(!date||!type) return showToastMsg('تاریخ و نوع امتحان را وارد کنید','error');
+  if(sendNow && !enforceWeeklyReport()) return;
+
+  const inputs = document.querySelectorAll('.bulk-score');
+  if(!inputs.length) return showToastMsg('دانشجویی در جدول وجود ندارد','error');
+
+  let count=0;
+  for(const inp of inputs){
+    const score = inp.value;
+    if(!score) continue;
+    const exam={
+      date, course:inp.dataset.course, studentId:inp.dataset.id,
+      studentName:inp.dataset.name, score:Number(score),
+      examType:type, status:Number(score)>=pass?'passed':'failed',
+      sentToTelegram:false, teacherName:'T01',
+    };
+    if(sendNow){
+      const ok=await sendExamToTelegram(exam);
+      exam.sentToTelegram=ok; exam.sentAt=ok?new Date().toISOString():null;
     }
+    HBA.pushTo(K.examResults,exam); count++;
+    await new Promise(res=>setTimeout(res,100));
+  }
+  renderBulkTable(); renderExamResults(); updateStats();
+  showToastMsg(`✓ ${count} نتیجه ذخیره شد`);
+}
 
-    // مدیریت لینک خروج
-    document.getElementById('logout-link').addEventListener('click', function(e) {
-        e.preventDefault();
-        sessionStorage.removeItem('isLoggedIn');
-        sessionStorage.removeItem('userRole');
-        sessionStorage.removeItem('userType');
-        window.location.href = 'login.html';
-    });
+async function addExamResult(e, sendNow=false){
+  if(e) e.preventDefault();
+  if(sendNow && !enforceWeeklyReport()) return;
+  if(!val('ex-date')||!val('ex-course')||!val('ex-student')||!val('ex-score')||!val('ex-type'))
+    return showToastMsg('همه فیلدهای الزامی را پر کنید','error');
 
-    const teacherId = 'TCHR-002';
-    document.getElementById('teacherId').textContent = teacherId;
-    document.getElementById('formTeacherId').value = teacherId;
-    document.querySelector('#examForm input[name="teacher_id"]').value = teacherId;
+  const students = HBA.getArr(K.students);
+  const st       = students.find(s=>s.id==val('ex-student'));
+  const exam={
+    date:val('ex-date'), course:val('ex-course'),
+    studentId:val('ex-student'), studentName:st?.name||val('ex-student'),
+    score:Number(val('ex-score')), examType:val('ex-type'),
+    status:val('ex-status')||'passed', note:val('ex-note'),
+    sentToTelegram:false, teacherName:'T01',
+  };
 
-    const reportKey = `reports-${teacherId}`;
-    const examKey = `exam-results-${teacherId}`;
+  if(sendNow){
+    showToastMsg('در حال ارسال...','warn');
+    const ok=await sendExamToTelegram(exam);
+    exam.sentToTelegram=ok; exam.sentAt=ok?new Date().toISOString():null;
+  }
 
-    const reportForm = document.getElementById('reportForm');
-    const examForm = document.getElementById('examForm');
-    const examFormInputs = document.getElementById('examFormInputs');
+  HBA.pushTo(K.examResults,exam);
+  $('exam-form').reset();
+  setVal('ex-date',new Date().toISOString().split('T')[0]);
+  renderExamResults(); updateStats();
+  showToastMsg(sendNow?(exam.sentToTelegram?'✓ نتیجه ذخیره و ارسال شد':'✓ ذخیره شد (ارسال ناموفق)'):'✓ نتیجه ذخیره شد',
+    exam.sentToTelegram?'success':'warn');
+}
 
-    reportForm.addEventListener('submit', function (e) {
-        e.preventDefault();
-        const report = {
-            class: document.getElementById('class').value,
-            date: document.getElementById('date').value,
-            subject: document.getElementById('subject').value,
-            duration: document.getElementById('duration').value,
-            content: document.getElementById('content').value,
-            assessment: document.getElementById('assessment').value,
-            challenges: document.getElementById('challenges').value,
-            suggestions: document.getElementById('suggestions').value,
-            presence: document.getElementById('presence').value,
-            attendance: document.getElementById('attendance').value,
-            sent: false
-        };
-        const existingReports = JSON.parse(localStorage.getItem(reportKey)) || [];
-        existingReports.push(report);
-        localStorage.setItem(reportKey, JSON.stringify(existingReports));
-        showReports(existingReports);
-        reportForm.reset();
-    });
+async function saveAndSendExam(){
+  if(!enforceWeeklyReport()) return;
+  if(!val('ex-date')||!val('ex-course')||!val('ex-student')||!val('ex-score')||!val('ex-type'))
+    return showToastMsg('همه فیلدهای الزامی را پر کنید','error');
+  await addExamResult(null, true);
+}
 
-    function showReports(reports) {
-        const display = document.getElementById('reportDisplay');
-        display.innerHTML = `
-            <h3 data-i18n="savedReports">گزارش‌های ثبت‌شده</h3>
-        `;
-        if (reports.length === 0) {
-            display.innerHTML += '<p data-i18n="noReports">گزارشی ثبت نشده است.</p>';
-        } else {
-            reports.forEach((r, index) => {
-                const div = document.createElement('div');
-                div.className = 'report-entry';
-                div.innerHTML = `
-                    <div class="report-entry-header">
-                        <div class="subtitle">${r.date} - ${r.class} / ${r.subject}</div>
-                        <div>
-                            <button class="send-report-button ${r.sent ? 'sent' : ''}" data-index="${index}" ${r.sent ? 'disabled' : ''} data-i18n="sendReport">${r.sent ? i18next.t('sent') : i18next.t('sendReport')}</button>
-                            <button class="delete-report-button" data-index="${index}" data-i18n="deleteReport">حذف</button>
-                        </div>
-                    </div>
-                    <p><strong data-i18n="durationLabel">مدت تدریس:</strong> ${r.duration}</p>
-                    <p><strong data-i18n="contentLabel">محتوا:</strong> ${r.content}</p>
-                    <p><strong data-i18n="assessmentLabel">ارزیابی یادگیری:</strong> ${r.assessment}</p>
-                    <p><strong data-i18n="challengesLabel">مشکلات:</strong> ${r.challenges || i18next.t('none') || 'ندارد'}</p>
-                    <p><strong data-i18n="suggestionsLabel">پیشنهادات:</strong> ${r.suggestions || i18next.t('none') || 'ندارد'}</p>
-                    <p><strong data-i18n="presenceLabel">حضور:</strong> ${r.presence}</p>
-                    <p><strong data-i18n="attendanceLabel">تعداد حاضر و غایب:</strong> ${r.attendance}</p>
-                `;
-                display.appendChild(div);
-            });
-        }
+async function sendExamToTelegram(ex){
+  const rows=[
+    ['دانشجو',  ex.studentName],
+    ['دوره',    ex.course],
+    ['تاریخ',   ex.date],
+    ['نوع',     ex.examType],
+    ['نمره',    ex.score+'/100'],
+    ['وضعیت',   ex.status==='passed'?'✅ قبول':'❌ رد'],
+    ['یادداشت', ex.note||'—'],
+  ];
+  try {
+    return await HBA.sendReportToTelegram(
+      'نتیجه امتحان — اکادمی هوپ‌بریج', rows,
+      `✏️ نتیجه امتحان جدید\nدانشجو: ${ex.studentName}\nدوره: ${ex.course}\nنمره: ${ex.score}/100 (${ex.status==='passed'?'قبول':'رد'})`,
+      `exam-${ex.date}-${ex.studentName}`
+    );
+  } catch { return false; }
+}
 
-        document.querySelectorAll('.delete-report-button').forEach(button => {
-            button.addEventListener('click', (e) => {
-                const idx = e.target.getAttribute('data-index');
-                deleteReport(idx);
-            });
-        });
+async function sendSingleExam(id){
+  const exams = HBA.getArr(K.examResults);
+  const exam  = exams.find(e=>e.id==id); if(!exam) return;
+  if(!enforceWeeklyReport()) return;
+  showToastMsg('در حال ارسال...','warn');
+  const ok=await sendExamToTelegram(exam);
+  if(ok){
+    exam.sentToTelegram=true; exam.sentAt=new Date().toISOString();
+    HBA.setArr(K.examResults,exams);
+    renderExamResults();
+    showToastMsg('✓ نتیجه به تلگرام ارسال شد');
+  } else showToastMsg('خطا در ارسال','error');
+}
 
-        document.querySelectorAll('.send-report-button:not(.sent)').forEach(button => {
-            button.addEventListener('click', (e) => {
-                const idx = e.target.getAttribute('data-index');
-                sendTeachingReportToTelegram(idx, e.target);
-            });
-        });
+async function sendAllUnsentExams(){
+  if(!enforceWeeklyReport()) return;
+  const exams  = HBA.getArr(K.examResults);
+  const unsent = exams.filter(e=>!e.sentToTelegram);
+  if(!unsent.length) return showToastMsg('همه نتایج قبلاً ارسال شده‌اند');
+  showToastMsg(`در حال ارسال ${unsent.length} نتیجه...`,'warn');
+  for(const ex of unsent){
+    const ok=await sendExamToTelegram(ex);
+    if(ok){ ex.sentToTelegram=true; ex.sentAt=new Date().toISOString(); }
+    await new Promise(res=>setTimeout(res,1200));
+  }
+  HBA.setArr(K.examResults,exams);
+  renderExamResults(); updateStats();
+  showToastMsg('✓ ارسال انجام شد');
+}
+
+function deleteExam(id){
+  if(!confirm('حذف شود؟')) return;
+  HBA.removeFrom(K.examResults,id);
+  renderExamResults(); updateStats();
+  showToastMsg('✓ نتیجه حذف شد');
+}
+
+function renderExamResults(){
+  const filterCourse = val('filter-course');
+  let list = HBA.getArr(K.examResults);
+  if(filterCourse) list=list.filter(e=>e.course===filterCourse);
+  const el=$('exam-list'); if(!el) return;
+
+  // Summary
+  const summaryEl=$('exam-summary');
+  if(summaryEl && list.length){
+    const passed=list.filter(e=>e.status==='passed').length;
+    const avg=Math.round(list.reduce((s,e)=>s+Number(e.score||0),0)/list.length);
+    summaryEl.innerHTML=[
+      ['کل نتایج',list.length,'badge-blue'],
+      ['قبول',passed,'badge-green'],
+      ['رد',list.length-passed,'badge-red'],
+      ['میانگین نمره',avg+'/100','badge-yellow'],
+    ].map(([l,v,cls])=>`<span class="badge ${cls}" style="font-size:.9rem;padding:.4rem .9rem">${l}: ${v}</span>`).join('');
+  } else if(summaryEl) summaryEl.innerHTML='';
+
+  if(!list.length){ el.innerHTML='<p class="empty">نتیجه‌ای ثبت نشده</p>'; return; }
+  el.innerHTML=`<table class="data-table">
+    <thead><tr><th>دانشجو</th><th>دوره</th><th>تاریخ</th><th>نمره</th><th>نوع</th><th>وضعیت</th><th>ارسال</th><th>عملیات</th></tr></thead>
+    <tbody>${list.slice().reverse().map(ex=>`<tr>
+      <td>${ex.studentName}</td>
+      <td>${ex.course}</td>
+      <td>${ex.date}</td>
+      <td><strong>${ex.score}</strong>/100</td>
+      <td>${ex.examType||'—'}</td>
+      <td><span class="badge ${ex.status==='passed'?'badge-green':'badge-red'}">${ex.status==='passed'?'قبول':'رد'}</span></td>
+      <td><span class="badge ${ex.sentToTelegram?'badge-sent':'badge-pending'}">${ex.sentToTelegram?'✓':'⏳'}</span></td>
+      <td style="white-space:nowrap">
+        ${!ex.sentToTelegram?`<button class="btn btn-tg btn-xs" onclick="sendSingleExam('${ex.id}')"><i class="fab fa-telegram"></i></button> `:''}
+        <button class="btn btn-danger btn-xs" onclick="deleteExam('${ex.id}')">حذف</button>
+      </td>
+    </tr>`).join('')}</tbody></table>`;
+}
+
+async function exportExamsPDF(){
+  const list=HBA.getArr(K.examResults);
+  if(!list.length) return showToastMsg('نتیجه‌ای برای خروجی وجود ندارد','error');
+  const rows=list.map(ex=>[`${ex.studentName} — ${ex.course}`,`${ex.score}/100 | ${ex.status==='passed'?'قبول':'رد'} | ${ex.date}`]);
+  const pass=list.filter(e=>e.status==='passed').length;
+  const avg=Math.round(list.reduce((s,e)=>s+Number(e.score||0),0)/list.length);
+  const html=HBA.buildReportHTML('نتایج امتحانات',rows,
+    `<p>مجموع: ${list.length} | قبول: ${pass} | رد: ${list.length-pass} | میانگین: ${avg}/100</p>`);
+  const blob=await HBA.htmlToPDFBlob(html);
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob); a.download=`exam-results-${Date.now()}.txt`;
+  a.click(); showToastMsg('✓ فایل دانلود شد');
+}
+
+// ══ STUDENTS (READ-ONLY) ══
+function renderMyStudents(){
+  const q    = (val('student-search')||'').toLowerCase();
+  let list   = HBA.getArr(K.students);
+  if(q) list = list.filter(s=>s.name.toLowerCase().includes(q)||s.course.toLowerCase().includes(q));
+  const el   = $('my-students-list'); if(!el) return;
+  if(!list.length){ el.innerHTML='<p class="empty">دانشجویی یافت نشد</p>'; return; }
+  el.innerHTML=list.map(s=>`
+    <div class="list-item">
+      <div class="list-item-info">
+        <h4>${s.name}
+          <span class="badge ${s.status==='فعال'?'badge-green':s.status==='تکمیل شده'?'badge-blue':'badge-red'}">
+            ${s.status}
+          </span>
+        </h4>
+        <p>📚 ${s.course} | 📅 ثبت‌نام: ${s.enrollmentDate||'—'} ${s.email?'| 📧 '+s.email:''}</p>
+      </div>
+    </div>`).join('');
+}
+
+function renderMyCourses(){
+  const list = HBA.getArr(K.courses);
+  const el   = $('my-courses-list'); if(!el) return;
+  if(!list.length){ el.innerHTML='<p class="empty">دوره‌ای در سیستم ثبت نشده</p>'; return; }
+  const students=HBA.getArr(K.students);
+  el.innerHTML=list.map(c=>{
+    const count=students.filter(s=>s.course===c.name).length;
+    return`<div class="list-item">
+      <div class="list-item-info">
+        <h4>${c.name} <span class="badge badge-blue">${c.level}</span></h4>
+        <p>👨‍🏫 ${c.teacher} | 💰 ${c.fee} AFN/ماه | 👥 ${count} دانشجو ${c.days?'| 📅 '+c.days:''}</p>
+      </div>
+    </div>`;}).join('');
+}
+
+// ══ DATE DEFAULTS ══
+function setWeekDefaults(){
+  const d=new Date(), day=d.getDay();
+  const mondayOff=day===0?-6:1-day;
+  const mon=new Date(d); mon.setDate(d.getDate()+mondayOff);
+  const fri=new Date(mon); fri.setDate(mon.getDate()+4);
+  setVal('w-start', mon.toISOString().split('T')[0]);
+  setVal('w-end',   fri.toISOString().split('T')[0]);
+}
+
+// ══ INIT ══
+document.addEventListener('DOMContentLoaded',()=>{
+  const today=new Date().toISOString().split('T')[0];
+  setVal('tl-date',today); setVal('ex-date',today); setVal('bulk-date',today);
+  setWeekDefaults();
+
+  populateSelects();
+  updateStats(); checkOverdue();
+  renderWeeklyList(); renderTeachingLogs(); renderExamResults();
+  renderMyStudents(); renderMyCourses();
+
+  // Bulk course change
+  $('bulk-course')?.addEventListener('change', renderBulkTable);
+  $('bulk-pass-score')?.addEventListener('input', ()=>{
+    document.querySelectorAll('.bulk-score').forEach((inp,i)=>autoBulkStatus(i));
+  });
+
+  // Cross-page sync
+  window.addEventListener('hba:change',()=>{
+    populateSelects(); updateStats(); renderMyStudents(); renderMyCourses();
+  });
+  window.addEventListener('storage',e=>{
+    if(e.key==='hba_last_change'){
+      populateSelects(); updateStats(); renderMyStudents(); renderMyCourses();
     }
+  });
+});
 
-    function deleteReport(index) {
-        const reports = JSON.parse(localStorage.getItem(reportKey)) || [];
-        reports.splice(index, 1);
-        localStorage.setItem(reportKey, JSON.stringify(reports));
-        showReports(reports);
-    }
-
-    function sendTeachingReportToTelegram(index, button) {
-        const token = "7637224975:AAH7Al4buvRmfwW3LUZ-REvloF9rZgoAStU"; // Your Bot Token
-        const chatId = "-1002886209903"; // Your Telegram Group Chat ID
-        const reports = JSON.parse(localStorage.getItem(reportKey)) || [];
-        const report = reports[index];
-
-        if (!report) {
-            alert(i18next.t('reportNotFound') || 'گزارش یافت نشد.');
-            return;
-        }
-
-        const message = `
-📨 ${i18next.t('newTeachingReport') || 'گزارش جدید تدریس از آکادمی هوپ‌بریج'}
-📋 ${i18next.t('teacherId') || 'کد استاد'}: ${teacherId}
-📚 ${i18next.t('classLabel') || 'صنف'}: ${report.class}
-📅 ${i18next.t('dateLabel') || 'تاریخ'}: ${report.date}
-📖 ${i18next.t('subjectLabel') || 'موضوع'}: ${report.subject}
-⏰ ${i18next.t('durationLabel') || 'مدت تدریس'}: ${report.duration}
-📝 ${i18next.t('contentLabel') || 'محتوا'}: ${report.content}
-✅ ${i18next.t('assessmentLabel') || 'ارزیابی'}: ${report.assessment}
-⚠️ ${i18next.t('challengesLabel') || 'مشکلات'}: ${report.challenges || i18next.t('none') || 'ندارد'}
-💡 ${i18next.t('suggestionsLabel') || 'پیشنهادات'}: ${report.suggestions || i18next.t('none') || 'ندارد'}
-👥 ${i18next.t('presenceLabel') || 'حضور'}: ${report.presence}
-🔢 ${i18next.t('attendanceLabel') || 'تعداد حاضر و غایب'}: ${report.attendance}
-        `;
-
-        const url = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(message)}`;
-
-        fetch(url)
-            .then(response => {
-                if (response.ok) {
-                    reports[index].sent = true;
-                    localStorage.setItem(reportKey, JSON.stringify(reports));
-                    button.classList.add('sent');
-                    button.setAttribute('disabled', 'disabled');
-                    button.innerHTML = `${i18next.t('sent') || 'ارسال‌شده'} <i class="fas fa-check"></i>`;
-                    alert(i18next.t('reportSent') || "✅ گزارش تدریس به تلگرام ارسال شد!");
-                } else {
-                    alert(i18next.t('sendError') || "❌ خطا در ارسال گزارش تدریس به تلگرام.");
-                }
-            })
-            .catch(error => {
-                alert(i18next.t('error') || "⚠️ خطا: ") + error;
-            });
-    }
-
-    function sendExamResultsToTelegram(e) {
-        e.preventDefault();
-        const token = "7637224975:AAH7Al4buvRmfwW3LUZ-REvloF9rZgoAStU"; // Your Bot Token
-        const chatId = "-1002886209903"; // Your Telegram Group Chat ID
-        const exams = JSON.parse(localStorage.getItem(examKey)) || [];
-
-        if (exams.length === 0) {
-            alert(i18next.t('noExamResults') || 'هیچ نتیجه امتحانی برای ارسال وجود ندارد.');
-            return;
-        }
-
-        if (exams.every(exam => exam.sent)) {
-            alert(i18next.t('resultsAlreadySent') || 'نتایج امتحان قبلاً ارسال شده‌اند.');
-            return;
-        }
-
-        let examDetails = exams.map((exam, i) => `
-${i + 1}. ${i18next.t('studentName') || 'نام شاگرد'}: ${exam.studentName}
-   ${i18next.t('studentId') || 'کد شاگرد'}: ${exam.studentId}
-   ${i18next.t('score') || 'نمره'}: ${exam.score}
-        `).join('\n');
-
-        const message = `
-📝 ${i18next.t('examResults') || 'نتایج امتحان از آکادمی هوپ‌بریج'}
-📋 ${i18next.t('teacherId') || 'کد استاد'}: ${teacherId}
-📅 ${i18next.t('submissionDate') || 'تاریخ ارسال'}: ${new Date().toLocaleString('fa-IR')}
-📊 ${i18next.t('results') || 'نتایج'}:
-${examDetails}
-        `;
-
-        const url = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(message)}`;
-
-        fetch(url)
-            .then(response => {
-                if (response.ok) {
-                    exams.forEach(exam => { exam.sent = true; });
-                    localStorage.setItem(examKey, JSON.stringify(exams));
-                    loadExamResults();
-                    alert(i18next.t('examResultsSent') || "✅ نتایج امتحان به تلگرام ارسال شد!");
-                } else {
-                    alert(i18next.t('sendError') || "❌ خطا در ارسال نتایج امتحان به تلگرام.");
-                }
-            })
-            .catch(error => {
-                alert(i18next.t('error') || "⚠️ خطا: ") + error;
-            });
-    }
-
-    window.addEventListener('load', () => {
-        const savedReports = JSON.parse(localStorage.getItem(reportKey));
-        if (savedReports && savedReports.length > 0) {
-            showReports(savedReports);
-        } else {
-            showReports([]);
-        }
-        loadExamResults();
-
-        examForm.addEventListener('submit', sendExamResultsToTelegram);
-    });
-
-    const localExamResultsDiv = document.getElementById('localExamResults');
-    const addExamResultForm = document.getElementById('addExamResultForm');
-
-    function loadExamResults() {
-        const exams = JSON.parse(localStorage.getItem(examKey)) || [];
-        renderExamResults(exams);
-        updateExamFormInputs(exams);
-        const submitButton = document.getElementById('submitExamResults');
-        if (exams.length > 0 && exams.every(exam => exam.sent)) {
-            submitButton.disabled = true;
-            submitButton.classList.add('sent');
-            submitButton.innerHTML = `${i18next.t('sent') || 'ارسال‌شده'} <i class="fas fa-check"></i>`;
-        } else {
-            submitButton.disabled = false;
-            submitButton.classList.remove('sent');
-            submitButton.innerHTML = i18next.t('submitExamResults') || 'ثبت نتایج امتحان';
-        }
-    }
-
-    function renderExamResults(exams) {
-        localExamResultsDiv.innerHTML = '';
-        if (exams.length === 0) {
-            localExamResultsDiv.innerHTML = `<p data-i18n="noResults">${i18next.t('noResults') || 'نتایجی ثبت نشده است.'}</p>`;
-            return;
-        }
-        exams.forEach((exam, index) => {
-            const div = document.createElement('div');
-            div.className = 'exam-entry';
-            div.innerHTML = `
-                <span>${exam.studentName} (${exam.studentId}) - ${i18next.t('score') || 'نمره'}: ${exam.score} ${exam.sent ? '<i class="fas fa-check sent-icon"></i>' : ''}</span>
-                <button data-index="${index}" data-i18n="deleteResult">حذف</button>
-            `;
-            localExamResultsDiv.appendChild(div);
-        });
-
-        localExamResultsDiv.querySelectorAll('button').forEach(button => {
-            button.addEventListener('click', (e) => {
-                const idx = e.target.getAttribute('data-index');
-                deleteExamResult(idx);
-            });
-        });
-    }
-
-    function deleteExamResult(index) {
-        const exams = JSON.parse(localStorage.getItem(examKey)) || [];
-        exams.splice(index, 1);
-        localStorage.setItem(examKey, JSON.stringify(exams));
-        loadExamResults();
-    }
-
-    addExamResultForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        const studentName = document.getElementById('studentName').value.trim();
-        const studentId = document.getElementById('studentId').value.trim();
-        const score = document.getElementById('studentScore').value.trim();
-
-        if (!studentName || !studentId || score === '') {
-            alert(i18next.t('fillAllFields') || 'لطفاً همه فیلدها را پر کنید.');
-            return;
-        }
-
-        const exams = JSON.parse(localStorage.getItem(examKey)) || [];
-        exams.push({ studentName, studentId, score, sent: false });
-        localStorage.setItem(examKey, JSON.stringify(exams));
-        addExamResultForm.reset();
-        loadExamResults();
-    });
-
-    function updateExamFormInputs(exams) {
-        examFormInputs.innerHTML = '';
-        exams.forEach((exam, i) => {
-            examFormInputs.innerHTML += `
-                <input type="hidden" name="students[${i}][name]" value="${exam.studentName}" />
-                <input type="hidden" name="students[${i}][id]" value="${exam.studentId}" />
-                <input type="hidden" name="students[${i}][score]" value="${exam.score}" />
-            `;
-        });
-    }
+// Expose to HTML onclick
+window.scrollToSection    = scrollToSection;
+window.saveWeeklyDraft    = saveWeeklyDraft;
+window.sendSingleWeekly   = sendSingleWeekly;
+window.sendAllUnsentWeekly= sendAllUnsentWeekly;
+window.deleteWeekly       = deleteWeekly;
+window.showWeeklyDetail   = showWeeklyDetail;
+window.saveAndSendLog     = saveAndSendLog;
+window.sendSingleLog      = sendSingleLog;
+window.sendAllUnsentLogs  = sendAllUnsentLogs;
+window.deleteLog          = deleteLog;
+window.showLogDetail      = showLogDetail;
+window.exportLogsPDF      = exportLogsPDF;
+window.switchExamTab      = switchExamTab;
+window.saveAndSendExam    = saveAndSendExam;
+window.sendSingleExam     = sendSingleExam;
+window.sendAllUnsentExams = sendAllUnsentExams;
+window.deleteExam         = deleteExam;
+window.exportExamsPDF     = exportExamsPDF;
+window.submitBulkExams    = submitBulkExams;
+window.autoBulkStatus     = autoBulkStatus;
+window.closeModal         = closeModal;
 </script>
 </body>
 </html>

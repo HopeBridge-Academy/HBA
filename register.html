@@ -1,204 +1,216 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Register for courses at HopeBridge Academy to gain skills in language, computer, psychology, and more.">
-    <meta name="keywords" content="course registration, HopeBridge Academy, Afghan education, online learning">
-    <meta name="author" content="HopeBridge Academy">
-    <title data-i18n="registerTitle">Register - HopeBridge Academy</title>
-    <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Noto+Naskh+Arabic:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://unpkg.com/i18next@21.6.10/dist/umd/i18next.min.js"></script>
-    <script src="i18n.js" defer></script>
-    <script src="script.js" defer></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Register for courses at HopeBridge Academy — Language, Computer, Psychology and more.">
+<meta name="author" content="HopeBridge Academy">
+<title data-i18n="registerTitle">Register - HopeBridge Academy</title>
+<link rel="stylesheet" href="styles.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=DM+Sans:wght@300;400;500;600&family=Noto+Naskh+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+<script src="https://unpkg.com/i18next@23.15.2/dist/umd/i18next.min.js" defer></script>
+<script src="i18n.js" defer></script>
+<script src="script.js" defer></script>
 </head>
-<body onload="initializePage()">
-    <div class="floating-banner animate__animated animate__fadeIn">
-        <p data-i18n="bannerText">Join our new online courses today and get 20% off! <a href="register.html" data-i18n="bannerLink">Register Today</a></p>
-        <button class="close-banner" aria-label="Close banner" onclick="this.parentElement.classList.add('hidden')">×</button>
+<body>
+
+<div class="floating-banner" id="floatingBanner">
+  <p data-i18n="bannerText">Join our new online courses today and get 20% off! <a href="register.html" data-i18n="bannerLink">Sign Up Now</a></p>
+  <button class="close-banner" aria-label="Close banner" onclick="document.getElementById('floatingBanner').classList.add('hidden')">×</button>
+</div>
+
+<header>
+  <nav>
+    <a href="index.html" class="logo"><img src="logo.png" alt="HopeBridge Academy Logo"></a>
+    <button class="mobile-menu-toggle" aria-label="Toggle navigation" aria-expanded="false" onclick="toggleMobileMenu(this)"><i class="fas fa-bars"></i></button>
+    <div class="main-nav" id="mainNav">
+      <ul class="nav-list">
+        <li><a href="index.html"         class="nav-link"        data-i18n="home">Home</a></li>
+        <li><a href="register.html"      class="nav-link active" data-i18n="register" aria-current="page">Register</a></li>
+        <li><a href="contact.html"       class="nav-link"        data-i18n="contact">Contact</a></li>
+        <li><a href="tutor.html"         class="nav-link"        data-i18n="tutor">Request Tutor</a></li>
+        <li><a href="donation.html"      class="nav-link"        data-i18n="donation">Donate</a></li>
+        <li><a href="certification.html" class="nav-link"        data-i18n="certification">Certification</a></li>
+        <li><a href="login.html"         class="nav-link"        data-i18n="login" id="auth-link">Staff Portal</a></li>
+      </ul>
     </div>
+    <div class="header-actions">
+      <div class="search-bar">
+        <input type="text" id="searchInput" placeholder="Search courses…" data-i18n="[placeholder]searchPlaceholder" aria-label="Search courses">
+        <button onclick="searchCourses()" aria-label="Search"><i class="fas fa-search"></i></button>
+      </div>
+      <a href="ad.html" class="bell-icon" aria-label="Announcements"><img src="bell.gif" alt="Announcements"></a>
+      <div class="language-switcher">
+        <select id="language-select" onchange="changeLanguage(this.value)" aria-label="Select language">
+          <option value="en" data-i18n="englishOption">English</option>
+          <option value="fa" data-i18n="persianOption">فارسی</option>
+        </select>
+      </div>
+    </div>
+  </nav>
+</header>
 
-    <header>
-        <nav>
-            <a href="index.html" class="logo"><img src="logo.png" alt="HopeBridge Academy Logo"></a>
-            <button class="mobile-menu-toggle" aria-label="Toggle menu" onclick="toggleMobileMenu()">
-                <i class="fas fa-bars"></i>
-            </button>
-            <div class="main-nav">
-                <ul class="nav-list">
-                    <li><a href="index.html" class="nav-link" data-i18n="home">Home</a></li>
-                    <li><a href="register.html" class="nav-link active" data-i18n="register" aria-current="page">Register</a></li>
-                    <li><a href="contact.html" class="nav-link" data-i18n="contact">Contact</a></li>
-                    <li><a href="tutor.html" class="nav-link" data-i18n="tutor">Request Tutor</a></li>
-                    <li><a href="donation.html" class="nav-link" data-i18n="donation">Donate</a></li>
-                    <li><a href="certification.html" class="nav-link" data-i18n="certification">Certification</a></li>
-                    <li><a href="login.html" id="auth-link" class="nav-link" data-i18n="login">Staff Portal</a></li>
-                </ul>
-            </div>
-            <div class="header-actions">
-                <div class="search-bar">
-                    <input type="text" id="searchInput" placeholder="Search courses..." data-i18n-placeholder="searchPlaceholder" aria-label="Search courses">
-                    <button onclick="searchCourses()" aria-label="Search"><i class="fas fa-search"></i></button>
-                </div>
-                <a href="ad.html" class="bell-icon" aria-label="Notifications">
-                    <img src="bell.gif" alt="Notification Bell">
-                </a>
-                <div class="language-switcher">
-                    <select id="language-select" onchange="changeLanguage(this.value)" aria-label="Select language">
-                        <option value="en" data-i18n="englishOption">English</option>
-                        <option value="fa" data-i18n="persianOption">فارسی</option>
-                    </select>
-                </div>
-            </div>
-        </nav>
-    </header>
+<main>
+  <!-- Hero -->
+  <section class="hero compact" aria-label="Register hero">
+    <div class="hero-content">
+      <p class="section-label" style="color:var(--gold-light);">HopeBridge Academy</p>
+      <h1 data-i18n="registerHeading">Join HopeBridge Academy</h1>
+      <p data-i18n="registerHeroText">Sign up for our transformative courses and start your journey today.</p>
+      <div class="hero-actions">
+        <a href="#registration-form" class="hero-button primary" data-i18n="registerNow">Register Now</a>
+      </div>
+    </div>
+  </section>
 
-    <main>
-        <section class="hero compact animate__animated animate__fadeInDown">
-            <div class="hero-content">
-                <h1 data-i18n="registerHeading">Join HopeBridge Academy</h1>
-                <p data-i18n="registerHeroText">Sign up for our transformative courses and start your journey today.</p>
-                <a href="#registration-form" class="hero-button primary" data-i18n="registerNow">Register Now</a>
+  <!-- Academy Info -->
+  <section class="academy-info">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label">Why Choose Us</p>
+        <h2 class="section-title" data-i18n="academyWelcomeTitle">Why Choose HopeBridge Academy?</h2>
+        <div class="gold-line"></div>
+        <p class="section-sub" style="margin-top:1rem;" data-i18n="academyMission">Our mission is to provide accessible, high-quality education to empower Afghan youth.</p>
+      </div>
+      <div class="academy-info-content">
+        <div class="course-grid">
+          <!-- Computer -->
+          <div class="card" style="padding:2rem;">
+            <div style="display:flex;align-items:center;gap:.8rem;margin-bottom:1rem;">
+              <span style="width:44px;height:44px;border-radius:50%;background:var(--gold-pale);display:flex;align-items:center;justify-content:center;"><i class="fas fa-laptop" style="color:var(--gold);font-size:1.2rem;"></i></span>
+              <h3 style="font-family:var(--font-head);color:var(--navy);font-size:1.2rem;" data-i18n="computerCourseTitle">Computer Courses</h3>
             </div>
-        </section>
-
-        <section class="academy-info">
-            <h2 data-i18n="academyWelcomeTitle">Why Choose HopeBridge Academy?</h2>
-            <div class="academy-info-content animate__animated animate__fadeInUp">
-                <p data-i18n="academySlogan">Empowering Afghan youth through education.</p>
-                <p data-i18n="academyMission">Our mission is to provide accessible, high-quality education to empower Afghan youth.</p>
-                <div class="course-grid">
-                    <div class="course-card">
-                        <h3 data-i18n="computerCourseTitle">Computer Courses</h3>
-                        <p data-i18n="computerCourseDesc">Learn essential digital skills to thrive in the modern world.</p>
-                        <ul>
-                            <li data-i18n="computerBasic">Computer Basics</li>
-                            <li data-i18n="officeApps">Office Applications (Word, Excel, PowerPoint, etc.)</li>
-                            <li data-i18n="internetTools">Internet and Online Tools</li>
-                            <li data-i18n="graphicDesign">Graphic Design</li>
-                            <li data-i18n="digitalSkills">Web Design and Other Digital Skills</li>
-                        </ul>
-                        <p data-i18n="computerFee">Fees: 350-600 AFN/month</p>
-                    </div>
-                    <div class="course-card">
-                        <h3 data-i18n="englishCourseTitle">English Language Courses</h3>
-                        <p data-i18n="englishCourseDesc">Improve your English skills for global opportunities.</p>
-                        <ul>
-                            <li data-i18n="speaking">Speaking</li>
-                            <li data-i18n="grammar">Grammar and Language Structure</li>
-                            <li data-i18n="writingReading">Writing and Reading</li>
-                            <li data-i18n="examPrep">Preparation for International Exams</li>
-                        </ul>
-                        <p data-i18n="englishFee">Fees: 350-500 AFN/month</p>
-                    </div>
-                    <div class="course-card">
-                        <h3 data-i18n="psychologyWorkshopTitle">Psychology Workshops</h3>
-                        <p data-i18n="psychologyWorkshopDesc">Develop mental health and life skills for personal growth.</p>
-                        <ul>
-                            <li data-i18n="stressManagement">Stress Management</li>
-                            <li data-i18n="confidenceBuilding">Building Confidence</li>
-                            <li data-i18n="selfAwareness">Self-Awareness and Life Skills</li>
-                        </ul>
-                        <p data-i18n="psychologyFee">Free</p>
-                    </div>
-                </div>
-                <div class="additional-info">
-                    <h3 data-i18n="certificateTitle">Internationally Recognized Certificate</h3>
-                    <p data-i18n="certificateDesc">Earn certificates recognized globally upon course completion.</p>
-                    <h3 data-i18n="instructorsTitle">Professional Instructors</h3>
-                    <p data-i18n="instructorsDesc">Our instructors are highly qualified and dedicated to your success.</p>
-                    <ul>
-                        <li data-i18n="instructorExperience">Years of Teaching Experience</li>
-                        <li data-i18n="instructorExpertise">Expertise in Relevant Fields</li>
-                        <li data-i18n="instructorModernTeaching">Familiarity with Modern Teaching Methods</li>
-                    </ul>
-                </div>
-                <div class="course-table">
-                    <h3 data-i18n="courseTableTitle">Course Duration and Fees</h3>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th data-i18n="courseTableHeader">Course</th>
-                                <th data-i18n="levelTableHeader">Level</th>
-                                <th data-i18n="feeTableHeader">Monthly Fee (AFN)</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td data-i18n="computerCourseTable">Computer Courses</td>
-                                <td data-i18n="levelRange">Beginner to Advanced</td>
-                                <td>350 - 600</td>
-                            </tr>
-                            <tr>
-                                <td data-i18n="englishCourseTable">English Language Courses</td>
-                                <td data-i18n="levelRange">Beginner to Advanced</td>
-                                <td>350 - 500</td>
-                            </tr>
-                            <tr>
-                                <td data-i18n="psychologyCourseTable">Psychology Workshops</td>
-                                <td data-i18n="levelGeneral">General and Specialized</td>
-                                <td data-i18n="free">Free</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+            <p style="color:var(--gray-600);font-size:.93rem;margin-bottom:1rem;" data-i18n="computerCourseDesc">Learn essential digital skills to thrive in the modern world.</p>
+            <ul style="padding-left:1.2rem;list-style:disc;color:var(--gray-600);font-size:.9rem;">
+              <li data-i18n="computerBasic">Computer Basics</li>
+              <li data-i18n="officeApps">Office Applications (Word, Excel, PowerPoint)</li>
+              <li data-i18n="internetTools">Internet and Online Tools</li>
+              <li data-i18n="graphicDesign">Graphic Design</li>
+              <li data-i18n="digitalSkills">Web Design and Digital Skills</li>
+            </ul>
+            <p style="margin-top:1rem;font-weight:600;color:var(--gold);" data-i18n="computerFee">Fees: 350–700 AFN/month</p>
+          </div>
+          <!-- English -->
+          <div class="card" style="padding:2rem;">
+            <div style="display:flex;align-items:center;gap:.8rem;margin-bottom:1rem;">
+              <span style="width:44px;height:44px;border-radius:50%;background:var(--gold-pale);display:flex;align-items:center;justify-content:center;"><i class="fas fa-language" style="color:var(--gold);font-size:1.2rem;"></i></span>
+              <h3 style="font-family:var(--font-head);color:var(--navy);font-size:1.2rem;" data-i18n="englishCourseTitle">English Language Courses</h3>
             </div>
-        </section>
-
-        <section class="registration-form">
-            <h2 data-i18n="registerHeading">Student Registration</h2>
-            <form id="registration-form" class="modern-form animate__animated animate__fadeInUp" onsubmit="redirectToGoogleForm(event)">
-                <button type="submit" class="primary" data-i18n="submiting">Clich Here to Register</button>
-            </form>
-        </section>
-    </main>
-
-    <footer>
-        <div class="footer-content animate__animated animate__fadeInUp">
-            <div class="social-media-links">
-                <a href_RESULTS: No specific instructions were provided regarding the inclusion or exclusion of social media links in the footer. The original HTML includes links to Facebook, Twitter, Instagram, and YouTube. However, to ensure compliance with best practices and avoid potential issues with broken or placeholder links (e.g., the YouTube link pointing to a generic URL), I will retain the structure but update the Twitter link to reflect the correct platform branding (X) and ensure the links are consistent with the original intent. If you need specific social media links modified or removed, please provide further details.
-
-                <a href="https://www.facebook.com/profile.php?id=61576355386024" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Facebook">
-                    <i class="fab fa-facebook-f"></i>
-                </a>
-                <a href="https://x.com/Hopebridge96846" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="X">
-                    <i class="fab fa-x-twitter"></i>
-                </a>
-                <a href="https://www.instagram.com/hopebridgeacademy1/" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Instagram">
-                    <i class="fab fa-instagram"></i>
-                </a>
-                <a href="https://www.youtube.com/channel/UCtqHtyvuTbwOCM7NZy-DpJQ" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="YouTube">
-                    <i class="fab fa-youtube"></i>
-                </a>
+            <p style="color:var(--gray-600);font-size:.93rem;margin-bottom:1rem;" data-i18n="englishCourseDesc">Improve your English skills for global opportunities.</p>
+            <ul style="padding-left:1.2rem;list-style:disc;color:var(--gray-600);font-size:.9rem;">
+              <li data-i18n="speaking">Speaking</li>
+              <li data-i18n="grammar">Grammar and Language Structure</li>
+              <li data-i18n="writingReading">Writing and Reading</li>
+              <li data-i18n="examPrep">Preparation for International Exams</li>
+            </ul>
+            <p style="margin-top:1rem;font-weight:600;color:var(--gold);" data-i18n="englishFee">Fees: 350–700 AFN/month</p>
+          </div>
+          <!-- Psychology -->
+          <div class="card" style="padding:2rem;">
+            <div style="display:flex;align-items:center;gap:.8rem;margin-bottom:1rem;">
+              <span style="width:44px;height:44px;border-radius:50%;background:var(--gold-pale);display:flex;align-items:center;justify-content:center;"><i class="fas fa-brain" style="color:var(--gold);font-size:1.2rem;"></i></span>
+              <h3 style="font-family:var(--font-head);color:var(--navy);font-size:1.2rem;" data-i18n="psychologyWorkshopTitle">Psychology Workshops</h3>
             </div>
-            <div class="footer-nav">
-                <h4 data-i18n="footerNavTitle">Explore</h4>
-                <ul class="nav-list">
-                    <li><a href="about.html" data-i18n="about">About Us</a></li>
-                    <li><a href="faq.html" data-i18n="faq">FAQ</a></li>
-                    <li><a href="privacy.html" data-i18n="privacyPolicy">Privacy Policy</a></li>
-                    <li><a href="terms.html" data-i18n="terms">Terms of Service</a></li>
-                </ul>
-            </div>
-            <div class="footer-contact">
-                <h4 data-i18n="contactUsTitle">Contact Us</h4>
-                <p data-i18n="contactInfo">Email: info@hopebridgeacademy.com | Phone: +93 123-456-7890</p>
-            </div>
+            <p style="color:var(--gray-600);font-size:.93rem;margin-bottom:1rem;" data-i18n="psychologyWorkshopDesc">Develop mental health and life skills for personal growth.</p>
+            <ul style="padding-left:1.2rem;list-style:disc;color:var(--gray-600);font-size:.9rem;">
+              <li data-i18n="stressManagement">Stress Management</li>
+              <li data-i18n="confidenceBuilding">Building Confidence</li>
+              <li data-i18n="selfAwareness">Self-Awareness and Life Skills</li>
+            </ul>
+            <p style="margin-top:1rem;font-weight:600;color:var(--green);" data-i18n="psychologyFee">Free</p>
+          </div>
         </div>
-        <p data-i18n="copyright">© 2025 HopeBridge Academy</p>
-    </footer>
 
-    <button id="backToTopBtn" onclick="scrollToTop()" aria-label="Back to Top" data-tooltip="Back to Top"><i class="fas fa-chevron-up"></i></button>
+        <!-- Certificates & Instructors -->
+        <div class="additional-info animate-up">
+          <h3 data-i18n="certificateTitle"><i class="fas fa-award" style="color:var(--gold);margin-right:.5rem;"></i>Internationally Recognized Certificate</h3>
+          <p data-i18n="certificateDesc">Earn certificates recognized globally upon course completion.</p>
+          <h3 style="margin-top:1.2rem;" data-i18n="instructorsTitle"><i class="fas fa-chalkboard-teacher" style="color:var(--gold);margin-right:.5rem;"></i>Professional Instructors</h3>
+          <p data-i18n="instructorsDesc">Our instructors are highly qualified and dedicated to your success.</p>
+        </div>
 
-    <script>
-        function redirectToGoogleForm(event) {
-            event.preventDefault();
-            window.location.href = "https://forms.gle/xzq8i5oQuGcz6ypW7";
-        }
-    </script>
+        <!-- Fee Table -->
+        <div class="course-table animate-up">
+          <h3 style="font-family:var(--font-head);color:var(--navy);font-size:1.3rem;margin-bottom:1rem;" data-i18n="courseTableTitle">Course Duration and Fees</h3>
+          <table>
+            <thead>
+              <tr>
+                <th data-i18n="courseTableHeader">Course</th>
+                <th data-i18n="levelTableHeader">Level</th>
+                <th data-i18n="feeTableHeader">Monthly Fee (AFN)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td data-i18n="computerCourseTable">Computer Courses</td>
+                <td data-i18n="levelRange">Beginner to Advanced</td>
+                <td>350 – 700</td>
+              </tr>
+              <tr>
+                <td data-i18n="englishCourseTable">English Language Courses</td>
+                <td data-i18n="levelRange">Beginner to Advanced</td>
+                <td>350 – 700</td>
+              </tr>
+              <tr>
+                <td data-i18n="psychologyCourseTable">Psychology Workshops</td>
+                <td data-i18n="levelGeneral">General and Specialized</td>
+                <td data-i18n="free">Free</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Registration Form -->
+  <section class="registration-form" id="registration-form">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label">Get Started</p>
+        <h2 class="section-title" data-i18n="registerHeading">Student Registration</h2>
+        <div class="gold-line"></div>
+        <p class="section-sub" style="margin-top:1rem;">Click the button below to complete your registration via our secure Google Form.</p>
+      </div>
+      <div class="modern-form" style="text-align:center;max-width:480px;">
+        <i class="fas fa-file-alt" style="font-size:3rem;color:var(--gold);margin-bottom:1.5rem;display:block;"></i>
+        <p style="color:var(--gray-600);margin-bottom:2rem;line-height:1.7;" data-i18n="registerHeroText">Sign up for our transformative courses and start your journey today.</p>
+        <button onclick="window.location.href='https://forms.gle/xzq8i5oQuGcz6ypW7'" class="button primary" style="width:100%;padding:1rem;border:none;cursor:pointer;font-size:1rem;border-radius:99px;" data-i18n="submiting">Click Here to Register</button>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="footer-content">
+    <div>
+      <img src="logo.png" alt="HopeBridge Academy" style="height:48px;margin-bottom:1rem;filter:brightness(1.2);">
+      <div class="social-media-links" style="margin-top:1rem;">
+        <a href="https://www.facebook.com/profile.php?id=61576355386024" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://x.com/Hopebridge96846"                          target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="X"><i class="fab fa-x-twitter"></i></a>
+        <a href="https://www.instagram.com/hopebridgeacademy1"           target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.youtube.com/channel/UCtqHtyvuTbwOCM7NZy-DpJQ" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+      </div>
+    </div>
+    <nav class="footer-nav" aria-label="Footer navigation">
+      <h4 data-i18n="footerNavTitle">Explore</h4>
+      <ul>
+        <li><a href="about.html"   data-i18n="about">About Us</a></li>
+        <li><a href="faq.html"     data-i18n="faq">FAQ</a></li>
+        <li><a href="privacy.html" data-i18n="privacyPolicy">Privacy Policy</a></li>
+        <li><a href="terms.html"   data-i18n="terms">Terms of Service</a></li>
+      </ul>
+    </nav>
+    <div class="footer-contact">
+      <h4 data-i18n="contactUsTitle">Contact Us</h4>
+      <p data-i18n="contactInfo">Email: hopebridgeacademy@gmail.com | Phone: +93-747-903-369</p>
+    </div>
+  </div>
+  <div class="footer-bottom"><p data-i18n="copyright">© 2025–2026 HopeBridge Academy. All rights reserved.</p></div>
+</footer>
+
+<button id="backToTopBtn" onclick="scrollToTop()" aria-label="Back to Top"><i class="fas fa-chevron-up"></i></button>
 </body>
 </html>
